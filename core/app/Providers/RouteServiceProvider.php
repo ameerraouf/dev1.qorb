@@ -100,6 +100,7 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/dashboard.php');
         });
     }
+    
     protected function mapTeacherRoutes()
     {
         Route::group([

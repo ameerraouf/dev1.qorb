@@ -22,8 +22,12 @@ class CheckAdmin
             if (Auth::user()->role === 'admin') {
                 // If the user is an admin, redirect to the admin page
                 return $next($request);
-            } else if(Auth::user()->role === 'specialist'){
+            }
+            else if(Auth::user()->role === 'specialist'){
                 return redirect()->route('specialistHome');
+            }
+            else if(Auth::user()->role === 'supervisor'){
+                return redirect()->route('supervisorHome');
             }
         }
 
