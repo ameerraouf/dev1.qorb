@@ -67,5 +67,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Permissions', 'permissions_id');
     }
 
+
+    public function transactions()
+    {
+        return $this->hasMany(FinancialTransaction::class);
+    }
+
     public function getProfilePhotoUrlAttribute(){}
 }

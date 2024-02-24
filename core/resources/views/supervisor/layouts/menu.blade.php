@@ -2,7 +2,7 @@
     <div class="left navside dark dk" layout="column">
         <div class="navbar navbar-md no-radius">
             <!-- brand -->
-            <a class="navbar-brand" href="{{ route('adminHome') }}">
+            <a class="navbar-brand" href="{{ route('supervisorHome') }}">
                 <img src="{{ asset('assets/dashboard/images/logo.png') }}" alt="Control">
                 <span class="hidden-folded inline">{{ __('backend.control') }}</span>
             </a>
@@ -17,48 +17,31 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('teacher.teacherhome') }}">
+                        <a href="{{ route('supervisorHome') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
                             </span>
                             <span class="nav-text">{{ __('backend.dashboard') }}</span>
                         </a>
                     </li>
-                    <li class=" {{ request()->is('*childrens*') ? 'active' : '' }}">
-                        <a href="{{ route('childrens.index') }}" >
+                    <li>
+                        <a href="{{ route('SChildrens') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
                             </span>
-                            <span class="nav-text">{{ __('backend.childrens') }}</span>
+                            <span class="nav-text">{{ __('backend.Children') }}</span>
                         </a>
                     </li>
                     <li>
-                        <a>
-                            <span class="nav-caret">
-                                <i class="fa fa-caret-down"></i>
-                            </span>
+                        <a href="{{ route('SFTransactions') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe1b8;</i>
                             </span>
-                            <span class="nav-text">{{ __('backend.package') }}</span>
+                            <span class="nav-text">{{ __('cruds.FinancialTransactions.Title') }}</span>
                         </a>
-                        <ul class="nav-sub">
-                            <li>
-                                <a href="{{ route('TeacherPackages') }}">
-                                    <span
-                                        class="nav-text">{{ __('backend.package') }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span
-                                        class="nav-text">{{ __('backend.purchaseTransaction') }}</span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
-                        <a href="{{ route('TeacherProfile') }}">
+                        <a href="{{ route('SProfile') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
                             </span>

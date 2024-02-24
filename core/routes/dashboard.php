@@ -33,6 +33,7 @@ use App\Http\Controllers\Dashboard\ClientController;
 
 // >>>>>>> 2704ee87b2e7b7b7c6687a1e91124fa1b7313a1b
 use App\Http\Controllers\Dashboard\SocietyController;
+use App\Http\Controllers\Dashboard\SupervisorController;
 
 // Admin Routes
 Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
@@ -382,6 +383,7 @@ Route::group(['prefix'=>env('SPECIALIST_PATH'),'middleware'=>'specialist'],funct
     Route::get('/', [SpecialistController::class, 'index'])->name('specialistHome');
     Route::get('/childrens', [SpecialistController::class , 'showChildrens'])->name('Childrens');
     Route::get('/report/create/{id}', [SpecialistController::class, 'createReportPage'])->name('ReportCreate');
+    Route::get('/report/edit/{id}', [SpecialistController::class, 'editReportPage'])->name('ReportEdit');
     Route::post('/report/update/{id}', [SpecialistController::class, 'updateReport'])->name('ReportUpdate');
     Route::post('/report/create/{id}', [SpecialistController::class, 'storeReport'])->name('ReportStore');
     Route::get('/report/show/{id}', [SpecialistController::class, 'showReportPage'])->name('ReportShow');
@@ -409,4 +411,40 @@ Route::group(['prefix'=>env('SPECIALIST_PATH'),'middleware'=>'specialist'],funct
     Route::post('/profile/update', [SpecialistController::class, 'updateProfile'])->name('profileUpdate');
     
     Route::get('/transactions', [SpecialistController::class, 'showFTransactions'])->name('FTransactions');
+});
+
+
+//Supervisor Routes
+Route::group(['prefix'=>env('SUPERVISOR_PATH'),'middleware'=>'supervisor'],function(){
+    Route::get('/', [SupervisorController::class, 'index'])->name('supervisorHome');
+    Route::get('/childrens', [SupervisorController::class , 'showChildrens'])->name('SChildrens');
+    Route::get('/report/create/{id}', [SupervisorController::class, 'createReportPage'])->name('SReportCreate');
+    Route::get('/report/edit/{id}', [SupervisorController::class, 'editReportPage'])->name('SReportEdit');
+    Route::post('/report/update/{id}', [SupervisorController::class, 'updateReport'])->name('SReportUpdate');
+    Route::post('/report/create/{id}', [SupervisorController::class, 'storeReport'])->name('SReportStore');
+    Route::get('/report/show/{id}', [SupervisorController::class, 'showReportPage'])->name('SReportShow');
+    Route::get('/children/reports/{id}', [SupervisorController::class, 'showChildrenReports'])->name('SChildrenReports');
+    Route::get('/file/download/{name}', [SupervisorController::class, 'fileDownload'])->name('SDownloadFile');
+    Route::get('/children/reports/{id}', [SupervisorController::class, 'showChildrenReports'])->name('SChildrenReports');
+    
+    Route::get('/consulting-report/show/{id}', [SupervisorController::class, 'showConsultingReportPage'])->name('SConsultingReportShow');
+    Route::get('/children/consulting-reports/{id}', [SupervisorController::class, 'showChildrenConsultingReports'])->name('SChildrenConsultingReports');
+    Route::get('/consulting-report/create/{id}', [SupervisorController::class, 'createConsultingReportPage'])->name('SConsultingReportCreate');
+    Route::get('/consulting-report/edit/{id}', [SupervisorController::class, 'editConsultingReportPage'])->name('SConsultingReportEdit');
+    Route::post('/consulting-report/create/{id}', [SupervisorController::class, 'storeConsultingReport'])->name('SConsultingReportStore');
+    Route::post('/consulting-report/update/{id}', [SupervisorController::class, 'updateConsultingReport'])->name('SConsultingReportUpdate');
+
+    
+    Route::get('/status-report/show/{id}', [SupervisorController::class, 'showStatusReportPage'])->name('SStatusReportShow');
+    Route::get('/children/status-reports/{id}', [SupervisorController::class, 'showChildrenStatusReports'])->name('SChildrenStatusReports');
+    Route::get('/status-report/create/{id}', [SupervisorController::class, 'createStatusReportPage'])->name('SStatusReportCreate');
+    Route::get('/status-report/edit/{id}', [SupervisorController::class, 'editStatusReportPage'])->name('SStatusReportEdit');
+    Route::post('/status-report/create/{id}', [SupervisorController::class, 'storeStatusReport'])->name('SStatusReportStore');
+    Route::post('/status-report/update/{id}', [SupervisorController::class, 'updateStatusReport'])->name('SStatusReportUpdate');
+    
+    
+    Route::get('/profile', [SupervisorController::class, 'showProfile'])->name('SProfile');
+    Route::post('/profile/update', [SupervisorController::class, 'updateProfile'])->name('SprofileUpdate');
+    
+    Route::get('/transactions', [SupervisorController::class, 'showFTransactions'])->name('SFTransactions');
 });

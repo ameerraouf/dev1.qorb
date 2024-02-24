@@ -729,4 +729,34 @@ return array(
     'selectRole' => 'Select Role',
     'Admin' => 'Admin',
     'Specialist' => 'Specialist',
+
+     // TEACHER ____________________________
+     'signedInToControlteacher' => 'Sign in to teacher dashboard',
+     'registerToControlteacher' => 'Create a new account for teacher',
+     'childrens' => 'Childrens',
+     'package' => 'Packages',
+     'profile' => 'Profile',
+     'purchaseTransaction' => 'Purchase Transactions',
+     'login' => 'Login Page',
+     'sign' => 'Sign up',
+     'name' => 'Name',
+     'password_confirmation' => 'Password Confirmation',
+     'teacher' => 'Teacher Account',
+     'mother' => 'Mother Account',
+     'attachment' => 'Attachment',
+     'childname' => 'Child name',
+     'childname-en' => 'Child name',
+     'childname-ar' => 'Child name in Arabic',
+     'childage' => 'Child Age',
+     'childproblem' => 'Child Problem',
+     'childproblem-en' => 'Child Problem',
+     'childproblem-ar' => 'Child Problem in Arabic',
+     'year' => 'Year',
+     'file' => 'File',
+     'image' => 'Image',
+ 
+     'reports' => 'Reports',
+
+    'Supervisor' => 'Supervisor'
+
 );

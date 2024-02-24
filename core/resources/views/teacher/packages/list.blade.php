@@ -1,5 +1,5 @@
 @extends('teacher.layouts.master')
-@section('title', __('teacher.packages'))
+@section('title', __('backend.packages'))
 @section('content')
     <style>
         .container {

@@ -85,6 +85,7 @@
                             <option value="">- - {!!  __('backend.selectRole') !!} - -</option>
                                 <option value="admin">{{ __('backend.Admin') }}</option>
                                 <option value="specialist">{{ __('backend.Specialist') }}</option>
+                                <option value="supervisor">{{ __('backend.Supervisor') }}</option>
                         </select>
 
                     </div>

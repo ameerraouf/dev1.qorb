@@ -1,5 +1,5 @@
 @extends('teacher.layouts.master')
-@section('title',__('teacher.childrens') )
+@section('title',__('backend.childrens') )
 @push('css')
 {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" />
@@ -25,7 +25,7 @@
                 <h3><i class="fa fa-plus"></i>{{ __('backend.add') }}</h3>
                 <small>
                     <a href="{{ route('adminHome') }}">{{ __('backend.home') }}</a> /
-                    <a href="{{ route('childrens.index') }}">{{ __('teacher.childrens') }}</a> /
+                    <a href="{{ route('childrens.index') }}">{{ __('backend.childrens') }}</a> /
                     <a href="">{{ __('backend.add') }}</a>
                 </small>
             </div>
@@ -48,10 +48,10 @@
                         <div class="row">
                             {{-- <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name_ar">{{ __('teacher.childname-ar') }}</label>
+                                    <label for="name_ar">{{ __('backend.childname-ar') }}</label>
                                     <input type="text"
                                            class="form-control"
-                                           placeholder="{{ __('teacher.childname-ar') }}"
+                                           placeholder="{{ __('backend.childname-ar') }}"
                                            name="name_ar"
                                            value="{{ old('name_ar') }}" >
                                     @error('name_ar')
@@ -61,10 +61,10 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name_en">{{ __('teacher.childname-en') }}</label>
+                                    <label for="name_en">{{ __('backend.childname-en') }}</label>
                                     <input type="text"
                                            class="form-control"
-                                           placeholder="{{ __('teacher.childname-en') }}"
+                                           placeholder="{{ __('backend.childname-en') }}"
                                            name="name_en"
                                            value="{{ old('name_en') }}" >
                                     @error('name_en')
@@ -74,10 +74,10 @@
                             </div> --}}
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="name">{{ __('teacher.childname') }}</label>
+                                    <label for="name">{{ __('backend.childname') }}</label>
                                     <input type="text"
                                            class="form-control"
-                                           placeholder="{{ __('teacher.childname') }}"
+                                           placeholder="{{ __('backend.childname') }}"
                                            name="name"
                                            value="{{ old('name') }}" >
                                     @error('name')
@@ -87,11 +87,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="age">{{ __('teacher.childage') }}</label>
+                                    <label for="age">{{ __('backend.childage') }}</label>
                                     <input type="number" min="1"
                                            onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                                            class="form-control"
-                                           placeholder="{{ __('teacher.childage') }}"
+                                           placeholder="{{ __('backend.childage') }}"
                                            name="age"
                                            value="{{ old('age') }}" />
                                     @error('age')
@@ -101,8 +101,8 @@
                             </div>
                             <div class="col-md-6">
                                 <fieldset  class="form-group">
-                                    <label for="problem">{{ __('teacher.childproblem') }}</label>
-                                    <textarea  name="problem" class="form-control" id="editor1" placeholder="{{ __('teacher.childproblem') }}">
+                                    <label for="problem">{{ __('backend.childproblem') }}</label>
+                                    <textarea  name="problem" class="form-control" id="editor1" placeholder="{{ __('backend.childproblem') }}">
                                         {!! old('problem') !!}
                                     </textarea>
                                     @error('problem')<span class="text-danger">{{ $message }}</span>@enderror
@@ -110,8 +110,8 @@
                             </div>
                             {{-- <div class="col-md-6">
                                 <fieldset  class="form-group">
-                                    <label for="problem_ar">{{ __('teacher.childproblem-ar') }}</label>
-                                    <textarea  name="problem_ar" class="form-control" id="editor1" placeholder="{{ __('teacher.childproblem-ar') }}">
+                                    <label for="problem_ar">{{ __('backend.childproblem-ar') }}</label>
+                                    <textarea  name="problem_ar" class="form-control" id="editor1" placeholder="{{ __('backend.childproblem-ar') }}">
                                         {!! old('problem_ar') !!}
                                     </textarea>
                                     @error('problem_ar')<span class="text-danger">{{ $message }}</span>@enderror
@@ -119,8 +119,8 @@
                             </div>
                             <div class="col-md-6">
                                 <fieldset  class="form-group">
-                                    <label for="description_en">{{ __('teacher.childproblem-en') }}</label>
-                                    <textarea  name="problem_en" class="form-control" id="editor" placeholder="{{ __('teacher.childproblem-en') }}">
+                                    <label for="description_en">{{ __('backend.childproblem-en') }}</label>
+                                    <textarea  name="problem_en" class="form-control" id="editor" placeholder="{{ __('backend.childproblem-en') }}">
                                         {!! old('problem_en') !!}
                                     </textarea>
                                     @error('problem_en')<span class="text-danger">{{ $message }}</span>@enderror
@@ -129,7 +129,7 @@
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
-                                <label for="images">{{ __('teacher.attachment') }}</label>
+                                <label for="images">{{ __('backend.attachment') }}</label>
                                 <br>
                                 <div class="file-loading">
                                     <input type="file" name="images[]" id="children-images" class="file-input-overview" multiple="multiple" accept="image/*,.pdf">

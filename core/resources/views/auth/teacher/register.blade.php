@@ -12,7 +12,7 @@
                 @endif
             </div>
             <div class="m-y text-muted text-center">
-                {{ __('teacher.registerToControlteacher') }}
+                {{ __('backend.registerToControlteacher') }}
             </div>
             <form name="form" method="POST" action="{{ route('Register.submit') }}" onsubmit="document.getElementById('register_form_submit').disabled = true; return true;">
                 {{-- <form name="form" method="POST" action="{{ url('/'.env('Teacher_PATH').'/register/submit') }}" > --}}
@@ -30,7 +30,7 @@
 
                 <div class="md-form-group float-label {{ $errors->has('name') ? ' has-error' : '' }}">
                     <input type="text" name="name" value="{{ old('name') }}" class="md-input" required>
-                    <label>{{ __('teacher.name') }}</label>
+                    <label>{{ __('backend.name') }}</label>
                 </div>
                 <div class="md-form-group float-label {{ $errors->has('email') ? ' has-error' : '' }}">
                     <input type="email" name="email" value="{{ old('email') }}" class="md-input" required>
@@ -42,18 +42,18 @@
                 </div>
                 <div class="md-form-group float-label {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                     <input type="password" name="password_confirmation" class="md-input"  required>
-                    <label>{{ __('teacher.password_confirmation') }}</label>
+                    <label>{{ __('backend.password_confirmation') }}</label>
                 </div>
                 {{-- <div class="col-md-4">
                     <div class="md-form-group float-label {{ $errors->has('type') ? ' has-error' : '' }}">
                         <input type="radio" value="teacher" name="type" class="md-input"  required>
-                        <label>{{ __('teacher.teacher') }}</label>
+                        <label>{{ __('backend.teacher') }}</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="md-form-group float-label {{ $errors->has('type') ? ' has-error' : '' }}">
                         <input type="radio" value="mother" name="type" class="md-input"  required>
-                        <label>{{ __('teacher.mother') }}</label>
+                        <label>{{ __('backend.mother') }}</label>
                     </div>
                 </div> --}}
                 @if ($errors->has('password'))
@@ -73,12 +73,12 @@
                             class="primary"></i> {{ __('backend.keepMeSignedIn') }}
                     </label>
                 </div> --}}
-                <button type="submit"  class="btn primary btn-block p-x-md m-b">{{ __('teacher.sign') }}</button>
+                <button type="submit"  class="btn primary btn-block p-x-md m-b">{{ __('backend.sign') }}</button>
             </form>
 
 
             <a href="{{ route('teacher.login') }}" class="btn info btn-block text-left">
-                 {{ __('teacher.login') }}
+                 {{ __('backend.login') }}
             </a>
             {{-- @if(env("FACEBOOK_STATUS") && env("FACEBOOK_ID") && env("FACEBOOK_SECRET"))
                 <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block text-left">

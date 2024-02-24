@@ -1,13 +1,13 @@
 @extends('teacher.layouts.master')
-@section('title',__('teacher.childrens'))
+@section('title',__('backend.childrens'))
 @section('content')
     <div class="padding">
         <div class="box">
             <div class="box-header dker">
-                <h3>{{ __('teacher.childrens') }}</h3>
+                <h3>{{ __('backend.childrens') }}</h3>
                 <small>
                     <a href="{{ route('teacher.teacherhome') }}">{{ __('backend.home') }}</a> /
-                    <a href="{{ route('childrens.index') }}">{{ __('teacher.childrens') }}</a>
+                    <a href="{{ route('childrens.index') }}">{{ __('backend.childrens') }}</a>
                 </small>
             </div>
             {{-- @if($packages->total() > 0) --}}
@@ -50,10 +50,10 @@
                                 </label>
                             </th>
                             <th class="text-center" style="width:100px;">#</th>
-                            <th class="text-center" style="width:100px;">{{ __('teacher.childname') }}</th>
-                            <th class="text-center" style="width:50px;">{{ __('teacher.childage') }}</th>
-                            <th class="text-center" style="width:100px;">{{ __('teacher.childproblem') }}</th>
-                            <th class="text-center" style="width:100px;">{{ __('teacher.attachment') }}</th>
+                            <th class="text-center" style="width:100px;">{{ __('backend.childname') }}</th>
+                            <th class="text-center" style="width:50px;">{{ __('backend.childage') }}</th>
+                            <th class="text-center" style="width:100px;">{{ __('backend.childproblem') }}</th>
+                            <th class="text-center" style="width:100px;">{{ __('backend.attachment') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.action') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.reports') }}</th>
                         </tr>
@@ -78,7 +78,7 @@
                                     <td class="h6 text-center" title="{{ strip_tags($child->name)}}">
                                             {!! strlen($child->name) > 40 ? substr($child->name, 0, 40) . '...' : $child->name!!}
                                     </td>
-                                    <td class="h6 text-center">{{ $child->age }} {{ __('teacher.year') }}</td>
+                                    <td class="h6 text-center">{{ $child->age }} {{ __('backend.year') }}</td>
                                     <td class="h6 text-center" title="{{strip_tags($child->problem) }}">
                                             {!! strlen($child->problem) > 40 ? substr($child->problem, 0, 40) . '...' : $child->problem!!}
                                     </td>
@@ -95,11 +95,11 @@
                                                 <div class="col-md-6 " style="padding: 10px;">
                                                     @if (in_array($media->file_type, ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'], true))
                                                         <a href="{{ asset('uploads/children/' . $media->file_name) }}" class="btn btn-warning btn-sm " >
-                                                            {{ __('teacher.image') }}{{ $key+1 }}
+                                                            {{ __('backend.image') }}{{ $key+1 }}
                                                         </a>
                                                     @elseif ($media->file_type === 'application/pdf')
                                                         <a href="{{ asset('uploads/children/' . $media->file_name) }}" target="_blank" class="btn btn-primary btn-sm" >
-                                                            {{ __('teacher.file') }}{{ $key+1 }}
+                                                            {{ __('backend.file') }}{{ $key+1 }}
                                                         </a>
                                                     @else
                                                         <a href="{{ asset('uploads/children/' . $media->file_name) }}" target="_blank">{{ $media->file_name }}</a><br>
@@ -114,10 +114,10 @@
                                     <td class=" h6 text-center">
                                         <div class="dropdown" >
                                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              {{ __('teacher.reports') }}
+                                              {{ __('backend.reports') }}
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
-                                              {{-- <a class="dropdown-item" href="#">{{ __('teacher.reports') }}</a> --}}
+                                              {{-- <a class="dropdown-item" href="#">{{ __('backend.reports') }}</a> --}}
                                               <a class="dropdown-item" href="{{ route('TeacherReports',$child->id) }}">تقارير الجلسات</a>
                                               <a class="dropdown-item" href="{{ route('TeacherStatusReports', $child->id) }}">تقارير الحالة </a>
                                               <a class="dropdown-item" href="{{ route('TeacherConsultingReports',$child->id) }}">تقارير الاستشارات</a>

@@ -692,4 +692,6 @@ return array(
     'websiteUptoDate' => 'Your website is up to date and has the latest version.',
     'updateInProgress' => 'Update in progress please wait',
     'updateCompleted' => 'The website has been updated to the latest version.',
+
+   
 );

@@ -12,7 +12,7 @@
                 @endif
             </div>
             <div class="m-y text-muted text-center">
-                {{ __('teacher.signedInToControlteacher') }}
+                {{ __('backend.signedInToControlteacher') }}
             </div>
             <form name="form" method="POST" action="{{ route('login.submit') }}" onsubmit="document.getElementById('login_form_submit').disabled = true; return true;">
                 {{ csrf_field() }}

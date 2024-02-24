@@ -58,4 +58,56 @@
         </div>
     </div>
 </div>
+</div>
+<div class="row">
+    <div class="col-xs-3">
+        <div class="box p-a" style="cursor: pointer"
+            onclick="location.href='#'">
+            <a href="{{ route('childrens.index') }}">
+                <div class="pull-left m-r">
+                    <i
+                        class="material-icons text-2x m-y-sm"></i>
+                </div>
+                <div class="clear">
+                    <div class="text-muted">{{__('backend.childrens')}}</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-3">
+        <div class="box p-a" style="cursor: pointer"
+            onclick="location.href=''">
+            <a href="#">
+                <div class="pull-left m-r">
+                    <i
+                        class="material-icons text-2x m-y-sm"></i>
+                </div>
+                <div class="clear">
+                    <div class="text-muted">{{__('backend.package')}}</div>
+                    <h4 class="m-a-0 text-md _600"></h4>
+                </div>
+            </a>
+        </div>
+    </div> 
+</div>
+<div class="row">
+    <div class="col-xs-3">
+        <div class="box p-a" style="cursor: pointer"
+            onclick="location.href=''">
+            <a href="#">
+                <div class="pull-left m-r">
+                    <i
+                        class="material-icons text-2x m-y-sm"></i>
+                </div>
+                <div class="clear">
+                    <div class="text-muted">{{__('backend.profile')}}</div>
+                    <h4 class="m-a-0 text-md _600"></h4>
+                </div>
+            </a>
+        </div>
+    </div>
+</div> 
+
 @endsection
