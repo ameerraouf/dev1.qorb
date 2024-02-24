@@ -47,7 +47,7 @@
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Name_AR') : __('cruds.Childrens.Name_EN') }}</th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Age_AR') : __('cruds.Childrens.Age_EN') }}</th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Problem_AR') : __('cruds.Childrens.Problem_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Files_AR') : __('cruds.Childrens.Files_EN') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Files') : __('cruds.Childrens.Files') }}</th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Reports_AR') : __('cruds.Childrens.Reports_EN') }}</th>
                         </tr>
                         </thead>

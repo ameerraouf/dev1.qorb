@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div class="box-body">
-                {{Form::open(['route'=>['StatusReportUpdate',$report->id],'method'=>'POST', 'files' => true ])}}
+                {{Form::open(['route'=>['StatuupdateVbmap',$report->id],'method'=>'POST', 'files' => true ])}}
 
                 <div class="form-group row">
                     <label for="target"

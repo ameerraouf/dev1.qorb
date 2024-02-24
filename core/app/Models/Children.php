@@ -48,5 +48,17 @@ class Children extends Model
 
     function status_reports(){
         return $this->hasMany(StatusReport::class);
+    } 
+    
+    function vbmap_reports(){
+        return $this->hasMany(VbmapReport::class);
+    }
+
+    function final_reports(){
+        return $this->hasMany(FinalReport::class);
+    }
+
+    function treatment_plans(){
+        return $this->hasMany(TreatmentPlan::class);
     }
 }

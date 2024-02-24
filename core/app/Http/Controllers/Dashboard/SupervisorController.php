@@ -4,17 +4,18 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Children;
-use App\Models\ConsultingReport;
+use App\Models\TreatmentPlan;
 use App\Models\FinancialTransaction;
 use App\Models\Report;
-use App\Models\StatusReport;
+use App\Models\FinalReport;
 use App\Models\User;
+use App\Models\VbmapReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SupervisorController extends Controller
 {
-    private $uploadPath = "uploads/users/";
+    private $uploadPath = "uploads/reports/";
 
     public function index()
     {
@@ -28,25 +29,25 @@ class SupervisorController extends Controller
         return view('supervisor.childrens.list', compact('childrens'));
     }
 
-    public function showChildrenReports($id){
+    public function showChildrenVbmap($id){
         
-        $reports = Report::where('children_id', $id)->paginate(10);
+        $reports = VbmapReport::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id' , $id) -> select('id')->first()->id;
-        return view('supervisor.reports.list', compact('reports','child_id'));
+        return view('supervisor.vbmap_reports.list', compact('reports','child_id'));
     }
 
-    public function showChildrenConsultingReports($id){
+    public function showChildrenTreatmentPlan($id){
         
-        $reports = ConsultingReport::where('children_id', $id)->paginate(10);
+        $reports = TreatmentPlan::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id' , $id) -> select('id')->first()->id;
-        return view('supervisor.consulting_reports.list', compact('reports','child_id'));
+        return view('supervisor.treatment_plans.list', compact('reports','child_id'));
     }
 
-    public function showChildrenStatusReports($id){
+    public function showChildrenFinalReports($id){
         
-        $reports = StatusReport::where('children_id', $id)->paginate(10);
+        $reports = FinalReport::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id' , $id) -> select('id')->first()->id;
-        return view('supervisor.status_reports.list', compact('reports','child_id'));
+        return view('supervisor.final_reports.list', compact('reports','child_id'));
     }
 
     public function showFTransactions(){
@@ -55,208 +56,197 @@ class SupervisorController extends Controller
         return view('supervisor.financial-transactions.list', compact('transactions'));
     }
 
-    public function createReportPage($id){
+    public function createVbmapPage($id){
         
         $child_id = Children::where('id', $id)->select('id')->first()->id;
-        return view('supervisor.reports.create', compact('child_id'));
+        return view('supervisor.vbmap_reports.create', compact('child_id'));
     } 
 
-    public function createConsultingReportPage($id){
+    public function createTreatmentPlanPage($id){
         
         $child_id = Children::where('id', $id)->select('id')->first()->id;
-        return view('supervisor.consulting_reports.create', compact('child_id'));
+        return view('supervisor.treatment_plans.create', compact('child_id'));
     } 
-    public function createStatusReportPage($id){
+    public function createFinalReportPage($id){
         
         $child_id = Children::where('id', $id)->select('id')->first()->id;
-        return view('supervisor.status_reports.create', compact('child_id'));
+        return view('supervisor.final_reports.create', compact('child_id'));
     } 
 
-    public function editReportPage($id){
+    public function editVbmapPage($id){
         
-        $report = Report::find($id);
+        $report = VbmapReport::find($id);
         $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
-        return view('supervisor.reports.edit', compact('report', 'children_id'));
+        return view('supervisor.vbmap_reports.edit', compact('report', 'children_id'));
     }
 
-    public function editConsultingReportPage($id){
+    public function editTreatmentPlanPage($id){
         
-        $report = ConsultingReport::find($id);
+        $report = TreatmentPlan::find($id);
         $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
-        return view('supervisor.consulting_reports.edit', compact('report', 'children_id'));
+        return view('supervisor.treatment_plans.edit', compact('report', 'children_id'));
     }
 
-    public function editStatusReportPage($id){
+    public function editFinalReportPage($id){
         
-        $report = StatusReport::find($id);
+        $report = FinalReport::find($id);
         $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
-        return view('supervisor.status_reports.edit', compact('report', 'children_id'));
+        return view('supervisor.final_reports.edit', compact('report', 'children_id'));
     }
 
-    public function storeReport(Request $request , $id){
+    public function storeVbmap(Request $request , $id){
         
         
         $this->validate($request, [
             'children_id'=>'required',
-            'target' => 'required|max:256',
-            'help_method' => 'required|max:1000',
-            'behaviours' => ['required','max:1000'],
-            'success_number' => ['required','numeric', 'gt:0'],
+            'file' => 'required'
         ]);
 
         try {
-            $report = new Report;
+            $report = new VbmapReport;
             $report->children_id = $id;
-            $report->target = $request->target;
-            $report->help_method = $request->help_method;
-            $report->behaviours = $request->behaviours;
-            $report->success_number = $request->success_number;
+            if ($request->file) {
+                $file = time() . rand(1111,
+                        9999) . '.' . $request->file('file')->getClientOriginalExtension();
+                $path = $this->getUploadPath();
+                $request->file->move($path, $file);
+                $report->file = $file;
+            }
             $report->save();
-            return redirect()->route('SChildrenReports',$id)->with('doneMessage', __('backend.addDone'));
+            return redirect()->route('showChildrenVbmap',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
-        return redirect()->route('SChildrenReports',$id)->with('errorMessage', __('backend.error'));
+        return redirect()->route('showChildrenVbmap',$id)->with('errorMessage', __('backend.error'));
     }  
 
 
-    public function storeConsultingReport(Request $request , $id){
+    public function storeTreatmentPlan(Request $request , $id){
         
         
         $this->validate($request, [
             'children_id'=>'required',
-            'type' => 'required|max:255',
-            'problem' => 'required|max:1000',
-            'solution' => ['required','max:1000'],
+            'target' => 'max:1000',
+            'help_type' => 'max:255',
+            'help_description' => 'max:255',
         ]);
 
         try {
-            $report = new ConsultingReport;
+            $report = new TreatmentPlan;
             $report->children_id = $id;
-            $report->type = $request->type;
-            $report->problem = $request->problem;
-            $report->solution = $request->solution;
+            $report->target = $request->target;
+            $report->help_type = $request->help_type;
+            $report->help_description = $request->help_description;
             $report->save();
-            return redirect()->route('SChildrenConsultingReports',$id)->with('doneMessage', __('backend.addDone'));
+            return redirect()->route('showChildrenTreatmentPlan',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
-        return redirect()->route('SChildrenConsultingReports',$id)->with('errorMessage', __('backend.error'));
+        return redirect()->route('showChildrenTreatmentPlan',$id)->with('errorMessage', __('backend.error'));
     } 
 
-    public function storeStatusReport(Request $request , $id){
+    public function storeFinalReport(Request $request , $id){
         
         
         $this->validate($request, [
             'children_id'=>'required',
-            'companion' => 'required|max:255',
-            'status_type' => 'required',
-            'strength_weakness' => 'required|max:1000',
-            'reinforcers' => 'required|max:1000',
-            'status_target' => 'required|max:1000',
+            'target' => 'required|max:1000',
+            'develop' => 'required|numeric',
+            'recommends' => 'required|max:1000',
         ]);
 
         try {
-            $report = new StatusReport;
+            $report = new FinalReport;
             $report->children_id = $id;
-            $report->companion = $request->companion;
-            $report->status_type = $request->status_type;
-            $report->strength_weakness = $request->strength_weakness;
-            $report->reinforcers = $request->reinforcers;
-            $report->status_target = $request->status_target;
+            $report->target = $request->target;
+            $report->develop = $request->develop;
+            $report->recommends = $request->recommends;
+          
             $report->save();
-            return redirect()->route('SChildrenStatusReports',$id)->with('doneMessage', __('backend.addDone'));
+            return redirect()->route('showChildrenFinalReports',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
-        return redirect()->route('SChildrenStatusReports',$id)->with('errorMessage', __('backend.error'));
+        return redirect()->route('showChildrenFinalReports',$id)->with('errorMessage', __('backend.error'));
     } 
     
-    public function updateReport(Request $request , $id){
+    public function updateVbmap(Request $request , $id){
         
-        $report = Report::find($id);
+        $report = VbmapReport::find($id);
+        if(!empty($report)){
+
+            try {
+                if ($request->file) {
+                    $file = time() . rand(1111,
+                            9999) . '.' . $request->file('file')->getClientOriginalExtension();
+                    $path = $this->getUploadPath();
+                    $request->file->move($path, $file);
+                    $report->file = $file;
+                }
+                $report->save();
+                return redirect()->route('showChildrenVbmap',$report->children_id)->with('doneMessage', __('backend.saveDone'));
+    
+            } catch (\Exception $e) {
+                return redirect()->back()->with('errorMessage', $e->getMessage());
+            }
+
+        }
+        return redirect()->route('showChildrenVbmap',$report->children_id)->with('errorMessage', __('backend.error'));
+    }
+
+    public function updateTreatmentPlan(Request $request , $id){
+        
+        $report = TreatmentPlan::find($id);
         if(!empty($report)){
 
             $this->validate($request, [
-                'target' => 'required|max:256',
-                'help_method' => 'required|max:1000',
-                'behaviours' => ['required','max:1000'],
-                'success_number' => ['required','numeric', 'gt:0'],
+                'target' => 'max:1000',
+                'help_type' => 'max:255',
+                'help_description' => 'max:255',
             ]);
     
             try {
                 $report->target = $request->target;
-                $report->help_method = $request->help_method;
-                $report->behaviours = $request->behaviours;
-                $report->success_number = $request->success_number;
+                $report->help_type = $request->help_type;
+                $report->help_description = $request->help_description;
                 $report->save();
-                return redirect()->route('SChildrenReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
+                return redirect()->route('showChildrenTreatmentPlan',$report->children_id)->with('doneMessage', __('backend.saveDone'));
     
             } catch (\Exception $e) {
                 return redirect()->back()->with('errorMessage', $e->getMessage());
             }
 
         }
-        return redirect()->route('SChildrenReports',$report->children_id)->with('errorMessage', __('backend.error'));
+        return redirect()->route('showChildrenTreatmentPlan',$report->children_id)->with('errorMessage', __('backend.error'));
     }
 
-    public function updateConsultingReport(Request $request , $id){
+    public function updateFinalReport(Request $request , $id){
         
-        $report = ConsultingReport::find($id);
+        $report = FinalReport::find($id);
         if(!empty($report)){
 
             $this->validate($request, [
-                'type' => 'required|max:255',
-                'problem' => 'required|max:1000',
-                'solution' => ['required','max:1000'],
+                'target' => 'required|max:1000',
+                'develop' => 'required|numeric',
+                'recommends' => 'required|max:1000',
             ]);
     
             try {
-                $report->type = $request->type;
-                $report->problem = $request->problem;
-                $report->solution = $request->solution;
+                $report->target = $request->target;
+                $report->develop = $request->develop;
+                $report->recommends = $request->recommends;
                 $report->save();
-                return redirect()->route('SChildrenConsultingReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
+                return redirect()->route('showChildrenFinalReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
     
             } catch (\Exception $e) {
                 return redirect()->back()->with('errorMessage', $e->getMessage());
             }
 
         }
-        return redirect()->route('SChildrenConsultingReports',$report->children_id)->with('errorMessage', __('backend.error'));
-    }
-
-    public function updateStatusReport(Request $request , $id){
-        
-        $report = StatusReport::find($id);
-        if(!empty($report)){
-
-            $this->validate($request, [
-                'companion' => 'required|max:255',
-                'status_type' => 'required',
-                'strength_weakness' => 'required|max:1000',
-                'reinforcers' => 'required|max:1000',
-                'status_target' => 'required|max:1000',
-            ]);
-    
-            try {
-                $report->companion = $request->companion;
-                $report->status_type = $request->status_type;
-                $report->strength_weakness = $request->strength_weakness;
-                $report->reinforcers = $request->reinforcers;
-                $report->status_target = $request->status_target;
-                $report->save();
-                return redirect()->route('SChildrenStatusReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
-    
-            } catch (\Exception $e) {
-                return redirect()->back()->with('errorMessage', $e->getMessage());
-            }
-
-        }
-        return redirect()->route('SChildrenStatusReports',$report->children_id)->with('errorMessage', __('backend.error'));
+        return redirect()->route('showChildrenFinalReports',$report->children_id)->with('errorMessage', __('backend.error'));
     }
 
     function fileDownload($name) {
@@ -302,11 +292,11 @@ class SupervisorController extends Controller
             else{
                 $user->password = "";
             }
-            if ($request->photo) {
+            if ($request->file) {
                 $photo = time() . rand(1111,
                         9999) . '.' . $request->file('photo')->getClientOriginalExtension();
                 $path = $this->getUploadPath();
-                $request->photo->move($path, $photo);
+                $request->file->move($path, $photo);
                 $user->photo = $photo;
             }
             $user->update();

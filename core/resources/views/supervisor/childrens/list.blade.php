@@ -41,7 +41,7 @@
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Name_AR') : __('cruds.Childrens.Name_EN') }}</th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Age_AR') : __('cruds.Childrens.Age_EN') }}</th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Problem_AR') : __('cruds.Childrens.Problem_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Files_AR') : __('cruds.Childrens.Files_EN') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Files') : __('cruds.Childrens.Files') }}</th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Childrens.Reports_AR') : __('cruds.Childrens.Reports_EN') }}</th>
                         </tr>
                         </thead>
@@ -70,9 +70,9 @@
                                     @endforeach
                                 </td>
                                 <td class="h6 text-center">
-                                    <a href="{{ route('SChildrenReports' , $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.Title') }}</a><br>
-                                    <a href="{{ route('SChildrenConsultingReports', $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.Consulting') }}</a><br>
-                                    <a href="{{ route('SChildrenStatusReports', $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.Status') }}</a><br>
+                                    <a href="{{ route('showChildrenVbmap' , $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.Vbmap') }}</a><br>
+                                    <a href="{{ route('showChildrenTreatmentPlan', $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.TreatmentPlan') }}</a><br>
+                                    <a href="{{ route('showChildrenFinalReports', $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.FinalReport') }}</a><br>
                                 </td>
                             </tr>
                            

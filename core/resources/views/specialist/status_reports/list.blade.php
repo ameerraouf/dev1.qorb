@@ -18,7 +18,7 @@
             @if($reports->total() > 0)
                     <div class="row p-a pull-right" style="margin-top: -70px;">
                         <div class="col-sm-12">
-                            <a class="btn btn-fw primary" href="{{route('StatusReportCreate',$child_id)}}">
+                            <a class="btn btn-fw primary" href="{{route('StatucreateVbmapPage',$child_id)}}">
                                 <i class="material-icons">&#xe7fe;</i>
                                 &nbsp; {{ __('cruds.Reports.NewReport') }}
                             </a>
@@ -33,7 +33,7 @@
                             <br>
 
                                 <br>
-                                <a class="btn btn-fw primary" href="{{route('StatusReportCreate',$child_id)}}">
+                                <a class="btn btn-fw primary" href="{{route('StatucreateVbmapPage',$child_id)}}">
                                     <i class="material-icons">&#xe7fe;</i>
                                     &nbsp; {{ __('cruds.Reports.NewReport') }}
                                 </a>
@@ -94,7 +94,7 @@
                                 <td class="text-center">
                                     @if($report->created_at->addMinutes(10) > \Carbon\Carbon::now()) 
                                         <a class="btn btn-sm success"
-                                        href="{{ route("StatusReportEdit",["id"=>$report->id]) }}">
+                                        href="{{ route("StatueditVbmapPage",["id"=>$report->id]) }}">
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.edit') }}
                                             </small>
                                         </a>

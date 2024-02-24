@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            $table->string('phone')->nullable();
+        Schema::create('final_reports', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('children_id');
+            $table->string('target');
+            $table->integer('develop');
+            $table->text('recommends');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('final_reports');
     }
 };

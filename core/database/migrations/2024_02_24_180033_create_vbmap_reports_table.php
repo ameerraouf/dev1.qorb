@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            $table->string('phone')->nullable();
+        Schema::create('vbmap_reports', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('children_id');
+            $table->string('file');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('teachers', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('vbmap_reports');
     }
 };

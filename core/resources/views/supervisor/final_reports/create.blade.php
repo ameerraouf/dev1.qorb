@@ -1,5 +1,5 @@
 @extends('supervisor.layouts.master')
-@section('title', __('cruds.Reports.Consulting') )
+@section('title', __('cruds.Reports.FinalReport') )
 @section('content')
     <div class="padding">
         <div class="box">
@@ -7,71 +7,64 @@
                 <h3><i class="material-icons">&#xe02e;</i> {{ __('cruds.Reports.NewReport') }}</h3>
                 <small>
                     <a href="{{ route('supervisorHome') }}">{{ __('backend.home') }}</a> /
-                    <a href="{{ route('SChildrenConsultingReports', $child_id) }}">{{ __('cruds.Reports.Consulting') }}</a> /
+                    <a href="{{ route('showChildrenFinalReports', $child_id) }}">{{ __('cruds.Reports.FinalReport') }}</a> /
                     <a href="">{{ __('cruds.Reports.NewReport') }}</a>
                 </small>
             </div>
             <div class="box-tool">
                 <ul class="nav">
                     <li class="nav-item inline">
-                        <a class="nav-link" href="{{route('SChildrenConsultingReports',$child_id)}}">
+                        <a class="nav-link" href="{{route('showChildrenFinalReports',$child_id)}}">
                             <i class="material-icons md-18">×</i>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="box-body">
-                {{Form::open(['route'=>['SConsultingReportStore',$child_id],'method'=>'POST', 'files' => true ])}}
+                {{Form::open(['route'=>['storeFinalReport',$child_id],'method'=>'POST', 'files' => true ])}}
 
                 <div class="form-group row">
                     <label for="target"
-                           class="col-sm-2 form-control-label">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Type_AR') : __('cruds.Reports.Type_EN') }}
+                           class="col-sm-2 form-control-label">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Target_AR') : __('cruds.Reports.Target_EN') }}
                     </label>
                     <div class="col-sm-10">
                         {{ Form::hidden('children_id', $child_id) }}
-                        {!! Form::text('type','', array('placeholder' => '','class' => 'form-control','id'=>'type','required'=>'')) !!}
+                        {!! Form::text('target','', array('placeholder' => '','class' => 'form-control','id'=>'target','required'=>'')) !!}
+
                     </div>
                 </div>
+               
 
                     <div class="form-group row">
                         <label
-                            class="col-sm-2 form-control-label">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Problem_AR') : __('cruds.Reports.Problem_EN') }}
+                            class="col-sm-2 form-control-label">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Develop') : __('cruds.Reports.Develop') }}
                         </label>
                         <div class="col-sm-10">
                             
                                 <div class="box p-a-xs">
-                                    {!! Form::textarea('problem','<div dir='.@$ActiveLanguage->direction.'><br></div>', array('ui-jp'=>'summernote','placeholder' => '','class' => 'form-control summernote_'.@$ActiveLanguage->code, 'dir'=>@$ActiveLanguage->direction,'ui-options'=>'{height: 300,callbacks: {
-                                            onImageUpload: function(files, editor, welEditable) {
-                                                sendFile(files[0], editor, welEditable,"'.@$ActiveLanguage->code.'");
-                                            }
-                                        }}'))
-                                    !!}
+                                    {{ Form::number('develop', '' , array('placeholder' => '','class' => 'form-control','id'=>'type','required'=>'')) }}
                                 </div>
-                            
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label
-                            class="col-sm-2 form-control-label">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Solution_AR') : __('cruds.Reports.Solution_EN') }}
+                            class="col-sm-2 form-control-label">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Recommend') : __('cruds.Reports.Recommend') }}
                         </label>
                         <div class="col-sm-10">
                             
                                 <div class="box p-a-xs">
-                                    {!! Form::textarea('solution','<div dir='.@$ActiveLanguage->direction.'><br></div>', array('ui-jp'=>'summernote','placeholder' => '','class' => 'form-control summernote_'.@$ActiveLanguage->code, 'dir'=>@$ActiveLanguage->direction,'ui-options'=>'{height: 300,callbacks: {
-                                            onImageUpload: function(files, editor, welEditable) {
-                                                sendFile(files[0], editor, welEditable,"'.@$ActiveLanguage->code.'");
-                                            }
-                                        }}'))
-                                    !!}
+                                    {!! Form::text('recommends' , '' ,array('placeholder' => '','class' => 'form-control','id'=>'type','required'=>'')) !!}
                                 </div>
-                            
                         </div>
-                    </div>
+                    </div> 
+
+                  
                 <div class="form-group row m-t-md">
                     <div class="offset-sm-2 col-sm-10">
                         <button type="submit" class="btn btn-primary m-t"><i class="material-icons">
                                 &#xe31b;</i> {!! __('backend.add') !!}</button>
-                        <a href="{{route('SChildrenConsultingReports', $child_id)}}"
+                        <a href="{{route('showChildrenFinalReports', $child_id)}}"
                            class="btn btn-default m-t"><i class="material-icons">
                                 &#xe5cd;</i> {!! __('backend.cancel') !!}</a>
                     </div>

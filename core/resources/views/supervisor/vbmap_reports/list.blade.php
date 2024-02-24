@@ -8,17 +8,17 @@
 <div class="padding">
         <div class="box">
             <div class="box-header dker">
-                <h3>{{ __('cruds.Reports.Status') }}</h3>
+                <h3>{{ __('cruds.Reports.Vbmap') }}</h3>
                 <small>
                     <a href="{{ route('supervisorHome') }}">{{ __('backend.home') }}</a> /
                     <a href="{{ route('SChildrens') }}">{{ __('cruds.Childrens.Title') }}</a> /
-                    <a >{{ __('cruds.Reports.Status') }}</a>
+                    <a >{{ __('cruds.Reports.Vbmap') }}</a>
                 </small>
             </div>
             @if($reports->total() > 0)
                     <div class="row p-a pull-right" style="margin-top: -70px;">
                         <div class="col-sm-12">
-                            <a class="btn btn-fw primary" href="{{route('SStatusReportCreate',$child_id)}}">
+                            <a class="btn btn-fw primary" href="{{route('createVbmapPage',$child_id)}}">
                                 <i class="material-icons">&#xe7fe;</i>
                                 &nbsp; {{ __('cruds.Reports.NewReport') }}
                             </a>
@@ -33,7 +33,7 @@
                             <br>
 
                                 <br>
-                                <a class="btn btn-fw primary" href="{{route('SStatusReportCreate',$child_id)}}">
+                                <a class="btn btn-fw primary" href="{{route('createVbmapPage',$child_id)}}">
                                     <i class="material-icons">&#xe7fe;</i>
                                     &nbsp; {{ __('cruds.Reports.NewReport') }}
                                 </a>
@@ -55,11 +55,7 @@
                                 </label>
                             </th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Date_AR') : __('cruds.Reports.Date_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Companion_AR') : __('cruds.Reports.Companion_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Status_type_AR') : __('cruds.Reports.Status_type_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.StrengthWeakness_AR') : __('cruds.Reports.StrengthWeakness_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Reinforcers_AR') : __('cruds.Reports.Reinforcers_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Target_AR') : __('cruds.Reports.Target_EN') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Files') : __('cruds.Reports.Files') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.options') }}</th>
                         </tr>
                         </thead>
@@ -77,24 +73,14 @@
                                         {{ $report->created_at->format('Y-m-d') }}
                                 </td>
                                 <td class="h6 text-center">
-                                        {{ $report->companion }}
-                                </td>
-                                <td class="h6 text-center">
-                                    {{ $report->status_type }}
-                                </td>
-                                <td class="h6 text-center">
-                                    {!! strlen($report->strength_weakness) > 40 ? substr($report->strength_weakness, 0, 40) . '...' : $report->strength_weakness !!}
-                                </td>
-                                <td class="h6 text-center">
-                                    {!! strlen($report->reinforcers) > 40 ? substr($report->reinforcers, 0, 40) . '...' : $report->reinforcers !!}
-                                </td> 
-                                <td class="h6 text-center">
-                                    {!! strlen($report->status_target) > 40 ? substr($report->status_target, 0, 40) . '...' : $report->status_target !!}
+                                    <img
+                                    src="{{ asset('uploads/reports/'.$report->file) }}"
+                                    width="100px" height="80px"/>
                                 </td>
                                 <td class="text-center">
                                     @if($report->created_at->addMinutes(10) > \Carbon\Carbon::now()) 
                                         <a class="btn btn-sm success"
-                                        href="{{ route("SStatusReportEdit",["id"=>$report->id]) }}">
+                                        href="{{ route("editVbmapPage",["id"=>$report->id]) }}">
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.edit') }}
                                             </small>
                                         </a>
@@ -107,6 +93,9 @@
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.show') }}
                                             </small>
                                         </button>
+                                        
+
+
                                 </td>
                             </tr>
                             <!-- .modal -->
@@ -114,45 +103,20 @@
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ __('cruds.Reports.Status') }}</h5>
+                                            <h5 class="modal-title">{{ __('cruds.Reports.Vbmap') }}</h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
                                             <div class="form-group row">
                                                 <h6
-                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Date_AR') : __('cruds.Reports.Date_EN') }}
+                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Files') : __('cruds.Reports.Files') }}
                                                 </h6><br>
                                                 <div class="col-sm-8">
-                                                    <p>{{ $report->created_at->format('Y-m-d') }}</p>
+                                                    <img
+                                                        src="{{ asset('uploads/reports/'.$report->file) }}"
+                                                        class="img-responsive">
                                                 </div>
-                                            </div><hr>
-                                                <div class="form-group row">
-                                                    <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Status_type_AR') : __('cruds.Reports.Status_type_EN') }}
-                                                    </h6><br>
-                                                    <div class="col-sm-8">
-                                                        <p>{!! $report->status_type !!}</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="form-group row">
-                                                    <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.StrengthWeakness_AR') : __('cruds.Reports.StrengthWeakness_EN') }}
-                                                    </h6><br>
-                                                    <div class="col-sm-8">
-                                                            <p>{!! $report->strength_weakness !!}</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                
-                                                <div class="form-group row">
-                                                    <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Reinforcers_AR') : __('cruds.Reports.Reinforcers_EN') }}
-                                                    </h6><br>
-                                                    <div class="col-sm-8">
-                                                            <p>{!! $report->reinforcers !!}</p>
-                                                    </div>
-                                                </div>
-                                                <hr> 
+                                            </div>
+                                             
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark-white p-x-md"

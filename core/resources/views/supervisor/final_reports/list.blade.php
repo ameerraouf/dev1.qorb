@@ -8,17 +8,17 @@
 <div class="padding">
         <div class="box">
             <div class="box-header dker">
-                <h3>{{ __('cruds.Reports.Consulting') }}</h3>
+                <h3>{{ __('cruds.Reports.FinalReport') }}</h3>
                 <small>
                     <a href="{{ route('supervisorHome') }}">{{ __('backend.home') }}</a> /
                     <a href="{{ route('SChildrens') }}">{{ __('cruds.Childrens.Title') }}</a> /
-                    <a >{{ __('cruds.Reports.Consulting') }}</a>
+                    <a >{{ __('cruds.Reports.FinalReport') }}</a>
                 </small>
             </div>
             @if($reports->total() > 0)
                     <div class="row p-a pull-right" style="margin-top: -70px;">
                         <div class="col-sm-12">
-                            <a class="btn btn-fw primary" href="{{route('SConsultingReportCreate',$child_id)}}">
+                            <a class="btn btn-fw primary" href="{{route('createFinalReportPage',$child_id)}}">
                                 <i class="material-icons">&#xe7fe;</i>
                                 &nbsp; {{ __('cruds.Reports.NewReport') }}
                             </a>
@@ -33,7 +33,7 @@
                             <br>
 
                                 <br>
-                                <a class="btn btn-fw primary" href="{{route('ConsultingReportCreate',$child_id)}}">
+                                <a class="btn btn-fw primary" href="{{route('createFinalReportPage',$child_id)}}">
                                     <i class="material-icons">&#xe7fe;</i>
                                     &nbsp; {{ __('cruds.Reports.NewReport') }}
                                 </a>
@@ -54,10 +54,9 @@
                                     <input id="checkAll" type="checkbox"><i></i>
                                 </label>
                             </th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Date_AR') : __('cruds.Reports.Date_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Type_AR') : __('cruds.Reports.Type_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Problem_AR') : __('cruds.Reports.Problem_EN') }}</th>
-                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Solution_AR') : __('cruds.Reports.Solution_EN') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Target_AR') : __('cruds.Reports.Target_EN') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Develop') : __('cruds.Reports.Develop') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Recommend') : __('cruds.Reports.Recommend') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.options') }}</th>
                         </tr>
                         </thead>
@@ -71,22 +70,21 @@
                                         {!! Form::hidden('row_ids[]',$report->id, array('class' => 'form-control row_no')) !!}
                                     </label>
                                 </td>
+                               
                                 <td class="h6 text-center">
-                                        {{ $report->created_at->format('Y-m-d') }}
+                                    {!! strlen($report->target) > 40 ? substr($report->target, 0, 40) . '...' : $report->target !!}
+
                                 </td>
                                 <td class="h6 text-center">
-                                        {{ $report->type }}
+                                    {{ $report->develop }}
                                 </td>
                                 <td class="h6 text-center">
-                                    {!! strlen($report->problem) > 40 ? substr($report->problem, 0, 40) . '...' : $report->problem !!}
-                                </td>
-                                <td class="h6 text-center">
-                                    {!! strlen($report->solution) > 40 ? substr($report->solution, 0, 40) . '...' : $report->solution !!}
+                                    {!! strlen($report->recommends) > 40 ? substr($report->recommends, 0, 40) . '...' : $report->recommends !!}
                                 </td>
                                 <td class="text-center">
                                     @if($report->created_at->addMinutes(10) > \Carbon\Carbon::now()) 
                                         <a class="btn btn-sm success"
-                                        href="{{ route("SConsultingReportEdit",["id"=>$report->id]) }}">
+                                        href="{{ route("editFinalReportPage",["id"=>$report->id]) }}">
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.edit') }}
                                             </small>
                                         </a>
@@ -99,9 +97,6 @@
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.show') }}
                                             </small>
                                         </button>
-                                        
-
-
                                 </td>
                             </tr>
                             <!-- .modal -->
@@ -109,35 +104,34 @@
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ __('cruds.Reports.Consulting') }}</h5>
+                                            <h5 class="modal-title">{{ __('cruds.Reports.FinalReport') }}</h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
                                             <div class="form-group row">
                                                 <h6
-                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Type_AR') : __('cruds.Reports.Type_EN') }}
+                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Target_AR') : __('cruds.Reports.Target_EN') }}
                                                 </h6><br>
                                                 <div class="col-sm-8">
-                                                    <p>{{$report->type}}</p>
+                                                    <p>{!! $report->target !!}</p>
                                                 </div>
                                             </div><hr>
                                                 <div class="form-group row">
                                                     <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Problem_AR') : __('cruds.Reports.Problem_EN') }}
+                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Develop') : __('cruds.Reports.Develop') }}
                                                     </h6><br>
                                                     <div class="col-sm-8">
-                                                        <p>{!! $report->problem !!}</p>
+                                                        <p>{!! $report->develop !!}</p>
                                                     </div>
                                                 </div>
                                                 <hr>
                                                 <div class="form-group row">
                                                     <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Solution_AR') : __('cruds.Reports.Solution_EN') }}
+                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Recommend') : __('cruds.Reports.Recommend') }}
                                                     </h6><br>
                                                     <div class="col-sm-8">
-                                                            <p>{!! $report->solution !!}</p>
+                                                            <p>{!! $report->recommends !!}</p>
                                                     </div>
                                                 </div>
-                                                <hr>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark-white p-x-md"

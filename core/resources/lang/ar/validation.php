@@ -193,5 +193,9 @@ return [
         'strength_weakness' => "جوانب القوة والضعف",
         'reinforcers' => "المعززات",
         'status_target' => "الجانب الذى تم العمل عليه",
+        'develop' => 'نسبة التطور',
+        'recommends' => 'التوصيات',
+        'help_type' => 'نوع المساعدة',
+        'help_description' => 'وصف المساعدة',
     ],
 ];

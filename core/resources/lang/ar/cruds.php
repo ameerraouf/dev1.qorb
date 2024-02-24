@@ -28,8 +28,7 @@ return [
         'Name_EN' => 'الاسم',
         'Age_AR' => 'العمر',
         'Age_EN' => 'العمر',
-        'Files_AR' => 'الملفات',
-        'Files_EN' => 'الملفات',
+        'Files' => 'الملفات',
         'Problem_AR' => 'المشكلة',
         'Problem_EN' => 'المشكلة',
         'Reports_AR' => 'التقارير',
@@ -58,6 +57,7 @@ return [
         'Type_EN' => 'نوع الاستشارة',
         'Problem_EN' => 'المشكلة',
         'Solution_EN' => 'الحل',
+        'Files' => 'الملفات',
 
         'Companion_AR' => 'اسم مرافق الطفل',
         'Companion_EN' => 'اسم مرافق الطفل',
@@ -69,6 +69,14 @@ return [
         'Reinforcers_EN' => 'المعززات',
 
         'ChooseStatus' => 'اختر نوع',
+
+        'Vbmap' => 'تقييم vb map',
+        'TreatmentPlan' => 'الخطة العلاجية',
+        'FinalReport' => ' التقرير النهائى',
+        'HelpDesc' => 'وصف المساعدة',
+        'HelpType' => 'نوع المساعدة',
+        'Develop' => 'نسبة التطور ',
+        'Recommend' => 'التوصيات',
     ],
 
     'Packages' => [

@@ -33,8 +33,8 @@
     <div class="row">
         <div class="col-xs-3">
             <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='{{ route('Childrens') }}'">
-                <a href="{{ route('Childrens') }}">
+                onclick="location.href='{{ route('SChildrens') }}'">
+                <a href="{{ route('SChildrens') }}">
                     <div class="pull-left m-r">
                         <i
                             class="material-icons text-2x m-y-sm"></i>
@@ -49,8 +49,8 @@
         
         <div class="col-xs-3">
             <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='{{ route('FTransactions') }}'">
-                <a href="{{ route('FTransactions') }}">
+                onclick="location.href='{{ route('SFTransactions') }}'">
+                <a href="{{ route('SFTransactions') }}">
                     <div class="pull-left m-r">
                         <i
                             class="material-icons text-2x m-y-sm"></i>
@@ -66,8 +66,8 @@
     <div class="row">
         <div class="col-xs-3">
             <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='{{ route('Profile') }}'">
-                <a href="{{ route('Profile') }}">
+                onclick="location.href='{{ route('SProfile') }}'">
+                <a href="{{ route('SProfile') }}">
                     <div class="pull-left m-r">
                         <i
                             class="material-icons text-2x m-y-sm"></i>

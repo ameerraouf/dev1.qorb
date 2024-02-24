@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('status_reports', function (Blueprint $table) {
+        Schema::create('treatment_plans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('children_id');
-            $table->string('companion');
-            $table->string('status_type');
-            $table->text('strength_weakness');
-            $table->text('reinforcers');
-            $table->text('status_target');
+            $table->text('target')->nullable();
+            $table->string('help_type')->nullable();
+            $table->string('help_description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('status_reports');
+        Schema::dropIfExists('treatment_plans');
     }
 };
