@@ -418,10 +418,10 @@ Route::group(['prefix'=>env('SPECIALIST_PATH'),'middleware'=>'specialist'],funct
 Route::group(['prefix'=>env('SUPERVISOR_PATH'),'middleware'=>'supervisor'],function(){
     Route::get('/', [SupervisorController::class, 'index'])->name('supervisorHome');
     Route::get('/childrens', [SupervisorController::class , 'showChildrens'])->name('SChildrens');
+    Route::get('/children/vbmap/{id}', [SupervisorController::class, 'showChildrenVbmap'])->name('showChildrenVbmap');
     Route::get('/vbmap/create/{id}', [SupervisorController::class, 'createVbmapPage'])->name('createVbmapPage');
     Route::get('/vbmap/edit/{id}', [SupervisorController::class, 'editVbmapPage'])->name('editVbmapPage');
     Route::get('/vbmap/show/{id}', [SupervisorController::class, 'showVbmapPage'])->name('showVbmapPage');
-    Route::get('/children/vbmap/{id}', [SupervisorController::class, 'showChildrenVbmap'])->name('showChildrenVbmap');
     Route::get('/file/download/{name}', [SupervisorController::class, 'fileDownload'])->name('SDownloadFile');
     Route::post('/vbmap/update/{id}', [SupervisorController::class, 'updateVbmap'])->name('updateVbmap');
     Route::post('/vbmap/create/{id}', [SupervisorController::class, 'storeVbmap'])->name('storeVbmap');

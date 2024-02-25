@@ -121,9 +121,9 @@
                                               <a class="dropdown-item" href="{{ route('TeacherReports',$child->id) }}">تقارير الجلسات</a>
                                               <a class="dropdown-item" href="{{ route('TeacherStatusReports', $child->id) }}">تقارير الحالة </a>
                                               <a class="dropdown-item" href="{{ route('TeacherConsultingReports',$child->id) }}">تقارير الاستشارات</a>
-                                              <a class="dropdown-item" href="#">الخطة العلاجية</a>
-                                              <a class="dropdown-item" href="#">تقييم vbmap</a>
-                                              <a class="dropdown-item" href="#">التقرير النهائى</a>
+                                              <a class="dropdown-item" href="{{ route('TshowChildrenTreatmentPlan',$child->id) }}">الخطة العلاجية</a>
+                                              <a class="dropdown-item" href="{{ route('TshowChildrenVbmap',$child->id) }}">تقييم vbmap</a>
+                                              <a class="dropdown-item" href="{{ route('TshowChildrenFinalReports',$child->id) }}">التقرير النهائى</a>
                                               <a class="dropdown-item" href="#">تقرير الكشف المبكر</a>
 
 
