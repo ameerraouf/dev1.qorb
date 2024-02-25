@@ -28,7 +28,12 @@
                            class="col-sm-2 form-control-label">{{ __('cruds.FinancialTransactions.Name') }}
                     </label>
                     <div class="col-sm-10">
-                        {!! Form::text('name',$transaction->name, array('placeholder' => '','class' => 'form-control','id'=>'name','required'=>'')) !!}
+                        <select class="form-control" name="name">
+                            <option value="" selected disabled hidden>Choose a user</option>    
+                            @foreach ($users as $user)
+                                <option value="{{ $user->name }}">{{ $user->name }}</option>    
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

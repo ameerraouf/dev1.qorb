@@ -433,6 +433,12 @@ Route::group(['prefix'=>env('SUPERVISOR_PATH'),'middleware'=>'supervisor'],funct
     Route::post('/treatment-plan/create/{id}', [SupervisorController::class, 'storeTreatmentPlan'])->name('storeTreatmentPlan');
     Route::post('/treatment-plan/update/{id}', [SupervisorController::class, 'updateTreatmentPlan'])->name('updateTreatmentPlan');
 
+    Route::get('/consulting-report/show/{id}', [SupervisorController::class, 'showConsultingReportPage'])->name('showConsultingReportPage');
+    Route::get('/children/consulting-reports/{id}', [SupervisorController::class, 'showChildrenConsultingReports'])->name('showChildrenConsultingReports');
+    Route::get('/consulting-report/create/{id}', [SupervisorController::class, 'createConsultingReportPage'])->name('createConsultingReportPage');
+    Route::get('/consulting-report/edit/{id}', [SupervisorController::class, 'editConsultingReportPage'])->name('editConsultingReportPage');
+    Route::post('/consulting-report/create/{id}', [SupervisorController::class, 'storeConsultingReport'])->name('storeConsultingReport');
+    Route::post('/consulting-report/update/{id}', [SupervisorController::class, 'updateConsultingReport'])->name('updateConsultingReport');
     
     Route::get('/final-report/show/{id}', [SupervisorController::class, 'showFinalReportPage'])->name('SStatushowVbmapPage');
     Route::get('/children/final-reports/{id}', [SupervisorController::class, 'showChildrenFinalReports'])->name('showChildrenFinalReports');

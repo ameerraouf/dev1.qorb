@@ -101,9 +101,10 @@ class FinancialTransactionController extends Controller
         // General END
 
         $transaction = FinancialTransaction::find($id);
+        $users = User::where('role' , '!=' , 'admin')->get();
 
         if (!empty($transaction)) {
-            return view("dashboard.financial-transactions.edit", compact("transaction", "GeneralWebmasterSections"));
+            return view("dashboard.financial-transactions.edit", compact("transaction", "GeneralWebmasterSections", "users"));
         } else {
             return redirect()->action('Dashboard\FinancialTransactionController@index');
         }

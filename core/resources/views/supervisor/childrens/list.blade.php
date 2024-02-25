@@ -71,6 +71,7 @@
                                 </td>
                                 <td class="h6 text-center">
                                     <a href="{{ route('showChildrenVbmap' , $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.Vbmap') }}</a><br>
+                                    <a href="{{ route('showChildrenConsultingReports' , $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.Consulting') }}</a><br>
                                     <a href="{{ route('showChildrenTreatmentPlan', $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.TreatmentPlan') }}</a><br>
                                     <a href="{{ route('showChildrenFinalReports', $children->id) }}" class="btn btn-primary" style="display: block;">{{ __('cruds.Reports.FinalReport') }}</a><br>
                                 </td>

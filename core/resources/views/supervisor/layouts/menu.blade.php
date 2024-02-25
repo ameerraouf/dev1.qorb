@@ -1,3 +1,14 @@
+<?php
+// Current Full URL
+$fullPagePath = Request::url();
+// Char Count of Backend folder Plus 1
+$envAdminCharCount = strlen(env('SUPERVISOR_PATH')) + 1;
+// URL after Root Path EX: admin/home
+$urlAfterRoot = substr($fullPagePath, strpos($fullPagePath, env('SUPERVISOR_PATH')) + $envAdminCharCount);
+$mnu_title_var = "title_" . @Helper::currentLanguage()->code;
+$mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
+?> 
+
 <div id="aside" class="app-aside modal fade folded md nav-expand">
     <div class="left navside dark dk" layout="column">
         <div class="navbar navbar-md no-radius">
@@ -15,8 +26,11 @@
                     <li class="nav-header hidden-folded">
                         <small class="text-muted">{{ __('backend.main') }}</small>
                     </li>
-
-                    <li>
+                    <?php
+                    $currentFolder = '' ; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                ?>
+                    <li  {{ ($fullPagePath == strpos($fullPagePath, env('SUPERVISOR_PATH'))) ? 'class=active' : '' }}>
                         <a href="{{ route('supervisorHome') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
@@ -24,7 +38,12 @@
                             <span class="nav-text">{{ __('backend.dashboard') }}</span>
                         </a>
                     </li>
-                    <li>
+
+                    <?php
+                    $currentFolder = "childrens"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    ?>
+                    <li  {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                         <a href="{{ route('SChildrens') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
@@ -32,7 +51,11 @@
                             <span class="nav-text">{{ __('backend.Children') }}</span>
                         </a>
                     </li>
-                    <li>
+                    <?php
+                    $currentFolder = "transactions"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                ?>
+                    <li  {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                         <a href="{{ route('SFTransactions') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe1b8;</i>
@@ -40,7 +63,11 @@
                             <span class="nav-text">{{ __('cruds.FinancialTransactions.Title') }}</span>
                         </a>
                     </li>
-                    <li>
+                    <?php
+                    $currentFolder = "profile"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                ?>
+                    <li  {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                         <a href="{{ route('SProfile') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>

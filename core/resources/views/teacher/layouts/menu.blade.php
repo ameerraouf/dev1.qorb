@@ -1,3 +1,14 @@
+<?php
+// Current Full URL
+$fullPagePath = Request::url();
+// Char Count of Backend folder Plus 1
+$envAdminCharCount = strlen(env('Teacher_PATH')) + 1;
+// URL after Root Path EX: admin/home
+$urlAfterRoot = substr($fullPagePath, strpos($fullPagePath, env('Teacher_PATH')) + $envAdminCharCount);
+$mnu_title_var = "title_" . @Helper::currentLanguage()->code;
+$mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
+?> 
+
 <div id="aside" class="app-aside modal fade folded md nav-expand">
     <div class="left navside dark dk" layout="column">
         <div class="navbar navbar-md no-radius">
@@ -16,7 +27,7 @@
                         <small class="text-muted">{{ __('backend.main') }}</small>
                     </li>
 
-                    <li>
+                    <li  {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                         <a href="{{ route('teacher.teacherhome') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
@@ -32,7 +43,11 @@
                             <span class="nav-text">{{ __('backend.childrens') }}</span>
                         </a>
                     </li>
-                    <li>
+                    <?php
+                        $currentFolder = ""; // Put folder name here
+                        $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                        ?>
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                         <a>
                             <span class="nav-caret">
                                 <i class="fa fa-caret-down"></i>
@@ -43,13 +58,17 @@
                             <span class="nav-text">{{ __('backend.package') }}</span>
                         </a>
                         <ul class="nav-sub">
-                            <li>
+                            <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="{{ route('TeacherPackages') }}">
                                     <span
                                         class="nav-text">{{ __('backend.package') }}</span>
                                 </a>
                             </li>
-                            <li>
+                            <?php
+                                $currentFolder = "packages"; // Put folder name here
+                                $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                                ?>
+                            <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="#">
                                     <span
                                         class="nav-text">{{ __('backend.purchaseTransaction') }}</span>
@@ -57,7 +76,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <?php
+                        $currentFolder = "profile"; // Put folder name here
+                        $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                        ?>
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                         <a href="{{ route('TeacherProfile') }}">
                             <span class="nav-icon">
                                 <i class="material-icons">&#xe3fc;</i>
