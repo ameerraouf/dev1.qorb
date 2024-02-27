@@ -73,7 +73,6 @@
 
                     <article>
                         @if($WebmasterSection->type==2 && $Topic->video_file!="")
-                            {{--video--}}
                             <div class="post-video">
                                 @if($WebmasterSection->title_status)
                                     <div class="post-heading">
@@ -91,7 +90,6 @@
                                         $Youtube_id = Helper::Get_youtube_video_id($Topic->video_file);
                                         ?>
                                         @if($Youtube_id !="")
-                                            {{-- Youtube Video --}}
                                             <iframe allowfullscreen
                                                     src="https://www.youtube.com/embed/{{ $Youtube_id }}?autoplay=1&mute=1"
                                                     allow="autoplay">
@@ -102,7 +100,6 @@
                                         $Vimeo_id = Helper::Get_vimeo_video_id($Topic->video_file);
                                         ?>
                                         @if($Vimeo_id !="")
-                                            {{-- Vimeo Video --}}
                                             <iframe allowfullscreen
                                                     src="https://player.vimeo.com/video/{{ $Vimeo_id }}?title=0&amp;byline=0">
                                             </iframe>
@@ -110,7 +107,6 @@
 
                                     @elseif($Topic->video_type ==3)
                                         @if($Topic->video_file !="")
-                                            {{-- Embed Video --}}
                                             {!! $Topic->video_file !!}
                                         @endif
 
@@ -126,7 +122,6 @@
                                 </div>
                             </div>
                         @elseif($WebmasterSection->type==3 && $Topic->audio_file!="")
-                            {{--audio--}}
                             <div class="post-video">
                                 @if($WebmasterSection->title_status)
                                     <div class="post-heading">
@@ -153,7 +148,6 @@
                             </div>
                             <br>
                         @elseif(count($Topic->photos)>0)
-                            {{--photo slider--}}
                             <div class="post-slider">
                                 @if($WebmasterSection->title_status)
                                     <div class="post-heading">
@@ -165,7 +159,6 @@
                                         </h1>
                                     </div>
                             @endif
-                            <!-- start flexslider -->
                                 <div class="p-slider flexslider">
                                     <ul class="slides">
                                         @if($Topic->photo_file !="")
@@ -183,12 +176,10 @@
 
                                     </ul>
                                 </div>
-                                <!-- end flexslider -->
                             </div>
                             <br>
 
                         @else
-                            {{--one photo--}}
                             <div class="post-image">
                                 @if($WebmasterSection->title_status)
                                     <div class="post-heading">
@@ -208,8 +199,6 @@
                             </div>
                         @endif
 
-
-                        {{--Additional Feilds--}}
                         @if(count($Topic->webmasterSection->customFields->where("in_page",true)) >0)
                             <div class="row">
                                 <div class="col-lg-12">
@@ -220,13 +209,11 @@
                                         ?>
                                         @foreach($Topic->webmasterSection->customFields->where("in_page",true) as $customField)
                                             <?php
-                                            // check permission
                                             $view_permission_groups = [];
                                             if ($customField->view_permission_groups != "") {
                                                 $view_permission_groups = explode(",", $customField->view_permission_groups);
                                             }
                                             if (in_array(0, $view_permission_groups) || $customField->view_permission_groups == "") {
-                                            // have permission & continue
                                             ?>
                                             @if($customField->in_page)
                                                 <?php
@@ -242,7 +229,6 @@
                                                     foreach ($Topic->fields as $t_field) {
                                                         if ($t_field->field_id == $customField->id) {
                                                             if ($customField->type == 7) {
-                                                                // if multi check
                                                                 $cf_saved_val_array = explode(", ", $t_field->field_value);
                                                             } else {
                                                                 $cf_saved_val = $t_field->field_value;
@@ -255,7 +241,6 @@
 
                                                 @if(($cf_saved_val!="" || count($cf_saved_val_array) > 0) && ($customField->lang_code == "all" || $customField->lang_code == @Helper::currentLanguage()->code))
                                                     @if($customField->type ==12)
-                                                        {{--Vimeo Video Link--}}
                                                         <?php
                                                         $CF_Vimeo_id = Helper::Get_vimeo_video_id($cf_saved_val);
                                                         ?>
@@ -265,7 +250,6 @@
                                                                     {!!  $cf_title !!} :
                                                                 </div>
                                                                 <div class="col-lg-9">
-                                                                    {{-- Vimeo Video --}}
                                                                     <iframe allowfullscreen
                                                                             style="height:450px;width: 100%"
                                                                             src="https://player.vimeo.com/video/{{ $CF_Vimeo_id }}?title=0&amp;byline=0">
@@ -274,7 +258,6 @@
                                                             </div>
                                                         @endif
                                                     @elseif($customField->type ==11)
-                                                        {{--Youtube Video Link--}}
 
                                                         <?php
                                                         $CF_Youtube_id = Helper::Get_youtube_video_id($cf_saved_val);
@@ -285,7 +268,6 @@
                                                                     {!!  $cf_title !!} :
                                                                 </div>
                                                                 <div class="col-lg-9">
-                                                                    {{-- Youtube Video --}}
                                                                     <iframe allowfullscreen
                                                                             style="height: 450px;width: 100%"
                                                                             src="https://www.youtube.com/embed/{{ $CF_Youtube_id }}">
@@ -294,7 +276,6 @@
                                                             </div>
                                                         @endif
                                                     @elseif($customField->type ==10)
-                                                        {{--Video File--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -309,7 +290,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==9)
-                                                        {{--Attach File--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -326,15 +306,15 @@
                                                                 @else
                                                                     <a href="{{ URL::to('uploads/topics/'.$cf_saved_val) }}"
                                                                        target="_blank">
-<span class="badge">
-    {!! Helper::GetIcon(URL::to('uploads/topics/'),$cf_saved_val) !!}
-    {!! $cf_saved_val !!}</span>
+                                                                        <span class="badge">
+                                                                            {!! Helper::GetIcon(URL::to('uploads/topics/'),$cf_saved_val) !!}
+                                                                            {!! $cf_saved_val !!}
+                                                                        </span>
                                                                     </a>
                                                                 @endif
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==8)
-                                                        {{--Photo File--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -347,7 +327,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==7)
-                                                        {{--Multi Check--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -377,14 +356,12 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==14)
-                                                        {{--Checkbox--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-12">
                                                                 {!! (($cf_saved_val == 1) ? "&check;" : "&bigotimes;"); !!} {!!  $cf_title !!} {!! "(".(($cf_saved_val == 1) ? __('backend.yes') : __('backend.no')).")" !!}
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==6 || $customField->type ==13)
-                                                        {{--Select--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -412,7 +389,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==5)
-                                                        {{--Date & Time--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -422,7 +398,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==4)
-                                                        {{--Date--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -432,7 +407,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==3)
-                                                        {{--Email Address--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -442,7 +416,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==2)
-                                                        {{--Number--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -452,7 +425,6 @@
                                                             </div>
                                                         </div>
                                                     @elseif($customField->type ==1)
-                                                        {{--Text Area--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -462,7 +434,6 @@
                                                             </div>
                                                         </div>
                                                     @else
-                                                        {{--Text Box--}}
                                                         <div class="row field-row">
                                                             <div class="col-lg-3">
                                                                 {!!  $cf_title !!} :
@@ -483,7 +454,6 @@
                             </div>
                             <br>
                         @endif
-                        {{--End of -- Additional Feilds--}}
 
 
                         {!! $Topic->$details !!}
@@ -508,7 +478,6 @@
                             </div>
                         @endif
 
-                        {{-- Show Additional attach files --}}
                         @if(count($Topic->attachFiles)>0)
                             <div style="padding: 10px;border: 1px dashed #ccc;margin-bottom: 10px;">
                                 @foreach($Topic->attachFiles as $attachFile)
@@ -664,9 +633,9 @@
 
                         @if(@$Topic->form_id >0)
                             <br>
-                            <div>
+                            {{-- <div>
                                 @include('frontEnd.form',["FormSectionID"=>@$Topic->form_id])
-                            </div>
+                            </div> --}}
                         @elseif($WebmasterSection->order_status)
                             <div id="order">
                                 <div class="row">

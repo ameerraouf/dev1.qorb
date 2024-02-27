@@ -81,6 +81,7 @@ class HomeController extends Controller
                 return $this->topic($section, $id);
                 break;
         }
+
         // General Webmaster Settings
         $WebmasterSettings = WebmasterSetting::find(1);
         $Current_Slug = "seo_url_slug_" . @Helper::currentLanguage()->code;
@@ -608,13 +609,13 @@ class HomeController extends Controller
                 $Categories = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('status',
                     1)->where('father_id', '=', '0')->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
 
-                // Get Most Viewed
+                    // Get Most Viewed
                 $TopicsMostViewed = Topic::where([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])->orderby('visits', 'desc')->limit(3)->get();
 
                 $SideBanners = Banner::where('section_id', $WebmasterSettings->side_banners_section_id)->where('status',
                     1)->orderby('row_no', 'asc')->get();
 
-                // Get Latest News
+                    // Get Latest News
                 $LatestNews = $this->latest_topics($WebmasterSettings->latest_news_section_id);
 
                 // Page Title, Description, Keywords

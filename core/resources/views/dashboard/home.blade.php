@@ -99,24 +99,26 @@
                                     if ($headerWebmasterSection->id == 8) {
                                         $LiIcon = '&#xe8f6;';
                                     }
-                                    
+
                                     ?>
-                                    <div class="col-xs-{{ $b_cls }}">
-                                        <div class="box p-a" style="cursor: pointer"
-                                            onclick="location.href='{{ route('topics', $headerWebmasterSection->id) }}'">
-                                            <a href="{{ route('topics', $headerWebmasterSection->id) }}">
-                                                <div class="pull-left m-r">
-                                                    <i
-                                                        class="material-icons  text-2x text-{{ @$clr_ary[$ik] }} m-y-sm">{!! $LiIcon !!}</i>
-                                                </div>
-                                                <div class="clear">
-                                                    <div class="text-muted">{{ $GeneralWebmasterSectionTitle }}</div>
-                                                    <h4 class="m-a-0 text-md _600">
-                                                        {{ $headerWebmasterSection->topics->count() }}</h4>
-                                                </div>
-                                            </a>
+                                    @if ($headerWebmasterSection->id !== 3 && $headerWebmasterSection->id !==5)
+                                        <div class="col-xs-{{ $b_cls }}">
+                                            <div class="box p-a" style="cursor: pointer"
+                                                onclick="location.href='{{ route('topics', $headerWebmasterSection->id) }}'">
+                                                <a href="{{ route('topics', $headerWebmasterSection->id) }}">
+                                                    <div class="pull-left m-r">
+                                                        <i
+                                                            class="material-icons  text-2x text-{{ @$clr_ary[$ik] }} m-y-sm">{!! $LiIcon !!}</i>
+                                                    </div>
+                                                    <div class="clear">
+                                                        <div class="text-muted">{{ $GeneralWebmasterSectionTitle }}</div>
+                                                        <h4 class="m-a-0 text-md _600">
+                                                            {{ $headerWebmasterSection->topics->count() }}</h4>
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                     <?php
                                     $ik++;
                                     ?>
@@ -501,7 +503,7 @@ $ii = 1;
                                     } else {
                                         $dtformated = Helper::formatDate($Webmail->date);
                                     }
-                                    
+
                                     try {
                                         $groupColor = $Webmail->webmailsGroup->color;
                                         $groupName = $Webmail->webmailsGroup->name;
@@ -509,7 +511,7 @@ $ii = 1;
                                         $groupColor = '';
                                         $groupName = '';
                                     }
-                                    
+
                                     $fontStyle = '';
                                     $unreadIcon = '&#xe151;';
                                     $unreadbg = '';
@@ -725,7 +727,7 @@ $ii = 1;
                                                 } else {
                                                     $dtformated = Helper::formatDate($Webmail->date);
                                                 }
-                                                
+
                                                 try {
                                                     $groupColor = $Webmail->webmailsGroup->color;
                                                     $groupName = $Webmail->webmailsGroup->name;
@@ -733,7 +735,7 @@ $ii = 1;
                                                     $groupColor = '';
                                                     $groupName = '';
                                                 }
-                                                
+
                                                 $fontStyle = '';
                                                 $unreadIcon = '&#xe151;';
                                                 $unreadbg = '';
