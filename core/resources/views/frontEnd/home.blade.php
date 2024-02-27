@@ -118,7 +118,7 @@
             <div class="row">
                 <div class="col-12 row row-gap-24">
                     @foreach ($packages as $item)
-                        
+
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="box-package">
                             <h3 class="title">
@@ -627,7 +627,7 @@
                             </div>
                           </div>
                         </div>
-                        
+
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h4 class="panel-title">
@@ -642,7 +642,7 @@
                             </div>
                           </div>
                         </div>
-                        
+
                         <div class="panel panel-default">
                           <div class="panel-heading">
                             <h4 class="panel-title">
@@ -664,8 +664,8 @@
             </div>
     </section> --}}
     <!-- نهاية صفحة الأسئلة الشائعة -->
-    
-  
+
+
 
     <!-- بداية صفحة المجتمع -->
     <section class="content-row-no-bg">
@@ -681,7 +681,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="panel-group mian-accordion" id="accordion">
-                        
+
                         <div class="boxes-faq">
                             @foreach(App\Models\Society::withCount('replies')->where('status', 1)->latest()->get() as $value)
 
@@ -694,7 +694,7 @@
                                                 {{ $value->question_ar }}
                                             @else
                                                 {{ $value->question_en }}
-                                            @endif 
+                                            @endif
                                         </h3>
                                     </div>
                                     <div class="footer-box">

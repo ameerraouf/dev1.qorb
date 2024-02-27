@@ -62,6 +62,9 @@ class HomeController extends Controller
             case "common-questions" :
                 return $this->CommonQuestions();
                 break;
+            case "society" :
+                return $this->Society();
+                break;
             case "about" :
                 $id = 1;
                 $section = 1;
@@ -1756,13 +1759,12 @@ class HomeController extends Controller
 
     }
 
-    
-    public function societies()
+    public function Society()
     {
-        return $this->societiesByLang("");
+        return $this->SocietyByLang("");
     }
 
-    public function societiesByLang($lang = "")
+    public function SocietyByLang($lang = "")
     {
 
         if ($lang != "") {
@@ -1776,8 +1778,7 @@ class HomeController extends Controller
 
         // $id = $WebmasterSettings->contact_page_id;
 
-        $Topic = Topic::where('status', 1)->find(87);
-
+        $Topic = Topic::where('status', 1)->where('title_en','Society')->first();
 
         if (!empty($Topic) && ($Topic->expire_date == '' || ($Topic->expire_date != '' && $Topic->expire_date >= date("Y-m-d")))) {
 
@@ -1832,7 +1833,7 @@ class HomeController extends Controller
 
                 $societies = Society::withCount('replies')->where('status', 1)->latest()->get();
 
-                return view("frontEnd.societies",
+                return view("frontEnd.society",
                     compact(
                         "WebmasterSettings",
                         "LatestNews",

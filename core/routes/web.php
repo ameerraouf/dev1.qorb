@@ -113,6 +113,8 @@ Route::get('/{lang?}/topic/{id}', [HomeController::class, 'topicByLang'])->name(
 
 Route::get('/common-questions', [HomeController::class, 'CommonQuestions'])->name('FrontendCommonQuestions');
 Route::get('/{lang?}/common-questions', [HomeController::class, 'CommonQuestionsByLang'])->name('FrontendCommonQuestionsByLang');
+Route::get('/society', [HomeController::class, 'Society'])->name('FrontendSociety');
+Route::get('/{lang?}/society', [HomeController::class, 'SocietyByLang'])->name('FrontendSocietyByLang');
 
 // Route::get('/societies', [HomeController::class, 'societies'])->name('FrontendSocieties');
 // Route::get('/{lang?}/societies', [HomeController::class, 'societiesByLang'])->name('FrontendSocietiesByLang');
