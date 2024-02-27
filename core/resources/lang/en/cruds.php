@@ -23,6 +23,10 @@ return array(
         "answer en" => "Answer in English",
     ],
 
+    'Society' => [
+        'Title' => 'Society',
+    ],
+
     'Childrens' => [
         "Title" => "Childrens",
         "NewChildren" => "Add Children",
@@ -90,5 +94,5 @@ return array(
         'purchaseDate' => 'Purchase Date',
         'childName' => 'Subsicripted Child Name',
     ],
-    
+
 );

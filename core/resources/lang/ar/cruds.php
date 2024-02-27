@@ -21,6 +21,10 @@ return [
         'Answer_EN' => 'الإجابة باللغة الإنجليزية',
     ],
 
+    'Society' => [
+        'Title' => 'المجتمع',
+    ],
+
     'Childrens' => [
         'Title' => 'الاطفال',
         'NewChildren' => 'اضافة طفل',
