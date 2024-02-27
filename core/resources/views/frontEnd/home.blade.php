@@ -45,7 +45,7 @@
             $col_width = 3;
         }
         ?>
-        <section class="content-row-no-bg p-b-0">
+        {{-- <section class="content-row-no-bg p-b-0">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -103,7 +103,56 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
+
+          <!-- بداية صفحة الباقات -->
+    <section class="content-row-no-bg top-line">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="home-row-head">
+                        <h2 class="heading">الباقات</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 row row-gap-24">
+                    @foreach ($packages as $item)
+                        
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="box-package">
+                            <h3 class="title">
+                                {{ $item->title }}
+                            </h3>
+                            <h4 class="price">
+                                {{ $item->price }}
+                                <span>
+                                    {{ __('cruds.Packages.currency') }}
+                                </span>
+                            </h4>
+                            <ul class="list">
+                                @foreach ($item->advantages as $adv)
+                                    <li>
+                                        <span class="icon">
+                                            &#10003;
+                                        </span>
+                                        {{ $adv }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <a href="" class="btn-box">
+                                {{ __('cruds.Packages.Subscribe') }}
+                            </a>
+                        </div>
+                    </div>
+
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- نهاية صفحة الباقات -->
     @endif
 
     @if(count($HomeTopics)>0)
@@ -552,7 +601,7 @@
     @endif
 
     <!-- بداية صفحة الأسئلة الشائعة -->
-    <section class="content-row-no-bg">
+    {{-- <section class="content-row-no-bg">
             <div class="container">
                         <div class="row">
                             <div class="col-12">
@@ -613,170 +662,10 @@
                             </div>
                         </div>
             </div>
-    </section>
+    </section> --}}
     <!-- نهاية صفحة الأسئلة الشائعة -->
     
-    <!-- بداية صفحة الباقات -->
-    <section class="content-row-no-bg top-line">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="home-row-head">
-                        <h2 class="heading">الباقات</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 row row-gap-24">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="box-package">
-                            <h3 class="title">
-                                أسم الباقة
-                            </h3>
-                            <h4 class="price">
-                                500.00
-                                <span>
-                                    ريال
-                                </span>
-                            </h4>
-                            <ul class="list">
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                            </ul>
-                            <a href="" class="btn-box">
-                                أشترك الأن
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="box-package">
-                            <h3 class="title">
-                                أسم الباقة
-                            </h3>
-                            <h4 class="price">
-                                500.00
-                                <span>
-                                    ريال
-                                </span>
-                            </h4>
-                            <ul class="list">
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                            </ul>
-                            <a href="" class="btn-box">
-                                أشترك الأن
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="box-package">
-                            <h3 class="title">
-                                أسم الباقة
-                            </h3>
-                            <h4 class="price">
-                                500.00
-                                <span>
-                                    ريال
-                                </span>
-                            </h4>
-                            <ul class="list">
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                                <li>
-                                <span class="icon">
-                                    &#10003;
-                                </span>
-                                    ميزة
-                                </li>
-                            </ul>
-                            <a href="" class="btn-box">
-                                أشترك الأن
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- نهاية صفحة الباقات -->
+  
 
     <!-- بداية صفحة المجتمع -->
     <section class="content-row-no-bg">

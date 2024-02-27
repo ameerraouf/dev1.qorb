@@ -8,6 +8,8 @@ return array(
         "Name" => "Name",
         "CopyOfTheBankTransfer" => "Copy Of The Bank Transfer",
         "Notes" => "Notes",
+        'Purchases'=>'Purchases'
+
     ],
 
     'CommonQuestions' => [
@@ -82,8 +84,11 @@ return array(
 
     "Packages" => [
         'currency' => 'SAR',
+        'price' => 'Price',
         'Subscribe' => "Subscribe now",
         'Title' => "Packages",
+        'purchaseDate' => 'Purchase Date',
+        'childName' => 'Subsicripted Child Name',
     ],
     
 );

@@ -17,9 +17,9 @@ if (Helper::GeneralSiteSettings("style_footer") != 1) {
         $bx3w = 3;
         $bx4w = 3;
         $News = [];
-        if(@$LatestNews){
-            $News = $LatestNews;
-        }
+        // if(@$LatestNews){
+        //     $News = $LatestNews;
+        // }
         if (count($News) == 0 && Helper::GeneralSiteSettings("style_subscribe") == 0) {
             $bx1w = 6;
             $bx2w = 6;
@@ -62,7 +62,7 @@ if (Helper::GeneralSiteSettings("style_footer") != 1) {
                         @endif
                     </div>
                 </div>
-                @if(count($News)>0)
+                {{--@if(count($News)>0)
                     <?php
                     $footer_title_var = "title_" . @Helper::currentLanguage()->code;
                     $footer_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
@@ -90,7 +90,7 @@ if (Helper::GeneralSiteSettings("style_footer") != 1) {
                             </ul>
                         </div>
                     </div>
-                @endif
+                @endif--}}
 
                 @if(Helper::GeneralWebmasterSettings("footer_menu_id") >0)
                     <?php

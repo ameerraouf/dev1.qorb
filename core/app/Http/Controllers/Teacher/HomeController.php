@@ -11,6 +11,7 @@ use App\Models\Package;
 use App\Models\Report;
 use App\Models\StatusReport;
 use App\Models\Teacher as ModelsTeacher;
+use App\Models\TeacherSubscription;
 use App\Models\TreatmentPlan;
 use App\Models\VbmapReport;
 use Illuminate\Http\Request;
@@ -72,6 +73,16 @@ class HomeController extends Controller
         $reports = FinalReport::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id', $id)->select('id')->first()->id;
         return view('teacher.final_reports.list', compact('reports', 'child_id'));
+    }
+
+    public function showSubscriptionsPage()
+    {
+        $subscriptions = TeacherSubscription::where('teacher_id', Auth::user()->id)->paginate(10);
+        $subscriptions->each(function($sub){
+            $sub->children = Children::where('id',$sub->children_id)->select('id','name')->first();
+            $sub->package = Package::where('id',$sub->package_id)->select('id','title','price')->first();
+        });
+        return view('teacher.subscriptions.list', compact('subscriptions'));
     }
 
     function showTeacherProfile()

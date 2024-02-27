@@ -8,6 +8,7 @@ return [
         'Name' => 'الاسم',
         'CopyOfTheBankTransfer' => 'صورة التحويل البنكي',
         'Notes' => 'ملاحظات',
+        'Purchases'=>'عمليات شراء الباقات'
     ],
 
     'CommonQuestions' => [
@@ -86,6 +87,10 @@ return [
         'price' => 'السعر',
         'currency' => 'ريال',
         'Subscribe' => 'أشترك الأن',
+        'purchaseDate' => 'تاريخ الاشتراك',
+        'childName' => 'اسم الطفل المشترك فى الباقة',
+        'price' => 'السعر',
+
     ],
 
     // 'Teacher' => [

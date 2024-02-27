@@ -74,11 +74,11 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </a>
                             </li>
                             <?php
-                                $currentFolder = "transactions"; // Put folder name here
+                                $currentFolder = "subscriptions"; // Put folder name here
                                 $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                                 ?>
-                            <li {{ request()->is('*transactions*') ? 'active' : '' }}>
-                                <a href="#">
+                            <li {{ request()->is('*subscriptions*') ? 'active' : '' }}>
+                                <a href="{{ route('TshowSubscriptionsPage') }}">
                                     <span
                                         class="nav-text">{{ __('backend.purchaseTransaction') }}</span>
                                 </a>

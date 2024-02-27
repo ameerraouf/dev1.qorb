@@ -12,6 +12,7 @@ use App\Models\Topic;
 use App\Models\Banner;
 use App\Models\Comment;
 use App\Models\Contact;
+use App\Models\Package;
 use App\Models\Section;
 use App\Models\Setting;
 use App\Models\Webmail;
@@ -245,8 +246,14 @@ class HomeController extends Controller
             $HomePage = Topic::where("status", 1)->find($WebmasterSettings->default_currency_id);
         }
 
+        $packages = Package::get();
+        $packages->each(function ($p) {
+            $p->advantages = explode(',', $p->advantages);
+        });
+
         return view("frontEnd.home",
             compact(
+                "packages",
                 "WebmasterSettings",
                 "SliderBanners",
                 "TextBanners",
