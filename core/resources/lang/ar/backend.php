@@ -714,8 +714,8 @@ return array(
     'Children' => 'الأطفال',
     'Role' => 'الدور',
     'selectRole' => 'اختيار دور',
-    'Admin' => 'مشرف',
-    'Specialist' => 'متخصص',
+    'Admin' => 'أدمن',
+    'Specialist' => 'أخصائية',
 
     'societies' => 'المجتمع',
     'question' => 'السؤال',
@@ -754,6 +754,6 @@ return array(
 
     'reports' => 'التقارير',
 
-    'Supervisor' => 'مشرف'
+    'Supervisor' => 'مشرفة'
 
 );

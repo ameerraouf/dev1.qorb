@@ -190,9 +190,9 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             ?>
                             <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                 <a href="{{ route('contacts') }}">
-<span class="nav-icon">
-<i class="material-icons">&#xe7ef;</i>
-</span>
+                                    <span class="nav-icon">
+                                        <i class="material-icons">&#xe7ef;</i>
+                                    </span>
                                     <span class="nav-text">{{ __('backend.newsletter') }}</span>
                                 </a>
                             </li>
@@ -358,16 +358,19 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             ?>
                             @if($GeneralWebmasterSection->sections_status > 0 && @Auth::user()->permissionsGroup->view_status == 0)
                                 <li {{ ($GeneralWebmasterSection->id == @$WebmasterSection->id && $is_webmaster != "webmaster") ? 'class=active' : '' }}>
-                                    <a>
-                  <span class="nav-caret">
-                    <i class="fa fa-caret-down"></i>
-                  </span>
-                                        <span class="nav-icon">
-                    <i class="material-icons">{!! $LiIcon !!}</i>
-                  </span>
-                                        <span
-                                            class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
-                                    </a>
+                                    @if ($GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
+                                        <a>
+                                            <span class="nav-caret">
+                                                <i class="fa fa-caret-down"></i>
+                                            </span>
+                                                                    <span class="nav-icon">
+                                                <i class="material-icons">{!! $LiIcon !!}</i>
+                                            </span>
+                                            <span
+                                                class="nav-text">{!! $GeneralWebmasterSectionTitle !!}
+                                            </span>
+                                        </a>
+                                    @endif
                                     <ul class="nav-sub">
                                         @if($GeneralWebmasterSection->sections_status > 0)
 
@@ -400,28 +403,30 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </li>
 
                             @else
-                                <li {{ ($GeneralWebmasterSection->id== @$WebmasterSection->id) ? 'class=active' : '' }}>
-                                    <a href="{{ route('topics',$GeneralWebmasterSection->id) }}">
-                  <span class="nav-icon">
-                    <i class="material-icons">{!! $LiIcon !!}</i>
-                  </span>
-                                        <span
+                                @if ($GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
+                                    <li {{ ($GeneralWebmasterSection->id== @$WebmasterSection->id) ? 'class=active' : '' }}>
+                                        <a href="{{ route('topics',$GeneralWebmasterSection->id) }}">
+                                            <span class="nav-icon">
+                                                <i class="material-icons">{!! $LiIcon !!}</i>
+                                            </span>
+                                                                    <span
                                             class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
+                                @endif
                             @endif
                         @endif
                     @endforeach
 
 
 
-                    @if(Helper::GeneralWebmasterSettings("banners_status"))
-                        @if(@Auth::user()->permissionsGroup->banners_status)
+                    {{-- @if(Helper::GeneralWebmasterSettings("banners_status"))
+                        @if(@Auth::user()->permissionsGroup->banners_status)--}}
                             <?php
-                            $currentFolder = "banners"; // Put folder name here
-                            $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                            // $currentFolder = "banners";
+                            // $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                             ?>
-                            <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                            {{--<li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                                 <a href="{{ route('Banners') }}">
                                     <span class="nav-icon">
                                         <i class="material-icons">&#xe433;</i>
@@ -430,7 +435,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </a>
                             </li>
                         @endif
-                    @endif
+                    @endif --}}
 
                     @if(Helper::GeneralWebmasterSettings("settings_status"))
                         @if(@Auth::user()->permissionsGroup->settings_status)

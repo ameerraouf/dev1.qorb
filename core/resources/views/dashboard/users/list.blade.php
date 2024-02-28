@@ -1,9 +1,9 @@
 @extends('dashboard.layouts.master')
 @section('title', __('backend.usersPermissions'))
 @section('content')
-    @if(@Auth::user()->permissionsGroup->webmaster_status)
+    {{-- @if(@Auth::user()->permissionsGroup->webmaster_status)
         @include('dashboard.permissions.list')
-    @endif
+    @endif --}}
     <div class="padding">
         <div class="box">
 

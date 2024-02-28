@@ -173,46 +173,54 @@
                     </article>
                 </div>
             </div>
-            <!-- بداية صفحة الأسئلة الشائعة -->
-            <section class="content-row-no-bg">
+            <!-- بداية صفحة الباقات -->
+            <section class="content-row-no-bg top-line">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="home-row-head">
-                                <h2 class="heading">{{ __('cruds.CommonQuestions.Title') }}</h2>
+                                <h2 class="heading">الباقات</h2>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <div class="boxes-faq">
-                                @foreach($societies as $value)
-                                <a href="#" class="box-faq">
-                                    <div class="content">
-                                        <img src="https://placehold.co/400" alt="" class="img">
-                                        <h3 class="title">
-                                            @if(app()->getLocale() == 'ar')
-                                                {{ $value->question_ar }}
-                                            @else
-                                                {{ $value->question_en }}
-                                            @endif
-                                        </h3>
-                                    </div>
-                                    <div class="footer-box">
-                                        <span class="name">باسم جابر</span>
-                                        <div class="btns">
-                                            <span class="btn"><i class="fa fa-eye" aria-hidden="true"></i>5</span>
-                                            <span class="btn"><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ $value->replies->count() }}</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                @endforeach
+                        <div class="col-12 row row-gap-24">
+                            @foreach ($packages as $item)
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="box-package">
+                                    <h3 class="title">
+                                        {{ $item->title }}
+                                    </h3>
+                                    <h4 class="price">
+                                        {{ $item->price }}
+                                        <span>
+                                            {{ __('cruds.Packages.currency') }}
+                                        </span>
+                                    </h4>
+                                    <ul class="list">
+                                        @foreach ($item->advantages as $adv)
+                                            <li>
+                                                <span class="icon">
+                                                    &#10003;
+                                                </span>
+                                                {{ $adv }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <a href="" class="btn-box">
+                                        {{ __('cruds.Packages.Subscribe') }}
+                                    </a>
+                                </div>
                             </div>
+
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- نهاية صفحة الأسئلة الشائعة -->
+            <!-- نهاية صفحة الباقات -->
         </div>
     </section>
 
