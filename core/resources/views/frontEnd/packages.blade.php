@@ -180,10 +180,9 @@
                 </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 row row-gap-24">
+                        <div class="boxes-package">
                             @foreach ($packages as $item)
 
-                            <div class="col-12 col-md-6 col-lg-4">
                                 <div class="box-package">
                                     <h3 class="title">
                                         {{ $item->title }}
@@ -208,7 +207,6 @@
                                         {{ __('cruds.Packages.Subscribe') }}
                                     </a>
                                 </div>
-                            </div>
 
                             @endforeach
 

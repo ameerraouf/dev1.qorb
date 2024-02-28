@@ -134,6 +134,11 @@ img.img-polaroid {
     justify-content: space-between;
 }
 
+.boxes-package {
+    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
 .box-package {
     background-color: white;
     padding: 2rem;
