@@ -8,7 +8,9 @@ return array(
         "Name" => "Name",
         "CopyOfTheBankTransfer" => "Copy Of The Bank Transfer",
         "Notes" => "Notes",
-        'Purchases'=>'Purchases'
+        'Purchases'=>'Purchases',
+        'UserName' => 'User'
+
 
     ],
 

@@ -8,7 +8,8 @@ return [
         'Name' => 'الاسم',
         'CopyOfTheBankTransfer' => 'صورة التحويل البنكي',
         'Notes' => 'ملاحظات',
-        'Purchases'=>'عمليات شراء الباقات'
+        'Purchases'=>'عمليات شراء الباقات',
+        'UserName' => 'المستخدم'
     ],
 
     'CommonQuestions' => [

@@ -71,7 +71,7 @@
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ __('cruds.Reports.Consulting') }}</h5>
+                                            <h5 class="modal-title">{{ __('cruds.FinancialTransactions.Title') }}</h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
                                             <div class="form-group row">
@@ -87,7 +87,7 @@
                                                         class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.FinancialTransactions.CopyOfTheBankTransfer') : __('cruds.FinancialTransactions.CopyOfTheBankTransfer') }}
                                                     </h6><br>
                                                     <div class="col-sm-8">
-                                                        <img src="uploads/financial-transactions/{{ $transaction->image }}" width="30px" height="30px" alt="">
+                                                        <img src="uploads/financial-transactions/{{ $transaction->image }}" width="100px" height="90px" alt="">
                                                     </div>
                                                 </div>
                                                 <hr>

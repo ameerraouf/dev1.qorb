@@ -18,6 +18,7 @@ class SpecialistController extends Controller
 {
 
     private $uploadPath = "uploads/users/";
+    private $filePath = "uploads/media/";
 
     public function index()
     {
@@ -271,8 +272,9 @@ class SpecialistController extends Controller
 
     function fileDownload($name) {
         try{
-            
-            return Storage::download($name);
+            $filePath = $this->filePath;
+
+            return response()->download($filePath .'/'. $name);
         }
 
         catch (\Exception $e) {
@@ -330,6 +332,11 @@ class SpecialistController extends Controller
     public function getUploadPath()
     {
         return $this->uploadPath;
+    }
+
+    public function getFilePath()
+    {
+        return $this->filePath;
     }
 
 }

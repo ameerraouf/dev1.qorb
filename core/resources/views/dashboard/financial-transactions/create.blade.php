@@ -24,14 +24,22 @@
                 {{Form::open(['route'=>['financialTransactionsStore'],'method'=>'POST', 'files' => true ])}}
 
                 <div class="form-group row">
-                    <label for="name"
-                           class="col-sm-2 form-control-label">{{ __('cruds.FinancialTransactions.Name') }}
+                    <label for="image"
+                           class="col-sm-2 form-control-label">{{ __('cruds.FinancialTransactions.Name') }}</label>
+                    <div class="col-sm-10">
+                        {!! Form::text('name', '' ,array('class' => 'form-control','id'=>'name','required'=>'')) !!}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="User"
+                           class="col-sm-2 form-control-label">{{ __('cruds.FinancialTransactions.UserName') }}
                     </label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="name">
+                        <select class="form-control" name="user">
                             <option value="" selected disabled hidden>Choose a user</option>    
                             @foreach ($users as $user)
-                                <option value="{{ $user->name }}">{{ $user->name }}</option>    
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>    
                             @endforeach
                         </select>
                     </div>

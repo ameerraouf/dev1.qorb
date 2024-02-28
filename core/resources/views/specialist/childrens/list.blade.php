@@ -10,7 +10,7 @@
             <div class="box-header dker">
                 <h3>{{ __('cruds.Childrens.Title') }}</h3>
                 <small>
-                    <a href="{{ route('adminHome') }}">{{ __('backend.home') }}</a> /
+                    <a href="{{ route('specialistHome') }}">{{ __('backend.home') }}</a> /
                     <a >{{ __('cruds.Childrens.Title') }}</a>
                 </small>
             </div>
