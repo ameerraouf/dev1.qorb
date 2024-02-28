@@ -39,7 +39,7 @@ class PackageController extends Controller
             $packages = Package::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
         }
         return view("dashboard.packages.list", compact("packages","GeneralWebmasterSections"));
-        
+
     }
 
     /**
@@ -70,16 +70,20 @@ class PackageController extends Controller
         }
 
         $this->validate($request, [
-            'title' => 'required|string',
-            'advantages' => 'required|string',
+            'title_en' => 'required|string',
+            'title_ar' => 'required|string',
+            'advantages_ar' => 'required|string',
+            'advantages_en' => 'required|string',
             'price' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
         ]);
-        
-        
+
+
         try {
             $package = new Package;
-            $package->title = $request->title;
-            $package->advantages = $request->advantages;
+            $package->title_en = $request->title_en;
+            $package->title_ar = $request->title_ar;
+            $package->advantages_en = $request->advantages_en;
+            $package->advantages_ar = $request->advantages_ar;
             $package->price = $request->price;
             $package->save();
             return redirect()->action('Dashboard\PackageController@index')->with('doneMessage', __('backend.addDone'));
@@ -131,8 +135,10 @@ class PackageController extends Controller
         }
 
         $this->validate($request, [
-            'title' => 'required|string',
-            'advantages' => 'required|string',
+            'title_en' => 'required|string',
+            'title_ar' => 'required|string',
+            'advantages_ar' => 'required|string',
+            'advantages_en' => 'required|string',
             'price' => 'required|numeric|min:1|regex:/^\d+(\.\d{1,2})?$/',
         ]);
 
@@ -141,8 +147,10 @@ class PackageController extends Controller
         if (!empty($package)) {
             try {
 
-                $package->title = $request->title;
-                $package->advantages = $request->advantages;
+                $package->title_en = $request->title_en;
+                $package->title_ar = $request->title_ar;
+                $package->advantages_en = $request->advantages_en;
+                $package->advantages_ar = $request->advantages_ar;
                 $package->price = $request->price;
                 $package->save();
                 return redirect()->action('Dashboard\PackageController@index', $id)->with('doneMessage', __('backend.saveDone'));

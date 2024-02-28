@@ -201,7 +201,7 @@
                                                 </h3>
                                             </div>
                                             <div class="footer-box">
-                                                <span class="name">{{ $value->user->name }}</span>
+                                                {{-- <span class="name">{{ $value->user->name }}</span> --}}
                                                 <div class="btns">
                                                     {{-- <span class="btn"><i class="fa fa-eye" aria-hidden="true"></i></span> --}}
                                                     <span class="btn"><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ $value->replies->count() }}</span>

@@ -41,22 +41,43 @@ padding: 0.2rem;
                 {{Form::open(['route'=>['packagesUpdate',$package->id],'method'=>'POST'])}}
 
                 <div class="form-group row">
-                    <label for="title" class="col-sm-2 form-control-label">{{ __('backend.packageTitle') }}</label>
+                    <label for="title_ar" class="col-sm-2 form-control-label">{{ __('backend.packageTitle') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('title',$package->title, array('placeholder' => '','class' => 'form-control','id'=>'title','required'=>'')) !!}
-                        @if ($errors->has('title'))
-                            <div class="text-danger">{{ $errors->first('title') }}</div>
+                        {!! Form::text('title_ar',$package->title_ar, array('placeholder' => '','class' => 'form-control','id'=>'title_ar','required'=>'')) !!}
+                        @if ($errors->has('title_ar'))
+                            <div class="text-danger">{{ $errors->first('title_ar') }}</div>
                         @endif
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="advantages" class="col-sm-2 form-control-label">{{ __('backend.advantages') }}</label>
+                    <label for="title_en" class="col-sm-2 form-control-label">{{ __('backend.packageTitle') }}</label>
+                    <div class="col-sm-10">
+                        {!! Form::text('title_en',$package->title_en, array('placeholder' => '','class' => 'form-control','id'=>'title_en','required'=>'')) !!}
+                        @if ($errors->has('title_en'))
+                            <div class="text-danger">{{ $errors->first('title_en') }}</div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="advantages_ar" class="col-sm-2 form-control-label">{{ __('backend.advantages') }}</label>
                     <div class="col-sm-10">
 
-                        {!! Form::text('advantages',$package->advantages, array('placeholder' => '','class' => 'form-control','id'=>'advantages','required'=>'', "data-role"=>"tagsinput")) !!}
-                        @if ($errors->has('advantages'))
-                            <div class="text-danger">{{ $errors->first('advantages') }}</div>
+                        {!! Form::text('advantages_ar',$package->advantages_ar, array('placeholder' => '','class' => 'form-control','id'=>'advantages_ar','required'=>'', "data-role"=>"tagsinput")) !!}
+                        @if ($errors->has('advantages_ar'))
+                            <div class="text-danger">{{ $errors->first('advantages_ar') }}</div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="advantages_en" class="col-sm-2 form-control-label">{{ __('backend.advantages_en') }}</label>
+                    <div class="col-sm-10">
+
+                        {!! Form::text('advantages_en',$package->advantages_en, array('placeholder' => '','class' => 'form-control','id'=>'advantages_en','required'=>'', "data-role"=>"tagsinput")) !!}
+                        @if ($errors->has('advantages_en'))
+                            <div class="text-danger">{{ $errors->first('advantages_en') }}</div>
                         @endif
                     </div>
                 </div>
@@ -64,7 +85,7 @@ padding: 0.2rem;
                 <div class="form-group row">
                     <label for="price" class="col-sm-2 form-control-label">{{ __('backend.price') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('price',$package->price, array('placeholder' => '','class' => 'form-control','id'=>'price','required'=>'')) !!}
+                        {!! Form::text('price',$package->price, array('min'=>'1','placeholder' => '','class' => 'form-control','id'=>'price','required'=>'')) !!}
                         @if ($errors->has('price'))
                             <div class="text-danger">{{ $errors->first('price') }}</div>
                         @endif

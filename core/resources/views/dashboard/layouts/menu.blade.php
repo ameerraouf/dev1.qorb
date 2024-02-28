@@ -36,18 +36,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                         </a>
                     </li>
 
-                    <?php
-                        $currentFolder = "packages"; // Put folder name here
-                        $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
-                    ?>
-                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
-                        <a href="{{ route('packages') }}">
-                            <span class="nav-icon">
-                                <i class="material-icons">&#xe433;</i>
-                            </span>
-                            <span class="nav-text">{{ __('backend.packages') }}</span>
-                        </a>
-                    </li>
+
 
 
                     @if (env('GEOIP_STATUS', false))
@@ -244,6 +233,19 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                     <?php
                     $data_sections_arr = explode(",", Auth::user()->permissionsGroup->data_sections);
                     ?>
+
+                    <?php
+                        $currentFolder = "packages"; // Put folder name here
+                        $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    ?>
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                        <a href="{{ route('packages') }}">
+                            <span class="nav-icon">
+                                <i class="material-icons">&#xe433;</i>
+                            </span>
+                            <span class="nav-text">{{ __('backend.packages') }}</span>
+                        </a>
+                    </li>
 
                     <?php
                     $currentFolder = "financial-transactions"; // Put folder name here

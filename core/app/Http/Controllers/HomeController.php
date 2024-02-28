@@ -255,10 +255,18 @@ class HomeController extends Controller
             $HomePage = Topic::where("status", 1)->find($WebmasterSettings->default_currency_id);
         }
 
-        $packages = Package::get();
-        $packages->each(function ($p) {
-            $p->advantages = explode(',', $p->advantages);
-        });
+        $packages = Package::orderBy('created_at', 'desc')
+        ->limit(3)
+        ->get();
+        if(app()->getLocale() == 'ar'){
+            $packages->each(function ($p) {
+                $p->advantages = explode(',', $p->advantages_ar);
+            });
+        }else{
+            $packages->each(function ($p) {
+                $p->advantages = explode(',', $p->advantages_en);
+            });
+        }
 
         return view("frontEnd.home",
             compact(
@@ -1936,9 +1944,15 @@ class HomeController extends Controller
                 }
 
                 $packages = Package::get();
-                $packages->each(function ($p) {
-                    $p->advantages = explode(',', $p->advantages);
-                });
+                if(app()->getLocale() == 'ar'){
+                    $packages->each(function ($p) {
+                        $p->advantages = explode(',', $p->advantages_ar);
+                    });
+                }else{
+                    $packages->each(function ($p) {
+                        $p->advantages = explode(',', $p->advantages_en);
+                    });
+                }
                 return view("frontEnd.packages",
                     compact(
                         "WebmasterSettings",

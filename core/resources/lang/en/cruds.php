@@ -93,6 +93,8 @@ return array(
         'Title' => "Packages",
         'purchaseDate' => 'Purchase Date',
         'childName' => 'Subsicripted Child Name',
+        'packageTitle' => 'Package Name',
+        'advantages' => 'Advantages',
     ],
 
 );

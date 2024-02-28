@@ -49,8 +49,8 @@
                                     <input id="checkAll" type="checkbox"><i></i>
                                 </label>
                             </th>
-                            <th class="text-center" style="width:100px;">{{ __('backend.packageTitle') }}</th>
-                            <th class="text-center" style="width:100px;">{{ __('backend.advantages') }}</th>
+                            <th class="text-center" style="width:100px;">{{ __('cruds.Packages.packageTitle') }}</th>
+                            <th class="text-center" style="width:100px;">{{ __('cruds.Packages.advantages') }}</th>
                             <th class="text-center" style="width:50px;">{{ __('backend.price') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.action') }}</th>
                         </tr>
@@ -65,11 +65,11 @@
                                         {!! Form::hidden('row_ids[]',$value->id, array('class' => 'form-control row_no')) !!}
                                     </label>
                                 </td>
-                                <td class="text-center">{{ $value->title }}</td>
+                                <td class="text-center">{{  (app()->getLocale() == 'ar') ? $value->title_ar : $value->title_en }}</td>
                                 <td class="text-center">
                                     @php
-                                        $advantages = strtok($value->advantages, ",");
-                    
+                                        $advantages = strtok( app()->getLocale() == 'ar' ? $value->advantages_ar : $value->advantages_en , ",");
+
                                         while ($advantages !== false)
                                             {
                                             echo '<span class="btn btn-xs btn-primary" style="margin:0px 5px">' . $advantages . '</span>';
@@ -86,7 +86,7 @@
                                         <small><i class="material-icons">&#xe8f4;</i> {{ __('backend.showing') }}
                                         </small>
                                     </button>
-                                    
+
                                     <a class="btn btn-sm success"
                                        href="{{ route("packagesEdit",["id"=>$value->id]) }}">
                                         <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.edit') }}
@@ -117,7 +117,7 @@
                                                 <li class="list-group-item">
                                                 @php
                                                 $advantages = strtok($value->advantages, ",");
-                            
+
                                                 while ($advantages !== false)
                                                     {
                                                     echo '<span class="btn btn-xs btn-primary" style="margin:0px 5px">' . $advantages . '</span>';

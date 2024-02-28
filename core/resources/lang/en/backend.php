@@ -693,10 +693,13 @@ return array(
     'updateInProgress' => 'Update in progress please wait',
     'updateCompleted' => 'The website has been updated to the latest version.',
     'action' => 'action',
+
     'packages' => 'Packages',
-    'packageTitle' => 'Package Title',
-    'advantages' => 'Advantages',
-    'price' => 'Price',
+    'packageTitle' => 'Package Title in Arabic',
+    'packageTitle_en' => 'Package Title in English',
+    'advantages' => 'Advantages in Arabic',
+    'advantages_en' => 'Advantages in English',
+    'price' => 'price',
 
     'roles' => 'Roles',
     'role' => 'Role',
@@ -754,7 +757,7 @@ return array(
      'year' => 'Year',
      'file' => 'File',
      'image' => 'Image',
- 
+
      'reports' => 'Reports',
 
     'Supervisor' => 'Supervisor'

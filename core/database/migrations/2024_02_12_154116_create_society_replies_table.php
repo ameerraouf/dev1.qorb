@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('society_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('teacher_id');
-            
+
             $table->foreign('society_id')->references('id')->on('societies');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->foreign('user_id')->references('id')->on('users')->nullable();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->nullable();
 
             $table->timestamps();
         });

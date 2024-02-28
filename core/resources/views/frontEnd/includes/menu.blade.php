@@ -2,7 +2,9 @@
     <?php
     // Get list of footer menu links by group Id
     $HeaderMenuLinks = Helper::MenuList(Helper::GeneralWebmasterSettings("header_menu_id"));
+    // dd($HeaderMenuLinks);
     ?>
+
     @if(count($HeaderMenuLinks)>0)
 
         <?php
@@ -115,6 +117,9 @@
                         }
                         ?>
                         <li><a href="{{ $this_link_url }}">{{ $link_title }}</a></li>
+                        @if ($HeaderMenuLink->link === "home")
+                            <li><a href="{{ route('FrontendPackagesByLang') }}">{{ __('cruds.Packages.Title') }}</a></li>
+                        @endif
                     @else
                         <?php
                         // Main title ( have drop down menu )

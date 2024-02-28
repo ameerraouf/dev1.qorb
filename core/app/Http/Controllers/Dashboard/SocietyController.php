@@ -40,7 +40,7 @@ class SocietyController extends Controller
             $societies = Society::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
         }
         return view("dashboard.societies.list", compact("societies","GeneralWebmasterSections"));
-                
+
     }
 
     /**
@@ -74,11 +74,12 @@ class SocietyController extends Controller
             'question_ar' => 'required|string',
             'question_en' => 'required|string',
         ]);
-        
-        
+
+
         try {
             $society = new Society;
             $society->question_ar = $request->question_ar;
+            $society->user_id = Auth::user()->id;
             $society->question_en = $request->question_en;
             $society->status = $request->status;
             $society->save();

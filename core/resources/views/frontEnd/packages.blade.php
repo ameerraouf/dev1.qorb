@@ -179,7 +179,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="home-row-head">
-                                <h2 class="heading">الباقات</h2>
+                                <h2 class="heading">{{ __('cruds.Packages.Title') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="box-package">
                                     <h3 class="title">
-                                        {{ $item->title }}
+                                        {{ app()->getLocale() == 'ar' ? $item->title_ar : $item->title_en }}
                                     </h3>
                                     <h4 class="price">
                                         {{ $item->price }}

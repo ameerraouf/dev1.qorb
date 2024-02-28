@@ -694,8 +694,10 @@ return array(
     'action' => 'الأجراءات',
 
     'packages' => 'الباقات',
-    'packageTitle' => 'أسم الباقة',
-    'advantages' => 'المميزات',
+    'packageTitle' => 'أسم الباقة بالعربية',
+    'packageTitle_en' => 'أسم الباقة بالإنجليزية',
+    'advantages' => ' المميزات بالعربية',
+    'advantages_en' => 'المميزات بالإنجليزية',
     'price' => 'السعر',
 
     'roles' => 'الأدوار',

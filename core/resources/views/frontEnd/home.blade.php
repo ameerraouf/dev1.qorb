@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="home-row-head">
-                        <h2 class="heading">الباقات</h2>
+                        <h2 class="heading">{{ __('cruds.Packages.Title') }}</h2>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="box-package">
                             <h3 class="title">
-                                {{ $item->title }}
+                                {{ app()->getLocale() == 'ar' ? $item->title_ar : $item->title_en }}
                             </h3>
                             <h4 class="price">
                                 {{ $item->price }}
@@ -147,8 +147,13 @@
                     </div>
 
                     @endforeach
-
                 </div>
+            </div>
+            <div class="more-btn">
+                <a href="{{ route('FrontendPackages') }}" class="btn btn-theme"><i
+                        class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+                    &nbsp;<i
+                        class="fa fa-angle-right"></i></a>
             </div>
         </div>
     </section>
@@ -698,7 +703,7 @@
                                         </h3>
                                     </div>
                                     <div class="footer-box">
-                                        <span class="name">{{ $value->user->name }}</span>
+                                        {{-- <span class="name">{{ $value->user->name }}</span> --}}
                                         <div class="btns">
                                             {{-- <span class="btn"><i class="fa fa-eye" aria-hidden="true"></i></span> --}}
                                             <span class="btn"><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ $value->replies->count() }}</span>
