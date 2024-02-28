@@ -213,6 +213,26 @@
         color: {{ Helper::GeneralSiteSettings("style_color1") }};
     }
 
+    .text-main-color {
+        color: {{ Helper::GeneralSiteSettings("style_color1") }};
+    }
+
+    .box-package .btn-box {
+        background-color: {{ Helper::GeneralSiteSettings("style_color1") }};
+    }
+    
+    .box-faq::after{
+        background-color: {{ Helper::GeneralSiteSettings("style_color1") }};
+    }
+
+    .header-faq .data .item .title-item{
+        color: {{ Helper::GeneralSiteSettings("style_color1") }};
+    }
+
+    .box-comment {
+        border-inline-start: 2px solid {{ Helper::GeneralSiteSettings("style_color1") }};
+    }
+
     .flex-caption {
         background-color: {{ Helper::GeneralSiteSettings("style_color2") }};
     }
