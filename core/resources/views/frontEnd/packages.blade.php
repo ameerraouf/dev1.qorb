@@ -29,7 +29,7 @@
     ?>
     <section id="inner-headline">
         <div class="container">
-            <div class="row">
+            <div class="row ">
                 <div class="col-lg-12">
                     <ul class="breadcrumb">
                         <li><a href="{{ route('Home') }}"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i>
@@ -40,10 +40,16 @@
             </div>
         </div>
     </section>
-    <section id="content">
+    <section id="content" class="content-row-no-bg top-line">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
+            <!-- بداية صفحة الباقات -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="home-row-head">
+                                <h2 class="heading">الباقات</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
                     <article>
                         @if($WebmasterSection->type==2 && $Topic->video_file!="")
                             {{--video--}}
@@ -172,16 +178,6 @@
                         @endif
                     </article>
                 </div>
-            </div>
-            <!-- بداية صفحة الباقات -->
-            <section class="content-row-no-bg top-line">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="home-row-head">
-                                <h2 class="heading">الباقات</h2>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12 row row-gap-24">
@@ -218,8 +214,6 @@
 
                         </div>
                     </div>
-                </div>
-            </section>
             <!-- نهاية صفحة الباقات -->
         </div>
     </section>
