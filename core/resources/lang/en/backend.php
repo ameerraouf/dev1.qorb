@@ -757,6 +757,8 @@ return array(
  
      'reports' => 'Reports',
 
-    'Supervisor' => 'Supervisor'
+    'Supervisor' => 'Supervisor',
+
+    'setChildToParent' => 'Set Child to Specilist / Supervisor'
 
 );

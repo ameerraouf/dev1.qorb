@@ -754,6 +754,8 @@ return array(
 
     'reports' => 'التقارير',
 
-    'Supervisor' => 'مشرفة'
+    'Supervisor' => 'مشرفة',
+
+    'setChildToParent' => 'تعيين مشرفة و اخصائية للطفل'
 
 );

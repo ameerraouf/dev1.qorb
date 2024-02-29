@@ -1,6 +1,9 @@
 <?php
 
 return array(
+
+    'SetChild' => 'Set child',
+
     'FinancialTransactions' => [
         "Title" => "Financial Transactions",
         "SendPayment" => "Send Payment",
@@ -42,6 +45,10 @@ return array(
         "Problem_EN" => "Problem",
         "Reports_AR" => "Reports",
         "Reports_EN" => "Reports",
+        "childrenname" => "Children Name",
+        "Specialist" => "Specialist Name",
+        "Teacher" => "Teacher Name",
+        "Supervisor" => "Supervisor Name",
     ],
 
     'Reports' => [

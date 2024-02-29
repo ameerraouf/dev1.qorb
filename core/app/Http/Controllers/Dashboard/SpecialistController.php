@@ -28,7 +28,7 @@ class SpecialistController extends Controller
 
     public function showChildrens(){
         // return Children::with('media')->get();
-        $childrens = Children::with('media')->paginate(10);
+        $childrens = Children::with('media')->where('specialist_id', Auth::user()->id)->paginate(10);
         return view('specialist.childrens.list', compact('childrens'));
     }
 

@@ -1,6 +1,9 @@
 <?php
 
 return [
+
+    'SetChild' => 'تعيين طفل',
+
     'FinancialTransactions' => [
         'Title' => 'القوائم المالية',
         'SendPayment' => 'إرسال دفعة',
@@ -39,6 +42,11 @@ return [
         'Problem_EN' => 'المشكلة',
         'Reports_AR' => 'التقارير',
         'Reports_EN' => 'التقارير',
+
+        "childrenname" => "اسم الطفل",
+        "Specialist" => "الاخصائية",
+        "Teacher" => "اسم العميل",
+        "Supervisor" => "المشرفة",
     ],
 
     'Reports' => [

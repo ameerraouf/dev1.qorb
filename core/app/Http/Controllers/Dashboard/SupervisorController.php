@@ -26,7 +26,7 @@ class SupervisorController extends Controller
 
     public function showChildrens()
     {
-        $childrens = Children::with('media')->paginate(10);
+        $childrens = Children::with('media')->where('supervisor_id', Auth::user()->id)->paginate(10);
         return view('supervisor.childrens.list', compact('childrens'));
     }
 

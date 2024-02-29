@@ -27,8 +27,21 @@ class Children extends Model
     // }
     public function mother(): BelongsTo
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class ,'teacher_id');
     }
+    
+    public function specialist(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'specialist_id');
+    }
+
+    public function supervisor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'supervisor_id');
+    }
+
+    
+    
     public function firstMedia(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediable')->orderBy('file_sort', 'asc');
