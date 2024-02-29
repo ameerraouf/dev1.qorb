@@ -168,6 +168,8 @@ return [
 
     'attributes' => [
         'answer_en' => 'Answer in English.',
+        'question' => 'Question.',
+        'reply' => "Reply",
         'question_en' => 'Question in English.',
         'question_ar' => 'Question in Arabic.',
         'answer_ar' => 'Answer in Arabic.',

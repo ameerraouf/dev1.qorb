@@ -44,7 +44,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <article>
+                    <article style="margin-top:2%; padding: 0 0 0 0">
                         @if($WebmasterSection->type==2 && $Topic->video_file!="")
                             {{--video--}}
                             <div class="post-video">
@@ -173,13 +173,24 @@
                     </article>
                 </div>
             </div>
-            <!-- بداية صفحة الأسئلة الشائعة -->
-            <section class="content-row-no-bg">
+            <!-- بداية صفحة المجتمع -->
+            <section class="content-row-no-bg" style="margin-top:2%; padding: 0 0 0 0">
                 <div class="container">
+                    @if(auth()->check())
+                        <div id="society" class="panel-collapse" style="margin-bottom: 0%;">
+                            <h2 class="heading" style="margin-bottom: 2%;">{{ __('cruds.Society.AddQuestion') }}</h2>
+                            {{Form::open(['route'=>['societyStore'],'method'=>'POST'])}}
+                                <div class="box-add-comment" style="margin-top: 0%;">
+                                    <textarea name="question" class="form-control"  rows="1" style="height: 60px;resize: none;" placeholder="{{ __('cruds.Society.YourQuestion') }}"></textarea>
+                                    <button type="submit" class="btn btn-theme" style="margin-top: 1%;margin-bottom: 5%;">{{ __('cruds.Society.Add') }}</button>
+                                </div>
+                                {{Form::close()}}
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-12">
                             <div class="home-row-head">
-                                <h2 class="heading">المجتمع</h2>
+                                <h2 class="heading">{{ __('cruds.Society.Title') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -189,7 +200,7 @@
                                 <div class="boxes-faq">
                                     @foreach($societies as $value)
                                     <div class="panel panel-default">
-                                        <a class="box-faq" data-toggle="collapse" href="#society{{ $value->id }}">
+                                        <a class="box-faq" href="{{ route('showSociety',$value) }} ">
                                             <div class="content">
                                                 <img src="https://placehold.co/400" alt="" class="img">
                                                 <h3 class="title">
@@ -201,36 +212,13 @@
                                                 </h3>
                                             </div>
                                             <div class="footer-box">
-                                                {{-- <span class="name">{{ $value->user->name }}</span> --}}
+                                                <span class="name">{{ $value->user->name }}</span>
                                                 <div class="btns">
-                                                    {{-- <span class="btn"><i class="fa fa-eye" aria-hidden="true"></i></span> --}}
+                                                    <span class="btn"><i class="fa fa-eye" aria-hidden="true"></i>{{ $value->views }}</span>
                                                     <span class="btn"><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ $value->replies->count() }}</span>
                                                 </div>
                                             </div>
                                         </a>
-                                        <div id="society{{ $value->id }}" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <h5 class="text-black">الردود:</h5>
-                                                <div class="boxes-faq">
-                                                 @foreach($value->replies as $reply)
-                                                     <div class="box-comment">
-                                                         <div class="info-user">
-                                                         <img src="https://placehold.co/400" alt="" class="img">
-                                                             <span class="name">{{ $reply->user->name }}</span>
-                                                         </div>
-                                                         <p class="content">{{ $reply->reply }}</p>
-                                                     </div>
-                                                     @endforeach
-                                                </div>
-                                                {{Form::open(['route'=>['replySociety',$value->id],'method'=>'POST'])}}
-                                                 <div class="box-add-comment">
-                                                     <textarea name="reply" class="form-control" placeholder="أكتب ردك"></textarea>
-                                                     <button type="submit" class="btn btn-theme">reply</button>
-                                                 </div>
-                                                 {{Form::close()}}
-
-                                            </div>
-                                        </div>
                                       </div>
                                     @endforeach
                                 </div>
@@ -239,7 +227,7 @@
                     </div>
                 </div>
             </section>
-            <!-- نهاية صفحة الأسئلة الشائعة -->
+            <!-- نهاية صفحة المجتمع -->
         </div>
     </section>
 

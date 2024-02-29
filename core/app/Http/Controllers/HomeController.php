@@ -50,7 +50,6 @@ class HomeController extends Controller
 
     public function SEOByLang($lang = "", $seo_url_slug = 0)
     {
-
         if ($lang != "") {
             // Set Language
             App::setLocale($lang);
@@ -66,6 +65,10 @@ class HomeController extends Controller
                 break;
             case "society" :
                 return $this->Society();
+                break;
+            case "show-society" :
+                $id = Str::after(request()->server()['REQUEST_URI'], '/show-society/');
+                return $this->showSociety($id);
                 break;
             case "packages" :
                 return $this->Packages();
@@ -1978,6 +1981,13 @@ class HomeController extends Controller
 
     }
 
+    public function showSociety($id){
+        $society = Society::find($id);
+        $society->views += 1;
+        $society->save();
+        return view('frontEnd.society-show',compact('society'));
+        dd($society);
+    }
 
 }
 

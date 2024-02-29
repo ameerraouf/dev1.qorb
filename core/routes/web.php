@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\SocialAuthController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SiteMapController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SocietyReplyController;
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\Dashboard\SocietyController;
 
 
 /*
@@ -119,6 +120,8 @@ Route::get('/{lang?}/society', [HomeController::class, 'SocietyByLang'])->name('
 
 Route::get('/packages', [HomeController::class, 'Packages'])->name('FrontendPackages');
 Route::get('/{lang?}/packages', [HomeController::class, 'PackagesByLang'])->name('FrontendPackagesByLang');
+Route::post('/societies/store', [SocietyController::class, 'store'])->name('societyStore');
+Route::get('/show-society/{value}', [HomeController::class, 'showSociety'])->name('showSociety');
 
 Route::post('/replySociety/{id}', [SocietyReplyController::class, 'replySociety'])->name('replySociety');
 

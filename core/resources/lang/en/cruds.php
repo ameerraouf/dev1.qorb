@@ -25,6 +25,12 @@ return array(
 
     'Society' => [
         'Title' => 'Society',
+        'AddQuestion' => 'Add Question',
+        'Add' => 'Add',
+        'Reply' => 'Reply',
+        'YourQuestion' => 'Your Question',
+        'YourReply' => 'Your Reply',
+        'Replies' => 'Replies',
     ],
 
     'Childrens' => [

@@ -23,6 +23,12 @@ return [
 
     'Society' => [
         'Title' => 'المجتمع',
+        'AddQuestion' => 'أضف سؤالاََ',
+        'Add' => 'إضافة',
+        'Reply' => 'رد',
+        'YourQuestion' => 'أكتب سؤالك',
+        'YourReply' => 'أكتب ردك',
+        'Replies' => 'الردود',
     ],
 
     'Childrens' => [
