@@ -24,7 +24,7 @@
                 {{Form::open(['route'=>['financialTransactionsStore'],'method'=>'POST', 'files' => true ])}}
 
                 <div class="form-group row">
-                    <label for="image"
+                    <label for="name"
                            class="col-sm-2 form-control-label">{{ __('cruds.FinancialTransactions.Name') }}</label>
                     <div class="col-sm-10">
                         {!! Form::text('name', '' ,array('class' => 'form-control','id'=>'name','required'=>'')) !!}

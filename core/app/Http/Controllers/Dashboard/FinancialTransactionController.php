@@ -141,10 +141,11 @@ class FinancialTransactionController extends Controller
 
                 $transaction->name = $request->name;
                 $transaction->notes = $request->notes;
+                $transaction->user_id = $request->user;
                 $transaction->save();
                 return redirect()->action('Dashboard\FinancialTransactionController@index', $id)->with('doneMessage', __('backend.saveDone'));
             } catch (\Exception $e) {
-
+                return redirect()->back()->with('errorMessage', $e->getMessage());
             }
         }
         return redirect()->action('Dashboard\FinancialTransactionController@index');
