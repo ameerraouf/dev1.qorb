@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Employee;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WebmasterSection;
@@ -37,7 +39,7 @@ class ClientController extends Controller
             $employees = Employee::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
         } else {
-            $clients = Client::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+            $clients = Teacher::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
         }
         return view("dashboard.clients.list", compact("clients","GeneralWebmasterSections"));
     }

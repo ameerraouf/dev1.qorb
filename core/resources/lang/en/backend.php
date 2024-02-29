@@ -735,7 +735,7 @@ return array(
 
      // TEACHER ____________________________
      'signedInToControlteacher' => 'Sign in to clients dashboard',
-     'registerToControlteacher' => 'Create a new account for teacher',
+     'registerToControlteacher' => 'Create a new account for client',
      'childrens' => 'Childrens',
      'package' => 'Packages',
      'profile' => 'Profile',

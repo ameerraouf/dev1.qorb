@@ -74,32 +74,14 @@
                                             <h5 class="modal-title">{{ __('cruds.FinancialTransactions.Title') }}</h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
-                                            <div class="form-group row">
-                                                <h6
-                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.FinancialTransactions.Name') : __('cruds.FinancialTransactions.Name') }}
-                                                </h6><br>
-                                                <div class="col-sm-8">
-                                                    <p>{{$transaction->name}}</p>
-                                                </div>
-                                            </div><hr>
+                                            
                                                 <div class="form-group row">
-                                                    <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.FinancialTransactions.CopyOfTheBankTransfer') : __('cruds.FinancialTransactions.CopyOfTheBankTransfer') }}
-                                                    </h6><br>
-                                                    <div class="col-sm-8">
-                                                        <img src="uploads/financial-transactions/{{ $transaction->image }}" width="100px" height="90px" alt="">
+                                                   
+                                                    <div class="col-sm-12">
+                                                        <img src="uploads/financial-transactions/{{ $transaction->image }}" width="500px" height="290px" alt="">
                                                     </div>
                                                 </div>
-                                                <hr>
-                                                <div class="form-group row">
-                                                    <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.FinancialTransactions.Notes') : __('cruds.FinancialTransactions.Notes') }}
-                                                    </h6><br>
-                                                    <div class="col-sm-8">
-                                                            <p>{!! $transaction->notes !!}</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
+                                             
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark-white p-x-md"
