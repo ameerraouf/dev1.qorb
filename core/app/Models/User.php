@@ -73,5 +73,11 @@ class User extends Authenticatable
         return $this->hasMany(FinancialTransaction::class);
     }
 
+    public function childrens()
+    {
+        return $this->hasMany(Children::class);
+
+    }
+
     public function getProfilePhotoUrlAttribute(){}
 }

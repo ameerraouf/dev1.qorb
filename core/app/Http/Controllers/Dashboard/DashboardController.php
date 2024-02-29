@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Teacher;
 use App\Models\AnalyticsPage;
 use App\Models\AnalyticsVisitor;
 use App\Models\Contact;
 use App\Models\Event;
 use App\Http\Requests;
+use App\Models\Children;
 use App\Models\Section;
+use App\Models\Teacher as ModelsTeacher;
 use App\Models\Topic;
+use App\Models\User;
 use App\Models\Webmail;
 use App\Models\WebmasterSection;
 use Auth;
@@ -367,6 +371,61 @@ class DashboardController extends Controller
         return view("dashboard.search",
             compact("GeneralWebmasterSections", "search_word", "Webmails", "Contacts", "Events", "Topics", "Sections",
                 "active_tab"));
+    }
+
+
+    function setChildToPage(){
+        $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+
+        $childrens = Children::with('specialist', 'supervisor', 'mother')->select('id','name','teacher_id', 'specialist_id', 'supervisor_id')->paginate(10);
+        return view('dashboard.setting-childrens.list',compact('childrens','GeneralWebmasterSections'));
+    }
+
+    function setChildToCreatePage(){
+        $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+
+        $childrens = Children::get();
+        $specialists = User::where('role','specialist')->get();
+        $supervisors = User::where('role','supervisor')->get();
+        return view('dashboard.setting-childrens.create', compact('childrens', 'specialists', 'supervisors', 'GeneralWebmasterSections'));
+    }
+
+    function setChildToEditPage($id){
+        $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+
+        $children = Children::where('id', $id)->select('id', 'name')->first();
+        $specialists = User::where('role','specialist')->get();
+        $supervisors = User::where('role','supervisor')->get();
+        return view('dashboard.setting-childrens.edit', compact('children', 'specialists', 'supervisors', 'GeneralWebmasterSections'));
+    }
+
+    function setChild(Request $req){
+
+        try{
+            Children::where('id' , $req->child)->update([
+                'specialist_id' => $req->specialist,
+                'supervisor_id' => $req->supervisor,
+            ]);
+            return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
+
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with(['errorMessage'=> $e->getMessage()]);
+        }
+    }
+    function updateChild(Request $req, $id){
+
+        try{
+            Children::where('id' , $id)->update([
+                'specialist_id' => $req->specialist,
+                'supervisor_id' => $req->supervisor,
+            ]);
+            return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
+
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with(['errorMessage'=> $e->getMessage()]);
+        }
     }
 
 }

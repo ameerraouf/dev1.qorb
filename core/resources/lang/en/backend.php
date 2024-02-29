@@ -734,7 +734,7 @@ return array(
     'Specialist' => 'Specialist',
 
      // TEACHER ____________________________
-     'signedInToControlteacher' => 'Sign in to teacher dashboard',
+     'signedInToControlteacher' => 'Sign in to clients dashboard',
      'registerToControlteacher' => 'Create a new account for teacher',
      'childrens' => 'Childrens',
      'package' => 'Packages',
@@ -760,6 +760,8 @@ return array(
 
      'reports' => 'Reports',
 
-    'Supervisor' => 'Supervisor'
+    'Supervisor' => 'Supervisor',
+
+    'setChildToParent' => 'Set Child to Specilist / Supervisor'
 
 );

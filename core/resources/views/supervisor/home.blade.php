@@ -13,73 +13,69 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='#'">
-                <a href="#">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('backend.ChildrenCount')}}</div>
-                        <h4 class="m-a-0 text-md _600">
-                            {{ $childrenCount }}</h4>
-                    </div>
-                </a>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="box-color p-a-3 primary">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded">
+                        <i class="text-lg material-icons">&#xe7fb;</i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h3 class="m-a-0 text-lg"><a href></a>{{ $childrenCount }}</h3>
+                    <small class="text-muted">{{ __('backend.ChildrenCount') }}</small>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="box-color p-a-3 warn" onclick="location.href='{{ route('SChildrens') }}'">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded">
+                        <i class="text-lg material-icons">&#xe54b;</i>
+                    </span>
+                </div>
+                <div class="clear" onclick="location.href='{{ route('SChildrens') }}'">
+                    <h3 class="m-a-0 text-lg"><a href="{{ route('SChildrens') }}"></a></h3>
+                    <small class="text-muted">{{ __('cruds.Childrens.Title') }}</small>
+                </div>
             </div>
         </div>
+
     </div>
+
+
+
     <div class="row">
-        <div class="col-xs-3">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='{{ route('SChildrens') }}'">
-                <a href="{{ route('SChildrens') }}">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('cruds.Childrens.Title')}}</div>
-                        <h4 class="m-a-0 text-md _600"></h4>
-                    </div>
-                </a>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="box-color p-a-3 primary" onclick="location.href='{{ route('SFTransactions') }}'">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded">
+                        <i class="text-lg material-icons">&#xe7fb;</i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h3 class="m-a-0 text-lg"><a href></a></h3>
+                    <small class="text-muted">{{ __('cruds.FinancialTransactions.Title') }}</small>
+                </div>
             </div>
-        </div> 
-        
-        <div class="col-xs-3">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='{{ route('SFTransactions') }}'">
-                <a href="{{ route('SFTransactions') }}">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('cruds.FinancialTransactions.Title')}}</div>
-                        <h4 class="m-a-0 text-md _600"></h4>
-                    </div>
-                </a>
-            </div>
-        </div> 
-    </div>
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='{{ route('SProfile') }}'">
-                <a href="{{ route('SProfile') }}">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('backend.profile')}}</div>
-                        <h4 class="m-a-0 text-md _600"></h4>
-                    </div>
-                </a>
+
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="box-color p-a-3 warn" onclick="location.href='{{ route('SProfile') }}'">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded">
+                        <i class="text-lg material-icons">&#xe54b;</i>
+                    </span>
+                </div>
+                <div class="clear" onclick="location.href='{{ route('SProfile') }}'">
+                    <h3 class="m-a-0 text-lg"><a href="{{ route('SProfile') }}"></a></h3>
+                    <small class="text-muted">{{ __('backend.profile') }}</small>
+                </div>
             </div>
         </div>
-    </div> 
-        
+
+    </div>
+
+
 
 @endsection

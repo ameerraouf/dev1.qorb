@@ -314,6 +314,15 @@ Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
     Route::get('/clients', [ClientController::class, 'index'])->name('clients');
     Route::post('/clients/updateAll', [ClientController::class, 'updateAll'])->name('clientsUpdateAll');
 
+// SET CHILD TO SPECIALIST AND SUPERVISOR
+
+
+    Route::get('/set-child-to',[DashboardController::class, 'setChildToPage'])->name('SetChildTo');
+    Route::get('/set-child-to/create',[DashboardController::class, 'setChildToCreatePage'])->name('SetChildPage');
+    Route::get('/set-child-to/edit/{id}',[DashboardController::class, 'setChildToEditPage'])->name('SetChildEditPage');
+    Route::post('/set-child-to/store',[DashboardController::class, 'setChild'])->name('SetChild');
+    Route::post('/set-child-to/update/{id}',[DashboardController::class, 'updateChild'])->name('UpdateSetChild');
+
 
     // Society
     Route::get('/societies', [SocietyController::class, 'index'])->name('societies');
