@@ -72,7 +72,7 @@
                                     @enderror
                                 </div>
                             </div> --}}
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">{{ __('backend.childname') }}</label>
                                     <input type="text"
@@ -85,7 +85,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="age">{{ __('backend.childage') }}</label>
                                     <input type="number" min="1"
@@ -99,7 +99,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <fieldset  class="form-group">
                                     <label for="problem">{{ __('backend.childproblem') }}</label>
                                     <textarea  name="problem" class="form-control" id="editor1" placeholder="{{ __('backend.childproblem') }}">

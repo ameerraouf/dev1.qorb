@@ -48,76 +48,76 @@
         }
 
 
-        .box-package {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            display: flex;
-            box-shadow: 0 0 10px 0 #00000012;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-        }
-
-        .box-package .title {
-            margin: 0 0 1.5rem;
-            font-size: 15px;
-            border-radius: 4px;
-        }
-
-        .box-package .price {
-            font-size: 42px;
-            display: flex;
-            gap: 2px;
-            margin: 0 0 1rem;
-        }
-
-        .box-package .price span {
-            font-size: 18px;
-            font-weight: normal;
-        }
-
-        .box-package .list {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 0.5rem;
-            font-size: 15px;
-            margin: 0 0 1rem;
-        }
-
-        .box-package .list li {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .box-package .list li .icon {
-            background-color: #17bd17;
-            color: white;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 12px;
-            padding-top: 3px;
-        }
-
-        .box-package .btn-box {
-            display: block;
-            width: 100%;
-            background-color: #0cbaa4;
-            color: white;
-            padding: 0.8rem 1rem;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            border-radius: 4px;
-        }
+        .boxes-package {
+    gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.box-package {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    display: flex;
+    box-shadow: 0 0 10px 0 #00000012;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 24px;
+}
+.box-package .title {
+    margin: 0 0 1.5rem;
+    font-size: 15px;
+    border-radius: 4px;
+}
+.box-package .price {
+    font-size: 42px;
+    display: flex;
+    gap: 2px;
+    margin: 0 0 1rem;
+}
+.box-package .price span {
+    font-size: 18px;
+    font-weight: normal;
+}
+.box-package .list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    font-size: 15px;
+    margin: 0 0 1rem;
+}
+.box-package .list li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.box-package .list li .icon {
+    background-color: #17bd17;
+    color: white;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    padding-top: 3px;
+}
+.box-package .btn-box {
+    display: block;
+    width: 100%;
+    background-color: #0cbaa4;
+    color: white;
+    padding: 0.8rem 1rem;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: auto;
+}
     </style>
 
     @if ($packages->count() > 0)
@@ -133,10 +133,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 row row-gap-24">
+                    <div class="boxes-package">
                         @foreach ($packages as $item)
-                            
-                        <div class="col-12 col-md-6 col-lg-4">
                             <div class="box-package">
                                 <h3 class="title">
                                     {{ $item->title }}
@@ -161,10 +159,7 @@
                                     {{ __('cruds.Packages.Subscribe') }}
                                 </a>
                             </div>
-                        </div>
-
                         @endforeach
-
                     </div>
                 </div>
             </div>
