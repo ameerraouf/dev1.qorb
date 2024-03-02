@@ -98,8 +98,8 @@ class SettingsSeeder extends Seeder
         $settings->contact_t7_th = "อาทิตย์-พฤหัสบดี 08.00-17.00 น.";
         $settings->contact_t1_br = "Domingo a Quinta das 08:00 às 17:00";
 
-        $settings->style_color1 = "#0cbaa4";
-        $settings->style_color2 = "#2e3e4e";
+        $settings->style_color1 = "#606060";
+        $settings->style_color2 = "#04ebfd";
         $settings->style_type = "0";
         $settings->style_bg_type = "0";
         $settings->style_subscribe = "1";
