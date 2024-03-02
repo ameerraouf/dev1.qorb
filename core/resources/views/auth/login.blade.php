@@ -40,12 +40,12 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                 @endif
-                @if(env('NOCAPTCHA_STATUS', false))
+                {{-- @if(env('NOCAPTCHA_STATUS', false))
                     <div class="form-group">
                         {!! NoCaptcha::renderJs(@Helper::currentLanguage()->code) !!}
                         {!! NoCaptcha::display() !!}
                     </div>
-                @endif
+                @endif --}}
                 <div class="m-b-md text-left">
                     <label class="md-check">
                         <input type="checkbox" name="remember"><i
