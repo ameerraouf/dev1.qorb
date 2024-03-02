@@ -582,6 +582,19 @@ sup {
     color: inherit;
 }
 
+.d-flex {
+    display: flex !important;
+}
+.d-inline-flex {
+    display: inline-flex !important;
+}
+.align-items-center {
+    align-items: center !important;
+}
+.justify-content-center {
+    justify-content: center !important;
+}
+
 .form-group-stack .form-control {
     margin-top: -1px;
     position: relative;
@@ -1973,8 +1986,16 @@ a.list-group-item.hover {
     background-color: #fff;
     position: relative;
     margin-bottom: 1.5rem;
+    display: block;
+    transition: 300ms;
 }
 
+.box-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
 .box-header {
     position: relative;
     padding: 1rem;
@@ -7984,4 +8005,17 @@ select.form-control:not([size]):not([multiple]) {
     border-left: 20px solid #0cc2aa;
     clear: both;
     z-index: 999;
+}
+
+.bootstrap-tagsinput {
+    border-color: rgba(120, 130, 140, .2) !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: auto !important;
+    width: 100% !important;
+    min-height: 2.375rem !important;
+}
+.bootstrap-tagsinput input{
+    flex: 1 !important;
 }

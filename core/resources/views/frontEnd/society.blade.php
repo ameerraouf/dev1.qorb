@@ -181,7 +181,7 @@
                             <h2 class="heading" style="margin-bottom: 2%;">{{ __('cruds.Society.AddQuestion') }}</h2>
                             {{Form::open(['route'=>['societyStore'],'method'=>'POST'])}}
                                 <div class="box-add-comment" style="margin-top: 0%;">
-                                    <textarea name="question" class="form-control"  rows="1" style="height: 60px;resize: none;" placeholder="{{ __('cruds.Society.YourQuestion') }}"></textarea>
+                                    <textarea name="question" class="form-control"  rows="1" style="line-height: 46px; height: 60px;resize: none;" placeholder="{{ __('cruds.Society.YourQuestion') }}"></textarea>
                                     <button type="submit" class="btn btn-theme" style="margin-top: 1%;margin-bottom: 5%;">{{ __('cruds.Society.Add') }}</button>
                                 </div>
                                 {{Form::close()}}

@@ -85,7 +85,7 @@ padding: 0.2rem;
                 <div class="form-group row">
                     <label for="price" class="col-sm-2 form-control-label">{{ __('backend.price') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('price',$package->price, array('min'=>'1','placeholder' => '','class' => 'form-control','id'=>'price','required'=>'')) !!}
+                        {!! Form::number('price',$package->price, array('min'=>'1','placeholder' => '','class' => 'form-control','id'=>'price','required'=>'')) !!}
                         @if ($errors->has('price'))
                             <div class="text-danger">{{ $errors->first('price') }}</div>
                         @endif
