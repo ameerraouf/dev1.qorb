@@ -347,7 +347,7 @@
         border-color: {{ Helper::GeneralSiteSettings("style_color1") }};
     }
     ::-webkit-scrollbar-thumb {
-        background: {{ Helper::GeneralSiteSettings("style_color2") }};
+        background: {{ Helper::GeneralSiteSettings("style_color1") }};
     }
     ::-webkit-scrollbar-thumb:hover {
         background: {{ Helper::GeneralSiteSettings("style_color1") }};
