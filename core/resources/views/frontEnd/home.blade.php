@@ -158,8 +158,59 @@
     <!-- نهاية صفحة الباقات -->
     @endif
 
+    <!-- بداية صفحة الخدمات -->
+<section class="content-row-no-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="home-row-head">
+                    <h2 class="heading">{{ __('backend.services') }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 row">
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="box-serv">
+                        <span class="icon">
+                            <i class="fa fa-television" aria-hidden="true"></i>
+                        </span>
+                        <h3 class="title">عنوان الخدمة</h3>
+                        <p class="content">
+                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="box-serv">
+                        <span class="icon">
+                            <i class="fa fa-television" aria-hidden="true"></i>
+                        </span>
+                        <h3 class="title">عنوان الخدمة</h3>
+                        <p class="content">
+                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 col-xl-3">
+                    <div class="box-serv">
+                        <span class="icon">
+                            <i class="fa fa-television" aria-hidden="true"></i>
+                        </span>
+                        <h3 class="title">عنوان الخدمة</h3>
+                        <p class="content">
+                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- نهاية صفحة الخدمات -->
+
     @if(count($HomeTopics)>0)
-        <section class="content-row-no-bg">
+        <section class="content-row-no-bg top-line">
             <div class="container">
 
                 <div class="row">
@@ -419,7 +470,7 @@
     @endif
 
     @if(count($HomePhotos)>0)
-        <section class="content-row-no-bg">
+        <section class="content-row-no-bg ">
             <div class="container">
 
                 <div class="row">
@@ -497,7 +548,7 @@
     @endif
 
     @if(count($HomePartners)>0)
-        <section class="content-row-no-bg top-line">
+        <section class="content-row-no-bg ">
             <div class="container">
 
                 <div class="row">

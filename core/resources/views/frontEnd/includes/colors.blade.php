@@ -285,7 +285,12 @@
     .navbar .nav li .dropdown-menu li:hover {
         background: {{ Helper::GeneralSiteSettings("style_color2") }};
     }
-
+    .box-serv .icon{
+        background: {{ Helper::GeneralSiteSettings("style_color2") }};
+    }
+    .box-serv .title{
+        color: {{ Helper::GeneralSiteSettings("style_color1") }};
+    }
     @media (max-width: 767px) {
         header .navbar-nav > li {
             background: {{ Helper::GeneralSiteSettings("style_color1") }};
