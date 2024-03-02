@@ -168,7 +168,7 @@ class WebmasterSettingsController extends Controller
                 'MAIL_PASSWORD' => $request->mail_password,
                 'MAIL_ENCRYPTION' => $request->mail_encryption,
                 'MAIL_FROM_ADDRESS' => $request->mail_no_replay,
-                'NOCAPTCHA_STATUS' => $request->nocaptcha_status,
+                'NOCAPTCHA_STATUS' => 0,
                 'NOCAPTCHA_SECRET' => $request->nocaptcha_secret,
                 'NOCAPTCHA_SITEKEY' => $request->nocaptcha_sitekey,
                 'DEFAULT_LANGUAGE' => $request->languages_by_default,

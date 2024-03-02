@@ -44,14 +44,14 @@ class BannersController extends Controller
         // General END
 
         //List of Banners Sections
-        $WebmasterBanners = WebmasterBanner::where('status', '=', '1')->orderby('row_no', 'asc')->get();
+        $WebmasterBanners = WebmasterBanner::where('status', '=', '1')->where('id', '=', '1')->orderby('row_no', 'asc')->get();
 
         if (@Auth::user()->permissionsGroup->view_status) {
             $Banners = Banner::where('created_by', '=', Auth::user()->id)->orderby('section_id',
                 'asc')->orderby('row_no',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
         } else {
-            $Banners = Banner::orderby('section_id', 'asc')->orderby('row_no',
+            $Banners = Banner::where('section_id', '=', '1')->orderby('row_no',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
         }
         return view("dashboard.banners.list", compact("Banners", "GeneralWebmasterSections", "WebmasterBanners"));

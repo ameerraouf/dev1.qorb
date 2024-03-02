@@ -40,7 +40,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
 
 
                     @if (env('GEOIP_STATUS', false))
-                        @if(Helper::GeneralWebmasterSettings("analytics_status"))
+                        {{-- @if(Helper::GeneralWebmasterSettings("analytics_status")) --}}
                             @if(@Auth::user()->permissionsGroup->analytics_status)
                                 <?php
                                 $currentFolder = "analytics"; // Put folder name here
@@ -169,9 +169,9 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                     </ul>
                                 </li>
                             @endif
-                        @endif
+                        {{-- @endif --}}
                     @endif
-                    @if(Helper::GeneralWebmasterSettings("newsletter_status"))
+                    {{-- @if(Helper::GeneralWebmasterSettings("newsletter_status")) --}}
                         @if(@Auth::user()->permissionsGroup->newsletter_status)
                             <?php
                             $currentFolder = "contacts"; // Put folder name here
@@ -186,9 +186,9 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </a>
                             </li>
                         @endif
-                    @endif
+                    {{-- @endif --}}
 
-                    @if(Helper::GeneralWebmasterSettings("inbox_status"))
+                    {{-- @if(Helper::GeneralWebmasterSettings("inbox_status")) --}}
                         @if(@Auth::user()->permissionsGroup->inbox_status)
                             <?php
                             $currentFolder = "webmails"; // Put folder name here
@@ -208,9 +208,9 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </a>
                             </li>
                         @endif
-                    @endif
+                    {{-- @endif --}}
 
-                    @if(Helper::GeneralWebmasterSettings("calendar_status"))
+                    {{-- @if(Helper::GeneralWebmasterSettings("calendar_status")) --}}
                         @if(@Auth::user()->permissionsGroup->calendar_status)
                             <?php
                             $currentFolder = "calendar"; // Put folder name here
@@ -225,7 +225,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </a>
                             </li>
                         @endif
-                    @endif
+                    {{-- @endif --}}
                     <li class="nav-header hidden-folded">
                         <small class="text-muted">{{ __('backend.siteData') }}</small>
                     </li>
@@ -257,6 +257,19 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 <i class="material-icons">&#xe433;</i>
                             </span>
                             <span class="nav-text">{{ __('cruds.FinancialTransactions.Title') }}</span>
+                        </a>
+                    </li>
+
+                    <?php
+                    $currentFolder = "banners"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    ?>
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                        <a href="{{ route('Banners') }}">
+                            <span class="nav-icon">
+                                <i class="material-icons">&#xe433;</i>
+                            </span>
+                            <span class="nav-text">{{ __('backend.adsBanners') }}</span>
                         </a>
                     </li>
 
@@ -455,7 +468,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                         @endif
                     @endif --}}
 
-                    @if(Helper::GeneralWebmasterSettings("settings_status"))
+                    {{-- @if(Helper::GeneralWebmasterSettings("settings_status")) --}}
                         @if(@Auth::user()->permissionsGroup->settings_status)
                             <li class="nav-header hidden-folded">
                                 <small class="text-muted">{{ __('backend.settings') }}</small>
@@ -525,7 +538,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </ul>
                             </li>
                         @endif
-                    @endif
+                    {{-- @endif --}}
 
 
                     @if(@Auth::user()->permissionsGroup->webmaster_status)

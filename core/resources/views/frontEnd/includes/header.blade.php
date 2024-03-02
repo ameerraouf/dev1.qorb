@@ -14,7 +14,7 @@
         <div class="container">
             <div>
                 <div class="pull-right">
-                    @if(Helper::GeneralWebmasterSettings("dashboard_link_status"))
+                    {{-- @if(Helper::GeneralWebmasterSettings("dashboard_link_status")) --}}
                         @if(Auth::check())
                             <div class="btn-group header-dropdown">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
@@ -48,7 +48,7 @@
                                 </a>
                             </strong>
                         @endif
-                    @endif
+                    {{-- @endif --}}
                     @if(count(Helper::languagesList()) >1)
                         <div class="btn-group header-dropdown">
                             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
