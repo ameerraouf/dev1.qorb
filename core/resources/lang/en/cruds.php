@@ -28,6 +28,26 @@ return array(
         "answer en" => "Answer in English",
     ],
 
+    'MainServices' => [
+        "Title" => "Main Services",
+        "NewMainService" => "Add Main Service",
+        "EditMainService" => "Edit Main Service",
+        "MainService_AR" => " Name in Arabic",
+        "MainService_EN" => " Name in English",
+    ],
+
+    'SubServices' => [
+        "Title" => "Sub Services",
+        "SelectMainService" => "Choose a Main Service",
+        "MainService" => "Main Service",
+        "NewSubService" => "Add Sub Service",
+        "EditSubService" => "Edit Sub Service",
+        "Title_AR" => " Name in Arabic",
+        "Description_AR" => " Description in Arabic",
+        "Title_EN" => " Name in English",
+        "Description_EN" => " Description in English",
+    ],
+
     'Society' => [
         'Title' => 'Society',
         'AddQuestion' => 'Add Question',

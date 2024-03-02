@@ -63,7 +63,7 @@
                 </div>
 
 
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="permissions1"
                            class="col-sm-2 form-control-label">{!!  __('backend.Permission') !!}</label>
                     <div class="col-sm-10">
@@ -75,7 +75,7 @@
                         </select>
 
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group row">
                     <label for="permissions1"

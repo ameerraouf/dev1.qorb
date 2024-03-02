@@ -71,7 +71,7 @@
                 <a class="nav-link clear" href data-toggle="dropdown">
                   <span class="avatar w-32">
                       @if(Auth::user()->photo !="")
-                          <img src="{{ asset('uploads/users/'.Auth::user()->photo) }}" alt="{{ Auth::user()->name }}"
+                          <img src="{{ asset('uploads/users/'.auth()->user()->photo) }}" alt="{{ Auth::user()->name }}"
                                title="{{ Auth::user()->name }}">
                       @else
                           <img src="{{ asset('uploads/contacts/profile.jpg') }}" alt="{{ Auth::user()->name }}"

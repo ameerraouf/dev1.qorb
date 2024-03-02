@@ -4,10 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\MenusController;
 use App\Http\Controllers\Dashboard\UsersController;
+use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\EventsController;
 use App\Http\Controllers\Dashboard\TopicsController;
 use App\Http\Controllers\Dashboard\BannersController;
 use App\Http\Controllers\Dashboard\PackageController;
+use App\Http\Controllers\Dashboard\SocietyController;
 use App\Http\Controllers\Dashboard\ContactsController;
 use App\Http\Controllers\Dashboard\EmployeeController;
 use App\Http\Controllers\Dashboard\SettingsController;
@@ -16,24 +18,24 @@ use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\SpecialistController;
-use App\Http\Controllers\Dashboard\FileManagerController;
-use App\Http\Controllers\Dashboard\CommonQuestionController;
-use App\Http\Controllers\Dashboard\WebmasterBannersController;
+use App\Http\Controllers\Dashboard\SubServiceController;
 
-use App\Http\Controllers\Dashboard\WebmasterLicenseController;
-use App\Http\Controllers\Dashboard\WebmasterSectionsController;
-use App\Http\Controllers\Dashboard\WebmasterSettingsController;
-use App\Http\Controllers\Dashboard\FinancialTransactionController;
+use App\Http\Controllers\Dashboard\SupervisorController;
+use App\Http\Controllers\Dashboard\FileManagerController;
+use App\Http\Controllers\Dashboard\MainServiceController;
+use App\Http\Controllers\Dashboard\CommonQuestionController;
 
 // <<<<<<< HEAD
-use App\Http\Controllers\Dashboard\ClientController;
+use App\Http\Controllers\Dashboard\WebmasterBannersController;
 // =======
 
 
 
 // >>>>>>> 2704ee87b2e7b7b7c6687a1e91124fa1b7313a1b
-use App\Http\Controllers\Dashboard\SocietyController;
-use App\Http\Controllers\Dashboard\SupervisorController;
+use App\Http\Controllers\Dashboard\WebmasterLicenseController;
+use App\Http\Controllers\Dashboard\WebmasterSectionsController;
+use App\Http\Controllers\Dashboard\WebmasterSettingsController;
+use App\Http\Controllers\Dashboard\FinancialTransactionController;
 
 // Admin Routes
 Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
@@ -385,6 +387,24 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
     Route::post('/common-questions/{id}/update', [CommonQuestionController::class, 'update'])->name('CommonQuestionsUpdate');
     Route::get('/common-questions/destroy/{id}', [CommonQuestionController::class, 'destroy'])->name('CommonQuestionsDestroy');
     Route::post('/common-questions/updateAll', [CommonQuestionController::class, 'updateAll'])->name('CommonQuestionsUpdateAll');
+
+    // Main Services
+    Route::get('/main-services', [MainServiceController::class, 'index'])->name('MainServices');
+    Route::get('/main-services/create/', [MainServiceController::class, 'create'])->name('MainServicesCreate');
+    Route::post('/main-services/store', [MainServiceController::class, 'store'])->name('MainServicesStore');
+    Route::get('/main-services/{id}/edit', [MainServiceController::class, 'edit'])->name('MainServicesEdit');
+    Route::post('/main-services/{id}/update', [MainServiceController::class, 'update'])->name('MainServicesUpdate');
+    Route::get('/main-services/destroy/{id}', [MainServiceController::class, 'destroy'])->name('MainServicesDestroy');
+    Route::post('/main-services/updateAll', [MainServiceController::class, 'updateAll'])->name('MainServicesUpdateAll');
+
+    // Sub Services
+    Route::get('/sub-services', [SubServiceController::class, 'index'])->name('SubServices');
+    Route::get('/sub-services/create/', [SubServiceController::class, 'create'])->name('SubServicesCreate');
+    Route::post('/sub-services/store', [SubServiceController::class, 'store'])->name('SubServicesStore');
+    Route::get('/sub-services/{id}/edit', [SubServiceController::class, 'edit'])->name('SubServicesEdit');
+    Route::post('/sub-services/{id}/update', [SubServiceController::class, 'update'])->name('SubServicesUpdate');
+    Route::get('/sub-services/destroy/{id}', [SubServiceController::class, 'destroy'])->name('SubServicesDestroy');
+    Route::post('/sub-services/updateAll', [SubServiceController::class, 'updateAll'])->name('SubServicesUpdateAll');
 });
 
 //Specialist Routes
@@ -399,7 +419,7 @@ Route::group(['prefix'=>env('SPECIALIST_PATH'),'middleware'=>'specialist'],funct
     Route::get('/children/reports/{id}', [SpecialistController::class, 'showChildrenReports'])->name('ChildrenReports');
     Route::get('/file/download/{name}', [SpecialistController::class, 'fileDownload'])->name('DownloadFile');
     Route::get('/children/reports/{id}', [SpecialistController::class, 'showChildrenReports'])->name('ChildrenReports');
-    
+
     Route::get('/consulting-report/show/{id}', [SpecialistController::class, 'showConsultingReportPage'])->name('ConsultingReportShow');
     Route::get('/children/consulting-reports/{id}', [SpecialistController::class, 'showChildrenConsultingReports'])->name('ChildrenConsultingReports');
     Route::get('/consulting-report/create/{id}', [SpecialistController::class, 'createConsultingReportPage'])->name('ConsultingReportCreate');
@@ -407,18 +427,18 @@ Route::group(['prefix'=>env('SPECIALIST_PATH'),'middleware'=>'specialist'],funct
     Route::post('/consulting-report/create/{id}', [SpecialistController::class, 'storeConsultingReport'])->name('ConsultingReportStore');
     Route::post('/consulting-report/update/{id}', [SpecialistController::class, 'updateConsultingReport'])->name('ConsultingReportUpdate');
 
-    
+
     Route::get('/status-report/show/{id}', [SpecialistController::class, 'showStatusReportPage'])->name('StatushowVbmapPage');
     Route::get('/children/status-reports/{id}', [SpecialistController::class, 'showChildrenStatusReports'])->name('ChildrenStatusReports');
     Route::get('/status-report/create/{id}', [SpecialistController::class, 'createStatusReportPage'])->name('StatucreateVbmapPage');
     Route::get('/status-report/edit/{id}', [SpecialistController::class, 'editStatusReportPage'])->name('StatueditVbmapPage');
     Route::post('/status-report/create/{id}', [SpecialistController::class, 'storeStatusReport'])->name('StatustoreVbmap');
     Route::post('/status-report/update/{id}', [SpecialistController::class, 'updateStatusReport'])->name('StatuupdateVbmap');
-    
-    
+
+
     Route::get('/profile', [SpecialistController::class, 'showProfile'])->name('Profile');
     Route::post('/profile/update', [SpecialistController::class, 'updateProfile'])->name('profileUpdate');
-    
+
     Route::get('/transactions', [SpecialistController::class, 'showFTransactions'])->name('FTransactions');
 });
 
@@ -434,7 +454,7 @@ Route::group(['prefix'=>env('SUPERVISOR_PATH'),'middleware'=>'supervisor'],funct
     Route::get('/file/download/{name}', [SupervisorController::class, 'fileDownload'])->name('SDownloadFile');
     Route::post('/vbmap/update/{id}', [SupervisorController::class, 'updateVbmap'])->name('updateVbmap');
     Route::post('/vbmap/create/{id}', [SupervisorController::class, 'storeVbmap'])->name('storeVbmap');
-    
+
     Route::get('/treatment-plan/show/{id}', [SupervisorController::class, 'showTreatmentPlanPage'])->name('showTreatmentPlanPage');
     Route::get('/children/treatment-plan/{id}', [SupervisorController::class, 'showChildrenTreatmentPlan'])->name('showChildrenTreatmentPlan');
     Route::get('/treatment-plan/create/{id}', [SupervisorController::class, 'createTreatmentPlanPage'])->name('createTreatmentPlanPage');
@@ -448,17 +468,17 @@ Route::group(['prefix'=>env('SUPERVISOR_PATH'),'middleware'=>'supervisor'],funct
     Route::get('/consulting-report/edit/{id}', [SupervisorController::class, 'editConsultingReportPage'])->name('editConsultingReportPage');
     Route::post('/consulting-report/create/{id}', [SupervisorController::class, 'storeConsultingReport'])->name('storeConsultingReport');
     Route::post('/consulting-report/update/{id}', [SupervisorController::class, 'updateConsultingReport'])->name('updateConsultingReport');
-    
+
     Route::get('/final-report/show/{id}', [SupervisorController::class, 'showFinalReportPage'])->name('SStatushowVbmapPage');
     Route::get('/children/final-reports/{id}', [SupervisorController::class, 'showChildrenFinalReports'])->name('showChildrenFinalReports');
     Route::get('/final-report/create/{id}', [SupervisorController::class, 'createFinalReportPage'])->name('createFinalReportPage');
     Route::get('/final-report/edit/{id}', [SupervisorController::class, 'editFinalReportPage'])->name('editFinalReportPage');
     Route::post('/final-report/create/{id}', [SupervisorController::class, 'storeFinalReport'])->name('storeFinalReport');
     Route::post('/final-report/update/{id}', [SupervisorController::class, 'updateFinalReport'])->name('updateFinalReport');
-    
-    
+
+
     Route::get('/profile', [SupervisorController::class, 'showProfile'])->name('SProfile');
     Route::post('/profile/update', [SupervisorController::class, 'updateProfile'])->name('SprofileUpdate');
-    
+
     Route::get('/transactions', [SupervisorController::class, 'showFTransactions'])->name('SFTransactions');
 });
