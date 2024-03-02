@@ -334,9 +334,6 @@
         color: {{ Helper::GeneralSiteSettings("style_color1") }};
     }
 
-    .content-row-bg {
-        background: {{ Helper::GeneralSiteSettings("style_color2") }};
-    }
     #content .contacts p .fa,  #content .contacts address .fa{
         background: {{ Helper::GeneralSiteSettings("style_color1") }};
     }

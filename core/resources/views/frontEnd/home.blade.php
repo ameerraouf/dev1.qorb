@@ -159,7 +159,7 @@
     @endif
 
     @if(count($HomeTopics)>0)
-        <section class="content-row-bg">
+        <section class="content-row-no-bg">
             <div class="container">
 
                 <div class="row">

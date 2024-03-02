@@ -117,7 +117,7 @@ img.img-polaroid {
     color: #333;
 }
 .text-main-color {
-    color: #c5ae8f;
+    color: #2b9aeb;
 }
 /* ===================================
 4. Components
@@ -195,7 +195,7 @@ img.img-polaroid {
 .box-package .btn-box {
     display: block;
     width: 100%;
-    background-color: #c5ae8f;
+    background-color: #2b9aeb;
     color: white;
     padding: 0.8rem 1rem;
     font-size: 14px;
@@ -229,7 +229,7 @@ img.img-polaroid {
     width: 0;
     position: absolute;
     transition: 300ms;
-    background-color: #c5ae8f;
+    background-color: #2b9aeb;
 }
 .box-faq:hover{
     background-color: #eee;
@@ -320,14 +320,14 @@ img.img-polaroid {
     color: #333333;
 }
 .header-faq .data .item .title-item{
-    color: #c5ae8f;
+    color: #2b9aeb;
 }
 
 .box-comment {
     padding: 1.5rem;
     box-shadow: 0 0 7px 0 #0000001f;
     border: 1px solid #eee;
-    border-inline-start: 2px solid #c5ae8f;
+    border-inline-start: 2px solid #2b9aeb;
     border-radius: 4px;
 }
 .box-comment .info-user{
@@ -750,7 +750,7 @@ section.callaction {
 ==================================== */
 
 #inner-headline {
-    background: #5053dc;
+    background: #e87e26;
     position: relative;
     margin: 0;
     padding: 0;
@@ -2657,9 +2657,9 @@ li {
 
 .listing .item {
     padding: 10px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     margin: 10px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.02);
     text-align: center;
 }
 
