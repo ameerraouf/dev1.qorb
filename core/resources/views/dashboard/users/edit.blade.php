@@ -94,6 +94,7 @@
                             <option value="">- - {!!  __('backend.selectRole') !!} - -</option>
                                 <option {{ $Users->role == 'admin' ? 'selected' : ''  }} value="admin">{{ __('backend.Admin') }}</option>
                                 <option {{ $Users->role == 'specialist' ? 'selected' : ''  }} value="specialist">{{ __('backend.Specialist') }}</option>
+                                <option {{ $Users->role == 'supervisor' ? 'selected' : ''  }} value="supervisor">{{ __('backend.Supervisor') }}</option>
                         </select>
 
                     </div>

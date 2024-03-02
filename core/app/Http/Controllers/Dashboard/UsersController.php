@@ -95,7 +95,7 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => 'required',
-            'permissions_id' => 'required'
+            // 'permissions_id' => 'required'
         ]);
 
 
@@ -116,7 +116,7 @@ class UsersController extends Controller
                 $User->name = $request->name;
                 $User->email = $request->email;
                 $User->password = bcrypt($request->password);
-                $User->permissions_id = $request->permissions_id;
+                $User->permissions_id = 1;
                 $User->photo = $fileFinalName_ar;
                 $User->connect_email = $request->connect_email;
                 $User->connect_password = $request->connect_password;
@@ -192,7 +192,7 @@ class UsersController extends Controller
                 $this->validate($request, [
                     'photo' => 'mimes:png,jpeg,jpg,gif,svg',
                     'name' => 'required',
-                    'permissions_id' => 'required',
+                    // 'permissions_id' => 'required',
                     'role' => 'required'
                 ]);
 
@@ -205,8 +205,7 @@ class UsersController extends Controller
                 $formFileName = "photo";
                 $fileFinalName_ar = "";
                 if ($request->$formFileName != "") {
-                    $fileFinalName_ar = time() . rand(1111,
-                            9999) . '.' . $request->file($formFileName)->getClientOriginalExtension();
+                    $fileFinalName_ar = time() . '.' . $request->file($formFileName)->getClientOriginalExtension();
                     $path = $this->getUploadPath();
                     $request->file($formFileName)->move($path, $fileFinalName_ar);
                 }
@@ -219,7 +218,7 @@ class UsersController extends Controller
                 if ($request->password != "") {
                     $User->password = bcrypt($request->password);
                 }
-                $User->permissions_id = $request->permissions_id;
+                $User->permissions_id = 1;
                 //}
                 if ($request->photo_delete == 1) {
                     // Delete a User file
@@ -234,7 +233,6 @@ class UsersController extends Controller
                     if ($User->photo != "") {
                         File::delete($this->getUploadPath() . $User->photo);
                     }
-
                     $User->photo = $fileFinalName_ar;
                 }
 
@@ -243,10 +241,10 @@ class UsersController extends Controller
                     $User->connect_password = $request->connect_password;
                 }
 
-                $User->status = $request->status;
+                $User->status = $request->status ?? 1;
                 $User->updated_by = Auth::user()->id;
                 $User->save();
-                return redirect()->action('Dashboard\UsersController@edit', $id)->with('doneMessage', __('backend.saveDone'));
+                return redirect()->action('Dashboard\UsersController@index')->with('doneMessage', __('backend.saveDone'));
             } catch (\Exception $e) {
 
             }

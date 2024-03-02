@@ -489,7 +489,7 @@ class WebmasterSectionsSeeder extends Seeder
         $sections = new WebmasterSection();
         $sections->row_no = 9;
 
-        $sections->title_ar = "العملاء";
+        $sections->title_ar = "الشركاء";
         $sections->title_en = "Partners";
         $sections->title_ch = "伙伴";
         $sections->title_hi = "भागीदारों";
@@ -501,7 +501,7 @@ class WebmasterSectionsSeeder extends Seeder
         $sections->title_th = "พันธมิตร";
         $sections->title_br = "Parceiras";
 
-        $sections->seo_title_ar = "العملاء";
+        $sections->seo_title_ar = "الشركاء";
         $sections->seo_title_en = "Partners";
         $sections->seo_title_ch = "伙伴";
         $sections->seo_title_hi = "भागीदारों";

@@ -173,6 +173,14 @@ return [
         'question_en' => 'Question in English.',
         'question_ar' => 'Question in Arabic.',
         'answer_ar' => 'Answer in Arabic.',
+        'main_service_ar' => 'Name in Arabic.',
+        'main_service_en' => 'Name in English.',
+        'name_ar' =>  'Name in Arabic.',
+        'name_en' => 'Name in English.',
+        'title_ar' =>  'Title in Arabic.',
+        'title_en' => 'Title in English.',
+        'description_ar' =>  'Description in Arabic.',
+        'description_en' => 'Description in English.',
     ],
 
 ];

@@ -317,16 +317,19 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                     </li>
 
                     <?php
-                        $currentFolder = "societies"; // Put folder name here
+                        $currentFolder = "Services"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
-                        <a href="{{ route('societies') }}">
-                            <span class="nav-icon">
-                                <i class="material-icons">&#xe433;</i>
-                            </span>
-                            <span class="nav-text">{{ __('backend.societies') }}</span>
+                        <a >
+                            <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
+                            <span class="nav-icon"><i class="material-icons">&#xe1b8;</i></span>
+                            <span class="nav-text">{{ __('backend.services') }}</span>
                         </a>
+                        <ul class="nav-sub">
+                            <li><a href="{{ route('MainServices') }}"><span class="nav-text">{{ __('cruds.MainServices.Title') }}</span></a></li>
+                            <li><a href="{{ route('SubServices') }}"><span class="nav-text">{{ __('cruds.SubServices.Title') }}</span></a></li>
+                        </ul>
                     </li>
 
 
@@ -514,11 +517,11 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                     $currentFolder = "users"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                                     ?>
-                                    {{-- <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}> --}}
-                                        {{-- <a href="{{ route('users') }}"> --}}
-                                            {{-- <span class="nav-text">{{ __('backend.usersPermissions') }}</span> --}}
-                                        {{-- </a> --}}
-                                    {{-- </li> --}}
+                                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
+                                        <a href="{{ route('users') }}">
+                                            <span class="nav-text">{{ __('backend.users') }}</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         @endif

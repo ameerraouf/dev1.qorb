@@ -23,6 +23,10 @@ class CheckSpaces implements Rule
 
     public function message()
     {
-        return 'The :attribute field is invalid.';
+        if(app()->getLocale() == 'ar' ){
+            return ':attribute لا يمكن أن يحتوي على مسافات فقط.';
+        }else{
+            return 'The :attribute field is invalid.';
+        }
     }
 }

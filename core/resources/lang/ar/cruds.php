@@ -25,6 +25,26 @@ return [
         'Answer_EN' => 'الإجابة باللغة الإنجليزية',
     ],
 
+    'MainServices' => [
+        "Title" => "الخدمات الرئيسية",
+        "NewMainService" => "إضافة خدمة رئيسية",
+        "EditMainService" => "تعديل خدمة رئيسية",
+        "MainService_AR" => " الاسم باللغة العربية",
+        "MainService_EN" => " الاسم باللغة الانجليزية",
+    ],
+
+    'SubServices' => [
+        "Title" => "الخدمات الفرعية",
+        "MainService" => "الخدمة الرئيسية",
+        "SelectMainService" => "اختر خدمة رئيسية",
+        "NewSubService" => "إضافة خدمة فرعية",
+        "EditSubService" => "تعديل خدمة فرعية",
+        "Title_AR" => "العنوان باللغة العربية",
+        "Description_AR" => "الوصف باللغة العربية",
+        "Title_EN" => "العنوان باللغة الإنجليزية",
+        "Description_EN" => "الوصف باللغة الإنجليزية",
+    ],
+
     'Society' => [
         'Title' => 'المجتمع',
         'AddQuestion' => 'أضف سؤالاََ',

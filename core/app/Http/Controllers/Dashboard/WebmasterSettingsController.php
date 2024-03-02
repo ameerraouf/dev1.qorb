@@ -88,29 +88,29 @@ class WebmasterSettingsController extends Controller
             $WebmasterSetting->orders_status = 0; //$request->orders_status;
             $WebmasterSetting->shop_status = 0; //$request->shop_status;
             $WebmasterSetting->shop_settings_status = 0; //$request->shop_settings_status;
-            $WebmasterSetting->default_currency_id = $request->default_currency_id;
+            $WebmasterSetting->default_currency_id = $request->default_currency_id ?? $WebmasterSetting->default_currency_id;
             if ($request->languages_by_default == "") {
                 $request->languages_by_default = "en";
             }
             $WebmasterSetting->languages_by_default = $request->languages_by_default;
-            $WebmasterSetting->header_menu_id = $request->header_menu_id;
-            $WebmasterSetting->footer_menu_id = $request->footer_menu_id;
-            $WebmasterSetting->home_banners_section_id = $request->home_banners_section_id;
-            $WebmasterSetting->home_text_banners_section_id = $request->home_text_banners_section_id;
-            $WebmasterSetting->side_banners_section_id = $request->side_banners_section_id;
-            $WebmasterSetting->contact_page_id = $request->contact_page_id;
-            $WebmasterSetting->newsletter_contacts_group = $request->newsletter_contacts_group;
+            $WebmasterSetting->header_menu_id = $request->header_menu_id ?? $WebmasterSetting->header_menu_id;
+            $WebmasterSetting->footer_menu_id = $request->footer_menu_id ?? $WebmasterSetting->footer_menu_id;
+            $WebmasterSetting->home_banners_section_id = $request->home_banners_section_id ?? $WebmasterSetting->home_banners_section_id;
+            $WebmasterSetting->home_text_banners_section_id = $request->home_text_banners_section_id ?? $WebmasterSetting->home_text_banners_section_id;
+            $WebmasterSetting->side_banners_section_id = $request->side_banners_section_id ?? $WebmasterSetting->side_banners_section_id;
+            $WebmasterSetting->contact_page_id = $request->contact_page_id ?? $WebmasterSetting->contact_page_id;
+            $WebmasterSetting->newsletter_contacts_group = $request->newsletter_contacts_group ?? $WebmasterSetting->newsletter_contacts_group;
             $WebmasterSetting->new_comments_status = ($request->new_comments_status) ? 1 : 0;
             $WebmasterSetting->links_status = ($request->links_status) ? 1 : 0;
             $WebmasterSetting->register_status = ($request->register_status) ? 1 : 0;
-            $WebmasterSetting->permission_group = $request->permission_group;
+            $WebmasterSetting->permission_group = $request->permission_group ?? $WebmasterSetting->permission_group;
             $WebmasterSetting->api_status = ($request->api_status) ? 1 : 0;
             $WebmasterSetting->api_key = $request->api_key;
-            $WebmasterSetting->home_content1_section_id = $request->home_content1_section_id;
-            $WebmasterSetting->home_content2_section_id = $request->home_content2_section_id;
-            $WebmasterSetting->home_content3_section_id = $request->home_content3_section_id;
-            $WebmasterSetting->home_contents_per_page = $request->home_contents_per_page;
-            $WebmasterSetting->latest_news_section_id = $request->latest_news_section_id;
+            $WebmasterSetting->home_content1_section_id = $request->home_content1_section_id ?? $WebmasterSetting->home_content1_section_id;
+            $WebmasterSetting->home_content2_section_id = $request->home_content2_section_id ?? $WebmasterSetting->home_content2_section_id;
+            $WebmasterSetting->home_content3_section_id = $request->home_content3_section_id ?? $WebmasterSetting->home_content3_section_id;
+            $WebmasterSetting->home_contents_per_page = $request->home_contents_per_page ?? $WebmasterSetting->home_contents_per_page;
+            $WebmasterSetting->latest_news_section_id = $request->latest_news_section_id ?? $WebmasterSetting->latest_news_section_id;
 
             $WebmasterSetting->mail_driver = ($request->mail_driver != "") ? $request->mail_driver : "smtp";
             $WebmasterSetting->mail_host = ($request->mail_host != "") ? $request->mail_host : "";
