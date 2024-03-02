@@ -1,6 +1,9 @@
 <?php
 
 return array(
+
+    'SetChild' => 'Set child',
+
     'FinancialTransactions' => [
         "Title" => "Financial Transactions",
         "SendPayment" => "Send Payment",
@@ -8,7 +11,9 @@ return array(
         "Name" => "Name",
         "CopyOfTheBankTransfer" => "Copy Of The Bank Transfer",
         "Notes" => "Notes",
-        'Purchases'=>'Purchases'
+        'Purchases'=>'Purchases',
+        'UserName' => 'User'
+
 
     ],
 
@@ -46,6 +51,10 @@ return array(
         "Problem_EN" => "Problem",
         "Reports_AR" => "Reports",
         "Reports_EN" => "Reports",
+        "childrenname" => "Children Name",
+        "Specialist" => "Specialist Name",
+        "Teacher" => "Teacher Name",
+        "Supervisor" => "Supervisor Name",
     ],
 
     'Reports' => [

@@ -12,102 +12,45 @@
         </h5>
     </div>
     <div class="row g-3">
-        <div class="col-md-4">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href='#'">
-                <a href="{{ route('childrens.index') }}">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('teacher.childrens')}}</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href=''">
-                <a href="#">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('teacher.package')}}</div>
-                        <h4 class="m-a-0 text-md _600"></h4>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="box p-a" style="cursor: pointer"
-                onclick="location.href=''">
-                <a href="#">
-                    <div class="pull-left m-r">
-                        <i
-                            class="material-icons text-2x m-y-sm"></i>
-                    </div>
-                    <div class="clear">
-                        <div class="text-muted">{{__('backend.profile')}}</div>
-                        <h4 class="m-a-0 text-md _600"></h4>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<div class="row">
-    <div class="col-xs-3">
-        <div class="box p-a" style="cursor: pointer"
-            onclick="location.href='#'">
-            <a href="{{ route('childrens.index') }}">
-                <div class="pull-left m-r">
-                    <i
-                        class="material-icons text-2x m-y-sm"></i>
+        <div class="col-lg-4">
+            <a href="{{ route('childrens.index') }}" class="box-color box-flex p-a-2 primary">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded d-inline-flex align-items-center justify-content-center">
+                    <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+                    </span>
                 </div>
                 <div class="clear">
-                    <div class="text-muted">{{__('backend.childrens')}}</div>
+                    <h3 class="m-a-0 text-lg"></h3>
+                    <small class="text-muted">{{__('backend.childrens')}}</small>
                 </div>
             </a>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-3">
-        <div class="box p-a" style="cursor: pointer"
-            onclick="location.href=''">
-            <a href="#">
-                <div class="pull-left m-r">
-                    <i
-                        class="material-icons text-2x m-y-sm"></i>
+        <div class="col-lg-4">
+            <a href="" class="box-color box-flex p-a-2 blue">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded d-inline-flex align-items-center justify-content-center">
+                    <i class="fa fa-th-large fa-2x" aria-hidden="true"></i>
+                    </span>
                 </div>
                 <div class="clear">
-                    <div class="text-muted">{{__('backend.package')}}</div>
-                    <h4 class="m-a-0 text-md _600"></h4>
+                    <h3 class="m-a-0 text-lg"></h3>
+                    <small class="text-muted">{{__('backend.package')}}</small>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="" class="box-color box-flex p-a-2 warn">
+                <div class="pull-right m-l">
+                    <span class="w-56 dker text-center rounded d-inline-flex align-items-center justify-content-center">
+                    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="clear">
+                    <h3 class="m-a-0 text-lg"></h3>
+                    <small class="text-muted">{{__('backend.profile')}}</small>
                 </div>
             </a>
         </div>
     </div> 
-</div>
-<div class="row">
-    <div class="col-xs-3">
-        <div class="box p-a" style="cursor: pointer"
-            onclick="location.href=''">
-            <a href="#">
-                <div class="pull-left m-r">
-                    <i
-                        class="material-icons text-2x m-y-sm"></i>
-                </div>
-                <div class="clear">
-                    <div class="text-muted">{{__('backend.profile')}}</div>
-                    <h4 class="m-a-0 text-md _600"></h4>
-                </div>
-            </a>
-        </div>
     </div>
-</div> 
-
 @endsection

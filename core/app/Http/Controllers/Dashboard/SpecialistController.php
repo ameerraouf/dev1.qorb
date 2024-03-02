@@ -18,6 +18,7 @@ class SpecialistController extends Controller
 {
 
     private $uploadPath = "uploads/users/";
+    private $filePath = "uploads/media/";
 
     public function index()
     {
@@ -27,7 +28,7 @@ class SpecialistController extends Controller
 
     public function showChildrens(){
         // return Children::with('media')->get();
-        $childrens = Children::with('media')->paginate(10);
+        $childrens = Children::with('media')->where('specialist_id', Auth::user()->id)->paginate(10);
         return view('specialist.childrens.list', compact('childrens'));
     }
 
@@ -271,8 +272,9 @@ class SpecialistController extends Controller
 
     function fileDownload($name) {
         try{
-            
-            return Storage::download($name);
+            $filePath = $this->filePath;
+
+            return response()->download($filePath .'/'. $name);
         }
 
         catch (\Exception $e) {
@@ -330,6 +332,11 @@ class SpecialistController extends Controller
     public function getUploadPath()
     {
         return $this->uploadPath;
+    }
+
+    public function getFilePath()
+    {
+        return $this->filePath;
     }
 
 }

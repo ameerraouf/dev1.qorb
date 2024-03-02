@@ -69,17 +69,7 @@
             @endif
             <li class="nav-item dropdown">
                 <a class="nav-link clear" href data-toggle="dropdown">
-                  <span class="avatar w-32">
-                      {{-- @if(Auth::user()->photo !="")
-                          <img src="{{ asset('uploads/users/'.Auth::user()->photo) }}" alt="{{ Auth::user()->name }}"
-                               title="{{ Auth::user()->name }}">
-                      @else
-                          <img src="{{ asset('uploads/contacts/profile.jpg') }}" alt="{{ Auth::user()->name }}"
-                               title="{{ Auth::user()->name }}">
-                      @endif --}}
-                      {{ Auth::guard()->user()->name }}
-                      <i class="on b-white bottom"></i>
-                  </span>
+                    <img src="uploads/users/{{ Auth::guard()->user()->photo }}" class="avatar w-32">
                 </a>
                 <div class="dropdown-menu pull-right dropdown-menu-scale">
                     {{-- @if(Helper::GeneralWebmasterSettings("inbox_status"))

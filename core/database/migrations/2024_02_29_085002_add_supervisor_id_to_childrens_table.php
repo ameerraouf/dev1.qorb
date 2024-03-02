@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teacher_subscriptions', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('package_id');
-            $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('children_id');
-            $table->timestamps();
+        Schema::table('childrens', function (Blueprint $table) {
+            $table->unsignedBigInteger('supervisor_id');
+            $table->foreign('supervisor_id')->references('id')->on('users');
+
         });
     }
 
@@ -25,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teacher_subscriptions');
+        Schema::table('childrens', function (Blueprint $table) {
+            //
+        });
     }
 };
