@@ -52,6 +52,7 @@
                                 </label>
                             </th>
                             <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.MainServices.MainService_AR') : __('cruds.MainServices.MainService_EN') }}</th>
+                            <th class="text-center">{{ app()->getLocale() === 'ar' ? __('cruds.SubServices.Description_AR') : __('cruds.SubServices.Description_EN') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.options') }}</th>
                         </tr>
                         </thead>
@@ -67,9 +68,16 @@
                                 </td>
                                 <td class="h6 text-center">
                                     @if(app()->getLocale() == 'ar')
-                                        {!! strlen($main_service->name_ar) > 40 ? substr($main_service->name_ar, 0, 40) . '...' : $main_service->name_ar!!}
+                                    {!! strlen($main_service->name_ar) > 40 ? substr($main_service->name_ar, 0, 40) . '...' : $main_service->name_ar!!}
                                     @else
-                                        {!! strlen($main_service->name_en) > 40 ? substr($main_service->name_en, 0, 40) . '...' : $main_service->name_en!!}
+                                    {!! strlen($main_service->name_en) > 40 ? substr($main_service->name_en, 0, 40) . '...' : $main_service->name_en!!}
+                                    @endif
+                                </td>
+                                <td class="h6 text-center">
+                                    @if(app()->getLocale() == 'ar')
+                                        {!! strlen(strip_tags($main_service->description_ar)) > 40 ? substr(strip_tags($main_service->description_ar), 0, 40) . '...' : strip_tags($main_service->description_ar)!!}
+                                    @else
+                                        {!! strlen(strip_tags($main_service->description_en)) > 40 ? substr(strip_tags($main_service->description_en), 0, 40) . '...' : strip_tags($main_service->description_en)!!}
                                     @endif
                                 </td>
                                 <td class="text-center">

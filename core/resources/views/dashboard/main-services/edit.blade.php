@@ -41,6 +41,36 @@
                     </div>
                 </div>
 
+                @foreach(Helper::languagesList() as $ActiveLanguage)
+                    @if($ActiveLanguage->box_status)
+                        <div class="form-group row">
+                            <label
+                                class="col-sm-2 form-control-label">{{ $ActiveLanguage->code === 'ar' ? __('cruds.SubServices.Description_AR') : __('cruds.SubServices.Description_EN') }} {!! @Helper::languageName($ActiveLanguage) !!}
+                            </label>
+                            <div class="col-sm-10">
+                                @if (Helper::GeneralWebmasterSettings("text_editor") == 2)
+                                    <div>
+                                        {!! Form::textarea('description_'.@$ActiveLanguage->code,$main_service->{'description_'.@$ActiveLanguage->code}, array('placeholder' => '','class' => 'form-control ckeditor', 'dir'=>@$ActiveLanguage->direction)) !!}
+                                    </div>
+                                @elseif (Helper::GeneralWebmasterSettings("text_editor") == 1)
+                                    <div>
+                                        {!! Form::textarea('description_'.@$ActiveLanguage->code,$main_service->{'description_'.@$ActiveLanguage->code}, array('placeholder' => '','class' => 'form-control tinymce', 'dir'=>@$ActiveLanguage->direction)) !!}
+                                    </div>
+                                @else
+                                    <div class="box p-a-xs">
+                                        {!! Form::textarea('description_'.@$ActiveLanguage->code,$main_service->{'description_'.@$ActiveLanguage->code}, array('ui-jp'=>'summernote','placeholder' => '','class' => 'form-control summernote_'.@$ActiveLanguage->code, 'dir'=>@$ActiveLanguage->direction,'ui-options'=>'{height: 300,callbacks: {
+                                                onImageUpload: function(files, editor, welEditable) {
+                                                    sendFile(files[0], editor, welEditable,"'.@$ActiveLanguage->code.'");
+                                                }
+                                            }}'))
+                                        !!}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+
                 <div class="form-group row m-t-md">
                     <div class="offset-sm-2 col-sm-10">
                         <button type="submit" class="btn btn-primary m-t"><i class="material-icons">

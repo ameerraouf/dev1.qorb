@@ -103,20 +103,10 @@ class EarlyDetectionReportController extends Controller
             return redirect()->route('NoPermission');
         }
 
-        try {
-            $early_detection_report = new EarlyDetectionReport;
-            $early_detection_report->child_id = $id;
-            $early_detection_report->save();
-            $message = 'Added';
-            return response()->json([
-                'message' => $message,
-            ]);
-        } catch (\Exception $e) {
-            $message = 'Not Added';
-            return response()->json([
-                'message' => $message,
-            ]);
-        }
+        $message = 'Added';
+        return response()->json([
+            'message' => $message,
+        ]);
     }
 
     public function EarlyDetectionReportsCreate($id)

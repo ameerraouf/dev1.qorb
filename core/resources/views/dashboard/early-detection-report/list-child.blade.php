@@ -1,6 +1,17 @@
 @extends('dashboard.layouts.master')
 @section('title',  __('cruds.EarlyDetectionReports.Title') )
 @section('content')
+    <style>
+        .btn.btn-sm.success {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+    </style>
     <div class="padding">
         <div class="box">
             <div class="box-header dker">
@@ -154,8 +165,9 @@
     <script>
         $(document).on('click','.convert-to-early-detection',function() {
             event.preventDefault();
+                console.log($(this).text());
+                var ButtonText = $(this).text();
                 var childId = $(this).data('child-id');
-                console.log(childId);
                 $.ajax({
                     url: 'admin/early-detection-reports-ajax-create/' + childId,
                     type: 'POST',
@@ -163,14 +175,23 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        var investorId = response.investorId;
                         var $button = $('[data-child-id="' + childId + '"]');
                         if (response.message == 'Added') {
-                            $button.css({
-                                'background-color': '#1e91bd',
-                                'color': '#ffffff',
-                                'border-color': '#ffffff'
-                            }).prop('disabled', true).text("{{ __('cruds.EarlyDetectionReports.Converted') }}");
+                            console.log($(this).text());
+                            if( ButtonText === 'Converted' ){
+                                $button.css({
+                                    'color': '#fff',
+                                    'background-color': '#28a745',
+                                    'border-color': '#28a745',
+                                    'padding': '0.25rem 0.5rem',
+                                }).text("{{ __('cruds.EarlyDetectionReports.Convert') }}");
+                            }else{
+                                $button.css({
+                                    'background-color': '#1e91bd',
+                                    'color': '#ffffff',
+                                    'border-color': '#ffffff'
+                                }).text("{{ __('cruds.EarlyDetectionReports.Converted') }}");
+                            }
                         }
                     },
                     error: function(xhr, status, error) {

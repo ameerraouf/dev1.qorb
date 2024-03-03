@@ -55,6 +55,8 @@ class MainServiceController extends Controller
         }
 
         $this->validate($request, [
+            'description_en' => ['required','max:1000',new CheckSpaces],
+            'description_ar' => ['required','max:1000',new CheckSpaces],
             'main_service_en' => ['required','max:256',new CheckSpaces],
             'main_service_ar' => ['required','max:256',new CheckSpaces],
         ]);
@@ -63,6 +65,8 @@ class MainServiceController extends Controller
             $main_service = new MainService;
             $main_service->name_ar = $request->main_service_ar;
             $main_service->name_en = $request->main_service_en;
+            $main_service->description_ar = $request->description_ar;
+            $main_service->description_en = $request->description_en;
             $main_service->save();
             return redirect()->action('Dashboard\MainServiceController@index')->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
@@ -100,6 +104,8 @@ class MainServiceController extends Controller
         if (!empty($main_service)) {
 
             $this->validate($request, [
+                'description_en' => ['required','max:1000',new CheckSpaces],
+                'description_ar' => ['required','max:1000',new CheckSpaces],
                 'name_en' => ['required','max:256',new CheckSpaces],
                 'name_ar' => ['required','max:256',new CheckSpaces],
             ]);
@@ -107,6 +113,8 @@ class MainServiceController extends Controller
             try {
                 $main_service->name_ar = $request->name_ar;
                 $main_service->name_en = $request->name_en;
+                $main_service->description_en = $request->description_en;
+                $main_service->description_ar = $request->description_ar;
                 $main_service->save();
                 return redirect()->action('Dashboard\MainServiceController@index')->with('doneMessage', __('backend.saveDone'));
             } catch (\Exception $e) {
