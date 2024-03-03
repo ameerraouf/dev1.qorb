@@ -48,6 +48,19 @@ return array(
         "Description_EN" => " Description in English",
     ],
 
+    'EarlyDetectionReports' => [
+        "Title" => "Early Detection Reports",
+        "ChildName" => "Child Name",
+        "TeacherName" => "Teacher/Mother Name",
+        "ConvertToEarlyDetectionReport" => "Convert to Early Detection Reports",
+        "Convert" => "Convert",
+        "Converted" => "Converted",
+        "AddReport" => "Add Report",
+        "EditReport" => "Edit Report",
+        "File" => "File",
+        "NoFilesUplaoded" => "No Files Uplaoded",
+    ],
+
     'Society' => [
         'Title' => 'Society',
         'AddQuestion' => 'Add Question',
