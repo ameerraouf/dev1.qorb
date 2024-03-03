@@ -285,7 +285,7 @@ ul.cat li .active {
 }
 
 .flex-control-paging li a.flex-active {
-    background: var(--gradient-two-color);
+    background: var(--six-color);
 }
 
 .flex-control-paging li a {
@@ -2980,6 +2980,10 @@ li {
     -moz-border-radius: 0px;
     border-radius: 0px;
     border: 1px solid #f0f0f0;
+}
+
+#content .contacts p, #content .contacts address {
+    color: black;
 }
 
 #content .contacts p .fa, #content .contacts address .fa {
