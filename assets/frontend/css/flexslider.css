@@ -41,6 +41,8 @@
 .flexslider .slides img {
     width: 100%;
     display: block;
+    height: calc(100vh - 91px - 34px - 24.69px);
+    object-fit: cover;
 }
 
 .flex-pauseplay span {
