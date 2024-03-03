@@ -33,6 +33,19 @@ return [
         "MainService_EN" => " الاسم باللغة الانجليزية",
     ],
 
+    'EarlyDetectionReports' => [
+        "Title" => "تقارير الكشف المبكر",
+        "ChildName" => "اسم الطفل",
+        "TeacherName" => "اسم المعلمة / الأم",
+        "ConvertToEarlyDetectionReport" => "تحويل إلى تقارير الكشف المبكر",
+        "Convert" => "تحويل",
+        "Converted" => "تم التحويل",
+        "AddReport" => "إضافة تقرير",
+        "EditReport" => "تعديل تقرير",
+        "File" => "ملف",
+        "NoFilesUplaoded" => "لم يتم تحميل ملفات",
+    ],
+
     'SubServices' => [
         "Title" => "الخدمات الفرعية",
         "MainService" => "الخدمة الرئيسية",

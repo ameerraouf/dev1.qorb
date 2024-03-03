@@ -16,9 +16,8 @@
 <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/select2-bootstrap.min.css') }}?v={{ Helper::system_version() }}"/>
 <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/bootstrap-datetimepicker.min.css') }}?v={{ Helper::system_version() }}"/>
 
-<link href="{{ URL::asset('assets/frontend/css/style.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
-<link href="{{ URL::asset('assets/frontend/css/color.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
 <link href="{{ URL::asset('assets/frontend/css/colors.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
+<link href="{{ URL::asset('assets/frontend/css/style.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>
 <link rel="stylesheet" href="{{ URL::asset('assets/frontend/js/owl-carousel/assets/owl.carousel.min.css') }}?v={{ Helper::system_version() }}">
 <link rel="stylesheet" href="{{ URL::asset('assets/frontend/js/owl-carousel/assets/owl.theme.default.min.css') }}?v={{ Helper::system_version() }}">
 

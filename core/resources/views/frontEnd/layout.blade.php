@@ -2,7 +2,7 @@
 <html lang="{{ @Helper::currentLanguage()->code }}" dir="{{ @Helper::currentLanguage()->direction }}">
 <head>
     @include('frontEnd.includes.head')
-    @include('frontEnd.includes.colors')
+    {{-- @include('frontEnd.includes.colors') --}}
 </head>
 <?php
 $bdy_class = "";
