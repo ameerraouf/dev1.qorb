@@ -1,7 +1,10 @@
 @extends('frontEnd.layout')
 
 @section('content')
-
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
     <!-- start Home Slider -->
     @include('frontEnd.includes.slider')
     <!-- end Home Slider -->
@@ -115,38 +118,41 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="boxes-package">
-                    @foreach ($packages as $item)
-
-                        <div class="box-package">
-                            <h3 class="title">
-                                {{ app()->getLocale() == 'ar' ? $item->title_ar : $item->title_en }}
-                            </h3>
-                            <h4 class="price">
-                                {{ $item->price }}
-                                <span>
-                                    {{ __('cruds.Packages.currency') }}
-                                </span>
-                            </h4>
-                            <ul class="list">
-                                @foreach ($item->advantages as $adv)
-                                    <li>
-                                        <span class="icon">
-                                            &#10003;
-                                        </span>
-                                        {{ $adv }}
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <a href="" class="btn-box">
-                                {{ __('cruds.Packages.Subscribe') }}
-                            </a>
+                <div class="swiper-packages" style="position: relative; overflow:hidden;">
+                    <div class="swiper-wrapper">
+                        @foreach ($packages as $item)
+                        <div class="swiper-slide">
+                            <div class="box-package">
+                                <h3 class="title">
+                                    {{ app()->getLocale() == 'ar' ? $item->title_ar : $item->title_en }}
+                                </h3>
+                                <h4 class="price">
+                                    {{ $item->price }}
+                                    <span>
+                                        {{ __('cruds.Packages.currency') }}
+                                    </span>
+                                </h4>
+                                <ul class="list">
+                                    @foreach ($item->advantages as $adv)
+                                        <li>
+                                            <span class="icon">
+                                                &#10003;
+                                            </span>
+                                            {{ $adv }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <a href="" class="btn-box">
+                                    {{ __('cruds.Packages.Subscribe') }}
+                                </a>
+                            </div>
                         </div>
+                        @endforeach
+                    </div>
 
-                    @endforeach
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
-            </div>
             <div class="more-btn">
                 <a href="{{ route('FrontendPackages') }}" class="btn btn-theme"><i
                         class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
@@ -168,43 +174,78 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 row">
-                <div class="col-sm-6 col-lg-4 col-xl-3">
-                    <div class="box-serv">
-                        <span class="icon">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                        </span>
-                        <h3 class="title">عنوان الخدمة</h3>
-                        <p class="content">
-                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                        </p>
+        <div class="swiper-services" style="position: relative; overflow:hidden;">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="box-serv">
+                                <span class="icon">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                </span>
+                                <h3 class="title">عنوان الخدمة</h3>
+                                <p class="content">
+                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box-serv">
+                                <span class="icon">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                </span>
+                                <h3 class="title">عنوان الخدمة</h3>
+                                <p class="content">
+                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box-serv">
+                                <span class="icon">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                </span>
+                                <h3 class="title">عنوان الخدمة</h3>
+                                <p class="content">
+                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box-serv">
+                                <span class="icon">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                </span>
+                                <h3 class="title">عنوان الخدمة</h3>
+                                <p class="content">
+                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box-serv">
+                                <span class="icon">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                </span>
+                                <h3 class="title">عنوان الخدمة</h3>
+                                <p class="content">
+                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="box-serv">
+                                <span class="icon">
+                                    <i class="fa fa-television" aria-hidden="true"></i>
+                                </span>
+                                <h3 class="title">عنوان الخدمة</h3>
+                                <p class="content">
+                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3">
-                    <div class="box-serv">
-                        <span class="icon">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                        </span>
-                        <h3 class="title">عنوان الخدمة</h3>
-                        <p class="content">
-                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3">
-                    <div class="box-serv">
-                        <span class="icon">
-                            <i class="fa fa-television" aria-hidden="true"></i>
-                        </span>
-                        <h3 class="title">عنوان الخدمة</h3>
-                        <p class="content">
-                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 <!-- نهاية صفحة الخدمات -->
@@ -718,4 +759,55 @@
             </div>
     </section> --}}
     <!-- نهاية صفحة الأسئلة الشائعة -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper-packages', {
+    slidesPerView: 3,
+    spaceBetween: 24,
+    loop: true,
+    grabCursor: true,
+    speed: 1500,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        "@0.00": { slidesPerView: 1 },
+        "@1.00": { slidesPerView: 2 },
+        "@2.00": { slidesPerView: 3 },
+    },
+  });
+    const swiper2 = new Swiper('.swiper-services', {
+    slidesPerView: 3,
+    spaceBetween: 24,
+    loop: true,
+    grabCursor: true,
+    speed: 1500,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        "@0.00": { slidesPerView: 1 },
+        "@1.00": { slidesPerView: 2 },
+        "@2.00": { slidesPerView: 3 },
+    },
+  });
+</script>
 @endsection
