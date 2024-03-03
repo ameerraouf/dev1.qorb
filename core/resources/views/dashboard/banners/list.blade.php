@@ -18,7 +18,7 @@
                                 <a class="btn btn-fw primary marginBottom5"
                                    href="{{route("BannersCreate",$WebmasterBanner->id)}}">
                                     <i class="material-icons">&#xe02e;</i>
-                                    &nbsp; {!! $WebmasterBanner->{'title_'.@Helper::currentLanguage()->code} !!}</a>
+                                    &nbsp; {{ __('backend.bannerAdd') }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                     <a class="btn btn-fw primary marginBottom5"
                                        href="{{route("BannersCreate",$WebmasterBanner->id)}}">
                                         <i class="material-icons">&#xe02e;</i>
-                                        &nbsp; {!! $WebmasterBanner->{'title_'.@Helper::currentLanguage()->code} !!}</a>
+                                        &nbsp; {{ __('backend.bannerAdd') }}</a>
                                 @endforeach
                             @endif
                         </div>
