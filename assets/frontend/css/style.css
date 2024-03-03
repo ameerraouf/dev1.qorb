@@ -11,13 +11,12 @@
 1. General
 ==================================== */
 :root {
-    --main-color: #c5ae8f;
-    --main-color-dark: #ac977d;
     --two-color: #04ebfd;
     --three-color: #5053dc;
     --four-color: #f3c204;
     --five-color: #db3a49;
     --six-color: #3094e9;
+    --six-color-dark: #2c83cf;
     --seven-color: #e88025;
     --gradient-two-color: linear-gradient(to bottom right, var(--two-color), var(--three-color));
     --gradient-four-color: linear-gradient(to bottom right, var(--four-color), var(--five-color));
@@ -102,13 +101,13 @@ header .nav li.active ul.dropdown-menu li.active a {
 .pagination ul > .active > span,
 .flex-control-nav li a:hover,
 .flex-control-nav li a.active {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 /* === border color === */
 .pagination ul > li.active > a,
 .pagination ul > li.active > span, a.thumbnail:hover, input[type="text"].search-form:focus {
-    border: 1px solid var(--main-color);
+    border: 1px solid var(--six-color);
 }
 
 textarea:focus,
@@ -127,11 +126,11 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
-    border-color: var(--main-color);
+    border-color: var(--six-color);
 }
 
 input:focus {
-    border-color: var(--main-color);
+    border-color: var(--six-color);
 }
 
 #sendmessage {
@@ -139,11 +138,11 @@ input:focus {
 }
 
 .pullquote-left {
-    border-left: 5px solid var(--main-color);
+    border-left: 5px solid var(--six-color);
 }
 
 .pullquote-right {
-    border-right: 5px solid var(--main-color);
+    border-right: 5px solid var(--six-color);
 }
 
 /* cta */
@@ -153,7 +152,7 @@ input:focus {
 }
 
 ul.clients li:hover {
-    border: 4px solid var(--main-color);
+    border: 4px solid var(--six-color);
 }
 
 /* box */
@@ -177,12 +176,12 @@ ul.clients li:hover {
 }
 /* modal styled */
 .modal.styled .modal-header {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 /* blog */
 .post-meta {
-    border-top: 4px solid var(--main-color);
+    border-top: 4px solid var(--six-color);
 }
 
 .post-meta .comments a:hover {
@@ -217,27 +216,27 @@ ul.clients li:hover {
 .icon-square:hover,
 .icon-rounded:hover,
 .icon-circled:hover {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 [class^="icon-"].active,
 [class*=" icon-"].active {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 /* fancybox */
 .fancybox-close:hover {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 .fancybox-nav:hover span {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 /* parallax c slider */
 .da-slide .da-link:hover {
     background: var(--gradient-two-color);
-    border: 4px solid var(--main-color);
+    border: 4px solid var(--six-color);
 }
 
 .da-dots span {
@@ -246,16 +245,16 @@ ul.clients li:hover {
 
 /* flexslider */
 #featured .flexslider .slide-caption {
-    border-left: 5px solid var(--main-color);
+    border-left: 5px solid var(--six-color);
 }
 
 /* Nivo slider */
 .nivo-directionNav a:hover {
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 
 .nivo-caption, .caption {
-    border-bottom: var(--main-color) 5px solid;
+    border-bottom: var(--six-color) 5px solid;
 }
 
 /* footer */
@@ -346,14 +345,14 @@ header .nav li .dropdown-menu li a {
     .navbar-default .navbar-nav > .active > a,
     .navbar-default .navbar-nav > .active > a:hover,
     .navbar-default .navbar-nav > .active > a:focus {
-        background-color: var(--main-color);
+        background-color: var(--six-color);
         color: #fff;
     }
 
     .navbar-default .navbar-nav > .open > a,
     .navbar-default .navbar-nav > .open > a:hover,
     .navbar-default .navbar-nav > .open > a:focus {
-        background-color: var(--main-color);
+        background-color: var(--six-color);
         color: #fff;
     }
 
@@ -558,7 +557,7 @@ img.img-polaroid {
     width: 0;
     position: absolute;
     transition: 300ms;
-    background-color: var(--main-color);
+    background-color: var(--six-color);
 }
 .box-faq:hover{
     background-color: #eee;
@@ -656,7 +655,7 @@ img.img-polaroid {
     padding: 1.5rem;
     box-shadow: 0 0 7px 0 #0000001f;
     border: 1px solid #eee;
-    border-inline-start: 2px solid var(--main-color);
+    border-inline-start: 2px solid var(--six-color);
     border-radius: 4px;
 }
 .box-comment .info-user{
@@ -701,7 +700,7 @@ img.img-polaroid {
     align-items: center;
     margin-top: 24px;
     flex-direction: column;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.20);
+    border: 1px solid #bbb;
 }
 .box-serv .icon{
    width: 60px;
@@ -786,6 +785,8 @@ header .navbar-default .navbar-nav > .open > a:focus {
 
 header .navbar {
     min-height: 100px;
+    box-shadow: 0px 7px 9px 0 #0000000f;
+    z-index: 2;
 }
 
 header .navbar-nav > li {
@@ -820,7 +821,9 @@ header .nav .caret {
     border-radius: 0;
     border: none;
 }
-
+.panel-group .panel {
+margin-bottom: 1.5rem !important;
+}
 .dropdown-menu li:last-child {
     padding-bottom: 0 !important;
     margin-bottom: 0;
@@ -1120,7 +1123,7 @@ section.callaction {
 ==================================== */
 
 #inner-headline {
-    background: var(--gradient-two-color);
+    background: var(--seven-color);
     position: relative;
     margin: 0;
     padding: 0;
@@ -2579,7 +2582,7 @@ article img.pull-right, article .align-right {
 .site-top {
     padding: 5px 0px;
     color: #fff;
-    background-color: var(--main-color);
+    background-color: var(--six-color);
     height: 34px;
 }
 
@@ -3060,12 +3063,12 @@ li {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--main-color);
+    background: var(--six-color);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--main-color-dark);
+    background: var(--six-color-dark);
 }
 .header-dropdown .btn{
     background: #f9f9f9;
@@ -3351,4 +3354,14 @@ footer{
     margin-top: auto;
     bottom: 0;
     width: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+}
+.swiper-button-next::after, .swiper-button-prev::after {
+    color: var(--six-color) !important;
+    font-size: 25px !important;
 }
