@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Events\Supervisor\ConsultingReportCreated;
 use App\Events\Supervisor\SessionsReportCreated;
 use App\Events\Supervisor\StatusReportCreated;
+use App\Events\Teacher\SpecialistAddConsultingReport;
+use App\Events\Teacher\SpecialistAddSessionReport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Children;
@@ -13,6 +15,7 @@ use App\Models\FinancialTransaction;
 use App\Models\Notification;
 use App\Models\Report;
 use App\Models\StatusReport;
+use App\Models\Teacher;
 use App\Models\User;
 use App\Models\WebmasterSection;
 use Illuminate\Support\Facades\Auth;
@@ -120,9 +123,10 @@ class SpecialistController extends Controller
         ]);
 
         try {
-            $children =  Children::where('id', $id)->select('id', 'name','supervisor_id')->first();
+            $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
+            $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new Report;
             $report->children_id = $id;
             $report->target = $request->target;
@@ -132,6 +136,13 @@ class SpecialistController extends Controller
             $report->save();
             
             event(new SessionsReportCreated($children->name.' تم إضافة تقرير الجلسات ل', $supervisor->id));
+
+            event(new SpecialistAddSessionReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الجلسات ل', $teacher->id));
+
+            Notification::create([
+                'teacher_id' => $teacher->id,
+                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الجلسات ل'
+            ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
@@ -163,9 +174,10 @@ class SpecialistController extends Controller
         ]);
 
         try {
-            $children =  Children::where('id', $id)->select('id', 'name','supervisor_id')->first();
+            $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
+            $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new ConsultingReport;
             $report->children_id = $id;
             $report->type = $request->type;
@@ -174,6 +186,13 @@ class SpecialistController extends Controller
             $report->save();
 
             event(new ConsultingReportCreated($children->name.' تم إضافة تقرير الاستشارات ل', $supervisor->id));
+            
+            event(new SpecialistAddConsultingReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل', $teacher->id));
+
+            Notification::create([
+                'teacher_id' => $teacher->id,
+                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل'
+            ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
@@ -206,10 +225,10 @@ class SpecialistController extends Controller
         ]);
 
         try {
-            $children =  Children::where('id', $id)->select('id', 'name','supervisor_id')->first();
+            $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-
+            $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new StatusReport;
             $report->children_id = $id;
             $report->companion = $request->companion;
@@ -220,6 +239,13 @@ class SpecialistController extends Controller
             $report->save();
 
             event(new StatusReportCreated($children->name.' تم إضافة تقرير الحالة ل', $supervisor->id));
+
+            event(new SpecialistAddConsultingReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل', $teacher->id));
+
+            Notification::create([
+                'teacher_id' => $teacher->id,
+                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل'
+            ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,

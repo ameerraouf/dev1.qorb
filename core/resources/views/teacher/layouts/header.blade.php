@@ -18,8 +18,8 @@
             </li>
             <?php
             $webmailsAlerts = Helper::webmailsAlerts();
-            $eventsAlerts = Helper::eventsAlerts();
-            $alerts = count($webmailsAlerts) + count($eventsAlerts);
+            $notifications = Helper::teacherNotifications();
+            $alerts = count($notifications);
             ?>
             @if($alerts >0)
                 <li class="nav-item dropdown pos-stc-xs">
@@ -33,34 +33,16 @@
                         <div class="box dark">
                             <div class="box p-a scrollable maxHeight320">
                                 <ul class="list-group list-group-gap m-a-0">
-                                    @foreach($webmailsAlerts as $webmailsAlert)
+                                    @foreach($notifications as $webmailsAlert)
                                         <li class="list-group-item lt box-shadow-z0 b">
-                                    <span class="clear block">
-                                        <small>{{ $webmailsAlert->from_name }}</small><br>
-                                        <a href="{{ route("webmailsEdit",["id"=>$webmailsAlert->id]) }}"
-                                           class="text-primary">{{ $webmailsAlert->title }}</a>
-                                        <br>
-                                        <small class="text-muted">
-                                            {{ date('d M Y  h:i A', strtotime($webmailsAlert->date)) }}
-                                        </small>
-                                    </span></li>
-                                    @endforeach
-                                    @foreach($eventsAlerts as $eventsAlert)
-                                        <li class="list-group-item lt box-shadow-z0 b">
-                                    <span class="clear block">
-                                        <a href="{{ route("calendarEdit",["id"=>$eventsAlert->id]) }}"
-                                           class="text-primary">{{ $eventsAlert->title }}</a>
-                                        <br>
-                                        <small class="text-muted">
-                                            @if($eventsAlert->type ==3 || $eventsAlert->type ==2)
-                                                {{ date('d M Y  h:i A', strtotime($eventsAlert->start_date)) }}
-                                            @else
-                                                {{ date('d M Y', strtotime($eventsAlert->start_date)) }}
-                                            @endif
-                                        </small>
-                                    </span></li>
-                                    @endforeach
+                                    <span class="clear block text-right" dir="ltr">
+                                        <small>{{ $webmailsAlert->message }}</small><br>
 
+                                        <small class="text-muted">
+                                            {{ date('d M Y  h:i A', strtotime($webmailsAlert->created_at)) }}
+                                        </small>
+                                    </span></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
