@@ -16,6 +16,7 @@ use App\Models\Setting;
 use App\Models\Topic;
 use App\Models\Webmail;
 use App\Models\Language;
+use App\Models\Notification;
 use App\Models\WebmasterSection;
 use App\Models\WebmasterSetting;
 use Illuminate\Support\Carbon;
@@ -79,6 +80,23 @@ class Helper
         }
 
         return $Webmails;
+    }
+    // Get Notifiations
+    static function specialistsNotifications()
+    {
+        //List of all notifications
+        
+        $notifications = Notification::where('specialist_id', '=', Auth::user()->id)->orderby('id', 'desc')->latest()->take(5)->get();
+        return $notifications;
+    }
+
+ // Get Notifiations
+    static function supervisorNotifications()
+    {
+        //List of all notifications
+        
+        $notifications = Notification::where('supervisor_id', '=', Auth::user()->id)->orderby('id', 'desc')->latest()->take(5)->get();
+        return $notifications;
     }
 
     // Get Webmails Alerts
