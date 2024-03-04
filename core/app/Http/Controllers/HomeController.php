@@ -15,10 +15,11 @@ use App\Models\Contact;
 use App\Models\Package;
 use App\Models\Section;
 use App\Models\Setting;
-use App\Models\Webmail;
 use App\Models\Society;
+use App\Models\Webmail;
 use App\Models\Language;
 use App\Models\TopicField;
+use App\Models\MainService;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\TopicCategory;
@@ -72,6 +73,13 @@ class HomeController extends Controller
                 break;
             case "packages" :
                 return $this->Packages();
+                break;
+            case "main-services" :
+                return $this->MainServices();
+                break;
+            case "show-main-service" :
+                $id = Str::after(request()->server()['REQUEST_URI'], '/show-main-service/');
+                return $this->showMainService($id);
                 break;
             case "about" :
                 $id = 1;
@@ -271,8 +279,11 @@ class HomeController extends Controller
             });
         }
 
+        $main_services = MainService::orderBy('created_at', 'desc')->limit(6)->get();
+
         return view("frontEnd.home",
             compact(
+                "main_services",
                 "packages",
                 "WebmasterSettings",
                 "SliderBanners",
@@ -1986,7 +1997,108 @@ class HomeController extends Controller
         $society->views += 1;
         $society->save();
         return view('frontEnd.society-show',compact('society'));
-        dd($society);
+    }
+
+    public function MainServices()
+    {
+        return $this->MainServicesByLang("");
+    }
+
+    public function MainServicesByLang($lang = "")
+    {
+
+        if ($lang != "") {
+            // Set Language
+            App::setLocale($lang);
+            \Session::put('locale', $lang);
+        }
+
+        // General Webmaster Settings
+        $WebmasterSettings = WebmasterSetting::find(1);
+
+        // $id = $WebmasterSettings->contact_page_id;
+
+        $Topic = Topic::where('status', 1)->where('title_en','Main Services')->first();
+
+        if (!empty($Topic) && ($Topic->expire_date == '' || ($Topic->expire_date != '' && $Topic->expire_date >= date("Y-m-d")))) {
+            // update visits
+            $Topic->visits = $Topic->visits + 1;
+            $Topic->save();
+
+            // get Webmaster section settings by ID
+            $WebmasterSection = WebmasterSection::find($Topic->webmaster_id);
+
+            if (!empty($WebmasterSection)) {
+
+                // Get current Category Section details
+                $CurrentCategory = Section::find($Topic->section_id);
+                // Get a list of all Category ( for side bar )
+                $Categories = Section::where('webmaster_id', '=', $WebmasterSection->id)->where('father_id', '=',
+                    '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
+
+                // Get Most Viewed
+                $TopicsMostViewed = Topic::where([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', '>=', date("Y-m-d")], ['expire_date', '<>', null]])->orwhere([['webmaster_id', '=', $WebmasterSection->id], ['status', 1], ['expire_date', null]])->orderby('visits', 'desc')->limit(3)->get();
+
+
+                $SideBanners = Banner::where('section_id', $WebmasterSettings->side_banners_section_id)->where('status',
+                    1)->orderby('row_no', 'asc')->get();
+
+                // Get Latest News
+                $LatestNews = $this->latest_topics($WebmasterSettings->latest_news_section_id);
+
+
+                // Page Title, Description, Keywords
+                $seo_title_var = "seo_title_" . @Helper::currentLanguage()->code;
+                $seo_description_var = "seo_description_" . @Helper::currentLanguage()->code;
+                $seo_keywords_var = "seo_keywords_" . @Helper::currentLanguage()->code;
+                $tpc_title_var = "title_" . @Helper::currentLanguage()->code;
+                $site_desc_var = "site_desc_" . @Helper::currentLanguage()->code;
+                $site_keywords_var = "site_keywords_" . @Helper::currentLanguage()->code;
+                if ($Topic->$seo_title_var != "") {
+                    $PageTitle = $Topic->$seo_title_var;
+                } else {
+                    $PageTitle = $Topic->$tpc_title_var;
+                }
+                if ($Topic->$seo_description_var != "") {
+                    $PageDescription = $Topic->$seo_description_var;
+                } else {
+                    $PageDescription = Helper::GeneralSiteSettings($site_desc_var);
+                }
+                if ($Topic->$seo_keywords_var != "") {
+                    $PageKeywords = $Topic->$seo_keywords_var;
+                } else {
+                    $PageKeywords = Helper::GeneralSiteSettings($site_keywords_var);
+                }
+
+                $main_services = MainService::get();
+                return view("frontEnd.main-services",
+                    compact(
+                        "WebmasterSettings",
+                        "LatestNews",
+                        "Topic",
+                        "SideBanners",
+                        "WebmasterSection",
+                        "Categories",
+                        "CurrentCategory",
+                        "PageTitle",
+                        "PageDescription",
+                        "PageKeywords",
+                        "main_services",
+                        "TopicsMostViewed"
+                    ));
+
+            } else {
+                return redirect()->action('HomeController@HomePage');
+            }
+        } else {
+            return redirect()->action('HomeController@HomePage');
+        }
+
+    }
+
+    public function showMainService($id){
+        $main_service = MainService::find($id);
+        return view('frontEnd.main-service-show',compact('main_service'));
     }
 
 }

@@ -118,12 +118,16 @@ Route::get('/{lang?}/common-questions', [HomeController::class, 'CommonQuestions
 Route::get('/society', [HomeController::class, 'Society'])->name('FrontendSociety');
 Route::get('/{lang?}/society', [HomeController::class, 'SocietyByLang'])->name('FrontendSocietyByLang');
 
-Route::get('/packages', [HomeController::class, 'Packages'])->name('FrontendPackages');
-Route::get('/{lang?}/packages', [HomeController::class, 'PackagesByLang'])->name('FrontendPackagesByLang');
 Route::post('/societies/store', [SocietyController::class, 'store'])->name('societyStore');
 Route::get('/show-society/{value}', [HomeController::class, 'showSociety'])->name('showSociety');
-
 Route::post('/replySociety/{id}', [SocietyReplyController::class, 'replySociety'])->name('replySociety');
+
+Route::get('/packages', [HomeController::class, 'Packages'])->name('FrontendPackages');
+Route::get('/{lang?}/packages', [HomeController::class, 'PackagesByLang'])->name('FrontendPackagesByLang');
+
+Route::get('/main-services', [HomeController::class, 'MainServices'])->name('FrontendMainServices');
+Route::get('/{lang?}/main-services', [HomeController::class, 'MainServicesByLang'])->name('FrontendMainServicesByLang');
+Route::get('/show-main-service/{value}', [HomeController::class, 'showMainService'])->name('showMainService');
 
 // .. End of Frontend Route
 
