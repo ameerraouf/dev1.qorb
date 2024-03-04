@@ -39,7 +39,8 @@ class HomeController extends Controller
     function showChildrenReports($id)
     {
         $reports = Report::where('children_id', $id)->paginate(6);
-        return view('teacher.reports.list', compact('reports'));
+        $child_name = Children::where('id', $id)->select('name')->first()->name;
+        return view('teacher.reports.list', compact('reports','child_name'));
     }
 
     function showChildrenConsultingReports($id)

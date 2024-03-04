@@ -37,80 +37,80 @@ class SpecialistController extends Controller
     }
 
     public function showChildrenReports($id){
-        
+
         $reports = Report::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id' , $id) -> select('id')->first()->id;
         return view('specialist.reports.list', compact('reports','child_id'));
     }
 
     public function showChildrenConsultingReports($id){
-        
+
         $reports = ConsultingReport::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id' , $id) -> select('id')->first()->id;
         return view('specialist.consulting_reports.list', compact('reports','child_id'));
     }
 
     public function showChildrenStatusReports($id){
-        
+
         $reports = StatusReport::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id' , $id) -> select('id')->first()->id;
         return view('specialist.status_reports.list', compact('reports','child_id'));
     }
 
     public function showFTransactions(){
-        
+
         $transactions = FinancialTransaction::where('user_id', Auth::user()->id)->orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
         return view('specialist.financial-transactions.list', compact('transactions'));
     }
 
     public function createReportPage($id){
-        
+
         $child_id = Children::where('id', $id)->select('id')->first()->id;
         return view('specialist.reports.create', compact('child_id'));
-    } 
+    }
 
     public function createConsultingReportPage($id){
-        
+
         $child_id = Children::where('id', $id)->select('id')->first()->id;
         return view('specialist.consulting_reports.create', compact('child_id'));
-    } 
+    }
     public function createStatusReportPage($id){
-        
+
         $child_id = Children::where('id', $id)->select('id')->first()->id;
         return view('specialist.status_reports.create', compact('child_id'));
-    } 
-    
+    }
+
     // public function showReportPage($id){
-        
+
     //     $report = Report::find($id);
     //     $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
     //     return view('specialist.reports.show', compact('report', 'children_id'));
     // }
 
     public function editReportPage($id){
-        
+
         $report = Report::find($id);
         $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
         return view('specialist.reports.edit', compact('report', 'children_id'));
     }
 
     public function editConsultingReportPage($id){
-        
+
         $report = ConsultingReport::find($id);
         $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
         return view('specialist.consulting_reports.edit', compact('report', 'children_id'));
     }
 
     public function editStatusReportPage($id){
-        
+
         $report = StatusReport::find($id);
         $children_id = Children::where('id', $report->children_id)->select('id')->first()->id;
         return view('specialist.status_reports.edit', compact('report', 'children_id'));
     }
 
     public function storeReport(Request $request , $id){
-        
-        
+
+
         $this->validate($request, [
             'children_id'=>'required',
             'target' => 'required|max:256',
@@ -130,31 +130,31 @@ class SpecialistController extends Controller
             $report->behaviours = $request->behaviours;
             $report->success_number = $request->success_number;
             $report->save();
-            
+
             event(new SessionsReportCreated($children->name.' تم إضافة تقرير الجلسات ل', $supervisor->id));
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
                 'message' => $children->name.' تم إضافة تقرير الجلسات ل'
-          
+
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
                 'message' => $children->name.' لقد قمتِ بإضافة تقرير الجلسات ل'
             ]);
-            
+
             return redirect()->route('ChildrenReports',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
         return redirect()->route('ChildrenReports',$id)->with('errorMessage', __('backend.error'));
-    }  
+    }
 
 
     public function storeConsultingReport(Request $request , $id){
-        
-        
+
+
         $this->validate($request, [
             'children_id'=>'required',
             'type' => 'required|max:255',
@@ -178,24 +178,24 @@ class SpecialistController extends Controller
             Notification::create([
                 'supervisor_id' => $supervisor->id,
                 'message' => $children->name.' تم إضافة تقرير الاستشارات ل'
-          
+
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
                 'message' => $children->name.' لقد قمتِ بإضافة تقرير الاستشارات ل'
             ]);
-            
+
             return redirect()->route('ChildrenConsultingReports',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
         return redirect()->route('ChildrenConsultingReports',$id)->with('errorMessage', __('backend.error'));
-    } 
+    }
 
     public function storeStatusReport(Request $request , $id){
-        
-        
+
+
         $this->validate($request, [
             'children_id'=>'required',
             'companion' => 'required|max:255',
@@ -224,7 +224,7 @@ class SpecialistController extends Controller
             Notification::create([
                 'supervisor_id' => $supervisor->id,
                 'message' => $children->name.' تم إضافة تقرير الحالة ل'
-          
+
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
@@ -238,10 +238,10 @@ class SpecialistController extends Controller
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
         return redirect()->route('ChildrenStatusReports',$id)->with('errorMessage', __('backend.error'));
-    } 
-    
+    }
+
     public function updateReport(Request $request , $id){
-        
+
         $report = Report::find($id);
         if(!empty($report)){
 
@@ -251,7 +251,7 @@ class SpecialistController extends Controller
                 'behaviours' => ['required','max:1000'],
                 'success_number' => ['required','numeric', 'gt:0'],
             ]);
-    
+
             try {
                 $report->target = $request->target;
                 $report->help_method = $request->help_method;
@@ -259,7 +259,7 @@ class SpecialistController extends Controller
                 $report->success_number = $request->success_number;
                 $report->save();
                 return redirect()->route('ChildrenReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
-    
+
             } catch (\Exception $e) {
                 return redirect()->back()->with('errorMessage', $e->getMessage());
             }
@@ -269,7 +269,7 @@ class SpecialistController extends Controller
     }
 
     public function updateConsultingReport(Request $request , $id){
-        
+
         $report = ConsultingReport::find($id);
         if(!empty($report)){
 
@@ -278,14 +278,14 @@ class SpecialistController extends Controller
                 'problem' => 'required|max:1000',
                 'solution' => ['required','max:1000'],
             ]);
-    
+
             try {
                 $report->type = $request->type;
                 $report->problem = $request->problem;
                 $report->solution = $request->solution;
                 $report->save();
                 return redirect()->route('ChildrenConsultingReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
-    
+
             } catch (\Exception $e) {
                 return redirect()->back()->with('errorMessage', $e->getMessage());
             }
@@ -295,7 +295,7 @@ class SpecialistController extends Controller
     }
 
     public function updateStatusReport(Request $request , $id){
-        
+
         $report = StatusReport::find($id);
         if(!empty($report)){
 
@@ -306,7 +306,7 @@ class SpecialistController extends Controller
                 'reinforcers' => 'required|max:1000',
                 'status_target' => 'required|max:1000',
             ]);
-    
+
             try {
                 $report->companion = $request->companion;
                 $report->status_type = $request->status_type;
@@ -315,7 +315,7 @@ class SpecialistController extends Controller
                 $report->status_target = $request->status_target;
                 $report->save();
                 return redirect()->route('ChildrenStatusReports',$report->children_id)->with('doneMessage', __('backend.saveDone'));
-    
+
             } catch (\Exception $e) {
                 return redirect()->back()->with('errorMessage', $e->getMessage());
             }
@@ -334,7 +334,7 @@ class SpecialistController extends Controller
         catch (\Exception $e) {
         return redirect()->back()->with('errorMessage', $e->getMessage());
         }
-        
+
     }
 
 

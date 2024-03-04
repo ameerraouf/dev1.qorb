@@ -46,39 +46,41 @@
                 <canvas id="myChart"></canvas>
             </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            const ctx = document.getElementById('myChart');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                labels: [
-                    @foreach($reports as $report)
-                        '{{ \Carbon\Carbon::parse($report->created_at)->format('Y-m-d') }}',
-                    @endforeach
-                ],
-                datasets: [{
-                    label:'{{ __('backend.SuccessChartforChild') }}' + ': '+ '{{ $report->children->name }}',
-                    data: [
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('myChart');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                    labels: [
+                        0,
                         @foreach($reports as $report)
-                            '{{ $report->success_number }}',
+                            '{{ \Carbon\Carbon::parse($report->created_at)->format('Y-m-d') }}',
                         @endforeach
                     ],
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                    borderWidth: 3
-                }]
-                },
-                options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
+                    datasets: [{
+                        label:'{{ __('backend.SuccessChartforChild') }}' + ': '+ '{{ $reports->first()->children->name }}',
+                        data: [
+                            0,
+                            @foreach($reports as $report)
+                                '{{ $report->success_number }}',
+                            @endforeach
+                        ],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        borderWidth: 3
+                    }]
+                    },
+                    options: {
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
                     }
-                }
-                }
-            });
-        </script>
+                    }
+                });
+            </script>
             @if($reports->total() > 0)
                 {{Form::open(['route'=>'CommonQuestionsUpdateAll','method'=>'post'])}}
                 <div class="table-responsive">
