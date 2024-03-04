@@ -26,6 +26,8 @@ class ChildrenController extends Controller
     // dd($request->all());
         $input['name'] = $request->name;
         $input['problem'] = $request->problem;
+        $input['specialist_id'] = 0;
+        $input['supervisor_id'] = 0;
         // $input['name_ar'] = $request->name_ar;
         // $input['name_en'] = $request->name_en;
         // $input['problem_ar'] = $request->problem_ar;

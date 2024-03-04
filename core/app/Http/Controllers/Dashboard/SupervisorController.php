@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\Specialist\CreateConsultingReport;
+use App\Events\Specialist\CreateFinalReport;
+use App\Events\Specialist\CreateTreatmentPlan;
+use App\Events\Specialist\CreateVbMap;
 use App\Http\Controllers\Controller;
 use App\Models\Children;
 use App\Models\ConsultingReport;
@@ -9,6 +13,7 @@ use App\Models\TreatmentPlan;
 use App\Models\FinancialTransaction;
 use App\Models\Report;
 use App\Models\FinalReport;
+use App\Models\Notification;
 use App\Models\User;
 use App\Models\VbmapReport;
 use Illuminate\Http\Request;
@@ -111,6 +116,9 @@ class SupervisorController extends Controller
         ]);
 
         try {
+            $children =  Children::where('id', $id)->select('id', 'name','specialist_id')->first();
+            $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
+            $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
             $report = new VbmapReport();
             $report->children_id = $id;
             if ($request->file) {
@@ -119,8 +127,23 @@ class SupervisorController extends Controller
                 $request->file->move($path, $file);
                 $report->file = $file;
             }
+
             $report->save();
+    
+            event(new CreateVbMap($children->name.' تم إضافة تقييم vb-map  ل  ', $specialist->id));
+
+            Notification::create([
+                'specialist_id' => $specialist->id,
+                'message' => $children->name.' تم إضافة تقييم vb-map  ل  '
+            ]);
+
+            Notification::create([
+                'supervisor_id' => $supervisor->id,
+                'message' => $children->name.' لقد قمتِ بإضافة تقرير لتقييم vb-map ل'
+            ]);
+
             return redirect()->route('showChildrenVbmap', $id)->with('doneMessage', __('backend.addDone'));
+       
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
@@ -137,12 +160,29 @@ class SupervisorController extends Controller
         ]);
 
         try {
+            $children =  Children::where('id', $id)->select('id', 'name','specialist_id')->first();
+            $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
+            $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
             $report = new TreatmentPlan();
             $report->children_id = $id;
             $report->target = $request->target;
             $report->help_type = $request->help_type;
             $report->help_description = $request->help_description;
             $report->save();
+            
+            event(new CreateTreatmentPlan($children->name.' تم إضافة الخطة العلاجية ل', $specialist->id));
+           
+            Notification::create([
+                'specialist_id' => $specialist->id,
+                'message' => $children->name.' تم إضافة الخطة العلاجية ل'
+          
+            ]);
+            Notification::create([
+                'supervisor_id' => $supervisor->id,
+                'message' => $children->name.' لقد قمتِ بإضافة تقرير الخطة العلاجية ل'
+          
+            ]);
+
             return redirect()->route('showChildrenTreatmentPlan', $id)->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
@@ -160,6 +200,9 @@ class SupervisorController extends Controller
         ]);
 
         try {
+            $children =  Children::where('id', $id)->select('id', 'name','specialist_id')->first();
+            $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
+            $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
             $report = new FinalReport();
             $report->children_id = $id;
             $report->target = $request->target;
@@ -167,6 +210,20 @@ class SupervisorController extends Controller
             $report->recommends = $request->recommends;
 
             $report->save();
+            event(new CreateFinalReport($children->name.' تم إضافة التقرير النهائى ل', $specialist->id));
+           
+            Notification::create([
+                'specialist_id' => $specialist->id,
+                'message' => $children->name.' تم إضافة التقرير النهائى ل'
+          
+            ]);
+
+            Notification::create([
+                'supervisor_id' => $supervisor->id,
+                'message' => $children->name.' لقد قمتِ بإضافة التقرير النهائى ل'
+          
+            ]);
+
             return redirect()->route('showChildrenFinalReports', $id)->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
@@ -288,12 +345,29 @@ class SupervisorController extends Controller
         ]);
 
         try {
+            $children =  Children::where('id', $id)->select('id', 'name','specialist_id')->first();
+            $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
+            $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
             $report = new ConsultingReport();
             $report->children_id = $id;
             $report->type = $request->type;
             $report->problem = $request->problem;
             $report->solution = $request->solution;
             $report->save();
+
+            event(new CreateConsultingReport($children->name.' تم إضافة تقرير الاستشارات ل', $specialist->id));
+           
+            Notification::create([
+                'specialist_id' => $specialist->id,
+                'message' => $children->name.' تم إضافة تقرير الاستشارات ل'
+          
+            ]);
+            Notification::create([
+                'supervisor_id' => $supervisor->id,
+                'message' => $children->name.' لقد قمتِ بإضافة تقرير الاستشارات ل'
+            ]);
+
+
             return redirect()->route('showChildrenConsultingReports', $id)->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());

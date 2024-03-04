@@ -15,15 +15,7 @@
                 
             </small>
         </div>
-        {{-- <div class="box-tool">
-            <ul class="nav">
-                <li class="nav-item inline">
-                    <a class="nav-link" href="{{route("users")}}">
-                        <i class="material-icons md-18">×</i>
-                    </a>
-                </li>
-            </ul>
-        </div> --}}
+       
         <div class="box-body">
             {{Form::open(['route'=>['teacherProfileUpdate'],'method'=>'POST', 'files' => true])}}
 
