@@ -152,18 +152,18 @@
                                 <div class="box-body">
                                     <div style="height:162px" ui-jp="plot" ui-refresh="app.setting.color"
                                         ui-options="
-			              [
-			                {
-			                  data: [
-                  <?php
-                  $ii = 1;
-                  ?>
+                                            [
+                                                {
+                                                data: [
+                                    <?php
+                                    $ii = 1;
+                                    ?>
                                         @foreach ($Last7DaysVisitors as $id)
 
                                         @if ($ii <= 10)
-                                        @if ($ii != 1)
-                                            ,
-@endif
+                                            @if ($ii != 1)
+                                                ,
+                                            @endif
                                         <?php
                                         $i2 = 0;
                                         ?>
@@ -172,7 +172,7 @@
                                         if ($i2 == 1) {
                                         ?>
                                             [{{ $ii }}, {{ $val }}]
-                                <?php
+                                        <?php
                                         }
                                         $i2++;
                                         ?> @endforeach
@@ -180,14 +180,14 @@
                                         <?php $ii++; ?>
                                         @endforeach
                                             ],
-                                          points: { show: true, radius: 0},
-                                          splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0 }
+                                        points: { show: true, radius: 0},
+                                        splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0 }
                                         },
                                         {
-                                          data: [
-<?php
-$ii = 1;
-?>
+                                        data: [
+                                        <?php
+                                        $ii = 1;
+                                        ?>
                                         @foreach ($Last7DaysVisitors as $id)
 
                                         @if ($ii <= 10)
