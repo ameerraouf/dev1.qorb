@@ -170,84 +170,49 @@
         <div class="row">
             <div class="col-12">
                 <div class="home-row-head">
-                    <h2 class="heading">{{ __('backend.services') }}</h2>
+                    <h2 class="heading">{{ __('cruds.MainServices.Title') }}</h2>
                 </div>
             </div>
         </div>
         <div class="swiper-services" style="position: relative; overflow:hidden;">
-                    <div class="swiper-wrapper">
+            <div class="swiper-wrapper">
+                    @foreach ($main_services as $main_service)
                         <div class="swiper-slide">
-                            <div class="box-serv">
-                                <span class="icon">
-                                    <i class="fa fa-television" aria-hidden="true"></i>
-                                </span>
-                                <h3 class="title">عنوان الخدمة</h3>
-                                <p class="content">
-                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                </p>
-                            </div>
+                            <a href="{{ route('showMainService',$main_service->id) }}" style="text-decoration: none;">
+                                <div class="box-serv">
+                                    <span class="icon">
+                                        <i class="fa fa-television" aria-hidden="true"></i>
+                                    </span>
+                                    <h3 class="title">
+                                        @if (app()->getLocale() == 'ar')
+                                            {{ $main_service->name_ar }}
+                                        @else
+                                            {{ $main_service->name_en }}
+                                        @endif
+                                    </h3>
+                                    <p class="content">
+                                        @if (app()->getLocale() == 'ar')
+                                            {!! strlen(strip_tags($main_service->description_ar)) > 40 ? substr(strip_tags($main_service->description_ar), 0, 40) . '...' : strip_tags($main_service->description_ar)!!}
+                                        @else
+                                            {!! strlen(strip_tags($main_service->description_en)) > 40 ? substr(strip_tags($main_service->description_en), 0, 40) . '...' : strip_tags($main_service->description_en)!!}
+                                        @endif
+                                    </p>
+                                </div>
+                            </a>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="box-serv">
-                                <span class="icon">
-                                    <i class="fa fa-television" aria-hidden="true"></i>
-                                </span>
-                                <h3 class="title">عنوان الخدمة</h3>
-                                <p class="content">
-                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="box-serv">
-                                <span class="icon">
-                                    <i class="fa fa-television" aria-hidden="true"></i>
-                                </span>
-                                <h3 class="title">عنوان الخدمة</h3>
-                                <p class="content">
-                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="box-serv">
-                                <span class="icon">
-                                    <i class="fa fa-television" aria-hidden="true"></i>
-                                </span>
-                                <h3 class="title">عنوان الخدمة</h3>
-                                <p class="content">
-                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="box-serv">
-                                <span class="icon">
-                                    <i class="fa fa-television" aria-hidden="true"></i>
-                                </span>
-                                <h3 class="title">عنوان الخدمة</h3>
-                                <p class="content">
-                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                </p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="box-serv">
-                                <span class="icon">
-                                    <i class="fa fa-television" aria-hidden="true"></i>
-                                </span>
-                                <h3 class="title">عنوان الخدمة</h3>
-                                <p class="content">
-                                محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    @endforeach
                 </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
     </div>
 </section>
+<div class="more-btn">
+    <a href="{{ route('FrontendMainServices') }}" class="btn btn-theme"><i
+            class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+        &nbsp;<i
+            class="fa fa-angle-right"></i></a>
+</div>
 <!-- نهاية صفحة الخدمات -->
 
     @if(count($HomeTopics)>0)
