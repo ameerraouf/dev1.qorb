@@ -51,7 +51,7 @@
         {{-- <section class="content-row-no-bg p-b-0">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="row" style="margin-bottom: 0;">
                             @foreach($TextBanners as $TextBanner)
                                 <?php
@@ -165,62 +165,161 @@
     @endif
 
     <!-- بداية صفحة الخدمات -->
-<section class="content-row-no-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="home-row-head">
-                    <h2 class="heading">{{ __('cruds.MainServices.Title') }}</h2>
+    <section class="content-row-no-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="home-row-head">
+                        <h2 class="heading">{{ __('cruds.MainServices.Title') }}</h2>
+                    </div>
                 </div>
             </div>
+            <div class="swiper-services" style="position: relative; overflow:hidden;">
+                <div class="swiper-wrapper">
+                        @foreach ($main_services as $main_service)
+                            <div class="swiper-slide">
+                                <a href="{{ route('showMainService',$main_service->id) }}" style="text-decoration: none;">
+                                    <div class="box-serv">
+                                        <span class="icon">
+                                            <i class="fa fa-television" aria-hidden="true"></i>
+                                        </span>
+                                        <h3 class="title">
+                                            @if (app()->getLocale() == 'ar')
+                                                {{ $main_service->name_ar }}
+                                            @else
+                                                {{ $main_service->name_en }}
+                                            @endif
+                                        </h3>
+                                        <p class="content">
+                                            @if (app()->getLocale() == 'ar')
+                                                {!! strlen(strip_tags($main_service->description_ar)) > 40 ? substr(strip_tags($main_service->description_ar), 0, 40) . '...' : strip_tags($main_service->description_ar)!!}
+                                            @else
+                                                {!! strlen(strip_tags($main_service->description_en)) > 40 ? substr(strip_tags($main_service->description_en), 0, 40) . '...' : strip_tags($main_service->description_en)!!}
+                                            @endif
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
-        <div class="swiper-services" style="position: relative; overflow:hidden;">
-            <div class="swiper-wrapper">
-                    @foreach ($main_services as $main_service)
-                        <div class="swiper-slide">
-                            <a href="{{ route('showMainService',$main_service->id) }}" style="text-decoration: none;">
-                                <div class="box-serv">
-                                    <span class="icon">
-                                        <i class="fa fa-television" aria-hidden="true"></i>
-                                    </span>
-                                    <h3 class="title">
-                                        @if (app()->getLocale() == 'ar')
-                                            {{ $main_service->name_ar }}
-                                        @else
-                                            {{ $main_service->name_en }}
-                                        @endif
-                                    </h3>
-                                    <p class="content">
-                                        @if (app()->getLocale() == 'ar')
-                                            {!! strlen(strip_tags($main_service->description_ar)) > 40 ? substr(strip_tags($main_service->description_ar), 0, 40) . '...' : strip_tags($main_service->description_ar)!!}
-                                        @else
-                                            {!! strlen(strip_tags($main_service->description_en)) > 40 ? substr(strip_tags($main_service->description_en), 0, 40) . '...' : strip_tags($main_service->description_en)!!}
-                                        @endif
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
+    </section>
+    <div class="more-btn">
+        <a href="{{ route('FrontendMainServices') }}" class="btn btn-theme"><i
+                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+            &nbsp;<i
+                class="fa fa-angle-right"></i></a>
     </div>
-</section>
-<div class="more-btn">
-    <a href="{{ route('FrontendMainServices') }}" class="btn btn-theme"><i
-            class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-        &nbsp;<i
-            class="fa fa-angle-right"></i></a>
-</div>
-<!-- نهاية صفحة الخدمات -->
+    <!-- نهاية صفحة الخدمات -->
+
+    <!-- بداية صفحة  الخدمات الفرعية -->
+    <section class="content-row-no-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="home-row-head">
+                        <h2 class="heading">{{ __('cruds.SubServices.Title') }}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-services" style="position: relative; overflow:hidden;">
+                <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="" style="text-decoration: none;">
+                                    <div class="box-serv">
+                                        <span class="icon">
+                                            <i class="fa fa-television" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="small-title">
+                                            أسم الخدمة الرئيسية
+                                        </div>
+                                        <h3 class="title">
+                                            عنوان الخدمة
+                                        </h3>
+                                        <p class="content">
+                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="" style="text-decoration: none;">
+                                    <div class="box-serv">
+                                        <span class="icon">
+                                            <i class="fa fa-television" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="small-title">
+                                            أسم الخدمة الرئيسية
+                                        </div>
+                                        <h3 class="title">
+                                            عنوان الخدمة
+                                        </h3>
+                                        <p class="content">
+                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="" style="text-decoration: none;">
+                                    <div class="box-serv">
+                                        <span class="icon">
+                                            <i class="fa fa-television" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="small-title">
+                                            أسم الخدمة الرئيسية
+                                        </div>
+                                        <h3 class="title">
+                                            عنوان الخدمة
+                                        </h3>
+                                        <p class="content">
+                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="" style="text-decoration: none;">
+                                    <div class="box-serv">
+                                        <span class="icon">
+                                            <i class="fa fa-television" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="small-title">
+                                            أسم الخدمة الرئيسية
+                                        </div>
+                                        <h3 class="title">
+                                            عنوان الخدمة
+                                        </h3>
+                                        <p class="content">
+                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                    </div>
+                    </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+    <div class="more-btn">
+        <a href="" class="btn btn-theme"><i
+                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+            &nbsp;<i
+                class="fa fa-angle-right"></i></a>
+    </div>
+    <!-- نهاية صفحة  الخدمات الفرعية -->
 
     @if(count($HomeTopics)>0)
         <section class="content-row-no-bg top-line">
             <div class="container">
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="home-row-head">
                             <h2 class="heading">{{ __('frontend.homeContents1Title') }}</h2>
                             <small>{{ __('frontend.homeContents1desc') }}</small>
@@ -264,7 +363,7 @@
                                     {{--Additional Feilds--}}
                                     @if(count($HomeTopic->webmasterSection->customFields->where("in_listing",true)) >0)
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-12">
                                                 <div>
                                                     <?php
                                                     $cf_title_var = "title_" . @Helper::currentLanguage()->code;
@@ -350,7 +449,7 @@
                                                                 @elseif($customField->type ==14)
                                                                     {{--Checkbox--}}
                                                                     <div class="row field-row">
-                                                                        <div class="col-lg-12">
+                                                                        <div class="col-12">
                                                                             {!! (($cf_saved_val == 1) ? "&check;" : "&#x2A09;"); !!} {!!  $cf_title !!}
                                                                         </div>
                                                                     </div>
@@ -461,7 +560,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="more-btn">
                             <a href="{{ url($section_url) }}" class="btn btn-theme"><i
                                     class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
@@ -480,7 +579,7 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="home-row-head">
                             <h2 class="heading">{{ __('frontend.homeContents2Title') }}</h2>
                             <small>{{ __('frontend.homeContents2desc') }}</small>
@@ -538,7 +637,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-12">
                                 <div class="more-btn">
                                     <a href="{{ url($section_url) }}" class="btn btn-theme"><i
                                             class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
@@ -558,7 +657,7 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-12">
                         <div class="home-row-head">
                             <h2 class="heading">{{ __('frontend.partners') }}</h2>
                             <small>{{ __('frontend.partnersMsg') }}</small>
@@ -745,10 +844,16 @@
         clickable: true,
       },
       breakpoints: {
-        "@0.00": { slidesPerView: 1 },
-        "@1.00": { slidesPerView: 2 },
-        "@2.00": { slidesPerView: 3 },
-    },
+          "0": {
+                "slidesPerView": 1,
+            },
+            "880": {
+                "slidesPerView": 2,
+            },
+            "1025": {
+                "slidesPerView": 3,
+            }
+      }
   });
     const swiper2 = new Swiper('.swiper-services', {
     slidesPerView: 3,
@@ -769,10 +874,16 @@
         clickable: true,
       },
       breakpoints: {
-        "@0.00": { slidesPerView: 1 },
-        "@1.00": { slidesPerView: 2 },
-        "@2.00": { slidesPerView: 3 },
-    },
+          "0": {
+                "slidesPerView": 1,
+            },
+            "880": {
+                "slidesPerView": 2,
+            },
+            "1025": {
+                "slidesPerView": 3,
+            }
+      }
   });
 </script>
 @endsection
