@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\Teacher\AdminAddEarlyDetectionReport;
 use App\Models\Children;
 use Illuminate\Http\Request;
 use App\Models\WebmasterSection;
 use App\Http\Controllers\Controller;
 use App\Models\EarlyDetectionReport;
+use App\Models\Notification;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 
 class EarlyDetectionReportController extends Controller
@@ -129,6 +132,8 @@ class EarlyDetectionReportController extends Controller
             'file' => 'required|mimes:png,jpeg,jpg,gif,svg',
         ]);
         try {
+            $children = Children::where('id', $request->child_id)->select('id' , 'name', 'teacher_id')->first();
+            $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new EarlyDetectionReport;
             if ($request->file) {
                 $file = time() . rand(1111, 9999) . '.' . $request->file('file')->getClientOriginalExtension();
@@ -138,6 +143,13 @@ class EarlyDetectionReportController extends Controller
             }
             $report->child_id = $request->child_id;
             $report->save();
+
+            event(new AdminAddEarlyDetectionReport($children->name.' تم إضافة تقرير الكشف المبكر ل', $teacher->id));
+
+            Notification::create([
+                'teacher_id' => $teacher->id,
+                'message' => $children->name.' تم إضافة تقرير الكشف المبكر ل'
+            ]);
             return redirect()->action('Dashboard\EarlyDetectionReportController@ShowEarlyDetectionReports',$request->child_id)->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
             return redirect()->action('Dashboard\EarlyDetectionReportController@EarlyDetectionReportsCreate',$request->child_id)->with('errorMessage', __('backend.error'));

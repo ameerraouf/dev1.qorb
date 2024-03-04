@@ -99,6 +99,15 @@ class Helper
         return $notifications;
     }
 
+ // Get Notifiations
+    static function teacherNotifications()
+    {
+        //List of all notifications
+        
+        $notifications = Notification::where('teacher_id', '=', Auth::guard('teacher')->user()->id)->orderby('id', 'desc')->latest()->take(5)->get();
+        return $notifications;
+    }
+
     // Get Webmails Alerts
     static function webmailsNewCount()
     {
