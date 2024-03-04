@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\Specialist\ChildrenAdded as SpecialistChildrenAdded;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Teacher;
 use App\Models\AnalyticsPage;
@@ -10,6 +11,7 @@ use App\Models\Contact;
 use App\Models\Event;
 use App\Http\Requests;
 use App\Models\Children;
+use App\Models\Notification;
 use App\Models\Section;
 use App\Models\Teacher as ModelsTeacher;
 use App\Models\Topic;
@@ -406,6 +408,12 @@ class DashboardController extends Controller
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
             ]);
+            event (new ChildrenAdded('تم إضافة حالة جديدة'));
+            Notification::create([
+                'specialist_id' => $req->specialist,
+                'supervisor_id' => $req->supervisor,
+                'message' =>  'تم إضافة حالة جديدة'
+            ]);
             return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
 
         }
@@ -419,6 +427,12 @@ class DashboardController extends Controller
             Children::where('id' , $id)->update([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
+            ]);
+            event (new SpecialistChildrenAdded('تم إضافة حالة جديدة'));
+            Notification::create([
+                'specialist_id' => $req->specialist,
+                'supervisor_id' => $req->supervisor,
+                'message' =>  'تم إضافة حالة جديدة'
             ]);
             return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
 
