@@ -175,9 +175,12 @@
                                             }
 
                                             ?>
-                                            <a class="dropdown-item"
-                                               href="{{route("topicsCreate",$headerWebmasterSection->id)}}"><span><i
-                                                        class="material-icons">{!! $LiIcon !!}</i> &nbsp;{!! $GeneralWebmasterSectionTitle !!}</span></a>
+                                            @if(!in_array($headerWebmasterSection->id, [2,3, 5, 6, 8, 11, 12]))
+                                                <a class="dropdown-item"
+                                                href="{{route("topicsCreate",$headerWebmasterSection->id)}}"><span><i
+                                                            class="material-icons">{!! $LiIcon !!}</i> &nbsp;{!! $GeneralWebmasterSectionTitle !!}</span>
+                                                </a>
+                                            @endif
                                         @endif
                                     @endforeach
 
@@ -186,6 +189,9 @@
                                                 &#xe433;</i>
                                             &nbsp;{{ __('backend.adsBanners') }}</a>
                                     @endif
+                                    <a class="dropdown-item" href="{{route("MainServices")}}"><i class="material-icons">
+                                        &#xe433;</i>
+                                    &nbsp;{{ __('cruds.MainServices.Title') }}</a>
                                     <div class="dropdown-divider"></div>
 
                                     @if(Helper::GeneralWebmasterSettings("newsletter_status"))
