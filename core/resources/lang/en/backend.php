@@ -767,5 +767,7 @@ return array(
     'SuccessChartforChild' => 'Success Chart for Child',
     'SubscriptionDate' => 'Subscription Date',
     'Pay' => 'Pay',
+    'BilledFrom' => 'Billed From',
+    'BilledTo' => 'Billed To',
 
 );

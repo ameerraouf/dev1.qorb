@@ -104,7 +104,7 @@
 
                                             <div class="form-group row">
                                                 <h6
-                                                    class="col-sm-4 form-control-label text-center">
+                                                    class="col-sm-4 form-control-label text-center">{{ __('backend.BilledFrom') }}
                                                 </h6><br>
                                                 <div class="col-sm-8">
                                                     قرب
@@ -113,7 +113,7 @@
 
                                             <div class="form-group row">
                                                 <h6
-                                                    class="col-sm-4 form-control-label text-center">مفوتر إلى
+                                                    class="col-sm-4 form-control-label text-center"> {{ __('backend.BilledTo') }}
                                                 </h6><br>
                                                 <div class="col-sm-8">
                                                     {{ auth()->user()->name }}
@@ -130,7 +130,7 @@
                                                 <hr>
                                                 <div class="form-group row">
                                                     <h6
-                                                        class="col-sm-4 form-control-label text-center">الأطفال
+                                                        class="col-sm-4 form-control-label text-center">{{ __('cruds.Childrens.Title') }}
                                                     </h6><br>
                                                     <div class="col-sm-8">
                                                         @foreach ($transaction->children_names as $index => $child)

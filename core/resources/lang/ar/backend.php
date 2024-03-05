@@ -764,5 +764,6 @@ return array(
     'SubscriptionDate' => 'تاريخ الاشتراك',
     'Pay' => 'دفع',
     'BilledFrom' => 'مفوتر من',
+    'BilledTo' => 'مفوتر إلى',
 
 );
