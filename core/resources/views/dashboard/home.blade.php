@@ -127,12 +127,12 @@
                         @endforeach
                         @if (env('GEOIP_STATUS', false))
                             <div class="col-xs-12">
-                                <div class="row-col box-color text-center primary">
-                                    <div class="row-cell p-a">
+                                <div class="row-col box-color text-center primary d-flex">
+                                    <div class="row-cell p-a flex-1">
                                         {{ __('backend.visitors') }}
                                         <h4 class="m-a-0 text-md _600"><a href>{{ $TodayVisitors }}</a></h4>
                                     </div>
-                                    <div class="row-cell p-a dker">
+                                    <div class="row-cell p-a flex-1 dker">
                                         {{ __('backend.pageViews') }}
                                         <h4 class="m-a-0 text-md _600"><a href>{{ $TodayPages }}</a></h4>
                                     </div>
