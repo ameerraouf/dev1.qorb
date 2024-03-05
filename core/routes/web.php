@@ -9,7 +9,6 @@ use App\Http\Controllers\SocietyReplyController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Dashboard\SocietyController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +19,8 @@ use App\Http\Controllers\Dashboard\SocietyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 // Language Route
 Route::post('/lang', [LanguageController::class, 'index'])->middleware('LanguageSwitcher')->name('lang');

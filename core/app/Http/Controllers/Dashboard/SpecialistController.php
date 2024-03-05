@@ -126,6 +126,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
+            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new Report;
             $report->children_id = $id;
@@ -141,6 +142,7 @@ class SpecialistController extends Controller
 
             Notification::create([
                 'teacher_id' => $teacher->id,
+                'admin_id' => $admin->id,
                 'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الجلسات ل'
             ]);
 
@@ -177,6 +179,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
+            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new ConsultingReport;
             $report->children_id = $id;
@@ -191,6 +194,7 @@ class SpecialistController extends Controller
 
             Notification::create([
                 'teacher_id' => $teacher->id,
+                'admin_id' => $admin->id,
                 'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل'
             ]);
 
@@ -228,6 +232,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
+            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new StatusReport;
             $report->children_id = $id;
@@ -244,6 +249,7 @@ class SpecialistController extends Controller
 
             Notification::create([
                 'teacher_id' => $teacher->id,
+                'admin_id' => $admin->id,
                 'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل'
             ]);
 
