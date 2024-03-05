@@ -765,5 +765,7 @@ return array(
     'setChildToParent' => 'Set Child to Specilist / Supervisor',
 
     'SuccessChartforChild' => 'Success Chart for Child',
+    'SubscriptionDate' => 'Subscription Date',
+    'Pay' => 'Pay',
 
 );

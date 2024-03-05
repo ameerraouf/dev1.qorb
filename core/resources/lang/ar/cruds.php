@@ -50,6 +50,7 @@ return [
         "Title" => "الخدمات الفرعية",
         "MainService" => "الخدمة الرئيسية",
         "SelectMainService" => "اختر خدمة رئيسية",
+        "SelectSubService" => "اختر خدمة فرعية",
         "NewSubService" => "إضافة خدمة فرعية",
         "EditSubService" => "تعديل خدمة فرعية",
         "Title_AR" => "العنوان باللغة العربية",
@@ -141,7 +142,8 @@ return [
         'Subscribe' => 'أشترك الأن',
         'purchaseDate' => 'تاريخ الاشتراك',
         'childName' => 'اسم الطفل المشترك فى الباقة',
-        'price' => 'السعر',
+        'PackagePrice' => 'سعر الباقة',
+        'PackageStatus' => 'حالة الباقة',
 
     ],
 

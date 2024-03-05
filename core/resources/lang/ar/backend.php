@@ -760,6 +760,9 @@ return array(
 
     'setChildToParent' => 'تعيين مشرفة و اخصائية للطفل',
 
-    'SuccessChartforChild' => 'مخطط نجاح الطفل'
+    'SuccessChartforChild' => 'مخطط نجاح الطفل',
+    'SubscriptionDate' => 'تاريخ الاشتراك',
+    'Pay' => 'دفع',
+    'BilledFrom' => 'مفوتر من',
 
 );
