@@ -62,7 +62,6 @@ class FinancialTransactionController extends Controller
 
         $this->validate($request, [
             'image' => 'mimes:png,jpeg,jpg,gif,svg',
-            'name' => 'required',
             'notes' => 'nullable|max:256',
         ]);
 
@@ -79,7 +78,7 @@ class FinancialTransactionController extends Controller
 
         try {
             $transaction = new FinancialTransaction;
-            $transaction->name = $request->name;
+            //$transaction->name = $request->name;
             $transaction->image = $fileFinalName_ar;
             $transaction->notes = $request->notes;
             $transaction->user_id = $request->user;
@@ -123,7 +122,6 @@ class FinancialTransactionController extends Controller
 
                 $this->validate($request, [
                     'image' => 'mimes:png,jpeg,jpg,gif,svg',
-                    'name' => 'required',
                     'notes' => 'nullable|max:256',
                 ]);
                 // Start of Upload Files
@@ -139,7 +137,7 @@ class FinancialTransactionController extends Controller
                 }
                 // End of Upload Files
 
-                $transaction->name = $request->name;
+                //$transaction->name = $request->name;
                 $transaction->notes = $request->notes;
                 $transaction->user_id = $request->user;
                 $transaction->save();

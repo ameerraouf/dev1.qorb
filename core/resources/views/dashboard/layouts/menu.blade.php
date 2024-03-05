@@ -534,7 +534,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                             <span class="nav-text">{{ __('backend.generalSettings') }}</span>
                                         </a>
                                     </li>
-                                    {{--<?php
+                                    <?php
                                     $currentFolder = "menus"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                                     ?>
@@ -542,7 +542,8 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                         <a href="{{ route('menus') }}">
                                             <span class="nav-text">{{ __('backend.siteMenus') }}</span>
                                         </a>
-                                    </li>--}}
+                                    </li>
+                                    
                                     {{--<?php
                                     $currentFolder = "file-manager"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
