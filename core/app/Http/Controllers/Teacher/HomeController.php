@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Teacher;
 
-use App\Http\Controllers\Controller;
-use App\Http\Middleware\Teacher;
-use App\Models\Children;
-use App\Models\ConsultingReport;
-use App\Models\FinalReport;
-use App\Models\Package;
 use App\Models\Report;
-use App\Models\StatusReport;
-use App\Models\Teacher as ModelsTeacher;
-use App\Models\TeacherSubscription;
-use App\Models\TreatmentPlan;
+use App\Models\Package;
+use App\Models\Children;
+use App\Models\FinalReport;
+use App\Models\MainService;
 use App\Models\VbmapReport;
+use App\Models\StatusReport;
 use Illuminate\Http\Request;
+use App\Models\TreatmentPlan;
+use App\Http\Middleware\Teacher;
+use App\Models\ConsultingReport;
+use App\Models\TeacherSubscription;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Teacher as ModelsTeacher;
 
 class HomeController extends Controller
 {
@@ -32,8 +33,32 @@ class HomeController extends Controller
         $packages->each(function ($p) {
             $p->advantages = explode(',', $p->advantages);
         });
-        // return $packages;
-        return view('teacher.packages.list', compact('packages'));
+        $user = Auth::user();
+        $main_services = MainService::whereHas('subServices')->get();
+        return view('teacher.packages.list', compact('main_services','user','packages'));
+    }
+
+    public function getSubServices($id)
+    {
+        $main_service = MainService::find($id);
+
+        if ($main_service) {
+            $subServices = $main_service->subServices()->get(['id', 'title_ar','title_en']); // Assuming you have defined the relationship in your MainService model
+            return response()->json($subServices);
+        } else {
+            return response()->json([]);
+        }
+    }
+
+    public function SubscribePackage(Request $request)
+    {
+        dd($request);
+        $packages = Package::paginate(8);
+        $packages->each(function ($p) {
+            $p->advantages = explode(',', $p->advantages);
+        });
+        $user = Auth::user();
+        return view('teacher.packages.list', compact('user','packages'));
     }
 
     function showChildrenReports($id)
