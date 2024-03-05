@@ -42,8 +42,10 @@
                     </div>
                 </div>
             @endif
-            <div class="table-responsive">
+            <div class="table-responsive d-flex justify-content-center">
+                <div class="col-xl-7">
                 <canvas id="myChart"></canvas>
+                </div>
             </div>
 
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

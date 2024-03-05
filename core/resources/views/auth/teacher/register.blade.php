@@ -77,7 +77,7 @@
             </form>
 
 
-            <a href="{{ route('teacher.login') }}" class="btn info btn-block text-left">
+            <a href="{{ route('teacher.login') }}" class="btn info btn-block text-center">
                  {{ __('backend.login') }}
             </a>
             {{-- @if(env("FACEBOOK_STATUS") && env("FACEBOOK_ID") && env("FACEBOOK_SECRET"))
@@ -112,7 +112,7 @@
             @endif
 
             @if(Helper::GeneralWebmasterSettings("register_status"))
-                <a href="{{ url('/'.env('BACKEND_PATH').'/register') }}" class="btn info btn-block text-left">
+                <a href="{{ url('/'.env('BACKEND_PATH').'/register') }}" class="btn info btn-block text-center">
                     <i class="fa fa-user-plus"></i> {{ __('backend.createNewAccount') }}
                 </a>
             @endif --}}

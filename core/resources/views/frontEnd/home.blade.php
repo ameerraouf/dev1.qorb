@@ -205,14 +205,14 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
+            <div class="more-btn">
+                <a href="{{ route('FrontendMainServices') }}" class="btn btn-theme"><i
+                        class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+                    &nbsp;<i
+                        class="fa fa-angle-right"></i></a>
+            </div>
         </div>
     </section>
-    <div class="more-btn">
-        <a href="{{ route('FrontendMainServices') }}" class="btn btn-theme"><i
-                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-            &nbsp;<i
-                class="fa fa-angle-right"></i></a>
-    </div>
     <!-- نهاية صفحة الخدمات -->
 
     <!-- بداية صفحة  الخدمات الفرعية -->
@@ -225,7 +225,7 @@
                     </div>
                 </div>
             </div>
-            <div class="swiper-services" style="position: relative; overflow:hidden;">
+            <div class="swiper-services2" style="position: relative; overflow:hidden;">
                 <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <a href="" style="text-decoration: none;">
@@ -300,18 +300,18 @@
                                 </a>
                             </div>
                     </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                     </div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+                <div class="more-btn">
+                    <a href="" class="btn btn-theme"><i
+                            class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+                        &nbsp;<i
+                            class="fa fa-angle-right"></i></a>
+                </div>
             </div>
         </div>
     </section>
-    <div class="more-btn">
-        <a href="" class="btn btn-theme"><i
-                class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-            &nbsp;<i
-                class="fa fa-angle-right"></i></a>
-    </div>
     <!-- نهاية صفحة  الخدمات الفرعية -->
 
     @if(count($HomeTopics)>0)
@@ -856,6 +856,36 @@
       }
   });
     const swiper2 = new Swiper('.swiper-services', {
+    slidesPerView: 3,
+    spaceBetween: 24,
+    loop: true,
+    grabCursor: true,
+    speed: 1500,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+          "0": {
+                "slidesPerView": 1,
+            },
+            "880": {
+                "slidesPerView": 2,
+            },
+            "1025": {
+                "slidesPerView": 3,
+            }
+      }
+  });
+    const swiper3 = new Swiper('.swiper-services2', {
     slidesPerView: 3,
     spaceBetween: 24,
     loop: true,
