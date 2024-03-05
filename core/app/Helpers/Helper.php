@@ -108,6 +108,15 @@ class Helper
         return $notifications;
     }
 
+ // Get Notifiations
+    static function adminNotifications()
+    {
+        //List of all notifications
+        
+        $notifications = Notification::whereNot('message', 'LIKE', "%لقد قمت%")->orderby('id', 'desc')->latest()->take(5)->get();
+        return $notifications;
+    }
+
     // Get Webmails Alerts
     static function webmailsNewCount()
     {

@@ -19,12 +19,14 @@
             <?php
             $webmailsAlerts = Helper::webmailsAlerts();
             $eventsAlerts = Helper::eventsAlerts();
+            $notifications = Helper::adminNotifications();
             $alerts = count($webmailsAlerts) + count($eventsAlerts);
+            $notificationCount = count($notifications);
             ?>
             @if($alerts >0)
                 <li class="nav-item dropdown pos-stc-xs">
                     <a class="nav-link" href data-toggle="dropdown">
-                        <i class="material-icons">&#xe7f5;</i>
+                        <i class="material-icons">mail_outline</i>
                         @if($alerts >0)
                             <span class="label label-sm up warn">{{ $alerts }}</span>
                         @endif
@@ -67,6 +69,35 @@
                     </div>
                 </li>
             @endif
+            @if($notificationCount >0)
+            <li class="nav-item dropdown pos-stc-xs">
+                <a class="nav-link" href data-toggle="dropdown">
+                    <i class="material-icons">&#xe7f5;</i>
+                    @if($notificationCount >0)
+                        <span class="label label-sm up warn">{{ $notificationCount }}</span>
+                    @endif
+                </a>
+                <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
+                    <div class="box dark">
+                        <div class="box p-a scrollable maxHeight320">
+                            <ul class="list-group list-group-gap m-a-0">
+                                @foreach($notifications as $webmailsAlert)
+                                    <li class="list-group-item lt box-shadow-z0 b">
+                                <span class="clear block">
+                                    <small>{{ $webmailsAlert->message }}</small><br>
+                                    
+                                    <br>
+                                    <small class="text-muted">
+                                        {{ date('d M Y  h:i A', strtotime($webmailsAlert->created_at)) }}
+                                    </small>
+                                </span></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        @endif
             <li class="nav-item dropdown">
                 <a class="nav-link clear" href data-toggle="dropdown">
                   <span class="avatar w-32">
