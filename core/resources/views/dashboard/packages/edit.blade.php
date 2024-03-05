@@ -51,7 +51,7 @@ padding: 0.2rem;
                 </div>
 
                 <div class="form-group row">
-                    <label for="title_en" class="col-sm-2 form-control-label">{{ __('backend.packageTitle') }}</label>
+                    <label for="title_en" class="col-sm-2 form-control-label">{{ __('backend.packageTitle_en') }}</label>
                     <div class="col-sm-10">
                         {!! Form::text('title_en',$package->title_en, array('placeholder' => '','class' => 'form-control','id'=>'title_en','required'=>'')) !!}
                         @if ($errors->has('title_en'))
@@ -64,7 +64,7 @@ padding: 0.2rem;
                     <label for="advantages_ar" class="col-sm-2 form-control-label">{{ __('backend.advantages') }}</label>
                     <div class="col-sm-10">
 
-                        {!! Form::text('advantages_ar',$package->advantages_ar, array('placeholder' => '','class' => 'form-control','id'=>'advantages_ar','required'=>'', "data-role"=>"tagsinput")) !!}
+                        {!! Form::text('advantages_ar',$package->advantages_ar, array('placeholder' => '','class' => 'form-control','id'=>'advantages_ar', "data-role"=>"tagsinput")) !!}
                         @if ($errors->has('advantages_ar'))
                             <div class="text-danger">{{ $errors->first('advantages_ar') }}</div>
                         @endif
@@ -75,7 +75,7 @@ padding: 0.2rem;
                     <label for="advantages_en" class="col-sm-2 form-control-label">{{ __('backend.advantages_en') }}</label>
                     <div class="col-sm-10">
 
-                        {!! Form::text('advantages_en',$package->advantages_en, array('placeholder' => '','class' => 'form-control','id'=>'advantages_en','required'=>'', "data-role"=>"tagsinput")) !!}
+                        {!! Form::text('advantages_en',$package->advantages_en, array('placeholder' => '','class' => 'form-control','id'=>'advantages_en', "data-role"=>"tagsinput")) !!}
                         @if ($errors->has('advantages_en'))
                             <div class="text-danger">{{ $errors->first('advantages_en') }}</div>
                         @endif
@@ -96,7 +96,7 @@ padding: 0.2rem;
                     <div class="offset-sm-2 col-sm-10">
                         <button type="submit" class="btn btn-primary m-t"><i class="material-icons">
                                 &#xe31b;</i> {!! __('backend.update') !!}</button>
-                        <a href="{{route("roles")}}"
+                        <a href="{{route("packages")}}"
                            class="btn btn-default m-t"><i class="material-icons">
                                 &#xe5cd;</i> {!! __('backend.cancel') !!}</a>
                     </div>

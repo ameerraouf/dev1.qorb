@@ -239,8 +239,29 @@
                         </li>
                     @endif
                 @endforeach
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown"data-delay="0" data-close-others="true">خدامتنا <i class="fa fa-angle-down"></i></a>
+
+                        <ul class="dropdown-menu">
+                            @foreach($main_services as $main_service)
+                            <li >
+                                <a href="{{ route('showMainService',$main_service->id) }}">
+                                    <i class="fa fa-ambulance"></i> &nbsp;
+                                    @if (app()->getLocale() == 'ar')
+                                        {{ $main_service->name_ar }}
+                                    @else
+                                        {{ $main_service->name_en }}
+                                    @endif                                
+                                </a>
+                            </li>
+                            @endforeach
+
+                        </ul>
+                    
+                </li>
                 <li><a href="{{ route('FrontendCommonQuestionsByLang') }}">{{ __('cruds.CommonQuestions.Title') }}</a></li>
                 <li><a href="{{ route('FrontendSocietyByLang') }}">{{ __('cruds.Society.Title') }}</a></li>
+    
             </ul>
         </div>
     @endif
