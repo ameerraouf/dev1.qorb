@@ -51,7 +51,7 @@
                                     <input id="checkAll" type="checkbox"><i></i>
                                 </label>
                             </th>
-                            <th class="text-center" style="width:220px;">{{ __('cruds.FinancialTransactions.Name') }}</th>
+                            {{-- <th class="text-center" style="width:220px;">{{ __('cruds.FinancialTransactions.Name') }}</th> --}}
                             <th class="text-center" style="width:220px;">{{ __('cruds.FinancialTransactions.CopyOfTheBankTransfer') }}</th>
                             <th class="text-center">{{ __('cruds.FinancialTransactions.Notes') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.options') }}</th>
@@ -67,9 +67,9 @@
                                         {!! Form::hidden('row_ids[]',$transaction->id, array('class' => 'form-control row_no')) !!}
                                     </label>
                                 </td>
-                                <td class="h6 text-center">
-                                    {!! $transaction->name   !!}
-                                </td>
+                                {{-- <td class="h6 text-center">
+                                    {!! $transaction->user->name   !!} 
+                                </td> --}}
                                 <td class="h6 text-center">
                                     <img src="uploads/financial-transactions/{{ $transaction->image }}" width="30px" height="30px" alt="">
                                 </td>
