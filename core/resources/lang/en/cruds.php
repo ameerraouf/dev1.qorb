@@ -39,6 +39,7 @@ return array(
     'SubServices' => [
         "Title" => "Sub Services",
         "SelectMainService" => "Choose a Main Service",
+        "SelectSubService" => "Choose a Sub Service",
         "MainService" => "Main Service",
         "NewSubService" => "Add Sub Service",
         "EditSubService" => "Edit Sub Service",
@@ -143,6 +144,8 @@ return array(
         'childName' => 'Subsicripted Child Name',
         'packageTitle' => 'Package Name',
         'advantages' => 'Advantages',
+        'PackagePrice' => 'Package Price',
+        'PackageStatus' => 'Package Status',
     ],
 
 );

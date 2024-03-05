@@ -538,11 +538,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                     $currentFolder = "menus"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                                     ?>
+                                    {{---
                                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                         <a href="{{ route('menus') }}">
                                             <span class="nav-text">{{ __('backend.siteMenus') }}</span>
                                         </a>
-                                    </li>
+                                    </li>--}}
                                     
                                     {{--<?php
                                     $currentFolder = "file-manager"; // Put folder name here

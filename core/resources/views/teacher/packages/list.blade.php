@@ -137,12 +137,12 @@
                         @foreach ($packages as $item)
                             <div class="box-package">
                                 <h3 class="title">
-                                    {{ $item->title }}
+                                    {{ app()->getLocale() == 'ar' ? $item->title_ar : $item->title_en }}
                                 </h3>
                                 <h4 class="price">
                                     {{ $item->price }}
                                     <span>
-                                        price
+                                        {{ __('cruds.Packages.currency') }}
                                     </span>
                                 </h4>
                                 <ul class="list">
@@ -175,7 +175,7 @@
                                             <div class="modal-body text-center p-lg">
                                                 <div class="form-group row">
                                                     <label for="children_ids"
-                                                        class="col-sm-2 form-control-label">الأطفال</label>
+                                                        class="col-sm-2 form-control-label">{{ __('cruds.Childrens.Title') }}</label>
                                                     <div class="col-sm-10">
                                                         <select name="children_ids[]" id="children_ids" class="form-control select2-multiple" multiple ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
                                                             @foreach ($user->childrens as $child)
@@ -186,31 +186,32 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="main_service"
-                                                        class="col-sm-2 form-control-label">الخدمات الرئيسية</label>
+                                                        class="col-sm-2 form-control-label">{{ __('cruds.MainServices.Title') }}</label>
                                                     <div class="col-sm-10">
-                                                        <select name="main_service" id="main_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
-                                                            <option value="">-- اختر خدمة رئيسية --</option>
+                                                        <select name="main_service_id" id="main_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
+                                                            <option value="">{{ __('cruds.SubServices.SelectMainService') }}</option>
                                                             @foreach ($main_services as $main_service)
-                                                                <option value="{{ $main_service->id }}">{{ $main_service->name_ar }}</option>
+                                                                <option value="{{ $main_service->id }}">{{ app()->getLocale() == 'ar' ? $main_service->name_ar : $main_service->name_en }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="sub_service" class="col-sm-2 form-control-label">الخدمات الفرعية</label>
+                                                    <label for="sub_service" class="col-sm-2 form-control-label">{{ __('cruds.SubServices.Title') }}</label>
                                                     <div class="col-sm-10">
-                                                        <select name="sub_service" id="sub_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
-                                                            <option value="">-- اختر خدمة فرعية --</option>
+                                                        <select name="sub_service_id" id="sub_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
+                                                            <option value="">{{ __('cruds.SubServices.SelectSubService') }}</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer d-flex justify-content-center">
                                                 <h5 class="modal-title package-price"></h5>
+                                                <input type="hidden" id="package_id" name="package_id" value="">
                                                 <input type="hidden" id="price" name="price" value="">
                                             </div>
                                             <div class="modal-footer d-flex justify-content-center">
-                                                <button type="submit" class="btn danger p-x-md">دفع</button>
+                                                <button type="submit" class="btn danger p-x-md">{{ __('backend.Pay') }}</button>
                                                 <button type="button" class="btn dark-white p-x-md"
                                                         data-dismiss="modal">{{ __('backend.cancel') }}</button>
                                             </div>
@@ -242,21 +243,31 @@
     var price = 0;
     @foreach ($packages as $pakage)
         $("#submit_show_msg_{{ $pakage->id }}").click(function() {
+
             value = $(this).data('package');
             price = value.price;
-            $('.package-name').text(value.title_ar);
-            $('.package-price').text('سعر الباقة: '+value.price+" {{ __('cruds.Packages.currency') }}");
+            $('.package-name').text(value[app.locale == 'ar' ? 'title_ar' : 'title_en']);
+            $('#package_id').val(value.id);
+            $('#price').val(value.price);
+            var selectedOptionsCount = $("#children_ids").find("option:selected").length;
+            if(selectedOptionsCount == 0 ){
+                $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price+" {{ __('cruds.Packages.currency') }}");
+                $('#price').val(value.price);
+            }else{
+                $('#price').val(value.price*selectedOptionsCount);
+                $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price*selectedOptionsCount+" {{ __('cruds.Packages.currency') }}");
+            }
         });
     @endforeach
     $("#children_ids").change(function() {
         var bh = $(this).data('package');
         var selectedOptionsCount = $(this).find("option:selected").length;
         if(selectedOptionsCount == 0 ){
-            $('.package-price').text('سعر الباقة: '+value.price+" {{ __('cruds.Packages.currency') }}");
+            $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price+" {{ __('cruds.Packages.currency') }}");
             $('#price').val(value.price);
         }else{
             $('#price').val(value.price*selectedOptionsCount);
-            $('.package-price').text('سعر الباقة: '+value.price*selectedOptionsCount+" {{ __('cruds.Packages.currency') }}");
+            $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price*selectedOptionsCount+" {{ __('cruds.Packages.currency') }}");
         }
     });
     $('#main_service').change(function() {
@@ -269,15 +280,15 @@
                 dataType: 'json',
                 success: function(data) {
                     $('#sub_service').empty();
-                    $('#sub_service').append('<option value="">-- اختر خدمة فرعية --</option>');
+                    $('#sub_service').append('<option value="">{{__('cruds.SubServices.SelectSubService')}}</option>');
                     $.each(data, function(key, value) {
-                        $('#sub_service').append('<option value="' + value.id + '">' + value.title_ar + '</option>');
+                        $('#sub_service').append('<option value="' + value.id + '">' + value[app.locale == 'ar' ? 'title_ar' : 'title_en'] + '</option>');
                     });
                 }
             });
         } else {
             $('#sub_service').empty();
-            $('#sub_service').append('<option value="">-- اختر خدمة فرعية --</option>');
+            $('#sub_service').append('<option value="">{{__('cruds.SubServices.SelectSubService')}}</option>');
         }
     });
     </script>

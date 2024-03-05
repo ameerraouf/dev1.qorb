@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PurchaseTransaction;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Children extends Model
 {
@@ -29,7 +30,7 @@ class Children extends Model
     {
         return $this->belongsTo(Teacher::class ,'teacher_id');
     }
-    
+
     public function specialist(): BelongsTo
     {
         return $this->belongsTo(User::class, 'specialist_id');
@@ -40,8 +41,6 @@ class Children extends Model
         return $this->belongsTo(User::class, 'supervisor_id');
     }
 
-    
-    
     public function firstMedia(): MorphOne
     {
         return $this->morphOne(Media::class, 'mediable')->orderBy('file_sort', 'asc');
@@ -61,8 +60,8 @@ class Children extends Model
 
     function status_reports(){
         return $this->hasMany(StatusReport::class);
-    } 
-    
+    }
+
     function vbmap_reports(){
         return $this->hasMany(VbmapReport::class);
     }
