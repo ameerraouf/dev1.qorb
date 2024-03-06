@@ -61,6 +61,7 @@
         toastr.success(data.message[0]);
     });
 </script>
+
 <script type="text/javascript">
     toastr.options.timeOut = 5000;
     // Enable pusher logging - don't include this in production

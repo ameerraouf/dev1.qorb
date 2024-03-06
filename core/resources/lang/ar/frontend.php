@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'ourservices' => 'خدماتنا',
     'dashboard' => 'لوحة التحكم',
     'toTop' => 'إلى الأعلى',
     'AllRightsReserved' => 'جميع الحقوق محفوظة',

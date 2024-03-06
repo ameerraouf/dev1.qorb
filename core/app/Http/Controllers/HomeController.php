@@ -9,6 +9,7 @@ use Helper;
 use Redirect;
 use App\Models\User;
 use App\Models\Topic;
+use App\Models\SubService;
 use App\Models\Banner;
 use App\Models\Comment;
 use App\Models\Contact;
@@ -2100,6 +2101,25 @@ class HomeController extends Controller
         $main_service = MainService::find($id);
         return view('frontEnd.main-service-show',compact('main_service'));
     }
+
+
+    public function GetSubServices(Request $req){
+        
+        $subservices = SubService::where('main_service_id', $req->msid)->get();
+        if($subservices){
+            return response()->json([
+                'data' => $subservices
+            ]);
+        }
+        else {
+            return response()->json([
+                'data' => "NO DATA !!!!!!!!"
+            ]);
+        }
+
+    }
+
+    
 
 }
 

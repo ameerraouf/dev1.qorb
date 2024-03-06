@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Role;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WebmasterSection;
@@ -34,10 +34,10 @@ class EmployeeController extends Controller
         // General END
 
         if (@Auth::user()->permissionsGroup->view_status) {
-            $employees = Employee::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
+            $employees = User::where('role', '!=', 'admin')->orderby('id',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
         } else {
-            $employees = Employee::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+            $employees = User::where('role', '!=', 'admin')->orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
         }
         return view("dashboard.employees.list", compact("employees","GeneralWebmasterSections"));
     }
@@ -77,7 +77,7 @@ class EmployeeController extends Controller
             'phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|unique:employees',
             'password' => 'required|min:6',
             'photo' => 'mimes:png,jpeg,jpg,gif,svg',
-            'role_id' => 'required'
+            'role' => 'required'
         ]);
 
 
@@ -94,18 +94,20 @@ class EmployeeController extends Controller
 
         if ($request->password != "" && $request->email != "") {
             try {
-                $employee = new Employee;
+                $employee = new User;
                 $employee->name = $request->name;
                 $employee->email = $request->email;
                 $employee->phone = $request->phone;
                 $employee->password = bcrypt($request->password);
                 $employee->photo = $fileFinalName_ar;
-                $employee->role_id = $request->role_id;
+                $employee->role = $request->role;
+                $employee->permissions_id = 1;
+                $employee->status = 1;
                 $employee->save();
 
                 return redirect()->action('Dashboard\EmployeeController@index')->with('doneMessage', __('backend.addDone'));
             } catch (\Exception $e) {
-
+                return redirect()->back()->with('errorMessage', $e->getMessage());
             }
         }
         return redirect()->action('Dashboard\EmployeeController@index')->with('errorMessage', __('backend.error'));

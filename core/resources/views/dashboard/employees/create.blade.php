@@ -75,17 +75,10 @@
                     <label for="permissions1"
                            class="col-sm-2 form-control-label">{!!  __('backend.role') !!}</label>
                     <div class="col-sm-10">
-                        <select name="role_id" id="role_id" required class="form-control c-select">
-                            <option value="">- - {!!  __('backend.role') !!} - -</option>
-                            @foreach ($roles as $value)
-                                <option value="{{ $value->id  }}">
-                                    @if(app()->getLocale() == 'ar')
-                                        {{ $value->role_ar }}
-                                    @else
-                                        {{ $value->role_en }}
-                                    @endif
-                                </option>
-                            @endforeach
+                        <select name="role" id="role" required class="form-control c-select">
+                            <option value="" selected disabled hidden>- - {!!  __('backend.role') !!} - -</option>
+                            <option value="specialist">{{ __('backend.Specialist') }}</option>
+                            <option value="supervisor">{{ __('backend.Supervisor') }}</option>
                         </select>
 
                     </div>

@@ -71,7 +71,29 @@
                                     {!! $transaction->user->name   !!} 
                                 </td> --}}
                                 <td class="h6 text-center">
-                                    <img src="uploads/financial-transactions/{{ $transaction->image }}" width="30px" height="30px" alt="">
+                                    <a href="javascript:;" data-toggle="modal" data-target="#preview-image_{{ $transaction->id }}">
+
+                                        <img src="uploads/financial-transactions/{{ $transaction->image }}" width="30px" height="30px" alt="" >
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="preview-image_{{$transaction->id }}" tabindex="-1" aria-labelledby="preview-imageLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="preview-imageLabel">{{ __('cruds.FinancialTransactions.CopyOfTheBankTransfer') }}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img src="uploads/financial-transactions/{{ $transaction->image }}" class="w-100" alt="" >
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('backend.close') }}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="h6 text-center">
                                     {!! $transaction->notes ?? '-'   !!}
@@ -179,6 +201,9 @@
             @endif
         </div>
     </div>
+
+  
+
 @endsection
 @push("after-scripts")
     <script type="text/javascript">
