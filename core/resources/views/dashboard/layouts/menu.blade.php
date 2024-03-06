@@ -336,7 +336,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('backend.employees') }}</span>
                         </a>
                         <ul class="nav-sub">
-                            <li><a href="{{ route('roles') }}"><span class="nav-text">{{ __('backend.roles') }}</span></a></li>
+                            {{-- <li><a href="{{ route('roles') }}"><span class="nav-text">{{ __('backend.roles') }}</span></a></li> --}}
                             <li><a href="{{ route('employees') }}"><span class="nav-text">{{ __('backend.employees') }}</span></a></li>
                         </ul>
                     </li>
