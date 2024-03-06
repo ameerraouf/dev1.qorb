@@ -130,5 +130,6 @@ Route::get('/main-services', [HomeController::class, 'MainServices'])->name('Fro
 Route::get('/{lang?}/main-services', [HomeController::class, 'MainServicesByLang'])->name('FrontendMainServicesByLang');
 Route::get('/show-main-service/{value}', [HomeController::class, 'showMainService'])->name('showMainService');
 
+Route::post('/get-sub-services', [HomeController::class, 'GetSubServices'])->name('GetSubService');
 // .. End of Frontend Route
 
