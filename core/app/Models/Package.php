@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PurchaseTransaction;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Package extends Model
 {
@@ -15,6 +16,11 @@ class Package extends Model
         'advantages_en',
         'price',
     ];
+
+    public function purchase()
+    {
+        return $this->belongsTo(PurchaseTransaction::class);
+    }
 
     // protected $casts = [
     //     'advantages' => 'array',

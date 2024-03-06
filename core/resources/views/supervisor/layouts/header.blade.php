@@ -35,8 +35,8 @@
                                 <ul class="list-group list-group-gap m-a-0">
                                     @foreach($notifications as $webmailsAlert)
                                         <li class="list-group-item lt box-shadow-z0 b">
-                                    <span class="clear block">
-                                        <small>{{ $webmailsAlert->message }}</small><br>
+                                    <span class="clear block text-right">
+                                        <small style="text-align: right;">{{ $webmailsAlert->message }}</small><br>
                                        
                                         <small class="text-muted">
                                             {{ date('d M Y  h:i A', strtotime($webmailsAlert->created_at)) }}

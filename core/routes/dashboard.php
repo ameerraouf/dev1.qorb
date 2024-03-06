@@ -6,7 +6,6 @@ use App\Http\Controllers\Dashboard\MenusController;
 use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\Dashboard\ClientController;
 use App\Http\Controllers\Dashboard\EventsController;
-use App\Http\Controllers\Dashboard\EarlyDetectionReportController;
 use App\Http\Controllers\Dashboard\TopicsController;
 use App\Http\Controllers\Dashboard\BannersController;
 use App\Http\Controllers\Dashboard\PackageController;
@@ -19,23 +18,25 @@ use App\Http\Controllers\Dashboard\AnalyticsController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\SpecialistController;
-
 use App\Http\Controllers\Dashboard\SubServiceController;
+
 use App\Http\Controllers\Dashboard\SupervisorController;
 use App\Http\Controllers\Dashboard\FileManagerController;
 use App\Http\Controllers\Dashboard\MainServiceController;
+use App\Http\Controllers\Dashboard\CommonQuestionController;
 
 // <<<<<<< HEAD
-use App\Http\Controllers\Dashboard\CommonQuestionController;
+use App\Http\Controllers\Dashboard\WebmasterBannersController;
 // =======
 
 
 
 // >>>>>>> 2704ee87b2e7b7b7c6687a1e91124fa1b7313a1b
-use App\Http\Controllers\Dashboard\WebmasterBannersController;
 use App\Http\Controllers\Dashboard\WebmasterLicenseController;
 use App\Http\Controllers\Dashboard\WebmasterSectionsController;
 use App\Http\Controllers\Dashboard\WebmasterSettingsController;
+use App\Http\Controllers\Dashboard\PurchaseTransactionController;
+use App\Http\Controllers\Dashboard\EarlyDetectionReportController;
 use App\Http\Controllers\Dashboard\FinancialTransactionController;
 
 // Admin Routes
@@ -415,6 +416,10 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
     Route::post('/chlidren-early-detection-reports/{id}/update', [EarlyDetectionReportController::class, 'UpdateEarlyDetectionReports'])->name('UpdateEarlyDetectionReports');
     Route::get('/early-detection-reports-create/{id}', [EarlyDetectionReportController::class, 'EarlyDetectionReportsCreate'])->name('EarlyDetectionReportsCreate');
     Route::post('/chlidren-early-detection-reports/store', [EarlyDetectionReportController::class, 'StoreEarlyDetectionReports'])->name('StoreEarlyDetectionReports');
+
+    // PurchaseTransactions
+    Route::get('/purchase-transactions', [PurchaseTransactionController::class, 'index'])->name('PurchaseTransactions');
+    Route::get('/societies/change_status/{id}', [PurchaseTransactionController::class, 'change_status'])->name('PurchaseTransactionsChangeStatus');
 });
 
 //Specialist Routes

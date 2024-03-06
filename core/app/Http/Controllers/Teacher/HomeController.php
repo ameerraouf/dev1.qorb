@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\TreatmentPlan;
 use App\Http\Middleware\Teacher;
 use App\Models\ConsultingReport;
+use App\Models\PurchaseTransaction;
 use App\Models\TeacherSubscription;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -30,11 +31,17 @@ class HomeController extends Controller
     public function showPackages()
     {
         $packages = Package::paginate(8);
-        $packages->each(function ($p) {
-            $p->advantages = explode(',', $p->advantages);
-        });
+        if(app()->getLocale() == 'ar'){
+            $packages->each(function ($p) {
+                $p->advantages = explode(',', $p->advantages_ar);
+            });
+        }else{
+            $packages->each(function ($p) {
+                $p->advantages = explode(',', $p->advantages_en);
+            });
+        }
         $user = Auth::user();
-        $main_services = MainService::whereHas('subServices')->get();
+        $main_services = MainService::all();
         return view('teacher.packages.list', compact('main_services','user','packages'));
     }
 
@@ -52,13 +59,38 @@ class HomeController extends Controller
 
     public function SubscribePackage(Request $request)
     {
-        dd($request);
-        $packages = Package::paginate(8);
-        $packages->each(function ($p) {
-            $p->advantages = explode(',', $p->advantages);
-        });
-        $user = Auth::user();
-        return view('teacher.packages.list', compact('user','packages'));
+        try {
+            $transaction = new PurchaseTransaction;
+
+            $childrenIds = $request->children_ids;
+            // dd($request->children_ids);
+            $childrenIdsAsString = implode(',', $childrenIds);
+
+            $transaction = $transaction->create([
+                'main_service_id' => $request->main_service_id,
+                'teacher_id' => Auth::user()->id,
+                'package_id' => $request->package_id,
+                'sub_service_id' => $request->sub_service_id ?? '',
+                'price' => $request->price,
+                'children_ids' => $childrenIdsAsString,
+            ]);
+
+            return redirect()->route('TshowSubscriptionsPage')->with('doneMessage', __('backend.saveDone'));
+        } catch (\Exception $e) {
+            return redirect()->route('TshowSubscriptionsPage')->with('errorMessage', $e->getMessage());
+        }
+    }
+
+    public function showSubscriptionsPage()
+    {
+        $transactions = PurchaseTransaction::where('teacher_id', Auth::user()->id)->paginate(10);
+        foreach ($transactions as $transaction) {
+            $childrenIds = explode(',', $transaction->children_ids);
+            $childrenNames = Children::whereIn('id', $childrenIds)->pluck('name')->toArray();
+            $transaction->children_names = $childrenNames;
+        }
+        // dd($transactions);
+        return view('teacher.subscriptions.list', compact('transactions'));
     }
 
     function showChildrenReports($id)
@@ -99,16 +131,6 @@ class HomeController extends Controller
         $reports = FinalReport::where('children_id', $id)->paginate(10);
         $child_id = Children::where('id', $id)->select('id')->first()->id;
         return view('teacher.final_reports.list', compact('reports', 'child_id'));
-    }
-
-    public function showSubscriptionsPage()
-    {
-        $subscriptions = TeacherSubscription::where('teacher_id', Auth::user()->id)->paginate(10);
-        $subscriptions->each(function($sub){
-            $sub->children = Children::where('id',$sub->children_id)->select('id','name')->first();
-            $sub->package = Package::where('id',$sub->package_id)->select('id','title','price')->first();
-        });
-        return view('teacher.subscriptions.list', compact('subscriptions'));
     }
 
     function showTeacherProfile()

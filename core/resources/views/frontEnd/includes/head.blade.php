@@ -3,6 +3,7 @@
 <meta name="description" content="{{@$PageDescription}}"/>
 <meta name="keywords" content="{{@$PageKeywords}}"/>
 <meta name="author" content="{{ URL::to('') }}"/>
+<meta name="token" content="{{ csrf_token() }}">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link href="{{ URL::asset('assets/frontend/css/bootstrap.min.css') }}?v={{ Helper::system_version() }}" rel="stylesheet"/>

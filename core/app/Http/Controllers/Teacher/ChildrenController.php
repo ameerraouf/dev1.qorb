@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Events\Admin\RegisterNewChild;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\ChildrenRequest;
 use App\Models\Children;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 class ChildrenController extends Controller
 {
@@ -21,9 +25,11 @@ class ChildrenController extends Controller
    {
       return view('teacher.children.create');
    }
+  
    public function store(ChildrenRequest $request)
    {
     // dd($request->all());
+        $admin = User::where('role','admin')->where('id', Auth::user()->id)->first();
         $input['name'] = $request->name;
         $input['problem'] = $request->problem;
         $input['specialist_id'] = 0;
@@ -52,6 +58,14 @@ class ChildrenController extends Controller
                 $i++;
             }
         }
+        
+        event(new RegisterNewChild('تم تسجيل طفل جديد فى النظام'));
+        
+        Notification::create([
+            'admin_id' => $admin->id,
+            'message' => 'تم تسجيل طفل جديد فى النظام'
+        ]);
+        
         return redirect()->route('childrens.index')->with('doneMessage', __('backend.saveDone'));
    }
    public function edit($id)

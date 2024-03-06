@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'ourservices' => 'Our services',
     'dashboard' => 'Dashboard',
     'toTop' => 'to Top',
     'AllRightsReserved' => 'All Rights Reserved',

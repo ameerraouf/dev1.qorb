@@ -9,7 +9,6 @@ use App\Http\Controllers\SocietyReplyController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Dashboard\SocietyController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +19,8 @@ use App\Http\Controllers\Dashboard\SocietyController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 
 // Language Route
 Route::post('/lang', [LanguageController::class, 'index'])->middleware('LanguageSwitcher')->name('lang');
@@ -129,5 +130,6 @@ Route::get('/main-services', [HomeController::class, 'MainServices'])->name('Fro
 Route::get('/{lang?}/main-services', [HomeController::class, 'MainServicesByLang'])->name('FrontendMainServicesByLang');
 Route::get('/show-main-service/{value}', [HomeController::class, 'showMainService'])->name('showMainService');
 
+Route::post('/get-sub-services', [HomeController::class, 'GetSubServices'])->name('GetSubService');
 // .. End of Frontend Route
 
