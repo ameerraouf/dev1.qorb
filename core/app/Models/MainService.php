@@ -11,6 +11,8 @@ class MainService extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name_ar' , 'name_en'];
+
     public function subServices()
     {
         return $this->hasMany(SubService::class);
