@@ -109,23 +109,17 @@
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ __('backend.viewDetails') }} : <strong>[ {{ $value->title }} ]</strong></h5>
+                                            <h5 class="modal-title">{{ __('backend.viewDetails') }} : <strong>[ {{ app()->getLocale() == 'ar' ? $value->title_ar : $value->title_en }} ]</strong></h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
                                             <ul class="list-group">
-                                                <li class="list-group-item active">{{ __('backend.advantages') }}</li>
-                                                <li class="list-group-item">
-                                                @php
-                                                $advantages = strtok($value->advantages, ",");
-
-                                                while ($advantages !== false)
-                                                    {
-                                                    echo '<span class="btn btn-xs btn-primary" style="margin:0px 5px">' . $advantages . '</span>';
-                                                    $advantages = strtok(",");
-                                                    }
-                                            @endphp
-                                                </li>
-                                                <li class="list-group-item">{{ __('backend.price') }} : <strong>[ {{ $value->price }} ]</strong></li>
+                                                <li class="list-group-item active">{{ __('cruds.Packages.advantages') }}</li>
+                                                @foreach ($value->advantages as $adv)
+                                                    <li class="list-group-item">
+                                                        {{ $adv }}
+                                                    </li>
+                                                    @endforeach
+                                                <li class="list-group-item">{{ __('backend.price') }} : <strong>[ {{ $value->price.' '.__('cruds.Packages.currency') }} ]</strong></li>
                                               </ul>
 
                                         </div>

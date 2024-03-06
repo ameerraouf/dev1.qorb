@@ -35,8 +35,26 @@ class PackageController extends Controller
         if (@Auth::user()->permissionsGroup->view_status) {
             $packages = Package::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
+                if(app()->getLocale() == 'ar'){
+                    $packages->each(function ($p) {
+                        $p->advantages = explode(',', $p->advantages_ar);
+                    });
+                }else{
+                    $packages->each(function ($p) {
+                        $p->advantages = explode(',', $p->advantages_en);
+                    });
+                }
         } else {
             $packages = Package::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+            if(app()->getLocale() == 'ar'){
+                $packages->each(function ($p) {
+                    $p->advantages = explode(',', $p->advantages_ar);
+                });
+            }else{
+                $packages->each(function ($p) {
+                    $p->advantages = explode(',', $p->advantages_en);
+                });
+            }
         }
         return view("dashboard.packages.list", compact("packages","GeneralWebmasterSections"));
 

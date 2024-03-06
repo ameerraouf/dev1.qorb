@@ -21,7 +21,7 @@ use App\Models\Teacher as ModelsTeacher;
 
 class HomeController extends Controller
 {
-    private $uploadPath = 'uploads/users/';
+    private $uploadPath = 'uploads/clients/';
 
     public function index()
     {
@@ -63,14 +63,14 @@ class HomeController extends Controller
             $transaction = new PurchaseTransaction;
 
             $childrenIds = $request->children_ids;
-            // dd($request->children_ids);
+            // dd($request->sub_service_id);
             $childrenIdsAsString = implode(',', $childrenIds);
 
             $transaction = $transaction->create([
                 'main_service_id' => $request->main_service_id,
                 'teacher_id' => Auth::user()->id,
                 'package_id' => $request->package_id,
-                'sub_service_id' => $request->sub_service_id ?? '',
+                'sub_service_id' => $request->sub_service_id,
                 'price' => $request->price,
                 'children_ids' => $childrenIdsAsString,
             ]);
