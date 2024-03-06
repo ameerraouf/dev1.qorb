@@ -82,7 +82,7 @@
                                 </td>
 
                                 <td class="h6 text-center">
-                                    {{ __('backend.active') }}
+                                    {{ $transaction->package_status == 1 ? __('backend.active') : __('backend.disable') }}
                                 </td>
 
                                 <td class="text-center">
