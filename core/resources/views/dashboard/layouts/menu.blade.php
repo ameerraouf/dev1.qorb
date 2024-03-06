@@ -261,6 +261,19 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                     </li>
 
                     <?php
+                    $currentFolder = "purchase-transactions"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    ?>
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                        <a href="{{ route('PurchaseTransactions') }}">
+                            <span class="nav-icon">
+                                <i class="material-icons">&#xe433;</i>
+                            </span>
+                            <span class="nav-text">{{ __('cruds.FinancialTransactions.Purchases') }}</span>
+                        </a>
+                    </li>
+
+                    <?php
                     $currentFolder = "banners"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
@@ -544,7 +557,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                             <span class="nav-text">{{ __('backend.siteMenus') }}</span>
                                         </a>
                                     </li>--}}
-                                    
+
                                     {{--<?php
                                     $currentFolder = "file-manager"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));

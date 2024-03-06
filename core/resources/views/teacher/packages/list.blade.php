@@ -196,10 +196,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                <div class="form-group row" id="sub_service_div" style="display: none;">
                                                     <label for="sub_service" class="col-sm-2 form-control-label">{{ __('cruds.SubServices.Title') }}</label>
                                                     <div class="col-sm-10">
-                                                        <select name="sub_service_id" id="sub_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
+                                                        <select name="sub_service_id" id="sub_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
                                                             <option value="">{{ __('cruds.SubServices.SelectSubService') }}</option>
                                                         </select>
                                                     </div>
@@ -274,6 +274,7 @@
         var mainServiceId = $(this).val();
         console.log(mainServiceId);
         if (mainServiceId) {
+            $('#sub_service_div').show();
             $.ajax({
                 url: 'teacher/getSubServices/' + mainServiceId,
                 type: 'GET',
@@ -287,6 +288,7 @@
                 }
             });
         } else {
+            $('#sub_service_div').hide();
             $('#sub_service').empty();
             $('#sub_service').append('<option value="">{{__('cruds.SubServices.SelectSubService')}}</option>');
         }

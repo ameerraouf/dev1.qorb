@@ -41,7 +41,7 @@ class HomeController extends Controller
             });
         }
         $user = Auth::user();
-        $main_services = MainService::whereHas('subServices')->get();
+        $main_services = MainService::all();
         return view('teacher.packages.list', compact('main_services','user','packages'));
     }
 
@@ -70,7 +70,7 @@ class HomeController extends Controller
                 'main_service_id' => $request->main_service_id,
                 'teacher_id' => Auth::user()->id,
                 'package_id' => $request->package_id,
-                'sub_service_id' => $request->sub_service_id,
+                'sub_service_id' => $request->sub_service_id ?? '',
                 'price' => $request->price,
                 'children_ids' => $childrenIdsAsString,
             ]);
