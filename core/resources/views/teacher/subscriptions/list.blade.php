@@ -1,5 +1,5 @@
 @extends('teacher.layouts.master')
-@section('title', __('cruds.FinancialTransactions.Title') )
+@section('title', __('cruds.FinancialTransactions.Purchases') )
 @section('content')
     <div class="padding">
         <div class="box">
@@ -10,88 +10,113 @@
                     <a >{{ __('cruds.FinancialTransactions.Purchases') }}</a>
                 </small>
             </div>
-            @if($subscriptions->total() == 0)
+            @if($transactions->total() == 0)
                 <div class="row p-a">
                     <div class="col-sm-12">
                         <div class=" p-a text-center ">
                             {{ __('backend.noData') }}
                             <br>
-                           
+
                         </div>
                     </div>
                 </div>
             @endif
 
-            @if($subscriptions->total() > 0)
+            @if($transactions->total() > 0)
                 {{Form::open(['route'=>'financialTransactionsUpdateAll','method'=>'post'])}}
                 <div class="table-responsive">
                     <table class="table table-bordered m-a-0">
                         <thead class="dker">
                         <tr>
-                            <th  class="width20 dker">
+                            {{-- <th  class="width20 dker">
                                 <label class="ui-check m-a-0">
                                     <input id="checkAll" type="checkbox"><i></i>
                                 </label>
-                            </th>
+                            </th> --}}
                             <th class="text-center" style="width:220px;">{{ __('cruds.Packages.Title') }}</th>
                             <th class="text-center" style="width:220px;">{{ __('cruds.Packages.price') }}</th>
-                            <th class="text-center">{{ __('cruds.Packages.purchaseDate') }}</th>
-                            <th class="text-center">{{ __('cruds.Packages.childName') }}</th>
+                            <th class="text-center" style="width:220px;">{{ __('cruds.EarlyDetectionReports.TeacherName') }}</th>
+                            <th class="text-center" style="width:220px;">{{ __('cruds.Childrens.childrenname') }}</th>
+                            <th class="text-center" style="width:220px;">{{ __('backend.SubscriptionDate') }}</th>
+                            <th class="text-center" style="width:220px;">{{ __('cruds.Packages.PackageStatus') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.options') }}</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach($subscriptions as $sub)
+                        @foreach($transactions as $transaction)
                             <tr>
-                                <td class="dker"><label class="ui-check m-a-0">
-                                        <input type="checkbox" name="ids[]" value="{{ $sub->id }}"><i
+                                {{-- <td class="dker"><label class="ui-check m-a-0">
+                                        <input type="checkbox" name="ids[]" value="{{ $transaction->id }}"><i
                                             class="dark-white"></i>
-                                        {!! Form::hidden('row_ids[]',$sub->id, array('class' => 'form-control row_no')) !!}
+                                        {!! Form::hidden('row_ids[]',$transaction->id, array('class' => 'form-control row_no')) !!}
                                     </label>
-                                </td>
+                                </td> --}}
                                 <td class="h6 text-center">
-                                    {!! $sub->package->title !!}
-                                </td>
-                              
-                                <td class="h6 text-center">
-                                    {!! $sub->package->price , ' ' ,__('cruds.Packages.currency')!!} 
+                                    {!! app()->getLocale() == 'ar' ? $transaction->package->title_ar : $transaction->package->title_en !!}
                                 </td>
 
                                 <td class="h6 text-center">
-                                    @if (isset($sub->created_at))
-                                     {!! $sub->created_at->format('Y-m-d') ?? '' !!}
+                                    {!! $transaction->price , ' ' ,__('cruds.Packages.currency')!!}
+                                </td>
+
+                                <td class="h6 text-center">
+                                    {!! auth()->user()->name !!}
+                                </td>
+
+                                <td class="h6 text-center">
+                                    @foreach ($transaction->children_names as $index => $child)
+                                        {!! $child !!}
+                                        @if ($index < count($transaction->children_names) - 1)
+                                            {!! ',' !!}
+                                        @endif
+                                    @endforeach
+                                </td>
+
+                                <td class="h6 text-center">
+                                    @if (isset($transaction->created_at))
+                                     {!! $transaction->created_at->format('Y-m-d') ?? '' !!}
                                     @else
-                                            
+
                                     @endif
                                 </td>
 
                                 <td class="h6 text-center">
-                                    {!! $sub->children->name !!}
+                                    {{ $transaction->package_status == 1 ? __('backend.active') : __('backend.disable') }}
                                 </td>
-                                
+
                                 <td class="text-center">
                                     <button class="btn btn-sm primary"data-toggle="modal"
-                                                data-target="#transaction-show{{ $sub->id }}" ui-toggle-class="bounce"
+                                                data-target="#transaction-show{{ $transaction->id }}" ui-toggle-class="bounce"
                                                 ui-target="#animate" data-dismiss="modal">
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.show') }}
                                             </small>
                                         </button>
                                 </td>
                             </tr>
-                            <div id="transaction-show{{ $sub->id }}" class="modal fade" data-backdrop="true">
+                            <div id="transaction-show{{ $transaction->id }}" class="modal fade" data-backdrop="true">
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">{{ __('cruds.FinancialTransactions.Purchases') }}</h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
+
                                             <div class="form-group row">
                                                 <h6
-                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Packages.Title') : __('cruds.Packages.Title') }}
+                                                    class="col-sm-4 form-control-label text-center">{{ __('backend.BilledFrom') }}
                                                 </h6><br>
                                                 <div class="col-sm-8">
-                                                    <p>{{$sub->package->title}}</p>
+                                                    قرب
+                                                </div>
+                                            </div><hr>
+
+                                            <div class="form-group row">
+                                                <h6
+                                                    class="col-sm-4 form-control-label text-center"> {{ __('backend.BilledTo') }}
+                                                </h6><br>
+                                                <div class="col-sm-8">
+                                                    {{ auth()->user()->name }}
                                                 </div>
                                             </div><hr>
                                                 <div class="form-group row">
@@ -99,33 +124,35 @@
                                                         class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Packages.price') : __('cruds.Packages.price') }}
                                                     </h6><br>
                                                     <div class="col-sm-8">
-                                                            <p>{!! $sub->package->price !!}</p>
+                                                            <p>{!! $transaction->price !!}</p>
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                
+                                                <div class="form-group row">
+                                                    <h6
+                                                        class="col-sm-4 form-control-label text-center">{{ __('cruds.Childrens.Title') }}
+                                                    </h6><br>
+                                                    <div class="col-sm-8">
+                                                        @foreach ($transaction->children_names as $index => $child)
+                                                            {!! $child !!}
+                                                            @if ($index < count($transaction->children_names) - 1)
+                                                                {!! '-' !!}
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div><hr>
                                                 <div class="form-group row">
                                                     <h6
                                                         class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Packages.purchaseDate') : __('cruds.Packages.purchaseDate') }}
                                                     </h6><br>
                                                     <div class="col-sm-8">
-                                                        @if (isset($sub->created_at))
-                                                            {!! $sub->created_at->format('Y-m-d') ?? '' !!}
+                                                        @if (isset($transaction->created_at))
+                                                            {!! $transaction->created_at->format('Y-m-d') ?? '' !!}
                                                         @else
-                                                               
+
                                                        @endif
                                                     </div>
                                                 </div>
-                                                <hr> 
-                                                <div class="form-group row">
-                                                    <h6
-                                                        class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Packages.childName') : __('cruds.Packages.childName') }}
-                                                    </h6><br>
-                                                    <div class="col-sm-8">
-                                                       {{ $sub->children->name }}
-                                                    </div>
-                                                </div>
-                                                <hr>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark-white p-x-md"
@@ -168,12 +195,12 @@
                         </div>
 
                         <div class="col-sm-3 text-center">
-                            <small class="text-muted inline m-t-sm m-b-sm">{{ __('backend.showing') }} {{ $subscriptions->firstItem() }}
-                                -{{ $subscriptions->lastItem() }} {{ __('backend.of') }}
-                                <strong>{{ $subscriptions->total()  }}</strong> {{ __('backend.records') }}</small>
+                            <small class="text-muted inline m-t-sm m-b-sm">{{ __('backend.showing') }} {{ $transactions->firstItem() }}
+                                -{{ $transactions->lastItem() }} {{ __('backend.of') }}
+                                <strong>{{ $transactions->total()  }}</strong> {{ __('backend.records') }}</small>
                         </div>
                         <div class="col-sm-6 text-right text-center-xs">
-                            {!! $subscriptions->links() !!}
+                            {!! $transactions->links() !!}
                         </div>
                     </div>
                 </footer>

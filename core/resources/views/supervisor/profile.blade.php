@@ -27,45 +27,45 @@
         <div class="box-body">
             {{Form::open(['route'=>['SprofileUpdate',$user->id],'method'=>'POST', 'files' => true])}}
 
-            <div class="form-group row">
+            <div class="form-group row g-3">
                 <label for="name"
-                       class="col-sm-2 form-control-label">{!!  __('backend.fullName') !!}
+                       class="col-sm-2 mt-3 form-control-label">{!!  __('backend.fullName') !!}
                 </label>
-                <div class="col-sm-4">
+                <div class="col-sm-10 mt-3">
                     {!! Form::text('name',$user->name, array('placeholder' => '','class' => 'form-control','id'=>'name','required'=>'')) !!}
                 </div>
         
                 <label for="email"
-                       class="col-sm-2 form-control-label">{!!  __('backend.loginEmail') !!}
+                       class="col-sm-2 mt-3 form-control-label">{!!  __('backend.loginEmail') !!}
                 </label>
-                <div class="col-sm-4">
+                <div class="col-sm-10 mt-3">
                     {!! Form::email('email',$user->email, array('placeholder' => '','class' => 'form-control','id'=>'email','required'=>'')) !!}
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row g-3">
                 <label for="password"
-                       class="col-sm-2 form-control-label">{!!  __('backend.loginPassword') !!}
+                       class="col-sm-2 mt-3 form-control-label">{!!  __('backend.loginPassword') !!}
                 </label>
-                <div class="col-sm-4">
+                <div class="col-sm-10 mt-3">
                     <input type="password" name="password" minlength="6" class="form-control">
                 </div>
                 <label for="phone"
-                       class="col-sm-2 form-control-label">{!!  __('backend.phone') !!}
+                       class="col-sm-2 mt-3 form-control-label">{!!  __('backend.phone') !!}
                 </label>
-                <div class="col-sm-4">
+                <div class="col-sm-10 mt-3">
                     <input type="text" name="phone" minlength="6" value="{{ $user->phone }}" class="form-control">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row g-3">
                 <label for="photo_file"
-                       class="col-sm-2 form-control-label">{!!  __('backend.topicPhoto') !!}</label>
-                <div class="col-sm-10">
+                       class="col-sm-2 mt-3 form-control-label">{!!  __('backend.topicPhoto') !!}</label>
+                <div class="col-sm-10 mt-3">
                     @if($user->photo)
                         <div class="row">
                             <div class="col-sm-12">
-                                <div id="user_photo" class="col-sm-4 box p-a-xs">
+                                <div id="user_photo" class="col-sm-10 mt-3 box p-a-xs">
                                     <a target="_blank"
                                        href="{{ asset('uploads/users/'.$user->photo) }}"><img
                                             src="{{ asset('uploads/users/'.$user->photo) }}"
@@ -76,7 +76,7 @@
                                     <a onclick="document.getElementById('user_photo').style.display='none';document.getElementById('photo_delete').value='1';document.getElementById('undo').style.display='block';"
                                        class="btn btn-sm btn-default">{!!  __('backend.delete') !!}</a>
                                 </div>
-                                <div id="undo" class="col-sm-4 p-a-xs" style="display: none">
+                                <div id="undo" class="col-sm-10 mt-3 p-a-xs" style="display: none">
                                     <a onclick="document.getElementById('user_photo').style.display='block';document.getElementById('photo_delete').value='0';document.getElementById('undo').style.display='none';">
                                         <i class="material-icons">&#xe166;</i> {!!  __('backend.undoDelete') !!}
                                     </a>
@@ -97,8 +97,8 @@
          
 
 
-            <div class="form-group row m-t-md">
-                <div class="offset-sm-2 col-sm-10">
+            <div class="form-group row g-3 m-t-md">
+                <div class="offset-sm-2 col-sm-10 mt-3">
                     <button type="submit" class="btn btn-primary m-t"><i class="material-icons">
                             &#xe31b;</i> {!! __('backend.update') !!}</button>
                     {{-- <a href="{{route("Profile")}}"

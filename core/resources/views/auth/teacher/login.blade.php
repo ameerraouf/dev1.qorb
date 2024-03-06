@@ -86,8 +86,8 @@
             @endif
 
             {{-- @if(Helper::GeneralWebmasterSettings("register_status")) --}}
-                {{-- <a href="{{ url('/'.env('Teacher_PATH').'/register') }}" class="btn info btn-block text-left"> --}}
-                <a href="{{ route('teacher.register') }}" class="btn info btn-block text-left">
+                {{-- <a href="{{ url('/'.env('Teacher_PATH').'/register') }}" class="btn info btn-block text-center"> --}}
+                <a href="{{ route('teacher.register') }}" class="btn info btn-block text-center">
                     <i class="fa fa-user-plus"></i> {{ __('backend.createNewAccount') }}
                 </a>
             {{-- @endif --}}

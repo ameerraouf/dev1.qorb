@@ -261,6 +261,19 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                     </li>
 
                     <?php
+                    $currentFolder = "purchase-transactions"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    ?>
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                        <a href="{{ route('PurchaseTransactions') }}">
+                            <span class="nav-icon">
+                                <i class="material-icons">&#xe433;</i>
+                            </span>
+                            <span class="nav-text">{{ __('cruds.FinancialTransactions.Purchases') }}</span>
+                        </a>
+                    </li>
+
+                    <?php
                     $currentFolder = "banners"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
@@ -415,7 +428,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             ?>
                             @if($GeneralWebmasterSection->sections_status > 0 && @Auth::user()->permissionsGroup->view_status == 0)
                                 <li {{ ($GeneralWebmasterSection->id == @$WebmasterSection->id && $is_webmaster != "webmaster") ? 'class=active' : '' }}>
-                                    @if ($GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
+                                    @if ($GeneralWebmasterSection->id !== 2 && $GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
                                         <a>
                                             <span class="nav-caret">
                                                 <i class="fa fa-caret-down"></i>
@@ -460,7 +473,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </li>
 
                             @else
-                                @if ($GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
+                                @if ($GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !== 2 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
                                     <li {{ ($GeneralWebmasterSection->id== @$WebmasterSection->id) ? 'class=active' : '' }}>
                                         <a href="{{ route('topics',$GeneralWebmasterSection->id) }}">
                                             <span class="nav-icon">
@@ -534,15 +547,17 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                             <span class="nav-text">{{ __('backend.generalSettings') }}</span>
                                         </a>
                                     </li>
-                                    {{--<?php
+                                    <?php
                                     $currentFolder = "menus"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                                     ?>
+                                    {{---
                                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                                         <a href="{{ route('menus') }}">
                                             <span class="nav-text">{{ __('backend.siteMenus') }}</span>
                                         </a>
                                     </li>--}}
+
                                     {{--<?php
                                     $currentFolder = "file-manager"; // Put folder name here
                                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));

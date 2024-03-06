@@ -37,12 +37,52 @@
                                     <i class="material-icons">&#xe7fe;</i>
                                     &nbsp; {{ __('cruds.Reports.NewReport') }}
                                 </a>
-                            
+
                         </div>
                     </div>
                 </div>
             @endif
+            <div class="table-responsive d-flex justify-content-center">
+                <div class="col-xl-7">
+                <canvas id="myChart"></canvas>
+                </div>
+            </div>
 
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('myChart');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                    labels: [
+                        0,
+                        @foreach($reports as $report)
+                            '{{ \Carbon\Carbon::parse($report->created_at)->format('Y-m-d') }}',
+                        @endforeach
+                    ],
+                    datasets: [{
+                        label:'{{ __('backend.SuccessChartforChild') }}' + ': '+ '{{ $reports->first()->children->name }}',
+                        data: [
+                            0,
+                            @foreach($reports as $report)
+                                '{{ $report->success_number }}',
+                            @endforeach
+                        ],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        borderWidth: 3
+                    }]
+                    },
+                    options: {
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
+                    }
+                    }
+                });
+            </script>
             @if($reports->total() > 0)
                 {{Form::open(['route'=>'CommonQuestionsUpdateAll','method'=>'post'])}}
                 <div class="table-responsive">
@@ -88,14 +128,14 @@
                                     {{ $report->success_number }}
                                 </td>
                                 <td class="text-center">
-                                    @if($report->created_at->addMinutes(10) > \Carbon\Carbon::now()) 
+                                    @if($report->created_at->addMinutes(10) > \Carbon\Carbon::now())
                                         <a class="btn btn-sm success"
                                         href="{{ route("ReportEdit",["id"=>$report->id]) }}">
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.edit') }}
                                             </small>
                                         </a>
                                     @else
-                                    
+
                                     @endif
                                         <button class="btn btn-sm primary"data-toggle="modal"
                                                 data-target="#report-show{{ $report->id }}" ui-toggle-class="bounce"
@@ -103,7 +143,7 @@
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.show') }}
                                             </small>
                                         </button>
-                                        
+
 
 
                                 </td>

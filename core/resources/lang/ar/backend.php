@@ -758,6 +758,12 @@ return array(
 
     'Supervisor' => 'مشرفة',
 
-    'setChildToParent' => 'تعيين مشرفة و اخصائية للطفل'
+    'setChildToParent' => 'تعيين مشرفة و اخصائية للطفل',
+
+    'SuccessChartforChild' => 'مخطط نجاح الطفل',
+    'SubscriptionDate' => 'تاريخ الاشتراك',
+    'Pay' => 'دفع',
+    'BilledFrom' => 'مفوتر من',
+    'BilledTo' => 'مفوتر إلى',
 
 );

@@ -127,12 +127,12 @@
                         @endforeach
                         @if (env('GEOIP_STATUS', false))
                             <div class="col-xs-12">
-                                <div class="row-col box-color text-center primary">
-                                    <div class="row-cell p-a">
+                                <div class="row-col box-color text-center primary d-flex">
+                                    <div class="row-cell p-a flex-1">
                                         {{ __('backend.visitors') }}
                                         <h4 class="m-a-0 text-md _600"><a href>{{ $TodayVisitors }}</a></h4>
                                     </div>
-                                    <div class="row-cell p-a dker">
+                                    <div class="row-cell p-a flex-1 dker">
                                         {{ __('backend.pageViews') }}
                                         <h4 class="m-a-0 text-md _600"><a href>{{ $TodayPages }}</a></h4>
                                     </div>
@@ -152,18 +152,18 @@
                                 <div class="box-body">
                                     <div style="height:162px" ui-jp="plot" ui-refresh="app.setting.color"
                                         ui-options="
-			              [
-			                {
-			                  data: [
-                  <?php
-                  $ii = 1;
-                  ?>
+                                            [
+                                                {
+                                                data: [
+                                    <?php
+                                    $ii = 1;
+                                    ?>
                                         @foreach ($Last7DaysVisitors as $id)
 
                                         @if ($ii <= 10)
-                                        @if ($ii != 1)
-                                            ,
-@endif
+                                            @if ($ii != 1)
+                                                ,
+                                            @endif
                                         <?php
                                         $i2 = 0;
                                         ?>
@@ -172,7 +172,7 @@
                                         if ($i2 == 1) {
                                         ?>
                                             [{{ $ii }}, {{ $val }}]
-                                <?php
+                                        <?php
                                         }
                                         $i2++;
                                         ?> @endforeach
@@ -180,14 +180,14 @@
                                         <?php $ii++; ?>
                                         @endforeach
                                             ],
-                                          points: { show: true, radius: 0},
-                                          splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0 }
+                                        points: { show: true, radius: 0},
+                                        splines: { show: true, tension: 0.45, lineWidth: 2, fill: 0 }
                                         },
                                         {
-                                          data: [
-<?php
-$ii = 1;
-?>
+                                        data: [
+                                        <?php
+                                        $ii = 1;
+                                        ?>
                                         @foreach ($Last7DaysVisitors as $id)
 
                                         @if ($ii <= 10)

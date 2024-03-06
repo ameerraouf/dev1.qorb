@@ -762,6 +762,12 @@ return array(
 
     'Supervisor' => 'Supervisor',
 
-    'setChildToParent' => 'Set Child to Specilist / Supervisor'
+    'setChildToParent' => 'Set Child to Specilist / Supervisor',
+
+    'SuccessChartforChild' => 'Success Chart for Child',
+    'SubscriptionDate' => 'Subscription Date',
+    'Pay' => 'Pay',
+    'BilledFrom' => 'Billed From',
+    'BilledTo' => 'Billed To',
 
 );

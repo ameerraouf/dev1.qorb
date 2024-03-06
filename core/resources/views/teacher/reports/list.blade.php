@@ -15,7 +15,7 @@
                     <a >{{ __('cruds.Reports.Title') }}</a>
                 </small>
             </div>
-        
+
             @if($reports->total() == 0)
                 <div class="row p-a">
                     <div class="col-sm-12">
@@ -25,7 +25,47 @@
                     </div>
                 </div>
             @endif
+            <div class="table-responsive d-flex justify-content-center">
+                <div class="col-xl-7">
+                <canvas id="myChart"></canvas>
+                </div>
+            </div>
 
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                const ctx = document.getElementById('myChart');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                    labels: [
+                        0,
+                        @foreach($reports as $report)
+                            '{{ \Carbon\Carbon::parse($report->created_at)->format('Y-m-d') }}',
+                        @endforeach
+                    ],
+                    datasets: [{
+                        label:'{{ __('backend.SuccessChartforChild') }}' + ': '+ '{{ $child_name }}',
+                        data: [
+                            0,
+                            @foreach($reports as $report)
+                                '{{ $report->success_number }}',
+                            @endforeach
+                        ],
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        borderWidth: 3
+                    }]
+                    },
+                    options: {
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
+                    }
+                    }
+                });
+            </script>
             @if($reports->total() > 0)
                 {{Form::open(['route'=>'CommonQuestionsUpdateAll','method'=>'post'])}}
                 <div class="table-responsive">

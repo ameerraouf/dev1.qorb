@@ -43,81 +43,81 @@
             margin: 0;
         }
 
-        .row-gap-24 {
-            row-gap: 24px;
+                .row-gap-24 {
+                    row-gap: 24px;
+                }
+
+
+                .boxes-package {
+            gap: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
-
-
-        .boxes-package {
-    gap: 3rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-}
-.box-package {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 15px;
-    display: flex;
-    box-shadow: 0 0 10px 0 #00000012;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    margin-bottom: 24px;
-}
-.box-package .title {
-    margin: 0 0 1.5rem;
-    font-size: 15px;
-    border-radius: 4px;
-}
-.box-package .price {
-    font-size: 42px;
-    display: flex;
-    gap: 2px;
-    margin: 0 0 1rem;
-}
-.box-package .price span {
-    font-size: 18px;
-    font-weight: normal;
-}
-.box-package .list {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
-    font-size: 15px;
-    margin: 0 0 1rem;
-}
-.box-package .list li {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.box-package .list li .icon {
-    background-color: #17bd17;
-    color: white;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 12px;
-    padding-top: 3px;
-}
-.box-package .btn-box {
-    display: block;
-    width: 100%;
-    background-color: #0cbaa4;
-    color: white;
-    padding: 0.8rem 1rem;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: auto;
-}
+        .box-package {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            display: flex;
+            box-shadow: 0 0 10px 0 #00000012;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            margin-bottom: 24px;
+        }
+        .box-package .title {
+            margin: 0 0 1.5rem;
+            font-size: 15px;
+            border-radius: 4px;
+        }
+        .box-package .price {
+            font-size: 42px;
+            display: flex;
+            gap: 2px;
+            margin: 0 0 1rem;
+        }
+        .box-package .price span {
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .box-package .list {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 0.5rem;
+            font-size: 15px;
+            margin: 0 0 1rem;
+        }
+        .box-package .list li {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .box-package .list li .icon {
+            background-color: #17bd17;
+            color: white;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 12px;
+            padding-top: 3px;
+        }
+        .box-package .btn-box {
+            display: block;
+            width: 100%;
+            background-color: #0cbaa4;
+            color: white;
+            padding: 0.8rem 1rem;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: auto;
+        }
     </style>
 
     @if ($packages->count() > 0)
@@ -137,7 +137,7 @@
                         @foreach ($packages as $item)
                             <div class="box-package">
                                 <h3 class="title">
-                                    {{ $item->title }}
+                                    {{ app()->getLocale() == 'ar' ? $item->title_ar : $item->title_en }}
                                 </h3>
                                 <h4 class="price">
                                     {{ $item->price }}
@@ -155,69 +155,77 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                                <a href="" class="btn-box">
+                                <button id="submit_show_msg_{{ $item->id }}" class="btn-box" data-toggle="modal"
+                                        style="display: inline-block"
+                                        data-package="{{ $item }}"
+                                        data-target="#m-all" ui-toggle-class="bounce"
+                                        ui-target="#animate">
                                     {{ __('cruds.Packages.Subscribe') }}
-                                </a>
+                                </button>
                             </div>
-                        @endforeach
+                            @endforeach
+                            <!-- .modal -->
+                            <div id="m-all" class="modal fade" data-backdrop="true">
+                                <div class="modal-dialog" id="animate">
+                                    {{Form::open(['route'=>'SubscribePackage','method'=>'post'])}}
+                                        <div class="modal-content">
+                                            <div class="modal-header d-flex justify-content-center">
+                                                <h5 class="modal-title package-name"></h5>
+                                            </div>
+                                            <div class="modal-body text-center p-lg">
+                                                <div class="form-group row">
+                                                    <label for="children_ids"
+                                                        class="col-sm-2 form-control-label">{{ __('cruds.Childrens.Title') }}</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="children_ids[]" id="children_ids" class="form-control select2-multiple" multiple ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
+                                                            @foreach ($user->childrens as $child)
+                                                                <option value="{{ $child->id }}">{{ $child->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="main_service"
+                                                        class="col-sm-2 form-control-label">{{ __('cruds.MainServices.Title') }}</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="main_service_id" id="main_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}" required>
+                                                            <option value="">{{ __('cruds.SubServices.SelectMainService') }}</option>
+                                                            @foreach ($main_services as $main_service)
+                                                                <option value="{{ $main_service->id }}">{{ app()->getLocale() == 'ar' ? $main_service->name_ar : $main_service->name_en }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row" id="sub_service_div" style="display: none;">
+                                                    <label for="sub_service" class="col-sm-2 form-control-label">{{ __('cruds.SubServices.Title') }}</label>
+                                                    <div class="col-sm-10">
+                                                        <select name="sub_service_id" id="sub_service" class="form-control select2-multiple" ui-jp="select2" ui-options="{theme: 'bootstrap'}">
+                                                            <option value="">{{ __('cruds.SubServices.SelectSubService') }}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <h5 class="modal-title package-price"></h5>
+                                                <input type="hidden" id="package_id" name="package_id" value="">
+                                                <input type="hidden" id="price" name="price" value="">
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="submit" class="btn danger p-x-md">{{ __('backend.Pay') }}</button>
+                                                <button type="button" class="btn dark-white p-x-md"
+                                                        data-dismiss="modal">{{ __('backend.cancel') }}</button>
+                                            </div>
+                                        </div>
+                                    {{Form::close()}}
+                                    <!-- /.modal-content -->
+                                </div>
+                            </div>
+                            <!-- / .modal -->
                     </div>
                 </div>
             </div>
         </section>
         {!! $packages->links() !!}
-
-        {{-- <footer class="dker p-a">
-                    <div class="row">
-                        <div class="col-sm-3 hidden-xs">
-                            <!-- .modal -->
-                            <div id="m-all" class="modal fade" data-backdrop="true">
-                                <div class="modal-dialog" id="animate">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{ __('backend.confirmation') }}</h5>
-                                        </div>
-                                        <div class="modal-body text-center p-lg">
-                                            <p>
-                                                {{ __('backend.confirmationDeleteMsg') }}
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn dark-white p-x-md"
-                                                    data-dismiss="modal">{{ __('backend.no') }}</button>
-                                            <button type="submit"
-                                                    class="btn danger p-x-md">{{ __('backend.yes') }}</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div>
-                            </div>
-                            <!-- / .modal -->
-                            @if (@Auth::user()->permissionsGroup->webmaster_status)
-                                <select name="action" id="action" class="form-control c-select w-sm inline v-middle"
-                                        required>
-                                    <option value="">{{ __('backend.bulkAction') }}</option>
-                                    <option value="delete">{{ __('backend.deleteSelected') }}</option>
-                                </select>
-                                <button type="submit" id="submit_all"
-                                        class="btn white">{{ __('backend.apply') }}</button>
-                                <button id="submit_show_msg" class="btn white" data-toggle="modal"
-                                        style="display: none"
-                                        data-target="#m-all" ui-toggle-class="bounce"
-                                        ui-target="#animate">{{ __('backend.apply') }}
-                                </button>
-                            @endif
-                        </div>
-
-                        <div class="col-sm-3 text-center">
-                            <small class="text-muted inline m-t-sm m-b-sm">{{ __('backend.showing') }} {{ $packages->firstItem() }}
-                                -{{ $packages->lastItem() }} {{ __('backend.of') }}
-                                <strong>{{ $packages->total()  }}</strong> {{ __('backend.records') }}</small>
-                        </div>
-                        <div class="col-sm-6 text-right text-center-xs">
-                            {!! $packages->links() !!}
-                        </div>
-                    </div>
-                </footer> --}}
-        {{-- {{Form::close()}} --}}
     @else
         <div class="row p-a">
             <div class="col-sm-12">
@@ -232,17 +240,58 @@
 @endsection
 @push('js')
     <script type="text/javascript">
-        $("#checkAll").click(function() {
-            $('input:checkbox').not(this).prop('checked', this.checked);
-        });
-        $("#action").change(function() {
-            if (this.value == "delete") {
-                $("#submit_all").css("display", "none");
-                $("#submit_show_msg").css("display", "inline-block");
-            } else {
-                $("#submit_all").css("display", "inline-block");
-                $("#submit_show_msg").css("display", "none");
+    var price = 0;
+    @foreach ($packages as $pakage)
+        $("#submit_show_msg_{{ $pakage->id }}").click(function() {
+
+            value = $(this).data('package');
+            price = value.price;
+            $('.package-name').text(value[app.locale == 'ar' ? 'title_ar' : 'title_en']);
+            $('#package_id').val(value.id);
+            $('#price').val(value.price);
+            var selectedOptionsCount = $("#children_ids").find("option:selected").length;
+            if(selectedOptionsCount == 0 ){
+                $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price+" {{ __('cruds.Packages.currency') }}");
+                $('#price').val(value.price);
+            }else{
+                $('#price').val(value.price*selectedOptionsCount);
+                $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price*selectedOptionsCount+" {{ __('cruds.Packages.currency') }}");
             }
         });
+    @endforeach
+    $("#children_ids").change(function() {
+        var bh = $(this).data('package');
+        var selectedOptionsCount = $(this).find("option:selected").length;
+        if(selectedOptionsCount == 0 ){
+            $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price+" {{ __('cruds.Packages.currency') }}");
+            $('#price').val(value.price);
+        }else{
+            $('#price').val(value.price*selectedOptionsCount);
+            $('.package-price').text('{{ __('cruds.Packages.PackagePrice') }}: '+value.price*selectedOptionsCount+" {{ __('cruds.Packages.currency') }}");
+        }
+    });
+    $('#main_service').change(function() {
+        var mainServiceId = $(this).val();
+        console.log(mainServiceId);
+        if (mainServiceId) {
+            $('#sub_service_div').show();
+            $.ajax({
+                url: 'teacher/getSubServices/' + mainServiceId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#sub_service').empty();
+                    $('#sub_service').append('<option value="">{{__('cruds.SubServices.SelectSubService')}}</option>');
+                    $.each(data, function(key, value) {
+                        $('#sub_service').append('<option value="' + value.id + '">' + value[app.locale == 'ar' ? 'title_ar' : 'title_en'] + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#sub_service_div').hide();
+            $('#sub_service').empty();
+            $('#sub_service').append('<option value="">{{__('cruds.SubServices.SelectSubService')}}</option>');
+        }
+    });
     </script>
 @endpush
