@@ -40,7 +40,7 @@
                                     </label>
                                 </td>
                                 <td class="text-center">{{ $value->name }}</td>
-                                <td class="text-center"><img src="uploads/clients/{{ $value->photo }}" width="30px" height="30px" alt="">
+                                <td class="text-center"><img src="uploads/users/{{ $value->photo }}" width="30px" height="30px" alt="">
                                 </td>
                                 <td class="text-center">{{ $value->email }}</td>
                                 <td class="text-center">{{ $value->phone }}</td>
@@ -64,8 +64,8 @@
                                             <h5 class="modal-title">{{ $value->name }}</h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
-                                            
-            
+
+
                                             <div class="card" style="width: 100%">
                                                 <img class="img-thumbnail rounded" style="width: 30%" src="uploads/clients/{{ $value->photo }}" alt="{{ $value->name }}">
                                                 <div class="card-body">

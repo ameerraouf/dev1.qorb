@@ -21,7 +21,7 @@ use App\Models\Teacher as ModelsTeacher;
 
 class HomeController extends Controller
 {
-    private $uploadPath = 'uploads/clients/';
+    private $uploadPath = 'uploads/users/';
 
     public function index()
     {
