@@ -73,11 +73,8 @@
                                 <td class="text-center">{{ $value->email }}</td>
                                 <td class="text-center">{{ $value->phone }}</td>
                                 <td class="text-center">
-                                    @if(app()->getLocale() == 'ar')
-                                        {{ $value->role->role_ar }}
-                                    @else
-                                        {{ $value->role->role_en }}
-                                    @endif
+                                    {{ $value->role }}
+                                   
                                 </td>
 
                                 <td class="text-center">
@@ -110,7 +107,7 @@
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ $value->name }} : <strong>[ {{ $value->role->role }} ]</strong></h5>
+                                            <h5 class="modal-title">{{ $value->name }} : <strong>[ {{ $value->role }} ]</strong></h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
                                             
