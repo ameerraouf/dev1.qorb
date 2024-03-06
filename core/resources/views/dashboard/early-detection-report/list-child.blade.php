@@ -2,7 +2,7 @@
 @section('title',  __('cruds.EarlyDetectionReports.Title') )
 @section('content')
     <style>
-        .btn.btn-sm.success {
+        .btn.btn-sm.convert {
             color: #fff;
             background-color: #28a745;
             border-color: #28a745;
@@ -10,6 +10,18 @@
             font-size: 0.875rem;
             line-height: 1.5;
             border-radius: 0.2rem;
+            content: "Your Fixed Text Here";
+        }
+
+        .btn.btn-sm.converted {
+            color: #fff;
+            background-color: #015efe;
+            border-color: #015efe;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+            content: "Your Fixed Text Here";
         }
     </style>
     <div class="padding">
@@ -56,13 +68,12 @@
                                         {!! $child->mother->name !!}
                                 </td>
                                 <td class="text-center">
-                                    <button id="toggleButton" class="convert-to-early-detection btn btn-sm success" data-child-id="{{ $child->id }}">
-                                        <small>
-                                            {{ __('cruds.EarlyDetectionReports.Convert') }}                                        </small>
-                                    </button>
+                                    <a href="{{ route('EarlyDetectionReports-UpdateStatus',$child->id) }}" type="button" class="{{ $child->early_detection_report_status == 1 ? 'btn btn-sm converted' : 'btn btn-sm convert' }}" data-child-id="{{ $child->id }}">
+                                        <small>{{ $child->early_detection_report_status == 1 ? __('cruds.EarlyDetectionReports.Converted') : __('cruds.EarlyDetectionReports.Convert')  }}</small>
+                                    </a>
                                 </td>
                                 <td class="text-center">
-                                    <a class="btn btn-sm success"
+                                    <a class="btn btn-sm convert"
                                        href="{{ route("ShowEarlyDetectionReports",["id"=>$child->id]) }}">
                                         <small>{{ __('cruds.EarlyDetectionReports.Title') }}
                                         </small>
@@ -160,46 +171,6 @@
             @endif
         </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).on('click','.convert-to-early-detection',function() {
-            event.preventDefault();
-                console.log($(this).text());
-                var ButtonText = $(this).text();
-                var childId = $(this).data('child-id');
-                $.ajax({
-                    url: 'admin/early-detection-reports-ajax-create/' + childId,
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        var $button = $('[data-child-id="' + childId + '"]');
-                        if (response.message == 'Added') {
-                            console.log($(this).text());
-                            if( ButtonText === 'Converted' ){
-                                $button.css({
-                                    'color': '#fff',
-                                    'background-color': '#28a745',
-                                    'border-color': '#28a745',
-                                    'padding': '0.25rem 0.5rem',
-                                }).text("{{ __('cruds.EarlyDetectionReports.Convert') }}");
-                            }else{
-                                $button.css({
-                                    'background-color': '#1e91bd',
-                                    'color': '#ffffff',
-                                    'border-color': '#ffffff'
-                                }).text("{{ __('cruds.EarlyDetectionReports.Converted') }}");
-                            }
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error); // Handle errors
-                    }
-                });
-            });
-    </script>
 @endsection
 @push("after-scripts")
     <script type="text/javascript">

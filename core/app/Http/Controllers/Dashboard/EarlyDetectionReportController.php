@@ -97,16 +97,20 @@ class EarlyDetectionReportController extends Controller
         return redirect()->action('Dashboard\EarlyDetectionReportController@EditEarlyDetectionReports',$id)->with('errorMessage', __('backend.error'));
     }
 
-    public function AjaxCreate($id)
+    public function UpdateStatus($id)
     {
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
         }
 
-        $message = 'Added';
-        return response()->json([
-            'message' => $message,
-        ]);
+        try {
+            $child = Children::find($id);
+            $child->early_detection_report_status == 0 ? $child->early_detection_report_status = 1 : $child->early_detection_report_status = 0;
+            $child->save();
+            return redirect()->action('Dashboard\EarlyDetectionReportController@EarlyDetectionReports')->with('doneMessage', __('backend.addDone'));
+        } catch (\Exception $e) {
+            return redirect()->action('Dashboard\EarlyDetectionReportController@EarlyDetectionReports')->with('errorMessage', __('backend.error'));
+        }
     }
 
     public function EarlyDetectionReportsCreate($id)

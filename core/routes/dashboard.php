@@ -410,7 +410,7 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
 
     // Reports
     Route::get('/early-detection-reports', [EarlyDetectionReportController::class, 'EarlyDetectionReports'])->name('EarlyDetectionReports');
-    Route::post('/early-detection-reports-ajax-create/{id}', [EarlyDetectionReportController::class, 'AjaxCreate'])->name('EarlyDetectionReports-AjaxCreate');
+    Route::get('/child-early-detection-reports-update-status/{id}', [EarlyDetectionReportController::class, 'UpdateStatus'])->name('EarlyDetectionReports-UpdateStatus');
     Route::get('/chlidren-early-detection-reports/{id}', [EarlyDetectionReportController::class, 'ShowEarlyDetectionReports'])->name('ShowEarlyDetectionReports');
     Route::get('/chlidren-early-detection-reports/{id}/edit', [EarlyDetectionReportController::class, 'EditEarlyDetectionReports'])->name('EditEarlyDetectionReports');
     Route::post('/chlidren-early-detection-reports/{id}/update', [EarlyDetectionReportController::class, 'UpdateEarlyDetectionReports'])->name('UpdateEarlyDetectionReports');
@@ -419,7 +419,7 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
 
     // PurchaseTransactions
     Route::get('/purchase-transactions', [PurchaseTransactionController::class, 'index'])->name('PurchaseTransactions');
-    Route::get('/societies/change_status/{id}', [PurchaseTransactionController::class, 'change_status'])->name('PurchaseTransactionsChangeStatus');
+    Route::get('/purchase-transactions/change_status/{id}', [PurchaseTransactionController::class, 'change_status'])->name('PurchaseTransactionsChangeStatus');
 });
 
 //Specialist Routes
