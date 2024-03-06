@@ -492,7 +492,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                 </a>
                             </li>
                         @endif
-                    @endif --}}
+                    @endif --}} 
 
                     {{-- @if(Helper::GeneralWebmasterSettings("settings_status")) --}}
                         @if(@Auth::user()->permissionsGroup->settings_status)
