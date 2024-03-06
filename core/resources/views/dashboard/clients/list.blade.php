@@ -67,7 +67,7 @@
 
 
                                             <div class="card" style="width: 100%">
-                                                <img class="img-thumbnail rounded" style="width: 30%" src="uploads/clients/{{ $value->photo }}" alt="{{ $value->name }}">
+                                                <img class="img-thumbnail rounded" style="width: 30%" src="uploads/users/{{ $value->photo }}" alt="{{ $value->name }}">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $value->name }}</h5>
                                                 </div>
