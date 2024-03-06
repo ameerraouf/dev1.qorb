@@ -717,7 +717,7 @@ return array(
     'Role' => 'الدور',
     'selectRole' => 'اختيار دور',
     'Admin' => 'أدمن',
-    'Specialist' => 'أخصائية',
+    'Specialist' => 'أخصائي',
 
     'societies' => 'المجتمع',
     'question' => 'السؤال',
