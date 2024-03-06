@@ -718,6 +718,7 @@ return array(
     'selectRole' => 'اختيار دور',
     'Admin' => 'أدمن',
     'Specialist' => 'أخصائي',
+    'specialist' => 'أخصائي',
 
     'societies' => 'المجتمع',
     'question' => 'السؤال',
@@ -757,6 +758,7 @@ return array(
     'reports' => 'التقارير',
 
     'Supervisor' => 'مشرفة',
+    'supervisor' => 'مشرفة',
 
     'setChildToParent' => 'تعيين مشرفة و اخصائية للطفل',
 

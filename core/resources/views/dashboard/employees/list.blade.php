@@ -107,7 +107,7 @@
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ $value->name }} : <strong>[ {{ $value->role }} ]</strong></h5>
+                                            <h5 class="modal-title">{{ $value->name }} : <strong>[ {{ __('backend.'.$value->role) }} ]</strong></h5>
                                         </div>
                                         <div class="modal-body text-center p-lg">
                                             

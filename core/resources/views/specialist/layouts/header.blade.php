@@ -11,8 +11,8 @@
         <!-- navbar right -->
         <ul class="nav navbar-nav pull-right">
             <li class="nav-item p-t p-b">
-                <a class="btn btn-sm info marginTop2" href="{{ route("Home") }}" target="_blank"
-                   title="{{ __('backend.sitePreview') }}">
+                <a class="btn btn-sm info marginTop2" href="{{ route('Home') }}" target="_blank"
+                    title="{{ __('backend.sitePreview') }}">
                     <i class="material-icons">&#xe895;</i> {{ __('backend.sitePreview') }}
                 </a>
             </li>
@@ -22,11 +22,11 @@
             $notifications = Helper::specialistsNotifications();
             $alerts = count($notifications);
             ?>
-            @if($alerts >0)
+            @if ($alerts > 0)
                 <li class="nav-item dropdown pos-stc-xs">
                     <a class="nav-link" href data-toggle="dropdown">
                         <i class="material-icons">&#xe7f5;</i>
-                        @if($alerts >0)
+                        @if ($alerts > 0)
                             <span class="label label-sm up warn">{{ $alerts }}</span>
                         @endif
                     </a>
@@ -34,53 +34,66 @@
                         <div class="box dark">
                             <div class="box p-a scrollable maxHeight320">
                                 <ul class="list-group list-group-gap m-a-0">
-                                    @foreach($notifications as $webmailsAlert)
+                                    @foreach ($notifications as $webmailsAlert)
                                         <li class="list-group-item lt box-shadow-z0 b">
-                                    <span class="clear block">
-                                        <small>{{ $webmailsAlert->message }}</small><br>
-                                        
-                                        <br>
-                                        <small class="text-muted">
-                                            {{ date('d M Y  h:i A', strtotime($webmailsAlert->created_at)) }}
-                                        </small>
-                                    </span></li>
+                                            <span class="clear block">
+                                                <small>{{ $webmailsAlert->message }}</small><br>
+
+                                                <br>
+                                                <small class="text-muted">
+                                                    {{ date('d M Y  h:i A', strtotime($webmailsAlert->created_at)) }}
+                                                </small>
+                                            </span>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </li>
+            @else
+            <li class="nav-item dropdown pos-stc-xs">
+                <a class="nav-link" href data-toggle="dropdown">
+                    <i class="material-icons">&#xe7f5;</i>
+                </a>
+                <div class="dropdown-menu pull-right w-xl animated fadeInUp no-bg no-border no-shadow">
+                    <div class="box dark">
+                        <div class="box p-a scrollable maxHeight320">
+                            {{ __('backend.noData') }}
+                        </div>
+                    </div>
+                </div>
+            </li>
             @endif
             <li class="nav-item dropdown">
                 <a class="nav-link clear" href data-toggle="dropdown">
-                  <img src="uploads/users/{{ Auth::guard()->user()->photo }}" class="avatar w-32">
-                     
-                      <i class="on b-white bottom"></i>
-                  
+                    <img src="uploads/users/{{ Auth::guard()->user()->photo }}" class="avatar w-32">
+
+                    <i class="on b-white bottom"></i>
+
                 </a>
                 <div class="dropdown-menu pull-right dropdown-menu-scale">
-                    {{-- @if(Helper::GeneralWebmasterSettings("inbox_status"))
-                        @if(@Auth::user()->permissionsGroup->inbox_status)
+                    {{-- @if (Helper::GeneralWebmasterSettings('inbox_status'))
+                        @if (@Auth::user()->permissionsGroup->inbox_status)
                             <a class="dropdown-item"
                                href="{{ route('webmails') }}"><span>{{ __('backend.siteInbox') }}</span>
-                                @if( @$webmailsNewCount >0)
+                                @if (@$webmailsNewCount > 0)
                                     <span class="label warn m-l-xs">{{ @$webmailsNewCount }}</span>
                                 @endif
                             </a>
                         @endif
                     @endif --}}
-                    {{-- @if(Auth::user()->permissions ==0 || Auth::user()->permissions ==1) --}}
-                        <a class="dropdown-item"
-                           href="#"><span>{{ __('backend.profile') }}</span></a>
+                    {{-- @if (Auth::user()->permissions == 0 || Auth::user()->permissions == 1) --}}
+                    <a class="dropdown-item" href="#"><span>{{ __('backend.profile') }}</span></a>
                     {{-- @endif --}}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url('/logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('backend.logout') }}
                     </a>
                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
                         @csrf
-                   </form>
+                    </form>
                 </div>
             </li>
 
@@ -93,19 +106,19 @@
 
         <!-- navbar collapse -->
         <div class="collapse navbar-toggleable-sm" id="collapse">
-            {{Form::open(['route'=>['adminFind'],'method'=>'POST', 'role'=>'search', 'class' => "navbar-form form-inline pull-right pull-none-sm navbar-item v-m" ])}}
+            {{ Form::open(['route' => ['adminFind'], 'method' => 'POST', 'role' => 'search', 'class' => 'navbar-form form-inline pull-right pull-none-sm navbar-item v-m']) }}
 
             <div class="form-group l-h m-a-0">
-                <div class="input-group input-group-sm"><input type="text" name="q" class="form-control p-x rounded"
-                                                               placeholder="{{ __('backend.search') }}..." required>
-                    <span
-                        class="input-group-btn"><button type="submit" class="btn white b-a rounded no-shadow"><i
-                                class="fa fa-search"></i></button></span></div>
+                <div class="input-group input-group-sm"><input type="text" name="q"
+                        class="form-control p-x rounded" placeholder="{{ __('backend.search') }}..." required>
+                    <span class="input-group-btn"><button type="submit" class="btn white b-a rounded no-shadow"><i
+                                class="fa fa-search"></i></button></span>
+                </div>
             </div>
-            {{Form::close()}}
+            {{ Form::close() }}
 
-            @if(Helper::GeneralWebmasterSettings("license") && Helper::GeneralWebmasterSettings("purchase_code")!="")
-                {{-- @if(@Auth::user()->permissionsGroup->add_status)
+            @if (Helper::GeneralWebmasterSettings('license') && Helper::GeneralWebmasterSettings('purchase_code') != '')
+                {{-- @if (@Auth::user()->permissionsGroup->add_status)
                     <ul class="nav navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link" href data-toggle="dropdown">
@@ -114,50 +127,50 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-scale">
                                 <?php
-                                $data_sections_arr = explode(",", Auth::user()->permissionsGroup->data_sections);
-                                $clr_ary = array("info", "danger", "success", "accent",);
+                                $data_sections_arr = explode(',', Auth::user()->permissionsGroup->data_sections);
+                                $clr_ary = ['info', 'danger', 'success', 'accent'];
                                 $ik = 0;
-                                $mnu_title_var = "title_" . @Helper::currentLanguage()->code;
-                                $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
+                                $mnu_title_var = 'title_' . @Helper::currentLanguage()->code;
+                                $mnu_title_var2 = 'title_' . env('DEFAULT_LANGUAGE');
                                 ?>
-                                @if(@Auth::user()->permissionsGroup->add_status)
-                                    @foreach($GeneralWebmasterSections as $headerWebmasterSection)
-                                        @if(in_array($headerWebmasterSection->id,$data_sections_arr))
+                                @if (@Auth::user()->permissionsGroup->add_status)
+                                    @foreach ($GeneralWebmasterSections as $headerWebmasterSection)
+                                        @if (in_array($headerWebmasterSection->id, $data_sections_arr))
                                             <?php
-                                            if ($headerWebmasterSection->$mnu_title_var != "") {
+                                            if ($headerWebmasterSection->$mnu_title_var != '') {
                                                 $GeneralWebmasterSectionTitle = $headerWebmasterSection->$mnu_title_var;
                                             } else {
                                                 $GeneralWebmasterSectionTitle = $headerWebmasterSection->$mnu_title_var2;
                                             }
-                                            $LiIcon = "&#xe2c8;";
+                                            $LiIcon = '&#xe2c8;';
                                             if ($headerWebmasterSection->type == 3) {
-                                                $LiIcon = "&#xe050;";
+                                                $LiIcon = '&#xe050;';
                                             }
                                             if ($headerWebmasterSection->type == 2) {
-                                                $LiIcon = "&#xe63a;";
+                                                $LiIcon = '&#xe63a;';
                                             }
                                             if ($headerWebmasterSection->type == 1) {
-                                                $LiIcon = "&#xe251;";
+                                                $LiIcon = '&#xe251;';
                                             }
                                             if ($headerWebmasterSection->type == 0) {
-                                                $LiIcon = "&#xe2c8;";
+                                                $LiIcon = '&#xe2c8;';
                                             }
                                             if ($headerWebmasterSection->id == 1) {
-                                                $LiIcon = "&#xe3e8;";
+                                                $LiIcon = '&#xe3e8;';
                                             }
                                             if ($headerWebmasterSection->id == 7) {
-                                                $LiIcon = "&#xe02f;";
+                                                $LiIcon = '&#xe02f;';
                                             }
                                             if ($headerWebmasterSection->id == 2) {
-                                                $LiIcon = "&#xe540;";
+                                                $LiIcon = '&#xe540;';
                                             }
                                             if ($headerWebmasterSection->id == 3) {
-                                                $LiIcon = "&#xe307;";
+                                                $LiIcon = '&#xe307;';
                                             }
                                             if ($headerWebmasterSection->id == 8) {
-                                                $LiIcon = "&#xe8f6;";
+                                                $LiIcon = '&#xe8f6;';
                                             }
-
+                                            
                                             ?>
                                             <a class="dropdown-item"
                                                href="{{route("topicsCreate",$headerWebmasterSection->id)}}"><span><i
@@ -165,15 +178,15 @@
                                         @endif
                                     @endforeach
 
-                                    @if(@Auth::user()->permissionsGroup->banners_status)
+                                    @if (@Auth::user()->permissionsGroup->banners_status)
                                         <a class="dropdown-item" href="{{route("Banners")}}"><i class="material-icons">
                                                 &#xe433;</i>
                                             &nbsp;{{ __('backend.adsBanners') }}</a>
                                     @endif
                                     <div class="dropdown-divider"></div>
 
-                                    @if(Helper::GeneralWebmasterSettings("newsletter_status"))
-                                        @if(@Auth::user()->permissionsGroup->newsletter_status)
+                                    @if (Helper::GeneralWebmasterSettings('newsletter_status'))
+                                        @if (@Auth::user()->permissionsGroup->newsletter_status)
                                             <a class="dropdown-item" href="{{route("contacts")}}"><i
                                                     class="material-icons">
                                                     &#xe7ef;</i>
@@ -181,8 +194,8 @@
                                         @endif
                                     @endif
                                 @endif
-                                @if(Helper::GeneralWebmasterSettings("inbox_status"))
-                                    @if(@Auth::user()->permissionsGroup->inbox_status)
+                                @if (Helper::GeneralWebmasterSettings('inbox_status'))
+                                    @if (@Auth::user()->permissionsGroup->inbox_status)
                                         <a class="dropdown-item"
                                            href="{{ route("webmails",["group_id"=>"create"]) }}"><i
                                                 class="material-icons">&#xe0be;</i> &nbsp;{{ __('backend.compose') }}
@@ -199,8 +212,8 @@
                     <li class="nav-item">
                         <div class=" p-y-sm p-x m-t-sm">
                             <strong class="inline-block text-warning">{{ __('backend.unlicensed') }}</strong> &nbsp;
-                            <a href="{{ route("webmasterSettings") }}?tab=license"
-                               class="btn btn-xs warning">{{ __('backend.licenseNow') }}</a>
+                            <a href="{{ route('webmasterSettings') }}?tab=license"
+                                class="btn btn-xs warning">{{ __('backend.licenseNow') }}</a>
                         </div>
                     </li>
                 </ul>

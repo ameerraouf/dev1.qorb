@@ -66,6 +66,24 @@
     });
 </script>
 
+<script type="text/javascript">
+    toastr.options.timeOut = 5000;
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('58f64b993fbe1bb0f3c5', {
+        cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('qorb-channel');
+    channel.bind('change-society-status', function(data) {
+      if(data.data[1] == {{auth()->user()->id}}){
+            console.log(data.data[0]);
+            toastr.success(data.data[0]);
+      }
+    });
+</script>
+
 
 <script type="text/javascript">
     toastr.options.timeOut = 5000;

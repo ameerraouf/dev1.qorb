@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Events\Teacher\SubscribePackage;
 use App\Models\Report;
 use App\Models\Package;
 use App\Models\Children;
@@ -16,6 +17,7 @@ use App\Models\ConsultingReport;
 use App\Models\PurchaseTransaction;
 use App\Models\TeacherSubscription;
 use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Teacher as ModelsTeacher;
 
@@ -65,6 +67,7 @@ class HomeController extends Controller
             $childrenIds = $request->children_ids;
             // dd($request->children_ids);
             $childrenIdsAsString = implode(',', $childrenIds);
+            $package = Package::where('id', $request->package_id)->first();
 
             $transaction = $transaction->create([
                 'main_service_id' => $request->main_service_id,
@@ -74,7 +77,13 @@ class HomeController extends Controller
                 'price' => $request->price,
                 'children_ids' => $childrenIdsAsString,
             ]);
+            event(new SubscribePackage(' قامت المدرسة'.Auth::user()->name . ' بالاشتراك بالباقة '. $package->name));
 
+            Notification::create([
+                'teacher_id' => Auth::user()->id,
+                'message' => ' قامت المدرسة'.Auth::user()->name . ' بالاشتراك بالباقة '. $package->name
+            ]);
+            
             return redirect()->route('TshowSubscriptionsPage')->with('doneMessage', __('backend.saveDone'));
         } catch (\Exception $e) {
             return redirect()->route('TshowSubscriptionsPage')->with('errorMessage', $e->getMessage());

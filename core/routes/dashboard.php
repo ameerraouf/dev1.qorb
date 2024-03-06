@@ -308,7 +308,7 @@ Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
     Route::get('/employees/create/', [EmployeeController::class, 'create'])->name('employeesCreate');
     Route::post('/employees/store', [EmployeeController::class, 'store'])->name('employeesStore');
-    Route::get('/employees{id}/edit', [EmployeeController::class, 'edit'])->name('employeesEdit');
+    Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employeesEdit');
     Route::post('employees/{id}/update', [EmployeeController::class, 'update'])->name('employeesUpdate');
     Route::get('/employees/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employeesDestroy');
     Route::post('/employees/updateAll', [EmployeeController::class, 'updateAll'])->name('employeesUpdateAll');

@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-use App\Http\Controllers\Controller;
 
+use App\Events\Admin\ChangeSocietyStatus;
+use App\Http\Controllers\Controller;
+use App\Models\Notification;
 use App\Models\Society;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\WebmasterSection;
@@ -140,6 +143,7 @@ class SocietyController extends Controller
         $society = Society::findorfail($id);
         ($society->status  == '1') ? $society->status  = 0 : $society->status  = 1;
         $society->update();
+        
         return redirect()->action('Dashboard\SocietyController@index')->with('doneMessage', __('backend.saveDone'));
 
     }

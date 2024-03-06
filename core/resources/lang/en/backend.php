@@ -732,6 +732,7 @@ return array(
     'selectRole' => 'Select Role',
     'Admin' => 'Admin',
     'Specialist' => 'Specialist',
+    'specialist' => 'Specialist',
 
      // TEACHER ____________________________
      'signedInToControlteacher' => 'Sign in to clients dashboard',
@@ -761,6 +762,7 @@ return array(
      'reports' => 'Reports',
 
     'Supervisor' => 'Supervisor',
+    'supervisor' => 'Supervisor',
 
     'setChildToParent' => 'Set Child to Specilist / Supervisor',
 

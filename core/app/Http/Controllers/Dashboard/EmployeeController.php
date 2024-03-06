@@ -133,15 +133,11 @@ class EmployeeController extends Controller
         // General for all pages
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
         // General END
-        $roles = Role::orderby('id', 'asc')->get();
 
-        if (@Auth::user()->permissionsGroup->view_status) {
-            $employee = Employee::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->find($id);
-        } else {
-            $employee = Employee::find($id);
-        }
+        $employee = User::find($id);
+
         if (!empty($employee)) {
-            return view("dashboard.employees.edit", compact("employee", "roles", "GeneralWebmasterSections"));
+            return view("dashboard.employees.edit", compact("employee", "GeneralWebmasterSections"));
         } else {
             return redirect()->action('Dashboard\EmployeeController@index');
         }
@@ -156,7 +152,7 @@ class EmployeeController extends Controller
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
         }
-        $employee = Employee::find($id);
+        $employee = User::find($id);
 
         $this->validate($request, [
             'name' => 'required',
@@ -164,7 +160,7 @@ class EmployeeController extends Controller
             'phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|unique:employees,phone,'. $employee->id,
             'password' => 'required|min:6',
             'photo' => 'mimes:png,jpeg,jpg,gif,svg',
-            'role_id' => 'required'
+            'role' => 'required'
         ]);
 
         if (!empty($employee)) {
@@ -195,7 +191,7 @@ class EmployeeController extends Controller
                 $employee->email = $request->email;
                 $employee->phone = $request->phone;
                 $employee->password = bcrypt($request->password);
-                $employee->role_id = $request->role_id;
+                $employee->role = $request->role;
                 
                 if ($request->photo_delete == 1) {
                     // Delete a User file
@@ -232,7 +228,7 @@ class EmployeeController extends Controller
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
         }
-        $employee = Employee::find($id);
+        $employee = User::find($id);
             if ($employee->photo != "") {
                 File::delete($this->getUploadPath() . $employee->photo);
             }
