@@ -28,7 +28,11 @@
                            class="col-sm-2 form-control-label">{{ __('cruds.EarlyDetectionReports.ChildName') }}
                     </label>
                     <div class="col-sm-10">
-                        {!! Form::text('child_id',$child->id, array('placeholder' => '','class' => 'form-control','id'=>'question_en','readonly'=>'')) !!}
+                        {!! Form::hidden('child_id',$child->id, array('placeholder' => '','class' => 'form-control','id'=>'question_en','readonly'=>'')) !!}
+                    </div>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" readonly value="{{ $child->name }}">
                     </div>
                 </div>
 
