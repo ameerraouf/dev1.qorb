@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div class="col-lg-4">
-                <a href="" class="box-color box-flex p-a-2 blue">
+                <a href="{{ route('TeacherPackages') }}" class="box-color box-flex p-a-2 blue">
                     <div class="pull-right m-l">
                         <span class="w-56 dker text-center rounded d-inline-flex align-items-center justify-content-center">
                             <i class="fa fa-th-large fa-2x" aria-hidden="true"></i>
@@ -38,7 +38,7 @@
                 </a>
             </div>
             <div class="col-lg-4">
-                <a href="" class="box-color box-flex p-a-2 warn">
+                <a href="{{ route('TeacherProfile') }}" class="box-color box-flex p-a-2 warn">
                     <div class="pull-right m-l">
                         <span class="w-56 dker text-center rounded d-inline-flex align-items-center justify-content-center">
                             <i class="fa fa-user fa-2x" aria-hidden="true"></i>

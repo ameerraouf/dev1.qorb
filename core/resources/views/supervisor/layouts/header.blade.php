@@ -37,7 +37,7 @@
                                         <li class="list-group-item lt box-shadow-z0 b">
                                     <span class="clear block text-right">
                                         <small style="text-align: right;">{{ $webmailsAlert->message }}</small><br>
-                                       
+
                                         <small class="text-muted">
                                             {{ date('d M Y  h:i A', strtotime($webmailsAlert->created_at)) }}
                                         </small>
@@ -67,7 +67,7 @@
                     @endif --}}
                     {{-- @if(Auth::user()->permissions ==0 || Auth::user()->permissions ==1) --}}
                         <a class="dropdown-item"
-                           href="#"><span>{{ __('backend.profile') }}</span></a>
+                           href="{{ route('SProfile') }}"><span>{{ __('backend.profile') }}</span></a>
                     {{-- @endif --}}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url('/logout') }}"

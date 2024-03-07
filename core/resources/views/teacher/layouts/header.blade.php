@@ -58,8 +58,8 @@
                       @else
                           <img src="{{ asset('uploads/contacts/profile.jpg') }}" alt="{{ Auth::user()->name }}"
                                title="{{ Auth::user()->name }}">
-                      @endif 
-                      
+                      @endif
+
                   </span>
                 </a>
                 <div class="dropdown-menu pull-right dropdown-menu-scale">
@@ -75,7 +75,7 @@
                     @endif --}}
                     {{-- @if(Auth::user()->permissions ==0 || Auth::user()->permissions ==1) --}}
                         <a class="dropdown-item"
-                           href="#"><span>{{ __('backend.profile') }}</span></a>
+                           href="{{ route('TeacherProfile') }}"><span>{{ __('backend.profile') }}</span></a>
                     {{-- @endif --}}
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('teacher.logout') }}"

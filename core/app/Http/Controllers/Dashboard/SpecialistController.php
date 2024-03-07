@@ -29,7 +29,7 @@ class SpecialistController extends Controller
 
     public function index()
     {
-        $childrenCount = Children::count();
+        $childrenCount = Children::where('specialist_id',Auth::user()->id)->count();
         return view('specialist.home', compact('childrenCount'));
     }
 
@@ -179,7 +179,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            $admin = User::where('role', 'admin')->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new ConsultingReport;
             $report->children_id = $id;
@@ -188,21 +188,24 @@ class SpecialistController extends Controller
             $report->solution = $request->solution;
             $report->save();
 
-            event(new ConsultingReportCreated($children->name.' تم إضافة تقرير الاستشارات ل', $supervisor->id));
-            
+            if($supervisor){
+                event(new ConsultingReportCreated($children->name.' تم إضافة تقرير الاستشارات ل', $supervisor->id));
+            }
             event(new SpecialistAddConsultingReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل', $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
                 'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل'
+                'message' => $specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل'
             ]);
 
-            Notification::create([
-                'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' تم إضافة تقرير الاستشارات ل'
+            if($supervisor){
+                Notification::create([
+                    'supervisor_id' => $supervisor->id,
+                    'message' => $children->name.' تم إضافة تقرير الاستشارات ل'
 
-            ]);
+                ]);
+            }
             Notification::create([
                 'specialist_id' => $specialist->id,
                 'message' => $children->name.' لقد قمتِ بإضافة تقرير الاستشارات ل'
@@ -232,7 +235,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            $admin = User::where('role', 'admin')->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new StatusReport;
             $report->children_id = $id;
@@ -243,21 +246,26 @@ class SpecialistController extends Controller
             $report->status_target = $request->status_target;
             $report->save();
 
-            event(new StatusReportCreated($children->name.' تم إضافة تقرير الحالة ل', $supervisor->id));
+            if($supervisor){
+                event(new StatusReportCreated($children->name.' تم إضافة تقرير الحالة ل', $supervisor->id));
+            }
 
             event(new SpecialistAddConsultingReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل', $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
                 'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل'
+                'message' => $specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل'
             ]);
 
-            Notification::create([
-                'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' تم إضافة تقرير الحالة ل'
+            if($supervisor){
+                Notification::create([
+                    'supervisor_id' => $supervisor->id,
+                    'message' => $children->name.' تم إضافة تقرير الحالة ل'
 
-            ]);
+                ]);
+            }
+
             Notification::create([
                 'specialist_id' => $specialist->id,
                 'message' => $children->name.' لقد قمتِ بإضافة تقرير الحالة ل'
@@ -396,9 +404,6 @@ class SpecialistController extends Controller
             $user->phone = $request->phone;
             if ($request->password) {
                 $user->password = bcrypt($request->password);
-            }
-            else{
-                $user->password = "";
             }
             if ($request->photo) {
                 $photo = time() . rand(1111,

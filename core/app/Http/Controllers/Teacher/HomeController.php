@@ -156,8 +156,6 @@ class HomeController extends Controller
             $user->phone = $request->phone;
             if ($request->password) {
                 $user->password = bcrypt($request->password);
-            } else {
-                $user->password = '';
             }
             if ($request->photo) {
                 $photo = time() . rand(1111, 9999) . '.' . $request->file('photo')->getClientOriginalExtension();
