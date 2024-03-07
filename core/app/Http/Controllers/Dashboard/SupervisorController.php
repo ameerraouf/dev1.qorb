@@ -137,25 +137,25 @@ class SupervisorController extends Controller
 
             $report->save();
     
-            event(new CreateVbMap($children->name.' ل vb-map تم إضافة تقييم', $specialist->id));
+            event(new CreateVbMap(" تم إضافة تقييم vb-map ل {$children->name}", $specialist->id));
            
-            event(new SupervisorAddVbmap($supervisor->name.' بواسطة '.$children->name.' ل vb-map تم إضافة تقييم', $teacher->id));
+            event(new SupervisorAddVbmap(" تم إضافة تقييم vb-map ل {$children->name} بواسطة {$supervisor->name}", $teacher->id));
             
 
             Notification::create([
                 'teacher_id' => $teacher->id,
                 'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' ل vb-map تم إضافة تقييم'
+                'message' => " تم إضافة تقييم vb-map ل {$children->name} بواسطة {$supervisor->name}"
             ]);
 
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' ل vb-map تم إضافة تقييم'
+                'message' => " تم إضافة تقييم vb-map ل {$children->name}"
             ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' ل vb-map لقد قمتِ بإضافة تقرير '
+                'message' => " لقد قمتِ بإضافة تقييم vb-map ل {$children->name}"
             ]);
 
             return redirect()->route('showChildrenVbmap', $id)->with('doneMessage', __('backend.addDone'));
@@ -180,7 +180,7 @@ class SupervisorController extends Controller
             $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            // $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $report = new TreatmentPlan();
             $report->children_id = $id;
             $report->target = $request->target;
@@ -188,26 +188,25 @@ class SupervisorController extends Controller
             $report->help_description = $request->help_description;
             $report->save();
             
-            event(new CreateTreatmentPlan($children->name.' تم إضافة الخطة العلاجية ل', $specialist->id));
+            event(new CreateTreatmentPlan(" تم إضافة الخطة العلاجية ل {$children->name}", $specialist->id));
             
-            event(new SupervisorAddTreatmentplan($supervisor->name.' بواسطة '.$children->name.' تم إضافة الخطة العلاجية ل', $teacher->id));
+            event(new SupervisorAddTreatmentplan(" تم إضافة الخطة العلاجية ل {$children->name} بواسطة {$supervisor->name}", $teacher->id));
             
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة الخطة العلاجية ل'
+                // 'admin_id' => $admin->id,
+                'message' => " تم إضافة الخطة العلاجية ل {$children->name} بواسطة {$supervisor->name}"
             ]);
 
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' تم إضافة الخطة العلاجية ل'
+                'message' => " تم إضافة الخطة العلاجية ل {$children->name}"
           
             ]);
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' لقد قمتِ بإضافة تقرير الخطة العلاجية ل'
-          
+                'message' => " لقد قمتِ بإضافة الخطة العلاجية ل {$children->name}"
             ]);
 
             return redirect()->route('showChildrenTreatmentPlan', $id)->with('doneMessage', __('backend.addDone'));
@@ -230,7 +229,7 @@ class SupervisorController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','specialist_id', 'teacher_id')->first();
             $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
             $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            // $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new FinalReport();
             $report->children_id = $id;
@@ -239,27 +238,27 @@ class SupervisorController extends Controller
             $report->recommends = $request->recommends;
 
             $report->save();
-            event(new CreateFinalReport($children->name.' تم إضافة التقرير النهائى ل', $specialist->id));
+            event(new CreateFinalReport(" تم إضافة التقرير النهائى ل {$children->name}", $specialist->id));
             
-            event(new SupervisorAddFinalReport($supervisor->name.' بواسطة '.$children->name.' تم إضافة التقرير النهائى ل', $teacher->id));
+            event(new SupervisorAddFinalReport(" تم إضافة التقرير النهائى ل {$children->name} بواسطة {$supervisor->name}", $teacher->id));
             
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة التقرير النهائى ل'
+                // 'admin_id' => $admin->id,
+                'message' => " تم إضافة التقرير النهائى ل {$children->name} بواسطة {$supervisor->name}"
             ]);
             
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' تم إضافة التقرير النهائى ل'
+                'message' => " تم إضافة التقرير النهائى ل {$children->name}"
           
             ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' لقد قمتِ بإضافة التقرير النهائى ل'
-          
+                'message' => " لقد قمتِ بإضافة التقرير النهائى ل {$children->name}"
+                
             ]);
 
             return redirect()->route('showChildrenFinalReports', $id)->with('doneMessage', __('backend.addDone'));
@@ -386,7 +385,7 @@ class SupervisorController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','specialist_id','teacher_id')->first();
             $specialist = User::where('role', 'specialist')->where('id', $children->specialist_id)->first();
             $supervisor = User::where('role', 'supervisor')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            // $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new ConsultingReport();
             $report->children_id = $id;
@@ -395,23 +394,23 @@ class SupervisorController extends Controller
             $report->solution = $request->solution;
             $report->save();
 
-            event(new CreateConsultingReport($children->name.' تم إضافة تقرير الاستشارات ل', $specialist->id));
-            
-            event(new SupervisorAddConsultingReport($supervisor->name.' بواسطة '.$children->name.' تم إضافة الاستشارات ل', $teacher->id));
+            event(new CreateConsultingReport(" تم إضافة تقرير الاستشارات ل {$children->name}", $specialist->id));
+            event(new SupervisorAddConsultingReport(" تم إضافة تقرير الاستشارات ل {$children->name} بواسطة {$supervisor->name}", $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة الاستشارات ل'
+                // 'admin_id' => $admin->id,
+                'message' => " تم إضافة تقرير الاستشارات ل {$children->name} بواسطة {$supervisor->name}"
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' تم إضافة تقرير الاستشارات ل'
+                'message' => " تم إضافة تقرير الاستشارات ل {$children->name}"
           
             ]);
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' لقد قمتِ بإضافة تقرير الاستشارات ل'
+                'message' => " لقد قمتِ بإضافة تقرير الاستشارات ل {$children->name}"
+                
             ]);
 
 

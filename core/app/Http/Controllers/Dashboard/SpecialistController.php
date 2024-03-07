@@ -7,6 +7,7 @@ use App\Events\Supervisor\SessionsReportCreated;
 use App\Events\Supervisor\StatusReportCreated;
 use App\Events\Teacher\SpecialistAddConsultingReport;
 use App\Events\Teacher\SpecialistAddSessionReport;
+use App\Events\Teacher\SpecialistAddStatusReport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Children;
@@ -126,7 +127,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            // $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new Report;
             $report->children_id = $id;
@@ -136,24 +137,24 @@ class SpecialistController extends Controller
             $report->success_number = $request->success_number;
             $report->save();
 
-            event(new SessionsReportCreated($children->name.' تم إضافة تقرير الجلسات ل', $supervisor->id));
+            event(new SessionsReportCreated(" تم إضافة تقرير الجلسات ل {$children->name}", $supervisor->id));
 
-            event(new SpecialistAddSessionReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الجلسات ل', $teacher->id));
+            event(new SpecialistAddSessionReport(" تم إضافة تقرير الجلسات ل {$children->name} بواسطة {$specialist->name}", $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الجلسات ل'
+                // 'admin_id' => $admin->id,
+                'message' => " تم إضافة تقرير الجلسات ل {$children->name} بواسطة {$specialist->name}"
             ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' تم إضافة تقرير الجلسات ل'
+                'message' => " تم إضافة تقرير الجلسات ل {$children->name}"
 
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' لقد قمتِ بإضافة تقرير الجلسات ل'
+                'message' => " لقد قمتِ بإضافة تقرير الجلسات ل {$children->name}" 
             ]);
 
             return redirect()->route('ChildrenReports',$id)->with('doneMessage', __('backend.addDone'));
@@ -179,7 +180,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            // $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new ConsultingReport;
             $report->children_id = $id;
@@ -188,24 +189,24 @@ class SpecialistController extends Controller
             $report->solution = $request->solution;
             $report->save();
 
-            event(new ConsultingReportCreated($children->name.' تم إضافة تقرير الاستشارات ل', $supervisor->id));
+            event(new ConsultingReportCreated(" تم إضافة تقرير الاستشارات ل {$children->name}", $supervisor->id));
             
-            event(new SpecialistAddConsultingReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل', $teacher->id));
+            event(new SpecialistAddConsultingReport(" تم إضافة تقرير الاستشارات ل {$children->name} بواسطة {$specialist->name}", $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الاستشارات ل'
+                // 'admin_id' => $admin->id,
+                'message' => " تم إضافة تقرير الاستشارات ل {$children->name} بواسطة {$specialist->name}"
             ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' تم إضافة تقرير الاستشارات ل'
+                'message' => " تم إضافة تقرير الاستشارات ل {$children->name}"
 
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' لقد قمتِ بإضافة تقرير الاستشارات ل'
+                'message' => " لقد قمتِ بإضافة تقرير الاستشارات ل {$children->name} "
             ]);
 
             return redirect()->route('ChildrenConsultingReports',$id)->with('doneMessage', __('backend.addDone'));
@@ -232,7 +233,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
+            // $admin = User::where('role', 'admin')->where('id', Auth::user()->id)->first();
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new StatusReport;
             $report->children_id = $id;
@@ -243,30 +244,30 @@ class SpecialistController extends Controller
             $report->status_target = $request->status_target;
             $report->save();
 
-            event(new StatusReportCreated($children->name.' تم إضافة تقرير الحالة ل', $supervisor->id));
+            event(new StatusReportCreated(' تم إضافة تقرير الحالة ل'.$children->name, $supervisor->id));
 
-            event(new SpecialistAddConsultingReport($specialist->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل', $teacher->id));
+            event(new SpecialistAddStatusReport(" تم إضافة تقرير الحالة ل {$children->name} بواسطة {$specialist->name}" , $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'admin_id' => $admin->id,
-                'message' => $supervisor->name.' بواسطة '.$children->name.' تم إضافة تقرير الحالة ل'
+                // 'admin_id' => $admin->id,
+                'message' => " تم إضافة تقرير الحالة ل {$children->name} بواسطة {$specialist->name}" 
             ]);
 
             Notification::create([
                 'supervisor_id' => $supervisor->id,
-                'message' => $children->name.' تم إضافة تقرير الحالة ل'
+                'message' => " تم إضافة تقرير الحالة ل{$children->name}"
 
             ]);
             Notification::create([
                 'specialist_id' => $specialist->id,
-                'message' => $children->name.' لقد قمتِ بإضافة تقرير الحالة ل'
+                'message' => " لقد قمتِ بإضافة تقرير الحالة ل {$children->name}"
+                
             ]);
 
             return redirect()->route('ChildrenStatusReports',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
-            return $e->getMessage();
             return redirect()->back()->with('errorMessage', $e->getMessage());
         }
         return redirect()->route('ChildrenStatusReports',$id)->with('errorMessage', __('backend.error'));

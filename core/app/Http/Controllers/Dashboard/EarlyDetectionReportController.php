@@ -144,11 +144,11 @@ class EarlyDetectionReportController extends Controller
             $report->child_id = $request->child_id;
             $report->save();
 
-            event(new AdminAddEarlyDetectionReport($children->name.' تم إضافة تقرير الكشف المبكر ل', $teacher->id));
+            event(new AdminAddEarlyDetectionReport(' تم إضافة تقرير الكشف المبكر ل'.$children->name, $teacher->id));
 
             Notification::create([
                 'teacher_id' => $teacher->id,
-                'message' => $children->name.' تم إضافة تقرير الكشف المبكر ل'
+                'message' => ' تم إضافة تقرير الكشف المبكر ل'.$children->name
             ]);
             return redirect()->action('Dashboard\EarlyDetectionReportController@ShowEarlyDetectionReports',$request->child_id)->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
