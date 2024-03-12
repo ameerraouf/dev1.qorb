@@ -179,7 +179,7 @@ class SpecialistController extends Controller
             $children =  Children::where('id', $id)->select('id', 'name','supervisor_id', 'teacher_id')->first();
             $supervisor = User::where('role', 'supervisor')->where('id', $children->supervisor_id)->first();
             $specialist = User::where('role', 'specialist')->where('id', Auth::user()->id)->first();
-            $admin = User::where('role', 'admin')->first();
+            $admin = User::where('role', 'admin')->first(); // all admins
             $teacher = Teacher::where('id', $children->teacher_id)->first();
             $report = new ConsultingReport;
             $report->children_id = $id;
