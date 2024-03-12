@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Models\WebmasterSection;
 use App\Http\Controllers\Controller;
@@ -25,6 +26,11 @@ class FinancialTransactionController extends Controller
 
     public function index()
     {
+
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
+
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -39,6 +45,9 @@ class FinancialTransactionController extends Controller
 
     public function create()
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -55,6 +64,9 @@ class FinancialTransactionController extends Controller
 
     public function store(Request $request)
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -78,20 +90,23 @@ class FinancialTransactionController extends Controller
 
         try {
             $transaction = new FinancialTransaction;
-            //$transaction->name = $request->name;
+            $transaction->name = User::where('id', $request->user)->select('id','name')->first()->name;
             $transaction->image = $fileFinalName_ar;
             $transaction->notes = $request->notes;
             $transaction->user_id = $request->user;
             $transaction->save();
             return redirect()->action('Dashboard\FinancialTransactionController@index')->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
-
+            return redirect()->back()->with('errorMessage', $e->getMessage());
         }
         return redirect()->action('Dashboard\FinancialTransactionController@index')->with('errorMessage', __('backend.error'));
     }
 
     public function edit($id)
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -112,6 +127,9 @@ class FinancialTransactionController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -151,6 +169,9 @@ class FinancialTransactionController extends Controller
 
     public function destroy($id)
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -166,6 +187,9 @@ class FinancialTransactionController extends Controller
 
     public function updateAll(Request $request)
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -188,11 +212,17 @@ class FinancialTransactionController extends Controller
 
     public function getUploadPath()
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         return $this->uploadPath;
     }
 
     public function setUploadPath($uploadPath)
     {
+        if (!Helper::checkPermission(2)) {
+            return redirect()->route('NoPermission');
+        }
         $this->uploadPath = Config::get('app.APP_URL') . $uploadPath;
     }
 

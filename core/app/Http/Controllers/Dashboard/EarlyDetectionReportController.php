@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\Teacher\AdminAddEarlyDetectionReport;
+use App\Events\Teacher\AdminSetChildToEarlyDetection;
+use App\Helpers\Helper;
 use App\Models\Children;
 use Illuminate\Http\Request;
 use App\Models\WebmasterSection;
@@ -29,6 +31,9 @@ class EarlyDetectionReportController extends Controller
 
     public function EarlyDetectionReports ()
     {
+        if (!Helper::checkPermission(7)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -43,6 +48,9 @@ class EarlyDetectionReportController extends Controller
 
     public function ShowEarlyDetectionReports ($id)
     {
+        if (!Helper::checkPermission(7)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -58,6 +66,9 @@ class EarlyDetectionReportController extends Controller
 
     public function EditEarlyDetectionReports($id)
     {
+        if (!Helper::checkPermission(7)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -77,6 +88,9 @@ class EarlyDetectionReportController extends Controller
 
     public function UpdateEarlyDetectionReports(Request $request, $id)
     {
+        if (!Helper::checkPermission(7)) {
+            return redirect()->route('NoPermission');
+        }
         if($request->photo_delete == 1){
             $this->validate($request, [
                 'file' => 'required|mimes:png,jpeg,jpg,gif,svg',
@@ -100,16 +114,28 @@ class EarlyDetectionReportController extends Controller
         return redirect()->action('Dashboard\EarlyDetectionReportController@EditEarlyDetectionReports',$id)->with('errorMessage', __('backend.error'));
     }
 
-    public function AjaxCreate($id)
+    public function UpdateStatus($id)
     {
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
         }
 
-        $message = 'Added';
-        return response()->json([
-            'message' => $message,
-        ]);
+        try {
+            $child = Children::find($id);
+            $teacher = Teacher::where('id', $child->teacher_id)->first();
+            $child->early_detection_report_status == 0 ? $child->early_detection_report_status = 1 : $child->early_detection_report_status = 0;
+            $child->save();
+
+            event(new AdminSetChildToEarlyDetection(' تم تحويل الطفل'.$child->name . 'إلى تقارير الكشف المبكر', $teacher->id));
+            Notification::create([
+                'teacher_id' => $teacher->id,
+                'message' => ' تم تحويل الطفل'.$child->name . 'إلى تقارير الكشف المبكر'
+            ]);
+            
+            return redirect()->action('Dashboard\EarlyDetectionReportController@EarlyDetectionReports')->with('doneMessage', __('backend.addDone'));
+        } catch (\Exception $e) {
+            return redirect()->action('Dashboard\EarlyDetectionReportController@EarlyDetectionReports')->with('errorMessage', __('backend.error'));
+        }
     }
 
     public function EarlyDetectionReportsCreate($id)

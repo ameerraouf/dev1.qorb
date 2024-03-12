@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\Specialist\ChildrenAdded as SpecialistChildrenAdded;
+use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Teacher;
 use App\Models\AnalyticsPage;
@@ -377,6 +378,9 @@ class DashboardController extends Controller
 
 
     function setChildToPage(){
+        if (!HelpersHelper::checkPermission(6)) {
+            return redirect()->route('NoPermission');
+        }
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
 
         $childrens = Children::with('specialist', 'supervisor', 'mother')->select('id','name','teacher_id', 'specialist_id', 'supervisor_id')->paginate(10);
@@ -384,6 +388,9 @@ class DashboardController extends Controller
     }
 
     function setChildToCreatePage(){
+        if (!HelpersHelper::checkPermission(6)) {
+            return redirect()->route('NoPermission');
+        }
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
 
         $childrens = Children::get();
@@ -393,6 +400,9 @@ class DashboardController extends Controller
     }
 
     function setChildToEditPage($id){
+        if (!HelpersHelper::checkPermission(6)) {
+            return redirect()->route('NoPermission');
+        }
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
 
         $children = Children::where('id', $id)->select('id', 'name')->first();

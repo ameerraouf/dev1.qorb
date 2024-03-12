@@ -63,29 +63,15 @@
                 </div>
 
 
-                {{-- <div class="form-group row">
+                <div class="form-group row">
                     <label for="permissions1"
                            class="col-sm-2 form-control-label">{!!  __('backend.Permission') !!}</label>
                     <div class="col-sm-10">
-                        <select name="permissions_id" id="permissions_id" required class="form-control c-select">
+                        <select name="role_id" id="permissions_id" required class="form-control c-select">
                             <option value="">- - {!!  __('backend.selectPermissionsType') !!} - -</option>
-                            @foreach ($Permissions as $Permission)
-                                <option value="{{ $Permission->id  }}">{{ $Permission->name }}</option>
+                            @foreach ($Roles as $Role)
+                                <option value="{{ $Role->id  }}">@if(app()->getLocale() == 'ar'){{ $Role->name_ar }}@else {{ $Role->name_en }} @endif</option>
                             @endforeach
-                        </select>
-
-                    </div>
-                </div> --}}
-
-                <div class="form-group row">
-                    <label for="permissions1"
-                           class="col-sm-2 form-control-label">{!!  __('backend.Role') !!}</label>
-                    <div class="col-sm-10">
-                        <select name="role" id="role" required class="form-control c-select">
-                            <option value="">- - {!!  __('backend.selectRole') !!} - -</option>
-                                <option value="admin">{{ __('backend.Admin') }}</option>
-                                <option value="specialist">{{ __('backend.Specialist') }}</option>
-                                <option value="supervisor">{{ __('backend.Supervisor') }}</option>
                         </select>
 
                     </div>

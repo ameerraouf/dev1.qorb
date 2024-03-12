@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('ALTER TABLE qorb_packages CHANGE title title_en VARCHAR(255)');
-        DB::statement('ALTER TABLE qorb_packages CHANGE advantages advantages_en VARCHAR(255)');
+        DB::statement('ALTER TABLE smartend_packages CHANGE title title_en VARCHAR(255)');
+        DB::statement('ALTER TABLE smartend_packages CHANGE advantages advantages_en VARCHAR(255)');
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 
 use App\Models\Package;
@@ -16,6 +18,7 @@ class PackageController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -23,6 +26,12 @@ class PackageController extends Controller
      */
     public function index()
     {
+
+        
+        if (!Helper::checkPermission(1)) {
+            return redirect()->route('NoPermission');
+        }
+
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -35,8 +44,26 @@ class PackageController extends Controller
         if (@Auth::user()->permissionsGroup->view_status) {
             $packages = Package::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
+                if(app()->getLocale() == 'ar'){
+                    $packages->each(function ($p) {
+                        $p->advantages = explode(',', $p->advantages_ar);
+                    });
+                }else{
+                    $packages->each(function ($p) {
+                        $p->advantages = explode(',', $p->advantages_en);
+                    });
+                }
         } else {
             $packages = Package::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+            if(app()->getLocale() == 'ar'){
+                $packages->each(function ($p) {
+                    $p->advantages = explode(',', $p->advantages_ar);
+                });
+            }else{
+                $packages->each(function ($p) {
+                    $p->advantages = explode(',', $p->advantages_en);
+                });
+            }
         }
         return view("dashboard.packages.list", compact("packages","GeneralWebmasterSections"));
 
@@ -47,6 +74,11 @@ class PackageController extends Controller
      */
     public function create()
     {
+
+        if (!Helper::checkPermission(1)) {
+            return redirect()->route('NoPermission');
+        }
+
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -65,6 +97,11 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
+                
+        if (!Helper::checkPermission(1)) {
+            return redirect()->route('NoPermission');
+        }
+
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
         }
@@ -88,8 +125,8 @@ class PackageController extends Controller
             $package->save();
             return redirect()->action('Dashboard\PackageController@index')->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
-
-        }
+            return redirect()->back()->with('errorMessage', $e->getMessage());
+        }   
         return redirect()->action('Dashboard\PackageController@index')->with('errorMessage', __('backend.error'));
 
     }
@@ -107,6 +144,9 @@ class PackageController extends Controller
      */
     public function edit($id)
     {
+        if (!Helper::checkPermission(1)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -129,6 +169,9 @@ class PackageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Helper::checkPermission(1)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -166,6 +209,9 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
+        if (!Helper::checkPermission(1)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');

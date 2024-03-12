@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\Admin\ChangeSocietyStatus;
+use App\Helpers\Helper;
 use App\Models\Children;
 use Illuminate\Http\Request;
 use App\Models\WebmasterSection;
@@ -16,6 +17,9 @@ class PurchaseTransactionController extends Controller
 {
     public function index()
     {
+        if (!Helper::checkPermission(3)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -36,11 +40,14 @@ class PurchaseTransactionController extends Controller
             $childrenNames = Children::whereIn('id', $childrenIds)->pluck('name')->toArray();
             $transaction->children_names = $childrenNames;
         }
-        return view("dashboard.purchase-transactions.list", compact("transactions","GeneralWebmasterSections"));
+        return view("dashboard.purchase-transactions.list", compact("transactions", "GeneralWebmasterSections"));
     }
 
     public function change_status($id)
     {
+        if (!Helper::checkPermission(3)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -56,6 +63,5 @@ class PurchaseTransactionController extends Controller
             'message' => "تم تغيير حالة الباقة من قبل الأدمن"
         ]);
         return redirect()->action('Dashboard\PurchaseTransactionController@index')->with('doneMessage', __('backend.saveDone'));
-
     }
 }

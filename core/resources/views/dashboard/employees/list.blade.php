@@ -73,7 +73,8 @@
                                 <td class="text-center">{{ $value->email }}</td>
                                 <td class="text-center">{{ $value->phone }}</td>
                                 <td class="text-center">
-                                    {{ $value->role }}
+                                    
+                                    {{ __("backend.$value->role") }}
                                    
                                 </td>
 

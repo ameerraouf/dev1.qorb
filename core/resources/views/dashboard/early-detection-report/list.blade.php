@@ -67,7 +67,11 @@
                                 </td> --}}
                                 <td class="h6 text-center">
                                     @if ($report->file)
-                                        <img src="uploads/reports/Early Detecting Reports/{{ $report->file }}" width="30px" height="30px" alt="">
+                                        <img src="uploads/reports/Early Detecting Reports/{{ $report->file }}" width="30px" height="30px" alt=""
+                                                data-toggle="modal"
+                                                data-target="#ed-show{{ $report->id }}" ui-toggle-class="bounce"
+                                                ui-target="#animate" data-dismiss="modal">
+
                                     @else
                                         {{ __('cruds.EarlyDetectionReports.NoFilesUplaoded')  }}
                                     @endif
@@ -105,6 +109,29 @@
                                                     data-dismiss="modal">{{ __('backend.no') }}</button>
                                             <a href="{{ route("CommonQuestionsDestroy",["id"=>$report->id]) }}"
                                                class="btn danger p-x-md">{{ __('backend.yes') }}</a>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div>
+                            </div>
+                            <div id="ed-show{{ $report->id }}" class="modal fade" data-backdrop="true">
+                                <div class="modal-dialog" id="animate">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ __('cruds.EarlyDetectionReports.File') }}</h5>
+                                        </div>
+                                        <div class="modal-body text-center p-lg">
+                                            
+                                                <div class="form-group row">
+                                                   
+                                                    <div class="col-sm-12">
+                                                        <img src="uploads/reports/Early Detecting Reports/{{ $report->file }}" width="500px" height="290px" alt="">
+                                                    </div>
+                                                </div>
+                                             
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn dark-white p-x-md"
+                                                    data-dismiss="modal">{{ __('backend.close') }}</button>
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div>

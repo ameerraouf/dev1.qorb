@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Role;
@@ -24,6 +26,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        if (!Helper::checkPermission(8)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -47,6 +52,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        if (!Helper::checkPermission(8)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -66,6 +74,9 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Helper::checkPermission(8)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -126,6 +137,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        if (!Helper::checkPermission(8)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -148,6 +162,9 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Helper::checkPermission(8)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -224,6 +241,9 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
+        if (!Helper::checkPermission(8)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');

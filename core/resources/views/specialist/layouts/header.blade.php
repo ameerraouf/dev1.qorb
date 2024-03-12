@@ -67,7 +67,7 @@
             @endif
             <li class="nav-item dropdown">
                 <a class="nav-link clear" href data-toggle="dropdown">
-                    <img src="uploads/users/{{ Auth::guard()->user()->photo }}" class="avatar w-32">
+                    <img src="uploads/employees/{{ auth()->user()->photo }}" class="avatar w-32">
 
                     <i class="on b-white bottom"></i>
 

@@ -595,6 +595,10 @@ sup {
     justify-content: center !important;
 }
 
+.flex-1 {
+    flex: 1;
+}
+
 .form-group-stack .form-control {
     margin-top: -1px;
     position: relative;
@@ -1979,6 +1983,10 @@ a.list-group-item.hover {
     .row-col-xs .row-inner {
         position: static;
     }
+}
+
+.mt-3 {
+    margin-top: 1rem;
 }
 
 .box,

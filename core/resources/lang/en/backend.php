@@ -731,12 +731,13 @@ return array(
     'Role' => 'Role',
     'selectRole' => 'Select Role',
     'Admin' => 'Admin',
+    'Admins' => 'Admins',
     'Specialist' => 'Specialist',
     'specialist' => 'Specialist',
 
      // TEACHER ____________________________
-     'signedInToControlteacher' => 'Sign in to clients dashboard',
-     'registerToControlteacher' => 'Create a new account for client',
+     'signedInToControlteacher' => 'Employees Login',
+     'registerToControlteacher' => 'Create a new account for Employees',
      'childrens' => 'Childrens',
      'package' => 'Packages',
      'profile' => 'Profile',
@@ -771,5 +772,14 @@ return array(
     'Pay' => 'Pay',
     'BilledFrom' => 'Billed From',
     'BilledTo' => 'Billed To',
+    'BilledTo' => 'Billed To',
+
+    'SessionReports' => 'Session Reports',
+    'CaseReports' => 'Case Reports',
+    'ConsultationReports' => 'Consultation Reports',
+    'TreatmentPlan' => 'Treatment Plan',
+    'VBMAPEvaluation' => 'VBMAP Evaluation',
+    'FinalReport' => 'Final Report',
+    'EarlyDetectionReport' => 'Early Detection Report',
 
 );

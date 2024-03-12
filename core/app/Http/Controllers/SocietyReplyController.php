@@ -87,7 +87,7 @@ class SocietyReplyController extends Controller
         // $replySociety->teacher_id = 0;
 
         $replySociety->save();
-        return redirect()->action('HomeController@HomePage');
+        return redirect()->back();
         
     }
 

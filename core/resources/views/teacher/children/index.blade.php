@@ -118,13 +118,13 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                                               {{-- <a class="dropdown-item" href="#">{{ __('backend.reports') }}</a> --}}
-                                              <a class="dropdown-item" href="{{ route('TeacherReports',$child->id) }}">تقارير الجلسات</a>
-                                              <a class="dropdown-item" href="{{ route('TeacherStatusReports', $child->id) }}">تقارير الحالة </a>
-                                              <a class="dropdown-item" href="{{ route('TeacherConsultingReports',$child->id) }}">تقارير الاستشارات</a>
-                                              <a class="dropdown-item" href="{{ route('TshowChildrenTreatmentPlan',$child->id) }}">الخطة العلاجية</a>
-                                              <a class="dropdown-item" href="{{ route('TshowChildrenVbmap',$child->id) }}">تقييم vbmap</a>
-                                              <a class="dropdown-item" href="{{ route('TshowChildrenFinalReports',$child->id) }}">التقرير النهائى</a>
-                                              <a class="dropdown-item" href="#">تقرير الكشف المبكر</a>
+                                              <a class="dropdown-item" href="{{ route('TeacherReports',$child->id) }}">{{ __('backend.SessionReports') }}</a>
+                                              <a class="dropdown-item" href="{{ route('TeacherStatusReports', $child->id) }}">{{ __('backend.CaseReports') }}</a>
+                                              <a class="dropdown-item" href="{{ route('TeacherConsultingReports',$child->id) }}">{{ __('backend.ConsultationReports') }}</a>
+                                              <a class="dropdown-item" href="{{ route('TshowChildrenTreatmentPlan',$child->id) }}">{{ __('backend.TreatmentPlan') }}</a>
+                                              <a class="dropdown-item" href="{{ route('TshowChildrenVbmap',$child->id) }}">{{ __('backend.VBMAPEvaluation') }}</a>
+                                              <a class="dropdown-item" href="{{ route('TshowChildrenFinalReports',$child->id) }}">{{ __('backend.FinalReport') }}</a>
+                                              <a class="dropdown-item" href="#">{{ __('backend.EarlyDetectionReport') }}</a>
 
 
                                             </div>

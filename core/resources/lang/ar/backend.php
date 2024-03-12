@@ -126,6 +126,7 @@ return array(
     'photos' => 'الصور',
     'blog' => 'المدونة',
     'services' => 'الخدمات',
+    'main_services' => 'الخدمات الرئيسية',
     'news' => 'الأخبار',
     'videos' => 'الفيديو',
     'sounds' => 'الصوتيات',
@@ -717,6 +718,7 @@ return array(
     'Role' => 'الدور',
     'selectRole' => 'اختيار دور',
     'Admin' => 'أدمن',
+    'Admins' => 'المسؤولين',
     'Specialist' => 'أخصائي',
     'specialist' => 'أخصائي',
 
@@ -730,8 +732,8 @@ return array(
     "ChildrenCount" => "عدد الأطفال الكلي",
 
     // TEACHER _______________________
-    'signedInToControlteacher' => 'تسجيل الدخول إلى لوحة المدرسين والامهات',
-    'registerToControlteacher' => 'انشاء حساب جديد للمدرسين والامهات',
+    'signedInToControlteacher' => 'تسجيل الدخول للعملاء',
+    'registerToControlteacher' => 'انشاء حساب جديد للعملاء',
     'childrens' => 'الاطفال',
     'package' => 'الباقات',
     'profile' => 'الملف الشخصي',
@@ -768,4 +770,11 @@ return array(
     'BilledFrom' => 'مفوتر من',
     'BilledTo' => 'مفوتر إلى',
 
+    'SessionReports' => 'تقارير الجلسات',
+    'CaseReports' => 'تقارير الحالة',
+    'ConsultationReports' => 'تقارير الاستشارات',
+    'TreatmentPlan' => 'الخطة العلاجية',
+    'VBMAPEvaluation' => 'تقييم VBMAP',
+    'FinalReport' => 'التقرير النهائي',
+    'EarlyDetectionReport' => 'تقرير الكشف المبكر',
 );

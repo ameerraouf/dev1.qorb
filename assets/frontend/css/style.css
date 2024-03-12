@@ -308,6 +308,8 @@ ul.cat li .active {
 
 .navbar .nav li .dropdown-menu {
     background: var(--gradient-two-color);
+    left: unset !important;
+    inset-inline-start: 0;
 }
 header .nav li .dropdown-menu li a {
     color: #fff;
@@ -440,6 +442,9 @@ img.img-polaroid {
 }
 .mt-0 {
     margin-top: 0;
+}
+.mt-3 {
+    margin-top: 1rem;
 }
 .text-black {
     color: #333;
@@ -699,7 +704,7 @@ img.img-polaroid {
     display: flex;
     height: 100%;
     align-items: center;
-    margin-top: 24px;
+    margin-bottom: 24px;
     flex-direction: column;
     border: 1px solid #bbb;
 }
@@ -900,6 +905,9 @@ header ul.nav li ul li a {
 .navbar .nav li .dropdown-menu {
     z-index: 2000;
 }
+.navbar .nav li .dropdown-menu .dropdown {
+    position: relative;
+}
 
 header ul.nav li ul {
     margin-top: 1px;
@@ -909,12 +917,12 @@ header ul.nav li ul li ul {
     margin: 1px 0 0 1px;
 }
 
-.dropdown-menu .dropdown i {
+/* .dropdown-menu .dropdown i {
     position: absolute;
     right: 0;
     margin-top: 3px;
     padding-left: 20px;
-}
+} */
 
 .navbar .nav > li > .dropdown-menu:before {
     display: inline-block;
@@ -2631,8 +2639,13 @@ article img.pull-right, article .align-right {
         visibility: visible;
     }
 
-    .dropdown:hover .dropdown-menu {
+    .dropdown:hover > .dropdown-menu {
         display: block;
+    }
+    .dropdown > .dropdown-menu > .dropdown > .dropdown-menu{
+        inset-inline-start: 100% !important;
+        top: 0 !important;
+        margin: 0 !important;
     }
 }
 
@@ -3205,7 +3218,11 @@ ul.social-network li a{
 
 @media (max-width: 767px){
     .navbar-brand {
-        margin-top: 0px;
+        margin-top: 0px !important;
+    }
+    .navbar-brand img{
+        width: 53px !important;
+        height: 53px !important;
     }
     header .navbar-nav > li {
         padding-bottom: 0px;

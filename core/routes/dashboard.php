@@ -38,6 +38,7 @@ use App\Http\Controllers\Dashboard\WebmasterSettingsController;
 use App\Http\Controllers\Dashboard\PurchaseTransactionController;
 use App\Http\Controllers\Dashboard\EarlyDetectionReportController;
 use App\Http\Controllers\Dashboard\FinancialTransactionController;
+use App\Http\Controllers\Dashboard\NewRoleController;
 
 // Admin Routes
 Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
@@ -296,13 +297,22 @@ Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
     Route::post('/packages/updateAll', [PackageController::class, 'updateAll'])->name('packagesUpdateAll');
 
     // Roles
-    Route::get('/roles', [RoleController::class, 'index'])->name('roles');
-    Route::get('/roles/create/', [RoleController::class, 'create'])->name('rolesCreate');
-    Route::post('/roles/store', [RoleController::class, 'store'])->name('rolesStore');
-    Route::get('/roles{id}/edit', [RoleController::class, 'edit'])->name('rolesEdit');
-    Route::post('roles/{id}/update', [RoleController::class, 'update'])->name('rolesUpdate');
-    Route::get('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('rolesDestroy');
+    // Route::get('/roles', [RoleController::class, 'index'])->name('roles');
+    // Route::get('/roles/create/', [RoleController::class, 'create'])->name('rolesCreate');
+    // Route::post('/roles/store', [RoleController::class, 'store'])->name('rolesStore');
+    // Route::get('/roles{id}/edit', [RoleController::class, 'edit'])->name('rolesEdit');
+    //Route::post('roles/{id}/update', [RoleController::class, 'update'])->name('rolesUpdate');
+    // Route::get('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('rolesDestroy');
     Route::post('/roles/updateAll', [RoleController::class, 'updateAll'])->name('rolesUpdateAll');
+
+
+    // New Roles
+    Route::get('/new-roles/', [NewRoleController::class, 'index'])->name('roles');
+    Route::get('/new-roles/create/', [NewRoleController::class, 'create'])->name('rolesCreate');
+    Route::post('/new-roles/store/', [NewRoleController::class, 'store'])->name('rolesStore');
+    Route::get('/new-roles/edit/{id}', [NewRoleController::class, 'edit'])->name('rolesEdit');
+    Route::post('roles/{id}/update', [NewRoleController::class, 'update'])->name('rolesUpdate');
+    Route::get('/roles/destroy/{id}', [NewRoleController::class, 'destroy'])->name('rolesDestroy');
 
     // Employees
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
@@ -410,7 +420,7 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
 
     // Reports
     Route::get('/early-detection-reports', [EarlyDetectionReportController::class, 'EarlyDetectionReports'])->name('EarlyDetectionReports');
-    Route::post('/early-detection-reports-ajax-create/{id}', [EarlyDetectionReportController::class, 'AjaxCreate'])->name('EarlyDetectionReports-AjaxCreate');
+    Route::get('/child-early-detection-reports-update-status/{id}', [EarlyDetectionReportController::class, 'UpdateStatus'])->name('EarlyDetectionReports-UpdateStatus');
     Route::get('/chlidren-early-detection-reports/{id}', [EarlyDetectionReportController::class, 'ShowEarlyDetectionReports'])->name('ShowEarlyDetectionReports');
     Route::get('/chlidren-early-detection-reports/{id}/edit', [EarlyDetectionReportController::class, 'EditEarlyDetectionReports'])->name('EditEarlyDetectionReports');
     Route::post('/chlidren-early-detection-reports/{id}/update', [EarlyDetectionReportController::class, 'UpdateEarlyDetectionReports'])->name('UpdateEarlyDetectionReports');
@@ -419,7 +429,7 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
 
     // PurchaseTransactions
     Route::get('/purchase-transactions', [PurchaseTransactionController::class, 'index'])->name('PurchaseTransactions');
-    Route::get('/societies/change_status/{id}', [PurchaseTransactionController::class, 'change_status'])->name('PurchaseTransactionsChangeStatus');
+    Route::get('/purchase-transactions/change_status/{id}', [PurchaseTransactionController::class, 'change_status'])->name('PurchaseTransactionsChangeStatus');
 });
 
 //Specialist Routes

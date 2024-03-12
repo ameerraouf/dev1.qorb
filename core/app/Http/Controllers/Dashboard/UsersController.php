@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Models\NewRole;
 use App\Models\Permissions;
 use App\Models\User;
 use App\Models\WebmasterSection;
@@ -46,11 +47,11 @@ class UsersController extends Controller
         // General END
 
         if (@Auth::user()->permissionsGroup->view_status) {
-            $Users = User::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
+            $Users = User::where('role', 'admin')->where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
                 'asc')->paginate(env('BACKEND_PAGINATION'));
             $Permissions = Permissions::where('created_by', '=', Auth::user()->id)->orderby('id', 'asc')->get();
         } else {
-            $Users = User::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
+            $Users = User::where('role', 'admin')->orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
             $Permissions = Permissions::orderby('id', 'asc')->get();
         }
         return view("dashboard.users.list", compact("Users", "Permissions", "GeneralWebmasterSections"));
@@ -71,9 +72,9 @@ class UsersController extends Controller
         // General for all pages
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
         // General END
-        $Permissions = Permissions::orderby('id', 'asc')->get();
+        $Roles = NewRole::orderby('id', 'asc')->get();
 
-        return view("dashboard.users.create", compact("GeneralWebmasterSections", "Permissions"));
+        return view("dashboard.users.create", compact("GeneralWebmasterSections", "Roles"));
     }
 
     /**
@@ -94,8 +95,7 @@ class UsersController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'required',
-            // 'permissions_id' => 'required'
+            'role_id' => 'required'
         ]);
 
 
@@ -121,7 +121,8 @@ class UsersController extends Controller
                 $User->connect_email = $request->connect_email;
                 $User->connect_password = $request->connect_password;
                 $User->status = 1;
-                $User->role = $request->role;;
+                $User->role = 'admin';
+                $User->admin_role = $request->role_id;
                 $User->created_by = Auth::user()->id;
                 $User->save();
 
@@ -158,7 +159,7 @@ class UsersController extends Controller
         // General for all pages
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
         // General END
-        $Permissions = Permissions::orderby('id', 'asc')->get();
+        $Roles = NewRole::orderby('id', 'asc')->get();
 
         if (@Auth::user()->permissionsGroup->view_status) {
             $Users = User::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->find($id);
@@ -166,7 +167,7 @@ class UsersController extends Controller
             $Users = User::find($id);
         }
         if (!empty($Users)) {
-            return view("dashboard.users.edit", compact("Users", "Permissions", "GeneralWebmasterSections"));
+            return view("dashboard.users.edit", compact("Users", "Roles", "GeneralWebmasterSections"));
         } else {
             return redirect()->action('Dashboard\UsersController@index');
         }
@@ -193,7 +194,7 @@ class UsersController extends Controller
                     'photo' => 'mimes:png,jpeg,jpg,gif,svg',
                     'name' => 'required',
                     // 'permissions_id' => 'required',
-                    'role' => 'required'
+                    'role_id' => 'required'
                 ]);
 
                 if ($request->email != $User->email) {
@@ -214,7 +215,8 @@ class UsersController extends Controller
                 //if ($id != 1) {
                 $User->name = $request->name;
                 $User->email = $request->email;
-                $User->role = $request->role;;
+                $User->role = 'admin';
+                $User->admin_role = $request->role_id;
                 if ($request->password != "") {
                     $User->password = bcrypt($request->password);
                 }

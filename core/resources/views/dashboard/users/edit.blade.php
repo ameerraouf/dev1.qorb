@@ -88,13 +88,13 @@
                 </div>
                 <div class="form-group row">
                     <label for="permissions1"
-                           class="col-sm-2 form-control-label">{!!  __('backend.Role') !!}</label>
+                           class="col-sm-2 form-control-label">{!!  __('backend.Permission') !!}</label>
                     <div class="col-sm-10">
-                        <select name="role" id="role" required class="form-control c-select">
-                            <option value="">- - {!!  __('backend.selectRole') !!} - -</option>
-                                <option {{ $Users->role == 'admin' ? 'selected' : ''  }} value="admin">{{ __('backend.Admin') }}</option>
-                                <option {{ $Users->role == 'specialist' ? 'selected' : ''  }} value="specialist">{{ __('backend.Specialist') }}</option>
-                                <option {{ $Users->role == 'supervisor' ? 'selected' : ''  }} value="supervisor">{{ __('backend.Supervisor') }}</option>
+                        <select name="role_id" id="permissions_id" required class="form-control c-select">
+                            <option value="">- - {!!  __('backend.selectPermissionsType') !!} - -</option>
+                            @foreach ($Roles as $Role)
+                                <option @if($Users->admin_role == $Role->id) selected @endif value="{{ $Role->id  }}">@if(app()->getLocale() == 'ar'){{ $Role->name_ar }}@else {{ $Role->name_en }} @endif</option>
+                            @endforeach
                         </select>
 
                     </div>

@@ -84,12 +84,14 @@
                                 </td>
 
                                 <td>
-                                    @if ($User->role == 'admin')
-                                        <small>{{ __('backend.Admin') }}</small>
-                                    @elseif($User->role == 'specialist')
-                                        <small>{{ __('backend.Specialist') }}</small>
-                                    @else
-                                    <small>{{ __('backend.Supervisor') }}</small>
+                                    @if($User->adminRole)
+                                        @if(app()->getLocale() == 'ar')
+                                            {{ $User->adminRole->name_ar }}
+                                            @else
+                                            {{ $User->adminRole->name_en }}
+                                        @endif
+                                    @else 
+                                    -
                                     @endif
                                 </td>
                                 {{-- <td>

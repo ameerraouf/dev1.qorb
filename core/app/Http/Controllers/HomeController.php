@@ -267,9 +267,7 @@ class HomeController extends Controller
             $HomePage = Topic::where("status", 1)->find($WebmasterSettings->default_currency_id);
         }
 
-        $packages = Package::orderBy('created_at', 'desc')
-        ->limit(3)
-        ->get();
+        $packages = Package::orderBy('created_at', 'desc')->limit(4)->get();
         if(app()->getLocale() == 'ar'){
             $packages->each(function ($p) {
                 $p->advantages = explode(',', $p->advantages_ar);
@@ -281,10 +279,12 @@ class HomeController extends Controller
         }
 
         $main_services = MainService::orderBy('created_at', 'desc')->limit(6)->get();
+        $sub_services  = SubService::with('main_service')->orderBy('created_at', 'desc')->limit(6)->get();
 
         return view("frontEnd.home",
             compact(
                 "main_services",
+                "sub_services",
                 "packages",
                 "WebmasterSettings",
                 "SliderBanners",
@@ -2104,7 +2104,7 @@ class HomeController extends Controller
 
 
     public function GetSubServices(Request $req){
-        
+
         $subservices = SubService::where('main_service_id', $req->msid)->get();
         if($subservices){
             return response()->json([
@@ -2119,7 +2119,7 @@ class HomeController extends Controller
 
     }
 
-    
+
 
 }
 

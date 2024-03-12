@@ -25,12 +25,12 @@ use Storage;
 class SpecialistController extends Controller
 {
 
-    private $uploadPath = "uploads/users/";
+    private $uploadPath = "uploads/employees/";
     private $filePath = "uploads/media/";
 
     public function index()
     {
-        $childrenCount = Children::count();
+        $childrenCount = Children::where('specialist_id',Auth::user()->id)->count();
         return view('specialist.home', compact('childrenCount'));
     }
 
@@ -203,13 +203,13 @@ class SpecialistController extends Controller
                 'supervisor_id' => $supervisor->id,
                 'message' => " تم إضافة تقرير الاستشارات ل {$children->name}"
 
-            ]);
-            Notification::create([
-                'specialist_id' => $specialist->id,
-                'message' => " لقد قمتِ بإضافة تقرير الاستشارات ل {$children->name} "
-            ]);
-
-            return redirect()->route('ChildrenConsultingReports',$id)->with('doneMessage', __('backend.addDone'));
+                ]);
+                Notification::create([
+                    'specialist_id' => $specialist->id,
+                    'message' => " لقد قمتِ بإضافة تقرير الاستشارات ل {$children->name} "
+                ]);
+                
+                return redirect()->route('ChildrenConsultingReports',$id)->with('doneMessage', __('backend.addDone'));
 
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
@@ -258,7 +258,8 @@ class SpecialistController extends Controller
                 'supervisor_id' => $supervisor->id,
                 'message' => " تم إضافة تقرير الحالة ل{$children->name}"
 
-            ]);
+                ]);
+
             Notification::create([
                 'specialist_id' => $specialist->id,
                 'message' => " لقد قمتِ بإضافة تقرير الحالة ل {$children->name}"
@@ -397,9 +398,6 @@ class SpecialistController extends Controller
             $user->phone = $request->phone;
             if ($request->password) {
                 $user->password = bcrypt($request->password);
-            }
-            else{
-                $user->password = "";
             }
             if ($request->photo) {
                 $photo = time() . rand(1111,

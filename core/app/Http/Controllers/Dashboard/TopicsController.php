@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
 use App\Imports\ReadExcelFile;
 use App\Imports\TopicsImport;
@@ -42,6 +43,9 @@ class TopicsController extends Controller
 
     public function index($webmasterId)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         $data_sections_arr = explode(",", Auth::user()->permissionsGroup->data_sections);
         if (!in_array($webmasterId, $data_sections_arr)) {
@@ -90,6 +94,9 @@ class TopicsController extends Controller
 
     public function list(Request $request)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
 
         $title_var = "title_" . @Helper::currentLanguage()->code;
         $title_var2 = "title_" . env('DEFAULT_LANGUAGE');
@@ -444,7 +451,9 @@ class TopicsController extends Controller
 
     public function print(Request $request, $webmasterId)
     {
-
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $title_var = "title_" . @Helper::currentLanguage()->code;
         $title_var2 = "title_" . env('DEFAULT_LANGUAGE');
 
@@ -513,6 +522,9 @@ class TopicsController extends Controller
 
     public function create($webmasterId)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->add_status) {
             return Redirect::to(route('NoPermission'))->send();
@@ -537,6 +549,9 @@ class TopicsController extends Controller
 
     public function store(Request $request, $webmasterId)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             //
@@ -731,6 +746,9 @@ class TopicsController extends Controller
 
     public function edit($webmasterId, $id)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             // Check Permissions
@@ -766,6 +784,9 @@ class TopicsController extends Controller
 
     public function update(Request $request, $webmasterId, $id)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             //
@@ -995,6 +1016,9 @@ class TopicsController extends Controller
 
     public function view($webmasterId, $id)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
 
@@ -1029,6 +1053,9 @@ class TopicsController extends Controller
 
     public function destroy($webmasterId, $id)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             // Check Permissions
@@ -1100,6 +1127,9 @@ class TopicsController extends Controller
 
     public function updateAll(Request $request, $webmasterId)
     {
+        if (!HelpersHelper::checkPermission(12)) {
+            return redirect()->route('NoPermission');
+        }
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             //
@@ -1200,6 +1230,7 @@ class TopicsController extends Controller
 
     public function seo(Request $request, $webmasterId, $id)
     {
+        
         $WebmasterSection = WebmasterSection::find($webmasterId);
         if (!empty($WebmasterSection)) {
             //

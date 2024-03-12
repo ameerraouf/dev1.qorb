@@ -36,7 +36,7 @@ return [
     'EarlyDetectionReports' => [
         "Title" => "تقارير الكشف المبكر",
         "ChildName" => "اسم الطفل",
-        "TeacherName" => "اسم المعلمة / الأم",
+        "TeacherName" => "اسم الام / المدرسة",
         "ConvertToEarlyDetectionReport" => "تحويل إلى تقارير الكشف المبكر",
         "Convert" => "تحويل",
         "Converted" => "تم التحويل",

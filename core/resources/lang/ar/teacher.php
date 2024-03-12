@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'signedInToControlteacher' => 'تسجيل الدخول إلى لوحة المدرسين والامهات',
-    'registerToControlteacher' => 'انشاء حساب جديد للمدرسين والامهات',
+    'signedInToControlteacher' => 'تسجيل الدخول للعملاء',
+    'registerToControlteacher' => 'انشاء حساب جديد للعملاء',
     'childrens' => 'الاطفال',
     'package' => 'الباقات',
     'profile' => 'الملف الشخصي',

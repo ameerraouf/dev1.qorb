@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Events\Admin\ChangeSocietyStatus;
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\Society;
@@ -27,6 +27,9 @@ class SocietyController extends Controller
      */
     public function index()
     {
+        if (!Helper::checkPermission(10)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -37,13 +40,14 @@ class SocietyController extends Controller
         // General END
 
         if (@Auth::user()->permissionsGroup->view_status) {
-            $societies = Society::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby('id',
-                'asc')->paginate(env('BACKEND_PAGINATION'));
+            $societies = Society::where('created_by', '=', Auth::user()->id)->orwhere('id', '=', Auth::user()->id)->orderby(
+                'id',
+                'asc'
+            )->paginate(env('BACKEND_PAGINATION'));
         } else {
             $societies = Society::orderby('id', 'asc')->paginate(env('BACKEND_PAGINATION'));
         }
-        return view("dashboard.societies.list", compact("societies","GeneralWebmasterSections"));
-
+        return view("dashboard.societies.list", compact("societies", "GeneralWebmasterSections"));
     }
 
     /**
@@ -51,6 +55,9 @@ class SocietyController extends Controller
      */
     public function create()
     {
+        if (!Helper::checkPermission(10)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -61,7 +68,6 @@ class SocietyController extends Controller
         // General END
 
         return view("dashboard.societies.create", compact("GeneralWebmasterSections"));
-
     }
 
     /**
@@ -69,6 +75,9 @@ class SocietyController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Helper::checkPermission(10)) {
+            return redirect()->route('NoPermission');
+        }
         // if (!@Auth::user()->permissionsGroup->settings_status) {
         //     return redirect()->route('NoPermission');
         // }
@@ -88,10 +97,8 @@ class SocietyController extends Controller
             $society->save();
             return redirect()->action('HomeController@Society')->with('doneMessage', ('the question will be reviewed by admin'));
         } catch (\Exception $e) {
-
         }
         return redirect()->action('HomeController@Society')->with('errorMessage', __('backend.error'));
-
     }
 
     /**
@@ -123,6 +130,9 @@ class SocietyController extends Controller
      */
     public function destroy($id)
     {
+        if (!Helper::checkPermission(10)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -136,6 +146,9 @@ class SocietyController extends Controller
 
     public function change_status($id)
     {
+        if (!Helper::checkPermission(10)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -143,8 +156,6 @@ class SocietyController extends Controller
         $society = Society::findorfail($id);
         ($society->status  == '1') ? $society->status  = 0 : $society->status  = 1;
         $society->update();
-        
         return redirect()->action('Dashboard\SocietyController@index')->with('doneMessage', __('backend.saveDone'));
-
     }
 }

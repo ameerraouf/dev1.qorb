@@ -192,16 +192,16 @@
                                         </h3>
                                         <p class="content">
                                             @if (app()->getLocale() == 'ar')
-                                                {!! strlen(strip_tags($main_service->description_ar)) > 40 ? substr(strip_tags($main_service->description_ar), 0, 40) . '...' : strip_tags($main_service->description_ar)!!}
+                                                {!! strlen(strip_tags($main_service->description_ar)) > 180 ? substr(strip_tags($main_service->description_ar), 0, 180) . '...' : strip_tags($main_service->description_ar)!!}
                                             @else
-                                                {!! strlen(strip_tags($main_service->description_en)) > 40 ? substr(strip_tags($main_service->description_en), 0, 40) . '...' : strip_tags($main_service->description_en)!!}
+                                                {!! strlen(strip_tags($main_service->description_en)) > 180 ? substr(strip_tags($main_service->description_en), 0, 180) . '...' : strip_tags($main_service->description_en)!!}
                                             @endif
                                         </p>
                                     </div>
                                 </a>
                             </div>
                         @endforeach
-                    </div>
+                </div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
@@ -227,88 +227,47 @@
             </div>
             <div class="swiper-services2" style="position: relative; overflow:hidden;">
                 <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <a href="" style="text-decoration: none;">
-                                    <div class="box-serv">
-                                        <span class="icon">
-                                            <i class="fa fa-television" aria-hidden="true"></i>
-                                        </span>
-                                        <div class="small-title">
-                                            أسم الخدمة الرئيسية
-                                        </div>
-                                        <h3 class="title">
-                                            عنوان الخدمة
-                                        </h3>
-                                        <p class="content">
-                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                        </p>
+                    @foreach ($sub_services as $item)
+                        <div class="swiper-slide">
+                            <a href="{{ route('showMainService', $item->main_service->id) }}" style="text-decoration: none;">
+                                <div class="box-serv">
+                                    <span class="icon">
+                                        <i class="fa fa-television" aria-hidden="true"></i>
+                                    </span>
+                                    <div class="small-title">
+                                        @if (app()->getLocale() == 'ar')
+                                            {{ $item->main_service->name_ar }}
+                                        @else
+                                            {{ $item->main_service->name_en }}
+                                        @endif
                                     </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="" style="text-decoration: none;">
-                                    <div class="box-serv">
-                                        <span class="icon">
-                                            <i class="fa fa-television" aria-hidden="true"></i>
-                                        </span>
-                                        <div class="small-title">
-                                            أسم الخدمة الرئيسية
-                                        </div>
-                                        <h3 class="title">
-                                            عنوان الخدمة
-                                        </h3>
-                                        <p class="content">
-                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="" style="text-decoration: none;">
-                                    <div class="box-serv">
-                                        <span class="icon">
-                                            <i class="fa fa-television" aria-hidden="true"></i>
-                                        </span>
-                                        <div class="small-title">
-                                            أسم الخدمة الرئيسية
-                                        </div>
-                                        <h3 class="title">
-                                            عنوان الخدمة
-                                        </h3>
-                                        <p class="content">
-                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide">
-                                <a href="" style="text-decoration: none;">
-                                    <div class="box-serv">
-                                        <span class="icon">
-                                            <i class="fa fa-television" aria-hidden="true"></i>
-                                        </span>
-                                        <div class="small-title">
-                                            أسم الخدمة الرئيسية
-                                        </div>
-                                        <h3 class="title">
-                                            عنوان الخدمة
-                                        </h3>
-                                        <p class="content">
-                                        محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة محتوي الخدمة 
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                    </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                    </div>
-                <div class="more-btn">
-                    <a href="" class="btn btn-theme"><i
-                            class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
-                        &nbsp;<i
-                            class="fa fa-angle-right"></i></a>
+                                    <h3 class="title">
+                                        @if (app()->getLocale() == 'ar')
+                                            {{ $item->title_ar }}
+                                        @else
+                                            {{ $item->title_en }}
+                                        @endif
+                                    </h3>
+                                    <p class="content">
+                                        @if (app()->getLocale() == 'ar')
+                                            {!! strlen(strip_tags($item->description_ar)) > 180 ? substr(strip_tags($item->description_ar), 0, 180) . '...' : strip_tags($item->description_ar)!!}
+                                        @else
+                                            {!! strlen(strip_tags($item->description_en)) > 180 ? substr(strip_tags($item->description_en), 0, 180) . '...' : strip_tags($item->description_en)!!}
+                                        @endif
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="more-btn">
+                <a href="{{ route('FrontendMainServices') }}" class="btn btn-theme"><i
+                        class="fa fa-angle-left"></i>&nbsp; {{ __('frontend.viewMore') }}
+                    &nbsp;<i
+                        class="fa fa-angle-right"></i></a>
             </div>
         </div>
     </section>

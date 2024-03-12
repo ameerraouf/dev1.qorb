@@ -18,6 +18,7 @@ use App\Models\PurchaseTransaction;
 use App\Models\TeacherSubscription;
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use App\Models\SubService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Teacher as ModelsTeacher;
 
@@ -65,7 +66,7 @@ class HomeController extends Controller
             $transaction = new PurchaseTransaction;
 
             $childrenIds = $request->children_ids;
-            // dd($request->children_ids);
+            // dd($request->sub_service_id);
             $childrenIdsAsString = implode(',', $childrenIds);
             $package = Package::where('id', $request->package_id)->first();
 
@@ -73,7 +74,7 @@ class HomeController extends Controller
                 'main_service_id' => $request->main_service_id,
                 'teacher_id' => Auth::user()->id,
                 'package_id' => $request->package_id,
-                'sub_service_id' => $request->sub_service_id ?? '',
+                'sub_service_id' => $request->sub_service_id,
                 'price' => $request->price,
                 'children_ids' => $childrenIdsAsString,
             ]);
@@ -97,8 +98,14 @@ class HomeController extends Controller
             $childrenIds = explode(',', $transaction->children_ids);
             $childrenNames = Children::whereIn('id', $childrenIds)->pluck('name')->toArray();
             $transaction->children_names = $childrenNames;
+            $mainService = MainService::where('id', $transaction->main_service_id)->first();
+            $subService = SubService::where('id', $transaction->sub_service_id)->first();
+            $transaction->main_service = $mainService;
+            $transaction->sub_service = $subService;
+
         }
         // dd($transactions);
+        // return $transactions;
         return view('teacher.subscriptions.list', compact('transactions'));
     }
 
@@ -165,8 +172,6 @@ class HomeController extends Controller
             $user->phone = $request->phone;
             if ($request->password) {
                 $user->password = bcrypt($request->password);
-            } else {
-                $user->password = '';
             }
             if ($request->photo) {
                 $photo = time() . rand(1111, 9999) . '.' . $request->file('photo')->getClientOriginalExtension();

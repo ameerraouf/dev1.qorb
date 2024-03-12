@@ -70,8 +70,8 @@
                             <div class="col-sm-12">
                                 <div id="user_photo" class="col-sm-4 box p-a-xs">
                                     <a target="_blank"
-                                       href="{{ asset('uploads/users/'.$user->photo) }}"><img
-                                            src="{{ asset('uploads/users/'.$user->photo) }}"
+                                       href="{{ asset('uploads/employees/'.$user->photo) }}"><img
+                                            src="{{ asset('uploads/employees/'.$user->photo) }}"
                                             class="img-responsive">
                                         {{ $user->photo }}
                                     </a>

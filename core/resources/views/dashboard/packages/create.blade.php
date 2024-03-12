@@ -63,7 +63,7 @@ padding: 0.2rem;
                 <div class="form-group row">
                     <label for="advantages_ar" class="col-sm-2 form-control-label">{{ __('backend.advantages') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('advantages_ar', '', array('placeholder' => '','class' => 'form-control','id'=>'advantages_ar', "data-role"=>"tagsinput")) !!}
+                        {!! Form::text('advantages_ar', '', array('placeholder' => '','class' => 'form-control','id'=>'advantages_ar', "data-role"=>"tagsinput", "required"=>true)) !!}
                         @if ($errors->has('advantages_ar'))
                             <div class="text-danger">{{ $errors->first('advantages_ar') }}</div>
                         @endif
@@ -73,7 +73,7 @@ padding: 0.2rem;
                 <div class="form-group row">
                     <label for="advantages_en" class="col-sm-2 form-control-label">{{ __('backend.advantages_en') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('advantages_en', '', array('placeholder' => '','class' => 'form-control','id'=>'advantages_en', "data-role"=>"tagsinput")) !!}
+                        {!! Form::text('advantages_en', '', array('placeholder' => '','class' => 'form-control','id'=>'advantages_en', "data-role"=>"tagsinput", "required"=>true)) !!}
                         @if ($errors->has('advantages_en'))
                             <div class="text-danger">{{ $errors->first('advantages_en') }}</div>
                         @endif
