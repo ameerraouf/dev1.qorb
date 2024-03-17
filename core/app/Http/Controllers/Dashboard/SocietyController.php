@@ -66,13 +66,8 @@ class SocietyController extends Controller
      */
     public function store(Request $request)
     {
-        // if (!@Auth::user()->permissionsGroup->settings_status) {
-        //     return redirect()->route('NoPermission');
-        // }
-
         $this->validate($request, [
             'question' => 'required|string|max:256',
-            // 'question_en' => 'required|string',
         ]);
 
 
@@ -83,7 +78,7 @@ class SocietyController extends Controller
             $society->question_en = $request->question;
             $society->status = 0;
             $society->save();
-            return redirect()->action('HomeController@Society')->with('doneMessage', ('the question will be reviewed by admin'));
+            return redirect()->action('HomeController@Society')->with('doneMessage', (__('backend.SocietyAddQuestionSuccessMessage')));
         } catch (\Exception $e) {
 
         }

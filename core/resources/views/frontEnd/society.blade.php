@@ -176,6 +176,19 @@
             <!-- بداية صفحة المجتمع -->
             <section class="content-row-no-bg" style="margin-top:2%; padding: 0 0 0 0">
                 <div class="container">
+                    @if(Session::has('doneMessage'))
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    {{ Session::get('doneMessage') }}
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     @if(auth()->check())
                         <div id="society" class="panel-collapse" style="margin-bottom: 0%;">
                             <h2 class="heading" style="margin-bottom: 2%;">{{ __('cruds.Society.AddQuestion') }}</h2>

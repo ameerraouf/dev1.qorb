@@ -773,4 +773,5 @@ return array(
     'VBMAPEvaluation' => 'تقييم VBMAP',
     'FinalReport' => 'التقرير النهائي',
     'EarlyDetectionReport' => 'تقرير الكشف المبكر',
+    'SocietyAddQuestionSuccessMessage'=>'شكرا لك! سيتم مراجعة السؤال من قبل المسؤول.',
 );

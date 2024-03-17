@@ -778,5 +778,5 @@ return array(
     'VBMAPEvaluation' => 'VBMAP Evaluation',
     'FinalReport' => 'Final Report',
     'EarlyDetectionReport' => 'Early Detection Report',
-
+    'SocietyAddQuestionSuccessMessage'=>'Thank you! The question will be reviewed by admin.',
 );

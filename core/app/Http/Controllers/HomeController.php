@@ -907,7 +907,6 @@ class HomeController extends Controller
 
         $search_word = request()->input("search_word");
         $section = request()->input("section");
-
         if ($search_word != "") {
 
             $WebmasterSection = WebmasterSection::find($section);
@@ -931,9 +930,9 @@ class HomeController extends Controller
             // Get current Category Section details
             $CurrentCategory = "none";
             // Get a list of all Category ( for side bar )
-            $Categories = Section::where('father_id', '=',
-                '0')->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
-
+            $Categories = Section::where('father_id', '=','0')
+                ->where('webmaster_id', $section)
+                ->where('status', 1)->orderby('webmaster_id', 'asc')->orderby('row_no', 'asc')->get();
             // Topics if NO Cat_ID
             $Topics = Topic::select("id")->where('title_' . Helper::currentLanguage()->code, 'like', '%' . $search_word . '%')
                 ->orwhere('seo_title_' . Helper::currentLanguage()->code, 'like', '%' . $search_word . '%')
@@ -2104,7 +2103,7 @@ class HomeController extends Controller
 
 
     public function GetSubServices(Request $req){
-        
+
         $subservices = SubService::where('main_service_id', $req->msid)->get();
         if($subservices){
             return response()->json([
@@ -2119,7 +2118,7 @@ class HomeController extends Controller
 
     }
 
-    
+
 
 }
 
