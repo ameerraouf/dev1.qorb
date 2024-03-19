@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\SocietyReplyController;
 
+use App\Http\Controllers\SocietyReplyController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Dashboard\SocietyController;
 
@@ -131,5 +132,9 @@ Route::get('/{lang?}/main-services', [HomeController::class, 'MainServicesByLang
 Route::get('/show-main-service/{value}', [HomeController::class, 'showMainService'])->name('showMainService');
 
 Route::post('/get-sub-services', [HomeController::class, 'GetSubServices'])->name('GetSubService');
+
+Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkout');
+Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
+
 // .. End of Frontend Route
 

@@ -72,6 +72,10 @@ class HomeController extends Controller
                 $id = Str::after(request()->server()['REQUEST_URI'], '/show-society/');
                 return $this->showSociety($id);
                 break;
+            case "checkout" :
+                $id = Str::after(request()->server()['REQUEST_URI'], '/checkout/');
+                return $this->checkout($id);
+                break;
             case "packages" :
                 return $this->Packages();
                 break;
@@ -1997,6 +2001,13 @@ class HomeController extends Controller
         $society->views += 1;
         $society->save();
         return view('frontEnd.society-show',compact('society'));
+    }
+
+    public function checkout($id){
+        $package = Package::find($id);
+        $user = Auth::guard('teacher')->user();
+        if(!$user){return redirect()->back();};
+        return view('frontEnd.checkout',compact('package','user'));
     }
 
     public function MainServices()
