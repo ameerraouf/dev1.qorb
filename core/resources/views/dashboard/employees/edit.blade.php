@@ -100,18 +100,11 @@
                                class="col-sm-2 form-control-label">{!!  __('backend.role') !!}</label>
                         <div class="col-sm-10">
                             <div class="radio">
-                                <select name="role_id" id="role_id" required
+                                <select name="role" id="role_id" required
                                         class="form-control c-select">
-                                    <option value="">- - {!!  __('backend.role') !!} - -</option>
-                                    @foreach ($roles as $value)
-                                        <option value="{{ $value->id  }}" {!! ($employee->role_id==$value->id) ? "selected='selected'":"" !!}>
-                                            @if(app()->getLocale() == 'ar')
-                                                {{ $value->role_ar }}
-                                            @else
-                                                {{ $value->role_en }}
-                                            @endif
-                                        </option>
-                                    @endforeach
+                                    <option value="{{ $employee->role  }}" hidden>{{ $employee->role  }}</option>
+                                    <option value="specialist">{!!  __('backend.Specialist') !!}</option>
+                                    <option value="supervisor">{!!  __('backend.Supervisor') !!}</option>
                                 </select>
                             </div>
                         </div>

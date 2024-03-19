@@ -38,6 +38,7 @@ use App\Http\Controllers\Dashboard\WebmasterSettingsController;
 use App\Http\Controllers\Dashboard\PurchaseTransactionController;
 use App\Http\Controllers\Dashboard\EarlyDetectionReportController;
 use App\Http\Controllers\Dashboard\FinancialTransactionController;
+use App\Http\Controllers\Dashboard\NewRoleController;
 
 // Admin Routes
 Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
@@ -296,19 +297,28 @@ Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
     Route::post('/packages/updateAll', [PackageController::class, 'updateAll'])->name('packagesUpdateAll');
 
     // Roles
-    Route::get('/roles', [RoleController::class, 'index'])->name('roles');
-    Route::get('/roles/create/', [RoleController::class, 'create'])->name('rolesCreate');
-    Route::post('/roles/store', [RoleController::class, 'store'])->name('rolesStore');
-    Route::get('/roles{id}/edit', [RoleController::class, 'edit'])->name('rolesEdit');
-    Route::post('roles/{id}/update', [RoleController::class, 'update'])->name('rolesUpdate');
-    Route::get('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('rolesDestroy');
+    // Route::get('/roles', [RoleController::class, 'index'])->name('roles');
+    // Route::get('/roles/create/', [RoleController::class, 'create'])->name('rolesCreate');
+    // Route::post('/roles/store', [RoleController::class, 'store'])->name('rolesStore');
+    // Route::get('/roles{id}/edit', [RoleController::class, 'edit'])->name('rolesEdit');
+    //Route::post('roles/{id}/update', [RoleController::class, 'update'])->name('rolesUpdate');
+    // Route::get('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('rolesDestroy');
     Route::post('/roles/updateAll', [RoleController::class, 'updateAll'])->name('rolesUpdateAll');
+
+
+    // New Roles
+    Route::get('/new-roles/', [NewRoleController::class, 'index'])->name('roles');
+    Route::get('/new-roles/create/', [NewRoleController::class, 'create'])->name('rolesCreate');
+    Route::post('/new-roles/store/', [NewRoleController::class, 'store'])->name('rolesStore');
+    Route::get('/new-roles/edit/{id}', [NewRoleController::class, 'edit'])->name('rolesEdit');
+    Route::post('roles/{id}/update', [NewRoleController::class, 'update'])->name('rolesUpdate');
+    Route::get('/roles/destroy/{id}', [NewRoleController::class, 'destroy'])->name('rolesDestroy');
 
     // Employees
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
     Route::get('/employees/create/', [EmployeeController::class, 'create'])->name('employeesCreate');
     Route::post('/employees/store', [EmployeeController::class, 'store'])->name('employeesStore');
-    Route::get('/employees{id}/edit', [EmployeeController::class, 'edit'])->name('employeesEdit');
+    Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employeesEdit');
     Route::post('employees/{id}/update', [EmployeeController::class, 'update'])->name('employeesUpdate');
     Route::get('/employees/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employeesDestroy');
     Route::post('/employees/updateAll', [EmployeeController::class, 'updateAll'])->name('employeesUpdateAll');

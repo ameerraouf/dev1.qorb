@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper as HelperPer;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Http\Requests;
@@ -29,6 +30,7 @@ class BannersController extends Controller
         if (!@Auth::user()->permissionsGroup->banners_status) {
             return Redirect::to(route('NoPermission'))->send();
         }
+
     }
 
     /**
@@ -38,8 +40,9 @@ class BannersController extends Controller
      */
     public function index()
     {
-        //
-        // General for all pages
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }        // General for all pages
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
         // General END
 
@@ -64,6 +67,9 @@ class BannersController extends Controller
      */
     public function create($sectionId)
     {
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->add_status) {
             return Redirect::to(route('NoPermission'))->send();
@@ -87,6 +93,9 @@ class BannersController extends Controller
      */
     public function store(Request $request)
     {
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->add_status) {
             return Redirect::to(route('NoPermission'))->send();
@@ -164,6 +173,9 @@ class BannersController extends Controller
      */
     public function edit($id)
     {
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->edit_status) {
             return Redirect::to(route('NoPermission'))->send();
@@ -197,6 +209,9 @@ class BannersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->add_status) {
             return Redirect::to(route('NoPermission'))->send();
@@ -276,6 +291,9 @@ class BannersController extends Controller
      */
     public function destroy($id = 0)
     {
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->delete_status) {
             return Redirect::to(route('NoPermission'))->send();
@@ -313,6 +331,9 @@ class BannersController extends Controller
      */
     public function updateAll(Request $request)
     {
+        if (!HelperPer::checkPermission(4)) {
+            return redirect()->route('NoPermission');
+        }
         //
         if ($request->action == "order") {
             foreach ($request->row_ids as $rowId) {

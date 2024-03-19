@@ -21,13 +21,7 @@
                         <div class=" p-a text-center ">
                             {{ __('backend.noData') }}
                             <br>
-                            @if(@Auth::user()->permissionsGroup->webmaster_status)
-                                <br>
-                                <a class="btn btn-fw primary" href="{{route("ChildrenCreate")}}">
-                                    <i class="material-icons">&#xe7fe;</i>
-                                    &nbsp; {{ __('cruds.childrens.NewChildren') }}
-                                </a>
-                            @endif
+                           
                         </div>
                     </div>
                 </div>

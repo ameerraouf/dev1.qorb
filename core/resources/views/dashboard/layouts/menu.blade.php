@@ -226,10 +226,11 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             </li>
                         @endif
                     {{-- @endif --}}
+                    @if(\Helper::checkPermission(1))
                     <li class="nav-header hidden-folded">
                         <small class="text-muted">{{ __('backend.siteData') }}</small>
                     </li>
-
+                    @endif
                     <?php
                     $data_sections_arr = explode(",", Auth::user()->permissionsGroup->data_sections);
                     ?>
@@ -238,6 +239,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                         $currentFolder = "packages"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(1))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('packages') }}">
                             <span class="nav-icon">
@@ -246,11 +248,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('backend.packages') }}</span>
                         </a>
                     </li>
-
+                    @endif
                     <?php
                     $currentFolder = "financial-transactions"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(2))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('financial-transactions') }}">
                             <span class="nav-icon">
@@ -259,11 +262,13 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('cruds.FinancialTransactions.Title') }}</span>
                         </a>
                     </li>
+                    @endif
 
                     <?php
                     $currentFolder = "purchase-transactions"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(3))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('PurchaseTransactions') }}">
                             <span class="nav-icon">
@@ -272,11 +277,14 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('cruds.FinancialTransactions.Purchases') }}</span>
                         </a>
                     </li>
+                    @endif
 
                     <?php
                     $currentFolder = "banners"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(4))
+
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('Banners') }}">
                             <span class="nav-icon">
@@ -286,10 +294,13 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                         </a>
                     </li>
 
+                    @endif
+
                     <?php
                         $currentFolder = "clients"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(5))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('clients') }}">
                             <span class="nav-icon">
@@ -298,11 +309,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('backend.clients') }}</span>
                         </a>
                     </li>
-
+                    @endif
                     <?php
                         $currentFolder = "set-child-to"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(6))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('SetChildTo') }}">
                             <span class="nav-icon">
@@ -311,11 +323,13 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('backend.setChildToParent') }}</span>
                         </a>
                     </li>
+                    @endif
 
                     <?php
                         $currentFolder = "early-detection-reports"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(7))
                     <li {{ ($PathCurrentFolder==$currentFolder ) ? 'class=active' : '' }} >
                         <a href="{{ route('EarlyDetectionReports') }}">
                             <span class="nav-icon">
@@ -324,11 +338,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('cruds.EarlyDetectionReports.Title') }}</span>
                         </a>
                     </li>
-
+                    @endif
                     <?php
                         $currentFolder = "employees"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(8))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a >
                             <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
@@ -336,16 +351,17 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('backend.employees') }}</span>
                         </a>
                         <ul class="nav-sub">
-                            {{-- <li><a href="{{ route('roles') }}"><span class="nav-text">{{ __('backend.roles') }}</span></a></li> --}}
+                            <li><a href="{{ route('employeesCreate') }}"><span class="nav-text">{{ __('backend.add') }}</span></a></li>
                             <li><a href="{{ route('employees') }}"><span class="nav-text">{{ __('backend.employees') }}</span></a></li>
                         </ul>
                     </li>
-
+                    @endif
 
                     <?php
                     $currentFolder = "common-questions"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(9))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('CommonQuestions') }}">
                             <span class="nav-icon">
@@ -354,11 +370,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('cruds.CommonQuestions.Title') }}</span>
                         </a>
                     </li>
-
+                    @endif
                     <?php
                     $currentFolder = "societies"; // Put folder name here
                     $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(10))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a href="{{ route('societies') }}">
                             <span class="nav-icon">
@@ -367,11 +384,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <span class="nav-text">{{ __('cruds.Society.Title') }}</span>
                         </a>
                     </li>
-
+                    @endif
                     <?php
                         $currentFolder = "Services"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                     ?>
+                    @if(\Helper::checkPermission(11))
                     <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
                         <a >
                             <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
@@ -383,9 +401,42 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             <li><a href="{{ route('SubServices') }}"><span class="nav-text">{{ __('cruds.SubServices.Title') }}</span></a></li>
                         </ul>
                     </li>
+                    @endif
+                    <?php
+                    $currentFolder = "users"; // Put folder name here
+                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    ?>
+                    @if(\Helper::checkPermission(11))
+                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                        <a >
+                            <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
+                            <span class="nav-icon"><i class="material-icons">&#xe1b8;</i></span>
+                            <span class="nav-text">{{ __('backend.Admins') }}</span>
+                        </a>
+                        <ul class="nav-sub">
+                            <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
+                                <a href="{{ route('users') }}">
+                                    <span class="nav-icon">
+                                        <i class="material-icons">&#xe7ef;</i>
+                                    </span>
+                                    <span class="nav-text">{{ __('backend.Admins') }}</span>
+                                </a>
+                            </li>
+                            <li {{ ($PathCurrentFolder== 'new-roles') ? 'class=active' : '' }}>
+                                <a href="{{ route('roles') }}">
+                                    <span class="nav-icon">
+                                        <i class="material-icons">&#xe3fc;</i>
+                                    </span>
+                                    <span class="nav-text">{{ __('backend.roles') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
 
+            
 
-                    @foreach($GeneralWebmasterSections as $GeneralWebmasterSection)
+                    @foreach($GeneralWebmasterSections as $index => $GeneralWebmasterSection)
                         @if(in_array($GeneralWebmasterSection->id,$data_sections_arr))
                             <?php
                             if ($GeneralWebmasterSection->$mnu_title_var != "") {
@@ -426,9 +477,11 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             // get 9 char after root url to check if is "webmaster"
                             $is_webmaster = substr($urlAfterRoot, 0, 9);
                             ?>
-                            @if($GeneralWebmasterSection->sections_status > 0 && @Auth::user()->permissionsGroup->view_status == 0)
+                            @if($GeneralWebmasterSection->sections_status > 0 && @Auth::user()->permissionsGroup->view_status == 0 )
+
+                                @if ($GeneralWebmasterSection->id !== 2 && $GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12 )
                                 <li {{ ($GeneralWebmasterSection->id == @$WebmasterSection->id && $is_webmaster != "webmaster") ? 'class=active' : '' }}>
-                                    @if ($GeneralWebmasterSection->id !== 2 && $GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
+                                    @if( \Helper::checkPermission(12))
                                         <a>
                                             <span class="nav-caret">
                                                 <i class="fa fa-caret-down"></i>
@@ -468,12 +521,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                                     class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
                                             </a>
                                         </li>
-
                                     </ul>
                                 </li>
-
+                                @endif
                             @else
                                 @if ($GeneralWebmasterSection->id !== 3 && $GeneralWebmasterSection->id !== 2 && $GeneralWebmasterSection->id !==5 && $GeneralWebmasterSection->id !==6 && $GeneralWebmasterSection->id !==8 && $GeneralWebmasterSection->id !==10 && $GeneralWebmasterSection->id !==11 && $GeneralWebmasterSection->id !==12)
+                                    @if( \Helper::checkPermission(12))
                                     <li {{ ($GeneralWebmasterSection->id== @$WebmasterSection->id) ? 'class=active' : '' }}>
                                         <a href="{{ route('topics',$GeneralWebmasterSection->id) }}">
                                             <span class="nav-icon">
@@ -483,6 +536,7 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                             class="nav-text">{!! $GeneralWebmasterSectionTitle !!}</span>
                                         </a>
                                     </li>
+                                    @endif
                                 @endif
                             @endif
                         @endif
@@ -509,10 +563,12 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
 
                     {{-- @if(Helper::GeneralWebmasterSettings("settings_status")) --}}
                         @if(@Auth::user()->permissionsGroup->settings_status)
+                            @if(\Helper::checkPermission(15) || \Helper::checkPermission(16))
+
                             <li class="nav-header hidden-folded">
                                 <small class="text-muted">{{ __('backend.settings') }}</small>
                             </li>
-
+                            @endif
                             <?php
                             $currentFolder = "settings"; // Put folder name here
                             $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
@@ -526,6 +582,8 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             $currentFolder4 = "file-manager"; // Put folder name here
                             $PathCurrentFolder4 = substr($urlAfterRoot, 0, strlen($currentFolder4));
                             ?>
+                            @if(\Helper::checkPermission(15))
+
                             <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2 || $PathCurrentFolder3==$currentFolder3 || $PathCurrentFolder4==$currentFolder4 ) ? 'class=active' : '' }}>
                                 <a>
                                 <span class="nav-caret">
@@ -567,34 +625,26 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                                             <span class="nav-text">{{ __('backend.fileManager') }}</span>
                                         </a>
                                     </li>--}}
-                                    <?php
-                                    $currentFolder = "users"; // Put folder name here
-                                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
-                                    ?>
-                                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
-                                        <a href="{{ route('users') }}">
-                                            <span class="nav-text">{{ __('backend.users') }}</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
+                            @endif
                         @endif
                     {{-- @endif --}}
 
 
-                    @if(@Auth::user()->permissionsGroup->webmaster_status)
+                    @if(@Auth::user()->permissionsGroup->webmaster_status && \Helper::checkPermission(16))
                         <?php
                         $currentFolder = "webmaster"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
                         ?>
                         <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }}>
                             <a>
-<span class="nav-caret">
-<i class="fa fa-caret-down"></i>
-</span>
+                                <span class="nav-caret">
+                                <i class="fa fa-caret-down"></i>
+                                </span>
                                 <span class="nav-icon">
-<i class="material-icons">&#xe8be;</i>
-</span>
+                                <i class="material-icons">&#xe8be;</i>
+                                </span>
                                 <span class="nav-text">{{ __('backend.webmasterTools') }}</span>
                             </a>
                             <ul class="nav-sub">

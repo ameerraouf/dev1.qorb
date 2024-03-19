@@ -246,7 +246,7 @@
                         </li>
                     @endif
                 @endforeach
-                <li class="dropdown">
+                {{--<li class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown"
                         data-hover="dropdown"data-delay="0" data-close-others="true">{{ __('frontend.ourservices') }}
                         <i class="fa fa-angle-down"></i></a>
@@ -262,7 +262,7 @@
                                         {{ $main_service->name_en }}
                                     @endif
                                 </a>
-                                
+
                             </li>
                             @endforeach
                             <ul class="dropdown-menu" id="sub" @if(app()->getLocale() == 'ar') style="position: absolute; top: 0; margin-right: 150px; margin-top: -1px" @else style="position: absolute; top: 0;margin-left: 150px; margin-top: -1px" @endif>
@@ -270,7 +270,59 @@
                             </ul>
 
                     </ul>
-                    
+
+
+                </li>--}}
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown"
+                        data-hover="dropdown"data-delay="0" data-close-others="true">{{ __('frontend.ourservices') }}
+                        <i class="fa fa-angle-down"></i></a>
+
+                    <ul class="dropdown-menu">
+                        @foreach ($main_services as $main_service)
+                            <li class="mainservices dropdown" class="dropdown-toggle" id="ms-{{ $main_service->id }}">
+                                <a href="{{ route('showMainService', $main_service->id) }}"
+                                    data-toggle="dropdown" data-hover="dropdown"data-delay="0" data-close-others="true">
+                                    @if (app()->getLocale() == 'ar')
+                                        {{ $main_service->name_ar }}
+                                    @else
+                                        {{ $main_service->name_en }}
+                                    @endif
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach ( $main_service->subServices  as $item)
+                                        <li class="mainservices">
+                                            <a href="{{ route('showMainService', $main_service->id) }}">
+                                                @if (app()->getLocale() == 'ar')
+                                                    {{ $item->title_ar }}
+                                                @else
+                                                    {{ $item->title_en }}
+                                                @endif
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                    {{-- <li class="mainservices">
+                                        <a href="{{ route('showMainService', $main_service->id) }}">
+                                            Test
+                                        </a>
+                                    </li>
+                                    <li class="mainservices">
+                                        <a href="{{ route('showMainService', $main_service->id) }}">
+                                            Test
+                                        </a>
+                                    </li>
+                                    <li class="mainservices">
+                                        <a href="{{ route('showMainService', $main_service->id) }}">
+                                            Test
+                                        </a>
+                                    </li> --}}
+                                </ul>
+
+                            </li>
+                            @endforeach
+
+                    </ul>
+
 
                 </li>
                 <li><a href="{{ route('FrontendCommonQuestionsByLang') }}">{{ __('cruds.CommonQuestions.Title') }}</a>
@@ -281,7 +333,7 @@
         </div>
     @endif
 @endif
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+{{--<script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(".mainservices").on('mouseover', function() {
@@ -293,7 +345,7 @@
             url: "{{ route('GetSubService') }}",
             type: 'POST',
             data: {'_token': '{{ csrf_token() }}', msid: msid},
-            dataType: 'json', 
+            dataType: 'json',
             success: function(data){
                 $("#sub").html("")
                 data.data.map(el => {
@@ -307,4 +359,4 @@
         let msid = $(this).attr("msid")
             $("#sub").html("")
     })
-</script>
+</script> --}}

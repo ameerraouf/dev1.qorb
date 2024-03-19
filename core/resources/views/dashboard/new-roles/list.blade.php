@@ -1,33 +1,27 @@
 @extends('dashboard.layouts.master')
-@section('title', __('backend.usersPermissions'))
+@section('title',__('backend.roles'))
 @section('content')
-    {{-- @if(@Auth::user()->permissionsGroup->webmaster_status)
-        @include('dashboard.permissions.list')
-    @endif --}}
     <div class="padding">
         <div class="box">
-
             <div class="box-header dker">
-                <h3>{{ __('backend.users') }}</h3>
+                <h3>{{ __('backend.roles') }}</h3>
                 <small>
                     <a href="{{ route('adminHome') }}">{{ __('backend.home') }}</a> /
-                    <a href="">{{ __('backend.settings') }}</a>
+                    <a href="">{{ __('backend.roles') }}</a>
                 </small>
             </div>
-
-            @if($Users->total() >0)
+            @if($roles->count() > 0)
                 @if(@Auth::user()->permissionsGroup->webmaster_status)
                     <div class="row p-a pull-right" style="margin-top: -70px;">
                         <div class="col-sm-12">
-                            <a class="btn btn-fw primary" href="{{route("usersCreate")}}">
-                                <i class="material-icons">&#xe7fe;</i>
-                                &nbsp; {{ __('backend.newUser') }}
+                            <a class="btn btn-fw primary" href="{{route("rolesCreate")}}">
+                                <i class="fa fa-plus"></i>{{ __('backend.add') }}
                             </a>
                         </div>
                     </div>
                 @endif
             @endif
-            @if($Users->total() == 0)
+            @if($roles->count() == 0)
                 <div class="row p-a">
                     <div class="col-sm-12">
                         <div class=" p-a text-center ">
@@ -35,9 +29,8 @@
                             <br>
                             @if(@Auth::user()->permissionsGroup->webmaster_status)
                                 <br>
-                                <a class="btn btn-fw primary" href="{{route("usersCreate")}}">
-                                    <i class="material-icons">&#xe7fe;</i>
-                                    &nbsp; {{ __('backend.newUser') }}
+                                <a class="btn btn-fw primary" href="{{route("rolesCreate")}}">
+                                    <i class="fa fa-plus"></i>{{ __('backend.add') }}
                                 </a>
                             @endif
                         </div>
@@ -45,8 +38,8 @@
                 </div>
             @endif
 
-            @if($Users->total() > 0)
-                {{Form::open(['route'=>'usersUpdateAll','method'=>'post'])}}
+            @if($roles->count() > 0)
+                {{Form::open(['route'=>'rolesUpdateAll','method'=>'post'])}}
                 <div class="table-responsive">
                     <table class="table table-bordered m-a-0">
                         <thead class="dker">
@@ -56,70 +49,45 @@
                                     <input id="checkAll" type="checkbox"><i></i>
                                 </label>
                             </th>
-                            <th>{{ __('backend.fullName') }}</th>
-                            <th>{{ __('backend.loginEmail') }}</th>
-                            <th>{!!  __('backend.Role') !!}</th>
-                            {{-- <th>{{ __('backend.Permission') }}</th> --}}
-
-                            <th class="text-center" style="width:50px;">{{ __('backend.status') }}</th>
-                            <th class="text-center" style="width:200px;">{{ __('backend.options') }}</th>
+                            <th class="text-center" style="width:100px;">{{ __('backend.role') }}</th>
+                            <th class="text-center" style="width:200px;">{{ __('backend.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @foreach($Users as $User)
+                        @foreach($roles as $value)
                             <tr>
                                 <td class="dker"><label class="ui-check m-a-0">
-                                        <input type="checkbox" name="ids[]" value="{{ $User->id }}"><i
+                                        <input type="checkbox" name="ids[]" value="{{ $value->id }}"><i
                                             class="dark-white"></i>
-                                        {!! Form::hidden('row_ids[]',$User->id, array('class' => 'form-control row_no')) !!}
+                                        {!! Form::hidden('row_ids[]',$value->id, array('class' => 'form-control row_no')) !!}
                                     </label>
                                 </td>
-                                <td class="h6">
-                                    {!! $User->name   !!}
-                                </td>
-
-                                <td>
-                                    <small>{!! $User->email   !!}</small>
-                                </td>
-
-                                <td>
-                                    @if($User->adminRole)
-                                        @if(app()->getLocale() == 'ar')
-                                            {{ $User->adminRole->name_ar }}
-                                            @else
-                                            {{ $User->adminRole->name_en }}
-                                        @endif
-                                    @else 
-                                    -
-                                    @endif
-                                </td>
-                                {{-- <td>
-                                    <small>{{ @$User->permissionsGroup->name}}</small>
-                                </td> --}}
                                 <td class="text-center">
-                                    <i class="fa {{ ($User->status==1) ? "fa-check text-success":"fa-times text-danger" }} inline"></i>
+                                    @if(app()->getLocale() == 'ar')
+                                        {{ $value->name_ar }}
+                                    @else
+                                        {{ $value->name_en }}
+                                    @endif
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-sm success"
-                                       href="{{ route("usersEdit",["id"=>$User->id]) }}">
+                                        href="{{ route("rolesEdit",["id"=>$value->id]) }}">
                                         <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.edit') }}
                                         </small>
                                     </a>
                                     @if(@Auth::user()->permissionsGroup->webmaster_status)
                                         <button class="btn btn-sm warning" data-toggle="modal"
-                                                data-target="#m-{{ $User->id }}" ui-toggle-class="bounce"
+                                                data-target="#delete-{{ $value->id }}" ui-toggle-class="bounce"
                                                 ui-target="#animate">
                                             <small><i class="material-icons">&#xe872;</i> {{ __('backend.delete') }}
                                             </small>
                                         </button>
                                     @endif
-
-
                                 </td>
                             </tr>
                             <!-- .modal -->
-                            <div id="m-{{ $User->id }}" class="modal fade" data-backdrop="true">
+                            <div id="delete-{{ $value->id }}" class="modal fade" data-backdrop="true">
                                 <div class="modal-dialog" id="animate">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -128,14 +96,12 @@
                                         <div class="modal-body text-center p-lg">
                                             <p>
                                                 {{ __('backend.confirmationDeleteMsg') }}
-                                                <br>
-                                                <strong>[ {{ $User->name }} ]</strong>
                                             </p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn dark-white p-x-md"
                                                     data-dismiss="modal">{{ __('backend.no') }}</button>
-                                            <a href="{{ route("usersDestroy",["id"=>$User->id]) }}"
+                                            <a href="{{ route("rolesDestroy",["id"=>$value->id]) }}"
                                                class="btn danger p-x-md">{{ __('backend.yes') }}</a>
                                         </div>
                                     </div><!-- /.modal-content -->
@@ -177,8 +143,6 @@
                                 <select name="action" id="action" class="form-control c-select w-sm inline v-middle"
                                         required>
                                     <option value="">{{ __('backend.bulkAction') }}</option>
-                                    <option value="activate">{{ __('backend.activeSelected') }}</option>
-                                    <option value="block">{{ __('backend.blockSelected') }}</option>
                                     <option value="delete">{{ __('backend.deleteSelected') }}</option>
                                 </select>
                                 <button type="submit" id="submit_all"
@@ -191,14 +155,14 @@
                             @endif
                         </div>
 
-                        <div class="col-sm-3 text-center">
-                            <small class="text-muted inline m-t-sm m-b-sm">{{ __('backend.showing') }} {{ $Users->firstItem() }}
-                                -{{ $Users->lastItem() }} {{ __('backend.of') }}
-                                <strong>{{ $Users->total()  }}</strong> {{ __('backend.records') }}</small>
+                        {{-- <div class="col-sm-3 text-center">
+                            <small class="text-muted inline m-t-sm m-b-sm">{{ __('backend.showing') }} {{ $roles->firstItem() }}
+                                -{{ $roles->lastItem() }} {{ __('backend.of') }}
+                                <strong>{{ $roles->total()  }}</strong> {{ __('backend.records') }}</small>
                         </div>
                         <div class="col-sm-6 text-right text-center-xs">
-                            {!! $Users->links() !!}
-                        </div>
+                            {!! $roles->links() !!}
+                        </div> --}}
                     </div>
                 </footer>
                 {{Form::close()}}

@@ -62,7 +62,7 @@ class ChildrenController extends Controller
         event(new RegisterNewChild('تم تسجيل طفل جديد فى النظام'));
         
         Notification::create([
-            'admin_id' => $admin->id,
+            'teacher_id' => auth()->guard('teacher')->user()->id,
             'message' => 'تم تسجيل طفل جديد فى النظام'
         ]);
         

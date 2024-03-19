@@ -17,6 +17,7 @@ use App\Models\Topic;
 use App\Models\Webmail;
 use App\Models\Language;
 use App\Models\Notification;
+use App\Models\RolePermission;
 use App\Models\WebmasterSection;
 use App\Models\WebmasterSetting;
 use Illuminate\Support\Carbon;
@@ -873,6 +874,32 @@ class Helper
         $str = preg_replace('/<a\s[^>]*href\s*=\s*"((?!https?:\/\/)[^"]*)"[^>]*>/i', '<a href="http://$1" ' . $target . '>', $str);
         return $str;
     }
+
+    static function checkPermission($permission_id) {
+
+        $user = auth()->user();
+
+        $role = $user->adminRole;
+
+        if ($role) {
+
+            $check = RolePermission::where('permission_id', $permission_id)->where('role_id', $role->id)->first();
+    
+            if ($check) {
+    
+                return true;
+    
+            }else {
+    
+                return false;
+    
+            }
+        }else {
+            return false;
+        }
+
+    }
+
 
 }
 

@@ -59,7 +59,7 @@
                                     {!! $transaction->notes ?? '-'   !!}
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm primary"data-toggle="modal"
+                                    <button class="btn btn-sm primary" data-toggle="modal"
                                                 data-target="#transaction-show{{ $transaction->id }}" ui-toggle-class="bounce"
                                                 ui-target="#animate" data-dismiss="modal">
                                             <small><i class="material-icons">&#xe3c9;</i> {{ __('backend.show') }}

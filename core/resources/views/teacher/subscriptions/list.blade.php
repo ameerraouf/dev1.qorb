@@ -35,7 +35,8 @@
                             </th> --}}
                             <th class="text-center" style="width:220px;">{{ __('cruds.Packages.Title') }}</th>
                             <th class="text-center" style="width:220px;">{{ __('cruds.Packages.price') }}</th>
-                            <th class="text-center" style="width:220px;">{{ __('cruds.EarlyDetectionReports.TeacherName') }}</th>
+                            <th class="text-center" style="width:220px;">{{ __('backend.main_services') }}</th>
+                            <th class="text-center" style="width:220px;">{{ __('backend.sub_services') }}</th>
                             <th class="text-center" style="width:220px;">{{ __('cruds.Childrens.childrenname') }}</th>
                             <th class="text-center" style="width:220px;">{{ __('backend.SubscriptionDate') }}</th>
                             <th class="text-center" style="width:220px;">{{ __('cruds.Packages.PackageStatus') }}</th>
@@ -61,7 +62,19 @@
                                 </td>
 
                                 <td class="h6 text-center">
-                                    {!! auth()->user()->name !!}
+                                    @if (app()->getLocale() == 'ar')
+                                        {!! $transaction->main_service->name_ar !!}
+                                    @else
+                                        {!! $transaction->main_service->name_en !!}
+                                    @endif
+                                </td>
+
+                                <td class="h6 text-center">
+                                    @if (app()->getLocale() == 'ar')
+                                        {!! $transaction->sub_service->title_ar ?? '' !!}
+                                    @else
+                                        {!! $transaction->sub_service->title_en ?? '' !!}
+                                    @endif
                                 </td>
 
                                 <td class="h6 text-center">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Section;
@@ -34,6 +35,9 @@ class CategoriesController extends Controller
      */
     public function index($webmasterId)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         $data_sections_arr = explode(",", Auth::user()->permissionsGroup->data_sections);
         if (!in_array($webmasterId, $data_sections_arr)) {
@@ -87,6 +91,9 @@ class CategoriesController extends Controller
      */
     public function create($webmasterId)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         //
         // General for all pages
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
@@ -111,6 +118,9 @@ class CategoriesController extends Controller
      */
     public function store(Request $request, $webmasterId)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         //
         $this->validate($request, [
             'photo' => 'mimes:png,jpeg,jpg,gif,svg'
@@ -174,6 +184,9 @@ class CategoriesController extends Controller
      */
     public function edit($webmasterId, $id)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         //
         // General for all pages
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
@@ -208,6 +221,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $webmasterId, $id)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         //
         $Section = Section::find($id);
         if (!empty($Section)) {
@@ -293,6 +309,9 @@ class CategoriesController extends Controller
      */
     public function destroy($webmasterId, $id = 0)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         //
         if (@Auth::user()->permissionsGroup->view_status) {
             $Sections = Section::where('created_by', '=', Auth::user()->id)->find($id);
@@ -324,6 +343,9 @@ class CategoriesController extends Controller
      */
     public function updateAll(Request $request, $webmasterId)
     {
+        if (!HelpersHelper::checkPermission(13)) {
+            return redirect()->route('NoPermission');
+        }
         //
         if ($request->action == "order") {
             foreach ($request->row_ids as $rowId) {

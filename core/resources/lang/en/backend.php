@@ -731,7 +731,9 @@ return array(
     'Role' => 'Role',
     'selectRole' => 'Select Role',
     'Admin' => 'Admin',
+    'Admins' => 'Admins',
     'Specialist' => 'Specialist',
+    'specialist' => 'Specialist',
 
      // TEACHER ____________________________
      'signedInToControlteacher' => 'Employees Login',
@@ -761,6 +763,7 @@ return array(
      'reports' => 'Reports',
 
     'Supervisor' => 'Supervisor',
+    'supervisor' => 'Supervisor',
 
     'setChildToParent' => 'Set Child to Specilist / Supervisor',
 
@@ -770,6 +773,14 @@ return array(
     'BilledFrom' => 'Billed From',
     'BilledTo' => 'Billed To',
     'BilledTo' => 'Billed To',
+
+    'SessionReports' => 'Session Reports',
+    'CaseReports' => 'Case Reports',
+    'ConsultationReports' => 'Consultation Reports',
+    'TreatmentPlan' => 'Treatment Plan',
+    'VBMAPEvaluation' => 'VBMAP Evaluation',
+    'FinalReport' => 'Final Report',
+    'EarlyDetectionReport' => 'Early Detection Report',
 
     'SessionReports' => 'Session Reports',
     'CaseReports' => 'Case Reports',

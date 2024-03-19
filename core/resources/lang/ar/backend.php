@@ -126,6 +126,7 @@ return array(
     'photos' => 'الصور',
     'blog' => 'المدونة',
     'services' => 'الخدمات',
+    'main_services' => 'الخدمات الرئيسية',
     'news' => 'الأخبار',
     'videos' => 'الفيديو',
     'sounds' => 'الصوتيات',
@@ -717,7 +718,9 @@ return array(
     'Role' => 'الدور',
     'selectRole' => 'اختيار دور',
     'Admin' => 'أدمن',
+    'Admins' => 'المسؤولين',
     'Specialist' => 'أخصائي',
+    'specialist' => 'أخصائي',
 
     'societies' => 'المجتمع',
     'question' => 'السؤال',
@@ -757,6 +760,7 @@ return array(
     'reports' => 'التقارير',
 
     'Supervisor' => 'مشرفة',
+    'supervisor' => 'مشرفة',
 
     'setChildToParent' => 'تعيين مشرفة و اخصائية للطفل',
 

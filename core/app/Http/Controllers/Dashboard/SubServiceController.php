@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper;
 use App\Models\SubService;
 use App\Rules\CheckSpaces;
 use App\Models\MainService;
@@ -20,6 +21,9 @@ class SubServiceController extends Controller
 
     public function index()
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
@@ -34,6 +38,9 @@ class SubServiceController extends Controller
 
     public function create()
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -50,6 +57,9 @@ class SubServiceController extends Controller
 
     public function store(Request $request)
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -80,6 +90,9 @@ class SubServiceController extends Controller
 
     public function edit($id)
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -99,6 +112,9 @@ class SubServiceController extends Controller
 
     public function update(Request $request, $id)
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status && @Auth::user()->id != $id) {
             return redirect()->route('NoPermission');
@@ -132,6 +148,9 @@ class SubServiceController extends Controller
 
     public function destroy($id)
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');
@@ -143,6 +162,9 @@ class SubServiceController extends Controller
 
     public function updateAll(Request $request)
     {
+        if (!Helper::checkPermission(11)) {
+            return redirect()->route('NoPermission');
+        }
         // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('NoPermission');

@@ -61,7 +61,7 @@
                         @endforeach
                     ],
                     datasets: [{
-                        label:'{{ __('backend.SuccessChartforChild') }}' + ': '+ '{{ $reports->first()->children->name }}',
+                        label:'{{ __('backend.SuccessChartforChild') }}' + ': '+ '{{ $reports->first()->children->name ?? '' }}',
                         data: [
                             0,
                             @foreach($reports as $report)

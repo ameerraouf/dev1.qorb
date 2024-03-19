@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('ALTER TABLE smartend_packages CHANGE title title_en VARCHAR(255)');
-        DB::statement('ALTER TABLE smartend_packages CHANGE advantages advantages_en VARCHAR(255)');
+        Schema::create('new_permissions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name_ar', 150);
+            $table->string('name_en', 150);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -20,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('packages', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('samrtend_new_permissions');
     }
 };

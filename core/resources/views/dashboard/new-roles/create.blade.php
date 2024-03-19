@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title',__('backend.packages') )
+@section('title',__('backend.roles') )
 @section('content')
 <link
 rel="stylesheet"
@@ -24,69 +24,64 @@ padding: 0.2rem;
                 <h3><i class="fa fa-plus"></i>{{ __('backend.add') }}</h3>
                 <small>
                     <a href="{{ route('adminHome') }}">{{ __('backend.home') }}</a> /
-                    <a href="">{{ __('backend.packages') }}</a> /
+                    <a href="">{{ __('backend.roles') }}</a> /
                     <a href="">{{ __('backend.add') }}</a>
                 </small>
             </div>
             <div class="box-tool">
                 <ul class="nav">
                     <li class="nav-item inline">
-                        <a class="nav-link" href="{{route("packages")}}">
+                        <a class="nav-link" href="{{route("roles")}}">
                             <i class="material-icons md-18">×</i>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="box-body">
-                {{Form::open(['route'=>['packagesStore'],'method'=>'POST' ])}}
-
+                {{Form::open(['route'=>['rolesStore'],'method'=>'POST' ])}}
+                
                 <div class="form-group row">
-                    <label for="title_ar" class="col-sm-2 form-control-label">{{ __('backend.packageTitle') }}</label>
+                    <label for="role" class="col-sm-2 form-control-label">{{ __('backend.roleAR') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('title_ar','', array('placeholder' => '','class' => 'form-control','id'=>'title_ar')) !!}
-                        @if ($errors->has('title_ar'))
-                            <div class="text-danger">{{ $errors->first('title_ar') }}</div>
+                        {!! Form::text('role_ar','', array('placeholder' => '','class' => 'form-control','id'=>'role_ar')) !!}
+                        @if ($errors->has('role_ar'))
+                            <div class="text-danger">{{ $errors->first('role_ar') }}</div>
                         @endif
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="title_en" class="col-sm-2 form-control-label">{{ __('backend.packageTitle_en') }}</label>
+                    <label for="role" class="col-sm-2 form-control-label">{{ __('backend.roleEN') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('title_en','', array('placeholder' => '','class' => 'form-control','id'=>'title_en')) !!}
-                        @if ($errors->has('title_en'))
-                            <div class="text-danger">{{ $errors->first('title_en') }}</div>
+                        {!! Form::text('role_en','', array('placeholder' => '','class' => 'form-control','id'=>'role_en')) !!}
+                        @if ($errors->has('role_en'))
+                            <div class="text-danger">{{ $errors->first('role_en') }}</div>
                         @endif
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="advantages_ar" class="col-sm-2 form-control-label">{{ __('backend.advantages') }}</label>
+                    <label for="permissions" class="col-sm-2 form-control-label">{{ __('backend.permissions') }}</label>
                     <div class="col-sm-10">
-                        {!! Form::text('advantages_ar', '', array('placeholder' => '','class' => 'form-control','id'=>'advantages_ar', "data-role"=>"tagsinput", "required"=>true)) !!}
-                        @if ($errors->has('advantages_ar'))
-                            <div class="text-danger">{{ $errors->first('advantages_ar') }}</div>
-                        @endif
-                    </div>
-                </div>
+                        <div class="row">
 
-                <div class="form-group row">
-                    <label for="advantages_en" class="col-sm-2 form-control-label">{{ __('backend.advantages_en') }}</label>
-                    <div class="col-sm-10">
-                        {!! Form::text('advantages_en', '', array('placeholder' => '','class' => 'form-control','id'=>'advantages_en', "data-role"=>"tagsinput", "required"=>true)) !!}
-                        @if ($errors->has('advantages_en'))
-                            <div class="text-danger">{{ $errors->first('advantages_en') }}</div>
-                        @endif
-                    </div>
-                </div>
+                            @foreach($permessions as $item)
 
+                                <div class="col-sm-4">
+                                    <div class="checkbox">
+                                        <label class="ui-check">
+                                            {!! Form::checkbox('permissions[]', $item->id ,false, ['id' =>  $item->id]) !!}
+                                            <i class="dark-white"></i><label
+                                                for="{{$item->id}}">@if(session('lang') == 'ar') {{ $item->name_ar }} @else {{ $item->name_en }} @endif</label>
+                                        </label>
+                                    </div>
+                                </div>
 
-                <div class="form-group row">
-                    <label for="price" class="col-sm-2 form-control-label">{{ __('backend.price') }}</label>
-                    <div class="col-sm-10">
-                        {!! Form::number('price','', array('min'=>'1','placeholder' => '','class' => 'form-control','id'=>'price')) !!}
-                        @if ($errors->has('price'))
-                            <div class="text-danger">{{ $errors->first('price') }}</div>
+                            @endforeach
+                            
+                        </div>
+                        @if ($errors->has('permissions'))
+                            <div class="text-danger">{{ $errors->first('permissions') }}</div>
                         @endif
                     </div>
                 </div>
@@ -95,7 +90,7 @@ padding: 0.2rem;
                     <div class="offset-sm-2 col-sm-10">
                         <button type="submit" class="btn btn-primary m-t"><i class="material-icons">
                                 &#xe31b;</i> {!! __('backend.add') !!}</button>
-                        <a href="{{route("packages")}}"
+                        <a href="{{route("roles")}}"
                            class="btn btn-default m-t"><i class="material-icons">
                                 &#xe5cd;</i> {!! __('backend.cancel') !!}</a>
                     </div>

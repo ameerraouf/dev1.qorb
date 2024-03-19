@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Employee;
@@ -26,6 +27,9 @@ class ClientController extends Controller
      */
     public function index()
     {
+        if (!Helper::checkPermission(5)) {
+            return redirect()->route('NoPermission');
+        }
                 // Check Permissions
         if (!@Auth::user()->permissionsGroup->settings_status) {
             return redirect()->route('adminHome');
