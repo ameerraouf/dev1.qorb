@@ -216,7 +216,7 @@
     <!-- نهاية صفحة الخدمات -->
 
     <!-- بداية صفحة  الخدمات الفرعية -->
-    <section class="content-row-no-bg">
+    {{-- <section class="content-row-no-bg">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -227,6 +227,7 @@
             </div>
             <div class="swiper-services2" style="position: relative; overflow:hidden;">
                 <div class="swiper-wrapper">
+                    @foreach($main_services as $item)
                             <div class="swiper-slide">
                                 <a href="" style="text-decoration: none;">
                                     <div class="box-serv">
@@ -326,7 +327,7 @@
                         class="fa fa-angle-right"></i></a>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- نهاية صفحة  الخدمات الفرعية -->
 
     @if(count($HomeTopics)>0)

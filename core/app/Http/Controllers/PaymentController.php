@@ -6,6 +6,8 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use App\Services\Payment\BasePaymentService;
 
 class PaymentController extends Controller
 {
@@ -47,9 +49,9 @@ class PaymentController extends Controller
             $object = [
                 'id' => $order->uuid,
                 'payment_method' => 'clickpay',
-                'currency' => get_option('click_pay_currency')
+                'currency' => env('CLICK_PAY_CURRENCY')
             ];
-            $total = $order->grand_total * (get_option('click_pay_conversion_rate') ? get_option('click_pay_conversion_rate') : 0);
+            $total = $order->grand_total_with_conversation_rate > 0 ?  $order->grand_total_with_conversation_rate :  $order->grand_total;
             $total = number_format($total, 2,'.','');
             $getWay = new BasePaymentService($object);
             $responseData = $getWay->makePayment($total);
