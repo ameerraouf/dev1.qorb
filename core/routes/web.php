@@ -6,6 +6,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\LanguageController;
 
+use App\Http\Controllers\PaymentApiController;
 use App\Http\Controllers\SocietyReplyController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Dashboard\SocietyController;
@@ -135,6 +136,8 @@ Route::post('/get-sub-services', [HomeController::class, 'GetSubServices'])->nam
 
 Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkout');
 Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
+Route::match(array('GET','POST'),'/payment-notify/{id}', [PaymentApiController::class, 'paymentNotifier'])->name('paymentNotify');
+Route::match(array('GET','POST'),'payment-cancel/{id}', [PaymentApiController::class, 'paymentCancel'])->name('paymentCancel');
 
 // .. End of Frontend Route
 

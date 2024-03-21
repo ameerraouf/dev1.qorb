@@ -55,7 +55,6 @@ class PaymentController extends Controller
             $total = number_format($total, 2,'.','');
             $getWay = new BasePaymentService($object);
             $responseData = $getWay->makePayment($total);
-
             if($responseData['redirect_url']){
                 $order->payment_id = $responseData['tran_ref'];
                 session()->put('payment_id', $order->payment_id);

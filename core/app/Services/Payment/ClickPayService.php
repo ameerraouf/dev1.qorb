@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Services\Payment;
-use Illuminate\Support\Facades\Http;
-
-use Clickpaysa\Laravel_package\Facades\paypage;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Clickpaysa\Laravel_package\Facades\paypage;
 
 class ClickPayService extends BasePaymentService
 {
@@ -20,10 +21,8 @@ class ClickPayService extends BasePaymentService
     public function __construct($object)
     {
         if (isset($object['id'])) {
-            // $this->cancelUrl = isset($object['cancelUrl ']) ? $object['cancelUrl '] : route('paymentCancel', $object['id']);
-            $this->cancelUrl = isset($object['cancelUrl ']);
-            // $this->successUrl = isset($object['successUrl']) ? $object['successUrl'] : route('paymentNotify', $object['id']);
-            $this->successUrl = isset($object['successUrl']);
+            $this->cancelUrl = isset($object['cancelUrl ']) ? $object['cancelUrl '] : route('paymentCancel', $object['id']);
+            $this->successUrl = isset($object['successUrl']) ? $object['successUrl'] : route('paymentNotify', $object['id']);
         }
 
         $this->test_mode = env('CLICK_PAY_MODE');
@@ -44,13 +43,13 @@ class ClickPayService extends BasePaymentService
                 'content-type' => 'application/json',
             ])->post('https://secure.clickpay.com.sa/payment/request',[
                 "customer_details" => [
-                    "name"  => auth()->user()->name,
-                    "email" => auth()->user()->email,
-                    "phone" => auth()->user()->mobile_number,
+                    "name"  => Auth::guard('teacher')->user()->name,
+                    "email" => Auth::guard('teacher')->user()->email,
+                    "phone" => Auth::guard('teacher')->user()->phone,
                 ],
                 'tran_type'     => 'sale',
                 'tran_class'    => 'ecom',
-                "profile_id" => 42974,
+                "profile_id" => 44713,
                 "tran_type" => "sale",
                 "tran_class" => "ecom" ,
                 "cart_id" => Str::uuid(),
@@ -61,7 +60,6 @@ class ClickPayService extends BasePaymentService
                 "return" => $this->successUrl,
 
             ]);
-
             return  $response;
 
         } catch (\Exception $ex) {
@@ -76,7 +74,7 @@ class ClickPayService extends BasePaymentService
             'authorization' => $this->server_key,
             'content-type' => 'application/json',
         ])->post('https://secure.clickpay.com.sa/payment/query',[
-            "profile_id" => 42974,
+            "profile_id" => 44713,
             "tran_ref"   => $payment_id
         ]);
 
@@ -93,7 +91,6 @@ class ClickPayService extends BasePaymentService
             $data['data']['payment_method'] = CLICKPAY;
             // Store in your local database that the transaction was paid successfully
         }
-
         return $data;
     }
 }

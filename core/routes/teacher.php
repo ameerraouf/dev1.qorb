@@ -45,8 +45,9 @@ Route::group(['middleware'=>'auth:teacher'],function(){
     Route::get('/teacher/subscriptions/', [HomeController::class, 'showSubscriptionsPage'])->name('TshowSubscriptionsPage');
 
 
-
-
+    // Route::match(array('GET','POST'), 'verify-certificate', [CertificateVerifyController::class, 'verifyCertificate'])->name('verify_certificate');
+    // Route::match(array('GET','POST'),'/payment-notify-subscription/{id}', [PaymentApiController::class, 'paymentSubscriptionNotifier'])->name('paymentNotify.subscription');
+    // Route::match(array('GET','POST'),'/payment-notify-wallet-recharge/{id}', [PaymentApiController::class, 'paymentWalletRechargeNotifier'])->name('paymentNotify.wallet_recharge');
 
 });
 //
