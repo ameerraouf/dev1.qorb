@@ -102,6 +102,12 @@
                                    onclick="clicked_tab('restfulAPITab')">
                                     &nbsp; {!!  __('backend.restfulAPI') !!}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link block {{  ( Session::get('active_tab') == 'paymentSettingsTab') ? 'active' : '' }}"
+                                   href data-toggle="tab" data-target="#tab-13"
+                                   onclick="clicked_tab('paymentSettingsTab')">
+                                    &nbsp; Payment Settings</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -123,12 +129,14 @@
                     @include('dashboard.webmaster.settings.login')
                     @include('dashboard.webmaster.settings.api')
                     @include('dashboard.webmaster.settings.mail')
+                    @include('dashboard.webmaster.settings.mail')
                     @include('dashboard.webmaster.settings.captcha')
                     @include('dashboard.webmaster.settings.tags')
                     {{-- @include('dashboard.webmaster.settings.maps') --}}
                     @include('dashboard.webmaster.settings.analytics')
                     {{-- @include('dashboard.webmaster.settings.apps') --}}
                     @include('dashboard.webmaster.settings.other')
+                    @include('dashboard.webmaster.settings.payment')
                     @include('dashboard.webmaster.settings.update')
                 </div>
                 {{Form::close()}}
@@ -140,6 +148,7 @@
 @push("after-scripts")
     <script src="{{ asset("assets/dashboard/js/summernote/dist/summernote.js") }}"></script>
     <script type="text/javascript">
+        $('.clickpay').hide();
         $("input:radio[name=api_status]").click(function () {
             if ($(this).val() == 1) {
                 $("#api_key_div").css("display", "block");
@@ -191,6 +200,14 @@
                 $("#smtp_check").hide();
             } else {
                 $("#smtp_check").show();
+            }
+        });
+
+        $('#payment_gateway').on('change', function () {
+            if ($(this).val() == "") {
+                $('.clickpay').hide();
+            } else if ($(this).val() == "clickpay") {
+                $('.clickpay').show();
             }
         });
 

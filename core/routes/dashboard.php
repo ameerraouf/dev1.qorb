@@ -323,12 +323,11 @@ Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
     Route::get('/employees/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employeesDestroy');
     Route::post('/employees/updateAll', [EmployeeController::class, 'updateAll'])->name('employeesUpdateAll');
 
-// <<<<<<< HEAD
     // Clients
     Route::get('/clients', [ClientController::class, 'index'])->name('clients');
     Route::post('/clients/updateAll', [ClientController::class, 'updateAll'])->name('clientsUpdateAll');
 
-// SET CHILD TO SPECIALIST AND SUPERVISOR
+    // SET CHILD TO SPECIALIST AND SUPERVISOR
 
 
     Route::get('/set-child-to',[DashboardController::class, 'setChildToPage'])->name('SetChildTo');
@@ -354,8 +353,6 @@ Route::group(['prefix'=>env('BACKEND_PATH'),'middleware'=>'admin'],function(){
     Route::get('file-manager', [FileManagerController::class, 'index'])->name('FileManager');
     Route::get('files-manager', [FileManagerController::class, 'manager'])->name('FilesManager');
 
-// =======
-
 // Society
 Route::get('/societies', [SocietyController::class, 'index'])->name('societies');
 Route::get('/societies/create/', [SocietyController::class, 'create'])->name('societiesCreate');
@@ -371,8 +368,6 @@ Route::get('files-manager', [FileManagerController::class, 'manager'])->name('Fi
 
     Route::get('file-manager', [FileManagerController::class, 'index'])->name('FileManager');
     Route::get('files-manager', [FileManagerController::class, 'manager'])->name('FilesManager');
-
-// >>>>>>> 2704ee87b2e7b7b7c6687a1e91124fa1b7313a1b
 
     // Clear Cache
     Route::get('/cache-clear', function () {

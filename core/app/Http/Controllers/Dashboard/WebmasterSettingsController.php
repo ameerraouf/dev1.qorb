@@ -200,6 +200,13 @@ class WebmasterSettingsController extends Controller
                 'GEOIP_SERVICE_KEY' => $request->geoip_service_key,
                 'FIRST_DAY_OF_WEEK' => $request->first_day_of_week,
                 'DATE_FORMAT' => $request->date_format,
+                /** PAYMENT DATA **/
+                'CLICK_PAY_STATUS' => $request->CLICK_PAY_STATUS,
+                'CLICK_PAY_SERVER_KEY' => $request->CLICK_PAY_SERVER_KEY,
+                'CLICK_PAY_CLIENT_KEY' => $request->CLICK_PAY_CLIENT_KEY,
+                'CLICK_PAY_CURRENCY' => $request->CLICK_PAY_CURRENCY,
+                'CLICK_PAY_CONVERSION_RATE' => $request->CLICK_PAY_CONVERSION_RATE,
+                'CLICK_PAY_MODE' => $request->CLICK_PAY_MODE,
             ]);
 
             if ($OLD_BACKEND_PATH != $request->backend_path) {
