@@ -1,5 +1,22 @@
 <meta name="token" content="{{ csrf_token() }}">
+<style>
+    #sub li.subservice > a:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 1rem;
+        background: inherit;
+        z-index: 999;
+    }
+    
+    #sub li.subservice > a {
+        position: relative;
+    }
 
+
+</style>
 @if (Helper::GeneralWebmasterSettings('header_menu_id') > 0)
     <?php
     // Get list of footer menu links by group Id
@@ -246,7 +263,7 @@
                         </li>
                     @endif
                 @endforeach
-                {{--<li class="dropdown">
+                {{-- <li class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown"
                         data-hover="dropdown"data-delay="0" data-close-others="true">{{ __('frontend.ourservices') }}
                         <i class="fa fa-angle-down"></i></a>
@@ -272,7 +289,7 @@
                     </ul>
 
 
-                </li>--}}
+                </li> --}}
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown"
                         data-hover="dropdown"data-delay="0" data-close-others="true">{{ __('frontend.ourservices') }}
@@ -280,7 +297,7 @@
 
                     <ul class="dropdown-menu">
                         @foreach ($main_services as $main_service)
-                            <li class="mainservices dropdown" class="dropdown-toggle" id="ms-{{ $main_service->id }}">
+                            <li class="mainservices dropdown" class="dropdown-toggle" id="ms-{{ $main_service->id }}" msid="{{ $main_service->id }}" onclick="location.href = '{{ route('showMainService', $main_service->id) }}'">
                                 <a href="{{ route('showMainService', $main_service->id) }}"
                                     data-toggle="dropdown" data-hover="dropdown"data-delay="0" data-close-others="true">
                                     @if (app()->getLocale() == 'ar')
@@ -289,8 +306,8 @@
                                         {{ $main_service->name_en }}
                                     @endif
                                 </a>
-                                <ul class="dropdown-menu">
-                                    @foreach ( $main_service->subServices  as $item)
+                                <ul class="dropdown-menu" id="sub" style="left: 100%; top:90%;">
+                                    {{-- @foreach ( $main_service->subServices  as $item)
                                         <li class="mainservices">
                                             <a href="{{ route('showMainService', $main_service->id) }}">
                                                 @if (app()->getLocale() == 'ar')
@@ -300,7 +317,7 @@
                                                 @endif
                                             </a>
                                         </li>
-                                    @endforeach
+                                    @endforeach --}}
                                     {{-- <li class="mainservices">
                                         <a href="{{ route('showMainService', $main_service->id) }}">
                                             Test
@@ -333,11 +350,12 @@
         </div>
     @endif
 @endif
-{{--<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(".mainservices").on('mouseover', function() {
         let msid = $(this).attr("msid")
+        console.log(msid);
         $.ajaxSetup({
             headers: {'X-CSRF-Token': $('meta[name=token]').attr('content')}
         });
@@ -347,9 +365,10 @@
             data: {'_token': '{{ csrf_token() }}', msid: msid},
             dataType: 'json',
             success: function(data){
+                console.log(data);
                 $("#sub").html("")
                 data.data.map(el => {
-                    $("#sub").append("<li class='subservice'><a href='show-main-service/"+el.main_service_id+"'><i class='fa fa-ambulance'></i>&nbsp;."+@if(app()->getLocale() == 'ar') el.title_ar @else el.title_en @endif +".</a></li>");
+                    $("#sub").append("<li class='subservice'><a href='show-main-service/"+el.main_service_id+" style='position: relative;''><i class='fa fa-ambulance'></i>&nbsp;."+@if(app()->getLocale() == 'ar') el.title_ar @else el.title_en @endif +".</a></li>");
                 });
 
             }
@@ -359,4 +378,4 @@
         let msid = $(this).attr("msid")
             $("#sub").html("")
     })
-</script> --}}
+</script>

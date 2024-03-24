@@ -114,7 +114,7 @@ class Helper
     {
         //List of all notifications
         
-        $notifications = Notification::whereNot('message', 'LIKE', "%لقد قمت%")->where('admin_id', Auth::user()->id)->orderby('id', 'desc')->latest()->take(5)->get();
+        $notifications = Notification::whereNot('message', 'LIKE', "%لقد قمت%")->orderby('id', 'desc')->latest()->take(5)->get();
         return $notifications;
     }
 

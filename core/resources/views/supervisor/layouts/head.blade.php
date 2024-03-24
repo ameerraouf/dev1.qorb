@@ -113,6 +113,23 @@
     });
 </script>
 
+<script type="text/javascript">
+    toastr.options.timeOut = 5000;
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = false;
+
+    var pusher = new Pusher('58f64b993fbe1bb0f3c5', {
+        cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('qorb-channel');
+    channel.bind('child-moved', function(data) {
+        if (data.data[2] == {{ auth()->user()->id }}) {
+            toastr.success(data.data[0]);
+        }
+    });
+</script>
+
 
 
 

@@ -105,15 +105,12 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title">{{ __('cruds.Reports.Vbmap') }}</h5>
                                         </div>
-                                        <div class="modal-body text-center p-lg">
-                                            <div class="form-group row">
-                                                <h6
-                                                    class="col-sm-4 form-control-label text-center">{{ app()->getLocale() === 'ar' ? __('cruds.Reports.Files') : __('cruds.Reports.Files') }}
-                                                </h6><br>
-                                                <div class="col-sm-8">
-                                                    <img
+                                        <div class="modal-body text-center p-lg justify-center">
+                                            <div class="form-group row text-center justify-center">
+                                                <div class="col-sm-8 text-center justify-center">
+                                                 <center>   <img
                                                         src="{{ asset('uploads/reports/'.$report->file) }}"
-                                                        class="img-responsive">
+                                                        class="img-responsive"></center>
                                                 </div>
                                             </div>
                                              

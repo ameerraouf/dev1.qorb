@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\Admin\SendFinancialTransaction;
 use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Models\WebmasterSection;
@@ -64,6 +65,7 @@ class FinancialTransactionController extends Controller
 
     public function store(Request $request)
     {
+        
         if (!Helper::checkPermission(2)) {
             return redirect()->route('NoPermission');
         }
@@ -87,14 +89,19 @@ class FinancialTransactionController extends Controller
             $request->file($formFileName)->move($path, $fileFinalName_ar);
         }
         // End of Upload Files
+        $userid = User::where('id', $request->user)->select('id','name')->first();
 
         try {
+            $username = User::where('id', $request->user)->select('id','name')->first();
             $transaction = new FinancialTransaction;
-            $transaction->name = User::where('id', $request->user)->select('id','name')->first()->name;
+            $transaction->name = $username->name;
             $transaction->image = $fileFinalName_ar;
             $transaction->notes = $request->notes;
             $transaction->user_id = $request->user;
             $transaction->save();
+            
+            event(new SendFinancialTransaction('لقد تم ارسال دفعة مالية اليك', $userid->id));
+            
             return redirect()->action('Dashboard\FinancialTransactionController@index')->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());

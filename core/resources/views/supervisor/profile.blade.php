@@ -65,11 +65,11 @@
                     @if($user->photo)
                         <div class="row">
                             <div class="col-sm-12">
-                                <div id="user_photo" class="col-sm-10 mt-3 box p-a-xs">
+                                <div id="user_photo" class="col-sm-3 mt-3 box p-a-xs">
                                     <a target="_blank"
                                        href="{{ asset('uploads/users/'.$user->photo) }}"><img
                                             src="{{ asset('uploads/users/'.$user->photo) }}"
-                                            class="img-responsive">
+                                            class="img-responsive" width="50" height="50">
                                         {{ $user->photo }}
                                     </a>
                                     <br>

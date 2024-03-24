@@ -210,22 +210,6 @@ class EmployeeController extends Controller
                 $employee->password = bcrypt($request->password);
                 $employee->role = $request->role;
                 
-                if ($request->photo_delete == 1) {
-                    // Delete a User file
-                    if ($employee->photo != "") {
-                        File::delete($this->getUploadPath() . $employee->photo);
-                    }
-
-                    $employee->photo = "";
-                }
-                if ($fileFinalName_ar != "") {
-                    // Delete a User file
-                    if ($employee->photo != "") {
-                        File::delete($this->getUploadPath() . $employee->photo);
-                    }
-
-                    $employee->photo = $fileFinalName_ar;
-                }
 
                 $employee->save();
                 return redirect()->action('Dashboard\EmployeeController@index', $id)->with('doneMessage', __('backend.saveDone'));

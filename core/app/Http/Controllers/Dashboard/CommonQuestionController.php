@@ -134,6 +134,7 @@ class CommonQuestionController extends Controller
                 $question->save();
                 return redirect()->action('Dashboard\CommonQuestionController@index')->with('doneMessage', __('backend.saveDone'));
             } catch (\Exception $e) {
+                return redirect()->back()->with('errorMessage', $e->getMessage());
 
             }
         }

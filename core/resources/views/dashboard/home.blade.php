@@ -104,8 +104,8 @@
                                     @if ($headerWebmasterSection->id !== 3 && $headerWebmasterSection->id !==5)
                                         <div class="col-xs-{{ $b_cls }}">
                                             <div class="box p-a" style="cursor: pointer"
-                                                onclick="location.href='{{ route('topics', $headerWebmasterSection->id) }}'">
-                                                <a href="{{ route('topics', $headerWebmasterSection->id) }}">
+                                                onclick="location.href='{{ route('MainServices') }}'">
+                                                <a href="{{ route('MainServices') }}">
                                                     <div class="pull-left m-r">
                                                         <i
                                                             class="material-icons  text-2x text-{{ @$clr_ary[$ik] }} m-y-sm">{!! $LiIcon !!}</i>
@@ -113,7 +113,7 @@
                                                     <div class="clear">
                                                         <div class="text-muted">{{ $GeneralWebmasterSectionTitle }}</div>
                                                         <h4 class="m-a-0 text-md _600">
-                                                            {{ $headerWebmasterSection->topics->count() }}</h4>
+                                                            {{ \App\Models\MainService::count() }}</h4>
                                                     </div>
                                                 </a>
                                             </div>

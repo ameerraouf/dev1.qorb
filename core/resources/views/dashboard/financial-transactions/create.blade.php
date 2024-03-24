@@ -36,7 +36,7 @@
                            class="col-sm-2 form-control-label">{{ __('cruds.FinancialTransactions.UserName') }}
                     </label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="user">
+                        <select class="form-control" name="user" required>
                             <option value="" selected disabled hidden>Choose a user</option>    
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>    

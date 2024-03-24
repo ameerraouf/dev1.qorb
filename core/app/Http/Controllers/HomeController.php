@@ -272,7 +272,6 @@ class HomeController extends Controller
         }
 
         $packages = Package::orderBy('created_at', 'desc')
-        ->limit(3)
         ->get();
         if(app()->getLocale() == 'ar'){
             $packages->each(function ($p) {
@@ -284,11 +283,13 @@ class HomeController extends Controller
             });
         }
 
-        $main_services = MainService::orderBy('created_at', 'desc')->limit(6)->get();
+        $main_services = MainService::orderBy('created_at', 'desc')->get();
+        $sub_services = SubService::with('main_service')->orderBy('created_at', 'desc')->get();
 
         return view("frontEnd.home",
             compact(
                 "main_services",
+                "sub_services",
                 "packages",
                 "WebmasterSettings",
                 "SliderBanners",
