@@ -415,17 +415,24 @@ class DashboardController extends Controller
     }
 
     function setChild(Request $req){
-
+        $child = Children::find($req->child);
+        
         try{
             Children::where('id' , $req->child)->update([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
             ]);
-            event (new ChildrenAdded('تم إضافة حالة جديدة'));
+            event (new ChildrenMoved(' تم تعيين أخصائي ومشرفة للطفل'.$child->name,$req->specialist,$req->supervisor));
+            
             Notification::create([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
                 'message' =>  'تم إضافة حالة جديدة'
+            ]);
+            
+            Notification::create([
+                'teacher_id' => $child->teacher_id,
+                'message' =>  ' تم تعيين أخصائي ومشرفة للطفل'.$child->name
             ]);
             return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
 
