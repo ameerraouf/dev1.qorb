@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\WebmasterSection;
 use App\Http\Controllers\Controller;
 use App\Models\FinancialTransaction;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use File;
@@ -89,19 +90,33 @@ class FinancialTransactionController extends Controller
             $request->file($formFileName)->move($path, $fileFinalName_ar);
         }
         // End of Upload Files
-        $userid = User::where('id', $request->user)->select('id','name')->first();
+        $userid = User::where('id', $request->user)->select('id','name','role')->first();
 
         try {
-            $username = User::where('id', $request->user)->select('id','name')->first();
             $transaction = new FinancialTransaction;
-            $transaction->name = $username->name;
+            $transaction->name = $userid->name;
             $transaction->image = $fileFinalName_ar;
             $transaction->notes = $request->notes;
             $transaction->user_id = $request->user;
             $transaction->save();
             
             event(new SendFinancialTransaction('لقد تم ارسال دفعة مالية اليك', $userid->id));
-            
+            Notification::create([
+                'admin_id' => Auth()->user()->id,
+                'message' => 'لقد تم ارسال دفعة مالية الى '.$userid->name
+            ]);    
+            if ($userid->role == 'specialist') {
+                Notification::create([
+                    'specialist_id' => $userid->id,
+                    'message' => 'لقد تم ارسال دفعة مالية اليك '.$userid->name
+                ]); 
+            }
+            else {
+                Notification::create([
+                    'supervisor_id' => $userid->id,
+                    'message' => 'لقد تم ارسال دفعة مالية اليك '.$userid->name
+                ]); 
+            }
             return redirect()->action('Dashboard\FinancialTransactionController@index')->with('doneMessage', __('backend.addDone'));
         } catch (\Exception $e) {
             return redirect()->back()->with('errorMessage', $e->getMessage());
