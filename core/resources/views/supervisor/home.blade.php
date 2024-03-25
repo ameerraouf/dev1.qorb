@@ -14,7 +14,7 @@
 
     <div class="row g-3">
         <div class="col-md-6 col-lg-3">
-            <a href="{{ route('SChildrens') }}" class="box-color box-flex p-a-2 primary">
+            <a href="javascript:void(0)" class="box-color box-flex p-a-2 primary">
                 <div class="pull-right m-l">
                     <span class="w-56 dker text-center rounded d-inline-flex align-items-center justify-content-center">
                     <i class="fa fa-users fa-2x" aria-hidden="true"></i>

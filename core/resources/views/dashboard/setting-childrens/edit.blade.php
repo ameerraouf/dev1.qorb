@@ -39,7 +39,7 @@
                     </label>
                     <div class="col-sm-10">
                         <select class="form-control" name="specialist" required>
-                            <option value="" selected disabled hidden>{{ __('cruds.Childrens.Specialist') }}</option>    
+                            <option value="" selected disabled hidden>{{ $children->specialist->name }}</option>    
                             @foreach ($specialists as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>    
                             @endforeach
@@ -53,7 +53,7 @@
                     </label>
                     <div class="col-sm-10">
                         <select class="form-control" name="supervisor" required>
-                            <option value="" selected disabled hidden>{{ __('cruds.Childrens.Supervisor') }}</option>    
+                            <option value="" selected disabled hidden>{{ $children->supervisor->name }}</option>    
                             @foreach ($supervisors as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>    
                             @endforeach

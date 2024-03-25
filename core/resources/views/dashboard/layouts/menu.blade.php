@@ -386,28 +386,38 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                     </li>
                     @endif
                     <?php
-                        $currentFolder = "Services"; // Put folder name here
+                        $currentFolder = "main-services"; // Put folder name here
                         $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                        
+                        $currentFolder2 = "sub-services"; // Put folder name here
+                        $PathCurrentFolder2 = substr($urlAfterRoot, 0, strlen($currentFolder2));
+                        
                     ?>
                     @if(\Helper::checkPermission(11))
-                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
-                        <a >
+                    <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2) ? 'class=active' : '' }}>
+                        <a>
                             <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
                             <span class="nav-icon"><i class="material-icons">&#xe1b8;</i></span>
                             <span class="nav-text">{{ __('backend.services') }}</span>
                         </a>
                         <ul class="nav-sub">
+                      
                             <li><a href="{{ route('MainServices') }}"><span class="nav-text">{{ __('cruds.MainServices.Title') }}</span></a></li>
+                           
                             <li><a href="{{ route('SubServices') }}"><span class="nav-text">{{ __('cruds.SubServices.Title') }}</span></a></li>
                         </ul>
                     </li>
                     @endif
                     <?php
-                    $currentFolder = "users"; // Put folder name here
-                    $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                        $currentFolder = "users"; // Put folder name here
+                        $PathCurrentFolder = substr($urlAfterRoot, 0, strlen($currentFolder));
+                    
+                        $currentFolder2 = "new-roles"; // Put folder name here
+                        $PathCurrentFolder2 = substr($urlAfterRoot, 0, strlen($currentFolder2));
+                    
                     ?>
                     @if(\Helper::checkPermission(11))
-                    <li {{ ($PathCurrentFolder==$currentFolder) ? 'class=active' : '' }} >
+                    <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2) ? 'class=active' : '' }} >
                         <a >
                             <span class="nav-caret"><i class="fa fa-caret-down"></i></span>
                             <span class="nav-icon"><i class="material-icons">&#xe1b8;</i></span>
@@ -576,15 +586,15 @@ $mnu_title_var2 = "title_" . env('DEFAULT_LANGUAGE');
                             $currentFolder2 = "menus"; // Put folder name here
                             $PathCurrentFolder2 = substr($urlAfterRoot, 0, strlen($currentFolder2));
 
-                            $currentFolder3 = "users"; // Put folder name here
-                            $PathCurrentFolder3 = substr($urlAfterRoot, 0, strlen($currentFolder3));
+                            // $currentFolder3 = "users"; // Put folder name here
+                            // $PathCurrentFolder3 = substr($urlAfterRoot, 0, strlen($currentFolder3));
 
                             $currentFolder4 = "file-manager"; // Put folder name here
                             $PathCurrentFolder4 = substr($urlAfterRoot, 0, strlen($currentFolder4));
                             ?>
                             @if(\Helper::checkPermission(15))
 
-                            <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2 || $PathCurrentFolder3==$currentFolder3 || $PathCurrentFolder4==$currentFolder4 ) ? 'class=active' : '' }}>
+                            <li {{ ($PathCurrentFolder==$currentFolder || $PathCurrentFolder2==$currentFolder2 || $PathCurrentFolder4==$currentFolder4 ) ? 'class=active' : '' }}>
                                 <a>
                                 <span class="nav-caret">
                                 <i class="fa fa-caret-down"></i>

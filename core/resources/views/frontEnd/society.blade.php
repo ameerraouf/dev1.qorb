@@ -189,7 +189,7 @@
                             </div>
                         </div>
                     @endif
-                    @if(auth()->check())
+                    {{-- @if(auth()->check()) --}}
                         <div id="society" class="panel-collapse" style="margin-bottom: 0%;">
                             <h2 class="heading" style="margin-bottom: 2%;">{{ __('cruds.Society.AddQuestion') }}</h2>
                             {{Form::open(['route'=>['societyStore'],'method'=>'POST'])}}
@@ -199,7 +199,7 @@
                                 </div>
                                 {{Form::close()}}
                         </div>
-                    @endif
+                    {{-- @endif --}}
                     <div class="row">
                         <div class="col-12">
                             <div class="home-row-head">

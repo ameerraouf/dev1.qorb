@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\Admin\ChildrenMoved;
 use App\Events\Specialist\ChildrenAdded as SpecialistChildrenAdded;
 use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
@@ -400,29 +401,38 @@ class DashboardController extends Controller
     }
 
     function setChildToEditPage($id){
+    //    return  $children = Children::where('id', $id)->select('id', 'name', 'specialist_id','supervisor_id')->with('specialist', 'supervisor')->first();
+       
         if (!HelpersHelper::checkPermission(6)) {
             return redirect()->route('NoPermission');
         }
         $GeneralWebmasterSections = WebmasterSection::where('status', '=', '1')->orderby('row_no', 'asc')->get();
 
-        $children = Children::where('id', $id)->select('id', 'name')->first();
+        $children = Children::where('id', $id)->select('id', 'name', 'specialist_id','supervisor_id')->with('specialist', 'supervisor')->first();
         $specialists = User::where('role','specialist')->get();
         $supervisors = User::where('role','supervisor')->get();
         return view('dashboard.setting-childrens.edit', compact('children', 'specialists', 'supervisors', 'GeneralWebmasterSections'));
     }
 
     function setChild(Request $req){
-
+        $child = Children::find($req->child);
+        
         try{
             Children::where('id' , $req->child)->update([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
             ]);
-            event (new ChildrenAdded('تم إضافة حالة جديدة'));
+            event (new ChildrenMoved(' تم تعيين أخصائي ومشرفة للطفل'.$child->name,$req->specialist,$req->supervisor));
+            
             Notification::create([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
                 'message' =>  'تم إضافة حالة جديدة'
+            ]);
+            
+            Notification::create([
+                'teacher_id' => $child->teacher_id,
+                'message' =>  ' تم تعيين أخصائي ومشرفة للطفل'.$child->name
             ]);
             return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
 
@@ -432,18 +442,29 @@ class DashboardController extends Controller
         }
     }
     function updateChild(Request $req, $id){
-
+        $children = Children::where('id' , $id)->select('id', 'name', 'specialist_id','supervisor_id')->first();
+      
         try{
             Children::where('id' , $id)->update([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
             ]);
-            event (new SpecialistChildrenAdded('تم إضافة حالة جديدة'));
+            
+            event (new ChildrenMoved('تم إضافة حالة جديدة', $req->specialist, $req->supervisor ));
+            event (new ChildrenMoved('تم نقل الحالة الى مستخدم اخر', $children->specialist_id, $children->supervisor_id));
+            
+            Notification::create([
+                'specialist_id' => $children->specialist_id,
+                'supervisor_id' => $children->supervisor_id,
+                'message' =>  'تم نقل الحالة الى مستخدم اخر'
+            ]);
+
             Notification::create([
                 'specialist_id' => $req->specialist,
                 'supervisor_id' => $req->supervisor,
                 'message' =>  'تم إضافة حالة جديدة'
             ]);
+
             return redirect()->route('SetChildTo')->with('doneMessage', __('backend.addDone'));
 
         }

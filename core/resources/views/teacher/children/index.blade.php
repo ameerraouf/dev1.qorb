@@ -54,8 +54,8 @@
                             <th class="text-center" style="width:50px;">{{ __('backend.childage') }}</th>
                             <th class="text-center" style="width:100px;">{{ __('backend.childproblem') }}</th>
                             <th class="text-center" style="width:100px;">{{ __('backend.attachment') }}</th>
-                            <th class="text-center" style="width:200px;">{{ __('backend.action') }}</th>
                             <th class="text-center" style="width:200px;">{{ __('backend.reports') }}</th>
+                            <th class="text-center" style="width:200px;">{{ __('backend.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -108,9 +108,6 @@
                                             @endforeach
                                         @endif
                                     </td>
-                                    <td class="h6 text-center">
-                                        @include('teacher.children.action')
-                                    </td>
                                     <td class=" h6 text-center">
                                         <div class="dropdown" >
                                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,6 +129,10 @@
 
                                     </td>
 
+                                    <td class="h6 text-center">
+                                        @include('teacher.children.action')
+                                    </td>
+                                   
                                 </tr>
                             @endforeach
                         </tbody>

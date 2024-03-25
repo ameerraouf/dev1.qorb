@@ -222,7 +222,7 @@
                                             }
                                             
                                             ?>
-                                            @if (!in_array($headerWebmasterSection->id, [2, 3, 5, 6, 8, 11, 12]))
+                                            @if (!in_array($headerWebmasterSection->id, [10,2, 3, 5, 6, 8, 11, 12]))
                                                 <a class="dropdown-item"
                                                     href="{{ route('topicsCreate', $headerWebmasterSection->id) }}"><span><i
                                                             class="material-icons">{!! $LiIcon !!}</i>

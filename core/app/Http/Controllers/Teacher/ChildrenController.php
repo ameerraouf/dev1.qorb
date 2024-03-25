@@ -29,7 +29,6 @@ class ChildrenController extends Controller
    public function store(ChildrenRequest $request)
    {
     // dd($request->all());
-        $admin = User::where('role','admin')->where('id', Auth::user()->id)->first();
         $input['name'] = $request->name;
         $input['problem'] = $request->problem;
         $input['specialist_id'] = 0;
