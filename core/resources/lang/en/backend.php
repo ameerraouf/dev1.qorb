@@ -790,4 +790,7 @@ return array(
     'FinalReport' => 'Final Report',
     'EarlyDetectionReport' => 'Early Detection Report',
     'SocietyAddQuestionSuccessMessage'=>'Thank you! The question will be reviewed by admin.',
+    'PaymentSuccessMessage'=>'Payment Done Successfully!',
+    'PaymentErrorMessage'=>'Payment Cancelled',
+    'LoginRequired'=>'You Must Login First',
 );

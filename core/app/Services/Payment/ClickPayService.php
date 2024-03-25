@@ -88,7 +88,7 @@ class ClickPayService extends BasePaymentService
             $data['data']['amount'] = $payment['cart_amount'];
             $data['data']['currency'] = $payment['cart_currency'];
             $data['data']['payment_status'] =  'success' ;
-            $data['data']['payment_method'] = CLICKPAY;
+            $data['data']['payment_method'] = 'clickpay';
             // Store in your local database that the transaction was paid successfully
         }
         return $data;

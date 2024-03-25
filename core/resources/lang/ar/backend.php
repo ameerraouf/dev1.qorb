@@ -778,4 +778,7 @@ return array(
     'FinalReport' => 'التقرير النهائي',
     'EarlyDetectionReport' => 'تقرير الكشف المبكر',
     'SocietyAddQuestionSuccessMessage'=>'شكرا لك! سيتم مراجعة السؤال من قبل المسؤول.',
+    'PaymentSuccessMessage'=>'تم الاشتراك بنجاح',
+    'PaymentErrorMessage'=>'تم إلغاء العملية',
+    'LoginRequired'=>'يجب تسجيل الدخول أولا',
 );

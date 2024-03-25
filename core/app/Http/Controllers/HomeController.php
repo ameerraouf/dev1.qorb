@@ -2006,7 +2006,9 @@ class HomeController extends Controller
     public function checkout($id){
         $package = Package::find($id);
         $user = Auth::guard('teacher')->user();
-        if(!$user){return redirect()->back();};
+        if(!$user){
+            return redirect()->action('HomeController@HomePage')->with('errorMessage', (__('backend.LoginRequired')));
+        };
         return view('frontEnd.checkout',compact('package','user'));
     }
 

@@ -1,3 +1,28 @@
+@if(Session::has('doneMessage'))
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                {{ Session::get('doneMessage') }}
+            </div>
+        </div>
+    </div>
+@elseif(Session::has('errorMessage'))
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                {{ Session::get('errorMessage') }}
+            </div>
+        </div>
+    </div>
+@endif
 @if(count($SliderBanners)>0)
     <section id="featured">
         <!-- start slider -->

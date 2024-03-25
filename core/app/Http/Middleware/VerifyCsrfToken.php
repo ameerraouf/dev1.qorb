@@ -15,5 +15,8 @@ class VerifyCsrfToken extends Middleware
         // Disable for API post routes
         'api/v1/*',
         'form-submit',
+        '/payment-notify/*',
+        'payment-cancel/*',
+        '/pay',
     ];
 }
