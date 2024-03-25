@@ -33,7 +33,7 @@
         $details_var2 = 'details_' . env('DEFAULT_LANGUAGE');
         $file_var = 'file_' . @Helper::currentLanguage()->code;
         $file_var2 = 'file_' . env('DEFAULT_LANGUAGE');
-        
+
         $col_width = 12;
         if (count($TextBanners) == 2) {
             $col_width = 6;
@@ -139,7 +139,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <a href="{{ auth()->guard('teacher')->check() ? route('TeacherPackages') : route('teacher.login') }}" class="btn-box">
+                                    <a href="{{ auth()->guard('teacher')->check() ? route('checkout',$item->id) : route('teacher.login') }}" class="btn-box">
                                         {{ __('cruds.Packages.Subscribe') }}
                                     </a>
                                 </div>
@@ -346,7 +346,7 @@
                                                             } else {
                                                                 $cf_title = $customField->$cf_title_var2;
                                                             }
-                                                            
+
                                                             $cf_saved_val = '';
                                                             $cf_saved_val_array = [];
                                                             if (count($HomeTopic->fields) > 0) {
@@ -361,7 +361,7 @@
                                                                     }
                                                                 }
                                                             }
-                                                            
+
                                                             ?>
 
                                                             @if (
@@ -561,7 +561,7 @@
                                         } else {
                                             $title = $HomePhoto->$title_var2;
                                         }
-                                        
+
                                         if ($section_url == '') {
                                             $section_url = Helper::sectionURL($HomePhoto->webmaster_id);
                                         }
@@ -643,7 +643,7 @@
                                         } else {
                                             $title = $HomePartner->$title_var2;
                                         }
-                                        
+
                                         if ($section_url == '') {
                                             $section_url = Helper::sectionURL($HomePartner->webmaster_id);
                                         }
@@ -657,7 +657,7 @@
                                                 }
                                             }
                                         }
-                                        
+
                                         if ($ii == 6) {
                                             echo "
                                                                                             </ul>

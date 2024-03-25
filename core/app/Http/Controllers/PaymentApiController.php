@@ -59,11 +59,12 @@ class PaymentApiController extends Controller
                     $this->logger->log('status', 'paid');
 
                     DB::commit();
+                    return redirect()->action('HomeController@HomePage')->with('doneMessage', (__('backend.PaymentSuccessMessage')));
+
                 } catch (\Exception $e) {
                     DB::rollBack();
                     $this->logger->log('End with Exception', $e->getMessage());
                 }
-                return redirect()->action('HomeController@HomePage')->with('doneMessage', (__('backend.PaymentSuccessMessage')));
 
             }
         }else {
