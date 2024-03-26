@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\TeacherLoginController;
-use App\Http\Controllers\Teacher\ChildrenController;
-use App\Http\Controllers\Teacher\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Teacher\HomeController;
+use App\Http\Controllers\Teacher\ChildrenController;
+use App\Http\Controllers\Auth\TeacherLoginController;
 
 
 Route::prefix('teacher')->group(function(){
@@ -43,6 +44,8 @@ Route::group(['middleware'=>'auth:teacher'],function(){
     Route::post('/teacher/subscribe/', [HomeController::class, 'SubscribePackage'])->name('SubscribePackage');
     Route::get('/teacher/getSubServices/{id}', [HomeController::class, 'getSubServices'])->name('getSubServices');
     Route::get('/teacher/subscriptions/', [HomeController::class, 'showSubscriptionsPage'])->name('TshowSubscriptionsPage');
+    Route::post('/teacher/checkout', [HomeController::class, 'checkout'])->name('checkout');
+    Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
 
 
     // Route::match(array('GET','POST'), 'verify-certificate', [CertificateVerifyController::class, 'verifyCertificate'])->name('verify_certificate');

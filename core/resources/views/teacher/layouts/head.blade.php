@@ -246,7 +246,7 @@
     var channel = pusher.subscribe('qorb-channel');
     channel.bind('child-moved', function(data) {
             toastr.success(data.data[0]);
-        
+
     });
 </script>
 

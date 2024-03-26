@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Services\Payment;
-use Illuminate\Support\Str;
+use App\Models\Package;
 
+use Illuminate\Support\Str;
+use App\Models\Notification;
+use App\Models\PurchaseTransaction;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Events\Teacher\SubscribePackage;
 use Clickpaysa\Laravel_package\Facades\paypage;
 
 class ClickPayService extends BasePaymentService
@@ -13,27 +17,33 @@ class ClickPayService extends BasePaymentService
     public $successUrl;
     public $cancelUrl;
     public $currency;
+    public $package_id;
+    public $sub_service_id;
+    public $main_service_id;
+    public $childrenIdsAsString;
+    public $teacher_id;
     protected $test_mode;
     protected $server_key;
     protected $client_key;
     protected $gateway;
-
     public function __construct($object)
     {
         if (isset($object['id'])) {
             $this->cancelUrl = isset($object['cancelUrl ']) ? $object['cancelUrl '] : route('paymentCancel', $object['id']);
             $this->successUrl = isset($object['successUrl']) ? $object['successUrl'] : route('paymentNotify', $object['id']);
         }
-
+        if(isset($object['package_id'])){
+            $this->package_id = $object['package_id'] ?? $this->package_id;
+            $this->sub_service_id = $object['sub_service_id'];
+            $this->main_service_id = $object['main_service_id'];
+            $this->childrenIdsAsString = $object['childrenIdsAsString'];
+            $this->teacher_id = $object['teacher_id'];
+        }
         $this->test_mode = env('CLICK_PAY_MODE');
         $this->server_key = env('CLICK_PAY_SERVER_KEY');
         $this->client_key = env('CLICK_PAY_CLIENT_KEY');
-
         $this->currency = $object['currency'];
-
-
     }
-
     public function makePayment($amount, $data= NULL)
     {
         try {

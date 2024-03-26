@@ -1,26 +1,10 @@
-@extends('frontEnd.layout')
-
+@extends('teacher.layouts.master')
+@section('title', __('backend.packages'))
 @section('content')
-
-    <section id="inner-headline">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="breadcrumb">
-                        <li><a href="{{ route('Home') }}"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i>
-                        </li>
-                        <li class="active">{{ __('cruds.Society.Title') }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
     <section id="content">
         <div class="container">
-            <!-- بداية صفحة المجتمع -->
             <section class="content-row-no-bg" style="margin-top:2%; padding: 0 0 0 0">
                 <div class="bg-page">
-                    <!-- Cart Page Area Start -->
                     <section class="checkout-page">
                         <div class="container">
                             @if ($message = Session::get('error'))
@@ -31,9 +15,7 @@
                                     <strong>{{ __('Error!') }}</strong> {{ $message }}
                                 </div>
                             @endif
-
                             <form method="post" action="{{ route('pay') }}" data-cc-on-file="false"
-                            {{-- <form method="post" action="{{ route('student.pay') }}" data-cc-on-file="false" --}}
                                 data-stripe-publishable-key="1" id="payment-form"
                                 class="require-validation" enctype="multipart/form-data">
                                 @csrf
@@ -224,7 +206,11 @@
                                                         <span class="font-16 color-heading font-medium">Click Pay</span>
                                                     </label>
                                                     <input type="hidden" name="package_id" value="{{ $package->id }}">
-                                                    <input type="hidden" name="package_price" value="{{ $package->price }}">
+                                                    <input type="hidden" name="sub_service_id" value="{{ $sub_service_id ?? '' }}">
+                                                    <input type="hidden" name="main_service_id" value="{{ $main_service_id }}">
+                                                    <input type="hidden" name="childrenIdsAsString" value="{{ $childrenIdsAsString }}">
+                                                    <input type="hidden" name="teacher_id" value="{{ $user->id}}">
+                                                    <input type="hidden" class="total_price" name="package_price" value="">
                                                 </div>
                                                 {{-- @endif --}}
                                                 <div class="checkout-we-protect-content d-flex align-items-center mt-30">
@@ -355,7 +341,7 @@
                                                                         </tr>
                                                                         {{-- @if($carts->sum('shipping_charge') > 0) --}}
                                                                         <tr>
-                                                                            <td>{{ __('Shipping Charge') }} </td>
+                                                                            <td>{{ __('Children Number') }} </td>
                                                                             <td>
                                                                                 {{-- @if (get_currency_placement() == 'after')
                                                                                     {{ get_number_format($carts->sum('shipping_charge')) }}
@@ -364,7 +350,7 @@
                                                                                     {{ get_currency_symbol() }}
                                                                                     {{ get_number_format($carts->sum('shipping_charge')) }}
                                                                                 @endif --}}
-                                                                               0 {{ __('cruds.Packages.currency') }}
+                                                                               {{ ($children_number) }} {{ __('cruds.Packages.currency') }}
 
                                                                             </td>
                                                                         </tr>
@@ -397,7 +383,7 @@
                                                                                         class="grand_total">{{ get_number_format($carts->sum('price') + $carts->sum('shipping_charge') + get_platform_charge($carts->sum('shipping_charge')+$carts->sum('price'))) }}</span>
                                                                                 @endif --}}
                                                                                 <span
-                                                                                    class="grand_total">{{ $package->price }}</span>
+                                                                                    class="grand_total">{{ $package->price * $children_number }}</span>
                                                                                     {{ __('cruds.Packages.currency') }}
 
                                                                             </th>
@@ -476,7 +462,7 @@
                                                                             <div class="regular-btn">
                                                                                 <button type="submit"
                                                                                     class="theme-btn theme-button1 theme-button3 font-15 fw-bold w-100 ">
-                                                                                    {{ __('Pay') }}s
+                                                                                    {{ __('Pay') }}
                                                                                     <span
                                                                                         class="ms-1  gateway_calculated_rate_price"></span><span
                                                                                         class="ms-1 gateway_calculated_rate_currency"></span>
@@ -532,7 +518,7 @@
                     <!-- Cart Page Area End -->
                 </div>
                 {{-- <input type="hidden" class="clickpay_currency" value="{{ get_option('click_pay_currency') }}"> --}}
-                {{-- <input type="hidden" class="clickpay_conversion_rate" value="{{ get_option('click_pay_conversion_rate') }}"> --}}
+                <input type="hidden" class="clickpay_conversion_rate" value="{{ env('CLICK_PAY_CONVERSION_RATE') }}">
                 {{-- <input type="hidden" class="fetchBankRoute" value="{{ route('student.fetchBank') }}"> --}}
             </section>
             <!-- نهاية صفحة المجتمع -->
@@ -543,14 +529,15 @@
     <script>
         $('input[type=radio][name=payment_method]').change(function () {
             var payment_method = $('input[name="payment_method"]:checked').val();
-            var grand_total = parseFloat(($('.grand_total').html()));
             console.log(payment_method);
             if (payment_method === 'clickpay') {
                 var rate = $('.clickpay_conversion_rate').val();
-                var gateway_calculated_rate_price = (parseFloat(grand_total).toFixed(2));
+                var grand_total = parseFloat(($('.grand_total').html()));
+                var gateway_calculated_rate_price = (parseFloat(grand_total).toFixed(2)) * rate;
                 var currency = 'SAR';
 
                 $('.selected_conversation_rate').html(rate)
+                $('.total_price').val(gateway_calculated_rate_price)
                 $('.selected_currency').html(currency)
                 $('.gateway_calculated_rate_currency').html(currency)
                 $('.gateway_calculated_rate_price').html(gateway_calculated_rate_price)

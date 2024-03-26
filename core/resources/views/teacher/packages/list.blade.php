@@ -167,7 +167,7 @@
                             <!-- .modal -->
                             <div id="m-all" class="modal fade" data-backdrop="true">
                                 <div class="modal-dialog" id="animate">
-                                    {{Form::open(['route'=>'SubscribePackage','method'=>'post'])}}
+                                    {{Form::open(['route'=>'checkout' ,'method'=>'post'])}}
                                         <div class="modal-content">
                                             <div class="modal-header d-flex justify-content-center">
                                                 <h5 class="modal-title package-name"></h5>

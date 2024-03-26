@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\PaymentController;
 use App\Services\Payment\BasePaymentService;
 
 class PaymentController extends Controller
 {
     public function pay(Request $request)
     {
-
         if (is_null($request->payment_method)) {
             $this->showToastrMessage('warning', __('Please Select Payment Method'));
             return redirect()->back();
@@ -47,6 +47,11 @@ class PaymentController extends Controller
 
         if ($request->payment_method == 'clickpay') {
             $object = [
+                'package_id'=>$request->package_id,
+                'sub_service_id'=>$request->sub_service_id,
+                'main_service_id'=>$request->main_service_id,
+                'childrenIdsAsString'=>$request->childrenIdsAsString,
+                'teacher_id'=>$request->teacher_id,
                 'id' => $order->uuid,
                 'payment_method' => 'clickpay',
                 'currency' => env('CLICK_PAY_CURRENCY')

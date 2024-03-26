@@ -134,8 +134,6 @@ Route::get('/show-main-service/{value}', [HomeController::class, 'showMainServic
 
 Route::post('/get-sub-services', [HomeController::class, 'GetSubServices'])->name('GetSubService');
 
-Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkout');
-Route::post('/pay', [PaymentController::class, 'pay'])->name('pay');
 Route::match(array('GET','POST'),'/payment-notify/{id}', [PaymentApiController::class, 'paymentNotifier'])->name('paymentNotify');
 Route::match(array('GET','POST'),'payment-cancel/{id}', [PaymentApiController::class, 'paymentCancel'])->name('paymentCancel');
 

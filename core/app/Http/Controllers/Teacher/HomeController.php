@@ -60,6 +60,17 @@ class HomeController extends Controller
         }
     }
 
+    public function checkout(Request $request)
+    {
+        $children_number = count($request->children_ids);
+        $childrenIdsAsString = implode(',', $request->children_ids);
+        $main_service_id = $request->main_service_id;
+        $sub_service_id = $request->sub_service_id ?? '';
+        $package = Package::find($request->package_id);
+        $user = Auth::guard('teacher')->user();
+        return view('teacher.checkout',compact('package','user','children_number','sub_service_id','main_service_id','childrenIdsAsString'));
+    }
+
     public function SubscribePackage(Request $request)
     {
         try {
@@ -84,7 +95,7 @@ class HomeController extends Controller
                 'teacher_id' => Auth::user()->id,
                 'message' => ' قامت المدرسة'.Auth::user()->name . ' بالاشتراك بالباقة '. $package->name
             ]);
-            
+
             return redirect()->route('TshowSubscriptionsPage')->with('doneMessage', __('backend.saveDone'));
         } catch (\Exception $e) {
             return redirect()->route('TshowSubscriptionsPage')->with('errorMessage', $e->getMessage());

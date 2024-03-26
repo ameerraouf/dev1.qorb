@@ -73,8 +73,7 @@ class HomeController extends Controller
                 return $this->showSociety($id);
                 break;
             case "checkout" :
-                $id = Str::after(request()->server()['REQUEST_URI'], '/checkout/');
-                return $this->checkout($id);
+                return $this->checkout();
                 break;
             case "packages" :
                 return $this->Packages();
@@ -2002,15 +2001,6 @@ class HomeController extends Controller
         $society->views += 1;
         $society->save();
         return view('frontEnd.society-show',compact('society'));
-    }
-
-    public function checkout($id){
-        $package = Package::find($id);
-        $user = Auth::guard('teacher')->user();
-        if(!$user){
-            return redirect()->action('HomeController@HomePage')->with('errorMessage', (__('backend.LoginRequired')));
-        };
-        return view('frontEnd.checkout',compact('package','user'));
     }
 
     public function MainServices()

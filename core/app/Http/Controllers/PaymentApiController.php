@@ -57,7 +57,6 @@ class PaymentApiController extends Controller
                     $order->payment_method = $payment_data['data']['payment_method'];
                     $order->save();
                     $this->logger->log('status', 'paid');
-
                     DB::commit();
                     return redirect()->action('HomeController@HomePage')->with('doneMessage', (__('backend.PaymentSuccessMessage')));
 

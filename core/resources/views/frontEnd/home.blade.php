@@ -139,7 +139,7 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <a href="{{ auth()->guard('teacher')->check() ? route('checkout',$item->id) : route('teacher.login') }}" class="btn-box">
+                                    <a href="{{ auth()->guard('teacher')->check() ? route('TeacherPackages') : route('teacher.login') }}" class="btn-box">
                                         {{ __('cruds.Packages.Subscribe') }}
                                     </a>
                                 </div>

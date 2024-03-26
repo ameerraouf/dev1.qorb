@@ -17,6 +17,6 @@ class VerifyCsrfToken extends Middleware
         'form-submit',
         '/payment-notify/*',
         'payment-cancel/*',
-        '/pay',
+        'teacher/pay',
     ];
 }
